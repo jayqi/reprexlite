@@ -48,12 +48,13 @@ def html(reprex: Union["Reprex", str], advertise: bool = True) -> str:
         from pygments import highlight
         from pygments.lexers import PythonLexer
         from pygments.formatters import HtmlFormatter
-    except ImportError:
-        raise ImportError("Pygments is required for HTML output.")
 
-    formatter = HtmlFormatter()
-    style = f"<style>{formatter.get_style_defs('.highlight')}</style>"
-    code = highlight(str(reprex), PythonLexer(), formatter)
+        formatter = HtmlFormatter()
+        style = f"<style>{formatter.get_style_defs('.highlight')}</style>"
+        code = highlight(str(reprex), PythonLexer(), formatter)
+    except ImportError:
+        code = f"<pre><code>{reprex}<code></pre>"
+
     ad = "\n" + Advertisement().html() if advertise else ""
     return style + code + ad
 
