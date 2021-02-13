@@ -33,7 +33,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    description=("A lightweight reprex."),
+    description=("Render reproducible examples of Python code for sharing."),
     entry_points={"console_scripts": ["reprex=reprexlite.cli:app"]},
     install_requires=requirements,
     long_description=readme,
