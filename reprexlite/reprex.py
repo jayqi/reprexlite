@@ -1,6 +1,6 @@
 from itertools import chain
 from pprint import pformat
-from typing import Any, List, Union
+from typing import Any, List, Optional, Union
 
 import libcst as cst
 
@@ -55,13 +55,6 @@ class Statement:
         return self.as_code()
 
 
-MARKDOWN_TEMPLATE = """\
-```python
-{reprex}
-```
-"""
-
-
 class Reprex:
     def __init__(self, input: str, black: bool = False):
         self.input: str = input
@@ -69,8 +62,8 @@ class Reprex:
         self.statements: List[Statement] = [
             Statement(stmt, black=black) for stmt in self.tree.body
         ]
-        self.scope: dict = {}
-        self.results: List[Result] = [stmt.evaluate(self.scope) for stmt in self.statements]
+        self.namespace: dict = {}
+        self.results: List[Result] = [stmt.evaluate(self.namespace) for stmt in self.statements]
 
     def __str__(self):
         return "\n".join(
@@ -81,6 +74,9 @@ class Reprex:
         return html(self)
 
 
-def reprex(input: str, venue="gh", black: bool = False):
+def reprex(input: str, venue="gh", black: bool = False, print_=True) -> Optional[str]:
     formatter = venues_dispatcher[venue]
-    return formatter(Reprex(input, black=black)) + "\n"
+    out = formatter(Reprex(input, black=black)) + "\n"
+    if print_:
+        print(out)
+    return out
