@@ -1,17 +1,22 @@
-from setuptools import setup, find_packages
+from collections import defaultdict
 from pathlib import Path
+
+from setuptools import setup, find_packages
 
 
 def load_requirements(path: Path):
-    requirements = []
+    requirements = defaultdict(list)
     with path.open("r") as fp:
+        reqs_type = "base"
         for line in fp.readlines():
+            if line.startswith("## extras:"):
+                reqs_type = line.partition(":")[-1].strip()
             if line.startswith("-r"):
-                requirements += load_requirements(line.split(" ")[1].strip())
+                requirements += load_requirements(line.split(" ")[1].strip())["base"]
             else:
                 requirement = line.strip()
                 if requirement and not requirement.startswith("#"):
-                    requirements.append(requirement)
+                    requirements[reqs_type].append(requirement)
     return requirements
 
 
@@ -35,7 +40,8 @@ setup(
     ],
     description=("Render reproducible examples of Python code for sharing."),
     entry_points={"console_scripts": ["reprex=reprexlite.cli:app"]},
-    install_requires=requirements,
+    extras_require={k: v for k, v in requirements.items() if k != "base"},
+    install_requires=requirements["base"],
     long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,

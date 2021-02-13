@@ -1,7 +1,8 @@
-Pygments
+libcst
 typer
 
 ## extras: black
 black
 
-## extras: highlight
+## extras: pygments
+Pygments
