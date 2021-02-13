@@ -1,0 +1,7 @@
+Pygments
+typer
+
+## extras: black
+black
+
+## extras: highlight
