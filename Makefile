@@ -1,13 +1,13 @@
 
-clean: clean-build
+clean: clean-dist
 
-clean-build:
+clean-dist:
 	find . -name *.pyc -delete && find . -name __pycache__ -delete
 	rm -rf build
 	rm -rf dist
 	rm -rf *.egg-info
 
-build: clean-build
+dist: clean-dist
 	python setup.py sdist bdist_wheel
 
 lint:
