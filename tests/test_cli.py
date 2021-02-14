@@ -1,3 +1,4 @@
+import subprocess
 from textwrap import dedent
 
 import pytest
@@ -52,3 +53,15 @@ def test_version():
     result = runner.invoke(app, ["--version"])
     assert result.exit_code == 0
     assert result.output.strip() == __version__
+
+
+def test_python_m_version():
+    """Test the CLI with python -m and --version flag."""
+    result = subprocess.run(
+        ["python", "-m", "reprexlite", "--version"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+    )
+    assert result.returncode == 0
+    assert result.stdout.strip() == __version__

@@ -1,3 +1,3 @@
 from reprexlite.cli import app
 
-app(prog_name="python -m reprex")
+app(prog_name="python -m reprexlite")
