@@ -17,16 +17,16 @@ class SessionInfo:
         self.packages = [Package(distr) for distr in importlib_metadata.Distribution.discover()]
 
     def __str__(self):
-        lines = ["-- Session Info --" + "-" * 62]
+        lines = ["-- Session Info --" + "-" * 60]
         lines += tabulate(
             [
                 ("version", f"Python {self.python_version} ({self.python_build_date})"),
                 ("os", self.os),
             ]
         )
-        lines += ["-- Packages --" + "-" * 66]
+        lines += ["-- Packages --" + "-" * 64]
         lines += tabulate([(pkg.name, pkg.version) for pkg in sorted(self.packages)])
-        return "\n".join(lines) + "\n"
+        return "\n".join(lines).strip()
 
 
 class Package:

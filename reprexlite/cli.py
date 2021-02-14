@@ -1,3 +1,4 @@
+from functools import partial
 from pathlib import Path
 from typing import Optional
 
@@ -19,11 +20,30 @@ def version_callback(version: bool):
 
 @app.command()
 def main(
-    infile: Optional[Path] = typer.Option(None, "--infile", "-i", help="Input filename."),
-    outfile: Optional[Path] = typer.Option(None, "--outfile", "-o", help="Output filename."),
-    venue: Venue = typer.Option("gh", "--venue", "-v", help="Format"),
-    black: Optional[bool] = typer.Option(
-        None, "--black", "-b", help="Format input code with black."
+    infile: Optional[Path] = typer.Option(
+        None, "--infile", "-i", help="Read code from an input file instead via editor."
+    ),
+    outfile: Optional[Path] = typer.Option(
+        None, "--outfile", "-o", help="Write output to file instead of printing to console."
+    ),
+    venue: Venue = typer.Option(
+        "gh",
+        "--venue",
+        "-v",
+        help="Output format appropriate to the venue where you plan to share this code.",
+    ),
+    advertise: Optional[bool] = typer.Option(
+        None,
+        help="Whether to include footer that credits reprexlite. "
+        "If unspecified, will depend on default for each venue.",
+    ),
+    session_info: Optional[bool] = typer.Option(
+        None,
+        "--session-info",
+        help="Whether to include details about session and installed packages.",
+    ),
+    style: Optional[bool] = typer.Option(
+        None, "--style", help="Autoformat code with black. Requires black to be installed."
     ),
     version: Optional[bool] = typer.Option(
         None,
@@ -39,9 +59,13 @@ def main(
             input = fp.read()
     else:
         input = typer.edit()
+        if input is None:
+            input = ""
 
-    reprex = Reprex(input, black=black if black else False)
-    formatter = venues_dispatcher[venue.value]
+    reprex = Reprex(input, style=style if style else False)
+    formatter = partial(
+        venues_dispatcher[venue.value], session_info=session_info if session_info else False
+    )
 
     if outfile:
         with outfile.open("w") as fp:

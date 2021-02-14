@@ -1,4 +1,5 @@
 from itertools import chain
+from pathlib import Path
 from pprint import pformat
 from typing import Any, List, Optional, Union
 
@@ -14,14 +15,15 @@ class Result:
     """Class that holds the result of evaluated code and generates a pretty-formatted string
     represetation."""
 
-    def __init__(self, result: Any):
+    def __init__(self, result: Any, comment="#>"):
         self.result = result
+        self.comment = comment
 
     def __str__(self) -> str:
         if not self:
             return ""
         lines = pformat(self.result, indent=2, width=77).split("\n")
-        return "\n".join("#> " + line for line in lines)
+        return "\n".join(f"{self.comment} " + line for line in lines)
 
     def __bool__(self) -> bool:
         return self.result is not NO_RETURN
@@ -33,10 +35,10 @@ class Statement:
     """
 
     def __init__(
-        self, stmt: Union[cst.SimpleStatementLine, cst.BaseCompoundStatement], black: bool = False
+        self, stmt: Union[cst.SimpleStatementLine, cst.BaseCompoundStatement], style: bool = False
     ):
         self.stmt = stmt
-        self.black = black
+        self.style = style
 
     def evaluate(self, scope: dict) -> Result:
         try:
@@ -47,11 +49,11 @@ class Statement:
 
     def __str__(self) -> str:
         code = cst.Module(body=[self.stmt]).code.strip()
-        if self.black:
+        if self.style:
             try:
                 from black import format_str, Mode
             except ImportError:
-                raise ImportError("Must install black to use black formatting.")
+                raise ImportError("Must install black to restyle code.")
 
             code = format_str(code, mode=Mode())
         return code
@@ -60,11 +62,11 @@ class Statement:
 class Reprex:
     """Class that takes Python code input and renders as a reprex output."""
 
-    def __init__(self, input: str, black: bool = False):
+    def __init__(self, input: str, style: bool = False):
         self.input: str = input
         self.tree: cst.Module = cst.parse_module(input)
         self.statements: List[Statement] = [
-            Statement(stmt, black=black) for stmt in self.tree.body
+            Statement(stmt, style=style) for stmt in self.tree.body
         ]
         self.namespace: dict = {}
         self.results: List[Result] = [stmt.evaluate(self.namespace) for stmt in self.statements]
@@ -81,9 +83,29 @@ class Reprex:
         return html(self)
 
 
-def reprex(input: str, venue="gh", black: bool = False, print_=True) -> Optional[str]:
+def reprex(
+    input: str,
+    outfile: Optional[Path] = None,
+    venue="gh",
+    advertise: Optional[bool] = None,
+    session_info: bool = False,
+    style: bool = False,
+    comment: str = "#>",
+    print_=True,
+) -> Optional[str]:
     formatter = venues_dispatcher[venue]
-    out = formatter(Reprex(input, black=black)) + "\n"
+    if advertise is not None:
+        out = (
+            formatter(Reprex(input, style=style), advertise=advertise, session_info=session_info)
+            + "\n"
+        )
+    else:
+        out = formatter(Reprex(input, style=style), session_info=session_info) + "\n"
+    if outfile is not None:
+        with outfile.open("w") as fp:
+            fp.write(out)
+        return
     if print_:
         print(out)
+        return
     return out

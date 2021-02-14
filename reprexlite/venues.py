@@ -2,6 +2,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Callable, Dict, TYPE_CHECKING, Union
 
+from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
 if TYPE_CHECKING:
@@ -30,20 +31,33 @@ class Advertisement:
         return f"{self.created} {self.pkg} {self.ver} <{self.url}>"
 
 
-def markdown(reprex: Union["Reprex", str], advertise: bool = True) -> str:
+def markdown(
+    reprex: Union["Reprex", str], advertise: bool = True, session_info: bool = False
+) -> str:
     out = "\n".join(
         [
             "```python",
             str(reprex),
-            "```\n",
+            "```",
         ]
     )
     if advertise:
-        out += "\n" + Advertisement().markdown() + "\n"
+        out += "\n\n" + Advertisement().markdown()
+    if session_info:
+        out += "\n".join(
+            [
+                "\n\n<details><summary>Session Info</summary>",
+                "```text",
+                str(SessionInfo()),
+                "```",
+                "</details>",
+            ]
+        )
+
     return out
 
 
-def html(reprex: Union["Reprex", str], advertise: bool = True) -> str:
+def html(reprex: Union["Reprex", str], advertise: bool = True, session_info: bool = False) -> str:
     try:
         from pygments import highlight
         from pygments.lexers import PythonLexer
@@ -53,18 +67,34 @@ def html(reprex: Union["Reprex", str], advertise: bool = True) -> str:
         style = f"<style>{formatter.get_style_defs('.highlight')}</style>"
         code = highlight(str(reprex), PythonLexer(), formatter)
     except ImportError:
-        code = f"<pre><code>{reprex}<code></pre>"
+        style = ""
+        code = f"<pre><code>{reprex}</code></pre>"
 
     ad = "\n" + Advertisement().html() if advertise else ""
-    return style + code + ad
+    sess = (
+        (
+            "\n<details><summary>Session Info</summary>"
+            f"<pre><code>{SessionInfo()}</code></pre>"
+            "</details>"
+        )
+        if session_info
+        else ""
+    )
+    return style + code + ad + sess
 
 
-def py(reprex: Union["Reprex", str], advertise: bool = False) -> str:
+def py(reprex: Union["Reprex", str], advertise: bool = False, session_info: bool = False) -> str:
     ad = "\n\n" + Advertisement().code_comment() if advertise else ""
-    return str(reprex) + ad
+    if session_info:
+        sess_lines = str(SessionInfo()).split("\n")
+        sess_lines = ["# " + line for line in sess_lines]
+        sess = "\n\n" + "\n".join(sess_lines)
+    else:
+        sess = ""
+    return str(reprex) + ad + sess
 
 
-def rtf(reprex: Union["Reprex", str], advertise: bool = False) -> str:
+def rtf(reprex: Union["Reprex", str], advertise: bool = False, session_info: bool = False) -> str:
     try:
         from pygments import highlight
         from pygments.lexers import PythonLexer
@@ -74,12 +104,27 @@ def rtf(reprex: Union["Reprex", str], advertise: bool = False) -> str:
     out = str(reprex)
     if advertise:
         out += "\n\n" + Advertisement().text()
+    if session_info:
+        out += "\n\n" + SessionInfo()
     return highlight(out, PythonLexer(), RtfFormatter())
 
 
-def slack(reprex: Union["Reprex", str], advertise: bool = False) -> str:
+def slack(
+    reprex: Union["Reprex", str], advertise: bool = False, session_info: bool = False
+) -> str:
     ad = "\n" + Advertisement().text() if advertise else ""
-    return "\n".join(["```", str(reprex), "```"]) + ad
+    sess = (
+        "\n".join(
+            [
+                "\n```",
+                str(SessionInfo()),
+                "```",
+            ]
+        )
+        if session_info
+        else ""
+    )
+    return "\n".join(["```", str(reprex), "```"]) + ad + sess
 
 
 def display_terminal(reprex: "Reprex"):
