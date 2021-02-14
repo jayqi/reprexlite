@@ -1,11 +1,10 @@
-from functools import partial
 from pathlib import Path
 from typing import Optional
 
 import typer
 
-from reprexlite.reprex import Reprex
-from reprexlite.venues import display_terminal, Venue, venues_dispatcher
+from reprexlite.reprex import reprex
+from reprexlite.venues import Venue
 from reprexlite.version import __version__
 
 app = typer.Typer()
@@ -35,7 +34,7 @@ def main(
     advertise: Optional[bool] = typer.Option(
         None,
         help="Whether to include footer that credits reprexlite. "
-        "If unspecified, will depend on default for each venue.",
+        "If unspecified, will depend on specified venue's default.",
     ),
     session_info: Optional[bool] = typer.Option(
         None,
@@ -44,6 +43,9 @@ def main(
     ),
     style: Optional[bool] = typer.Option(
         None, "--style", help="Autoformat code with black. Requires black to be installed."
+    ),
+    comment: str = typer.Option(
+        "#>", "--comment", help="Comment prefix to use for results returned by expressions."
     ),
     version: Optional[bool] = typer.Option(
         None,
@@ -65,14 +67,19 @@ def main(
         if input is None:
             input = ""
 
-    reprex = Reprex(input, style=style if style else False)
-    formatter = partial(
-        venues_dispatcher[venue.value], session_info=session_info if session_info else False
+    output = reprex(
+        input,
+        outfile=outfile,
+        venue=venue.value,
+        advertise=advertise,
+        session_info=session_info if session_info else False,
+        style=style if style else False,
+        comment=comment,
+        print_=False,
+        terminal=True,
     )
 
     if outfile:
-        with outfile.open("w") as fp:
-            fp.write(formatter(reprex) + "\n")
         typer.echo(f"Wrote reprex to {outfile}")
     else:
-        typer.echo(formatter(display_terminal(reprex)) + "\n")
+        typer.echo(output)

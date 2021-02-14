@@ -6,7 +6,7 @@ from typing import Any, List, Optional, Union
 
 import libcst as cst
 
-from reprexlite.venues import venues_dispatcher, html
+from reprexlite.venues import venues_dispatcher, html, display_terminal
 
 
 NO_RETURN = object()
@@ -55,7 +55,7 @@ class Statement:
             except ImportError:
                 raise ImportError("Must install black to restyle code.")
 
-            code = format_str(code, mode=Mode())
+            code = format_str(code, mode=Mode()).strip()
         return code
 
 
@@ -102,8 +102,12 @@ def reprex(
     style: bool = False,
     comment: str = "#>",
     print_=True,
+    terminal=False,
 ) -> Optional[str]:
     reprex = Reprex(input, style=style, comment=comment)
+    if terminal and outfile is None and venue not in ["html", "rtf"]:
+        # Don't screw up lexing for HTML and RTF
+        reprex = display_terminal(reprex)
     formatter = venues_dispatcher[venue]
     if advertise is not None:
         formatter = partial(formatter, advertise=advertise)
