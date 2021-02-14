@@ -1,3 +1,4 @@
+from functools import partial
 from itertools import chain
 from pathlib import Path
 from pprint import pformat
@@ -15,9 +16,8 @@ class Result:
     """Class that holds the result of evaluated code and generates a pretty-formatted string
     represetation."""
 
-    def __init__(self, result: Any, comment="#>"):
+    def __init__(self, result: Any, comment: str = "#>"):
         self.result = result
-        self.comment = comment
 
     def __str__(self) -> str:
         if not self:
@@ -62,7 +62,7 @@ class Statement:
 class Reprex:
     """Class that takes Python code input and renders as a reprex output."""
 
-    def __init__(self, input: str, style: bool = False):
+    def __init__(self, input: str, style: bool = False, comment: str = "#>"):
         self.input: str = input
         self.tree: cst.Module = cst.parse_module(input)
         self.statements: List[Statement] = [
@@ -70,6 +70,8 @@ class Reprex:
         ]
         self.namespace: dict = {}
         self.results: List[Result] = [stmt.evaluate(self.namespace) for stmt in self.statements]
+        for res in self.results:
+            res.comment = comment
 
     def __str__(self):
         header = cst.Module(body=[], header=self.tree.header).code.strip()
@@ -82,6 +84,14 @@ class Reprex:
     def _repr_html_(self):
         return html(self)
 
+    def set_style(self, style: bool):
+        for stmt in self.statements:
+            stmt.style = style
+
+    def set_comment(self, comment: str):
+        for result in self.results:
+            result.comment = comment
+
 
 def reprex(
     input: str,
@@ -93,14 +103,11 @@ def reprex(
     comment: str = "#>",
     print_=True,
 ) -> Optional[str]:
+    reprex = Reprex(input, style=style, comment=comment)
     formatter = venues_dispatcher[venue]
     if advertise is not None:
-        out = (
-            formatter(Reprex(input, style=style), advertise=advertise, session_info=session_info)
-            + "\n"
-        )
-    else:
-        out = formatter(Reprex(input, style=style), session_info=session_info) + "\n"
+        formatter = partial(formatter, advertise=advertise)
+    out = formatter(str(reprex), session_info=session_info) + "\n"
     if outfile is not None:
         with outfile.open("w") as fp:
             fp.write(out)

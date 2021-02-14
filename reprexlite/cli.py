@@ -53,7 +53,10 @@ def main(
         help="Show reprexlite version and exit.",
     ),
 ):
-    """Reprex"""
+    """Render reproducible examples of Python code for sharing. Your code will be executed and the
+    results will be embedded as comments their associated lines. By default, your system's default
+    command-line text editor will open for you to type or paste in your code. This editor can be
+    changed by setting the EDITOR environment variable."""
     if infile:
         with infile.open("r") as fp:
             input = fp.read()
