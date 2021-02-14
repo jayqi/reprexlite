@@ -5,10 +5,10 @@ from reprexlite.reprex import Reprex
 import pytest
 
 
-TestCase = namedtuple("TestCase", ["input", "expected"])
+Case = namedtuple("Case", ["input", "expected"])
 
-test_cases = [
-    TestCase(
+cases = [
+    Case(
         """\
         arr = [1, 2, 3, 4, 5]
         [x + 1 for x in arr]
@@ -19,7 +19,7 @@ test_cases = [
         #> [2, 3, 4, 5, 6]
         """,
     ),
-    TestCase(
+    Case(
         """\
         status = False
         if status:
@@ -42,7 +42,7 @@ test_cases = [
         #> 0
         """,
     ),
-    TestCase(
+    Case(
         """\
         def add_one(x: int):
             return x + 1
@@ -55,7 +55,7 @@ test_cases = [
         #> 2
         """,
     ),
-    TestCase(
+    Case(
         """\
         # Here's a comment
         x = 1
@@ -73,12 +73,12 @@ test_cases = [
 ]
 
 
-@pytest.mark.parametrize("test_case", test_cases)
-def test_source(test_case):
-    reprex = Reprex(dedent(test_case.input))
+@pytest.mark.parametrize("case", cases)
+def test_source(case):
+    reprex = Reprex(dedent(case.input))
     print("---")
     print(str(reprex))
     print("---")
-    print(dedent(test_case.expected))
+    print(dedent(case.expected))
     print("---")
-    assert str(reprex) == dedent(test_case.expected).strip()
+    assert str(reprex) == dedent(case.expected).strip()
