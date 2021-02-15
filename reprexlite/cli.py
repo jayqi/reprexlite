@@ -55,9 +55,21 @@ def main(
     ),
 ):
     """Render reproducible examples of Python code for sharing. Your code will be executed and the
-    results will be embedded as comments their associated lines. By default, your system's default
-    command-line text editor will open for you to type or paste in your code. This editor can be
-    changed by setting the EDITOR environment variable."""
+    results will be embedded as comments below their associated lines.
+
+    By default, your system's default command-line text editor will open for you to type or paste
+    in your code. This editor can be changed by setting the EDITOR environment variable.
+
+    \b
+    The supported venue formats are:
+    - gh : GitHub Flavored Markdown
+    - so : StackOverflow, alias for gh
+    - ds : Discourse, alias for gh
+    - html : HTML
+    - py : Python script
+    - rtf : Rich Text Format
+    - slack : Slack
+    """
     if infile:
         with infile.open("r") as fp:
             input = fp.read()
