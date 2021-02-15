@@ -1,4 +1,4 @@
--e .
+-e .[black,pygments]
 
 black
 flake8
