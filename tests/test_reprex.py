@@ -1,84 +1,67 @@
-from collections import namedtuple
+import builtins
+import sys
 from textwrap import dedent
-from reprexlite.reprex import Reprex
 
 import pytest
 
+from reprexlite.code import CodeBlock
+from reprexlite.reprex import reprex, venues_dispatcher
 
-Case = namedtuple("Case", ["input", "expected"])
-
-cases = [
-    Case(
-        """\
-        arr = [1, 2, 3, 4, 5]
-        [x + 1 for x in arr]
-        """,
-        """\
-        arr = [1, 2, 3, 4, 5]
-        [x + 1 for x in arr]
-        #> [2, 3, 4, 5, 6]
-        """,
-    ),
-    Case(
-        """\
-        status = False
-        if status:
-            # if True
-            x = 1
-        else:
-            # if False
-            x = 0
-        x
-        """,
-        """\
-        status = False
-        if status:
-            # if True
-            x = 1
-        else:
-            # if False
-            x = 0
-        x
-        #> 0
-        """,
-    ),
-    Case(
-        """\
-        def add_one(x: int):
-            return x + 1
-        add_one(1)
-        """,
-        """\
-        def add_one(x: int):
-            return x + 1
-        add_one(1)
-        #> 2
-        """,
-    ),
-    Case(
-        """\
-        # Here's a comment
-        x = 1
-        x + 1
-        # Here's another
-        """,
-        """\
-        # Here's a comment
-        x = 1
-        x + 1
-        #> 2
-        # Here's another
-        """,
-    ),
-]
+from tests.expected_reprexes import (
+    ASSETS_DIR,
+    expected_reprexes,
+    INPUT,
+    MockDateTime,
+    MockSessionInfo,
+    MOCK_VERSION,
+)
 
 
-@pytest.mark.parametrize("case", cases)
-def test_source(case):
-    reprex = Reprex(dedent(case.input))
-    print("---")
-    print(str(reprex))
-    print("---")
-    print(dedent(case.expected))
-    print("---")
-    assert str(reprex) == dedent(case.expected).strip()
+@pytest.fixture
+def patch_datetime(monkeypatch):
+    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "datetime", MockDateTime)
+
+
+@pytest.fixture
+def patch_version(monkeypatch):
+    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "__version__", MOCK_VERSION)
+
+
+@pytest.fixture
+def patch_session_info(monkeypatch):
+    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "SessionInfo", MockSessionInfo)
+
+
+@pytest.fixture
+def no_pygments(monkeypatch):
+    import_orig = builtins.__import__
+
+    def mocked_import(name, *args):
+        if name.startswith("pygments"):
+            raise ImportError()
+        return import_orig(name, *args)
+
+    monkeypatch.setattr(builtins, "__import__", mocked_import)
+
+
+@pytest.mark.parametrize("ereprex", expected_reprexes, ids=[e.filename for e in expected_reprexes])
+def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
+    actual = reprex(INPUT, **ereprex.kwargs, print_=False)
+    with (ASSETS_DIR / ereprex.filename).open("r") as fp:
+        assert str(actual) + "\n" == fp.read()
+
+
+def test_html(patch_datetime, patch_version, no_pygments):
+    reprex_class = venues_dispatcher["html"]
+    code_block = CodeBlock(INPUT)
+    reprex = reprex_class(code_block)
+    print(reprex)
+    expected = dedent(
+        """
+        <pre><code>x = 2
+        x + 2
+        #> 4</code></pre>
+        <p><sup>Created at DATETIME by <a href="https://github.com/jayqi/reprexlite">reprexlite</a> vVERSION</sup></p>
+        """
+    ).strip()
+    assert str(reprex) == expected

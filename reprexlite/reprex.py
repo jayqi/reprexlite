@@ -1,96 +1,157 @@
-from functools import partial
-from itertools import chain
+from abc import ABC, abstractmethod
+from datetime import datetime
+from enum import Enum
 from pathlib import Path
-from pprint import pformat
-from typing import Any, List, Optional, Union
+from typing import Callable, Dict, Optional
 
-import libcst as cst
-
-from reprexlite.venues import venues_dispatcher, html, display_terminal
-
-
-NO_RETURN = object()
+from reprexlite.code import CodeBlock
+from reprexlite.session_info import SessionInfo
+from reprexlite.version import __version__
 
 
-class Result:
-    """Class that holds the result of evaluated code and generates a pretty-formatted string
-    represetation."""
+class Advertisement:
+    pkg = "reprexlite"
+    url = "https://github.com/jayqi/reprexlite"
 
-    def __init__(self, result: Any, comment: str = "#>"):
-        self.result = result
+    def __init__(self):
+        now = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
+        self.created = f"Created at {now} by"
+        self.ver = f"v{__version__}"
 
-    def __str__(self) -> str:
-        if not self:
-            return ""
-        lines = pformat(self.result, indent=2, width=77).split("\n")
-        return "\n".join(f"{self.comment} " + line for line in lines)
+    def markdown(self) -> str:
+        return f"<sup>{self.created} [{self.pkg}]({self.url}) {self.ver}</sup>"
 
-    def __bool__(self) -> bool:
-        return self.result is not NO_RETURN
+    def html(self) -> str:
+        return f'<p><sup>{self.created} <a href="{self.url}">{self.pkg}</a> {self.ver}</sup></p>'
+
+    def code_comment(self) -> str:
+        return f"# {self.created} {self.pkg} {self.ver} <{self.url}>"
+
+    def text(self) -> str:
+        return f"{self.created} {self.pkg} {self.ver} <{self.url}>"
 
 
-class Statement:
-    """Class that holds a LibCST parsed statement. It can evaluate it and return a Result, and it
-    reproduces the source code as a string.
-    """
+class Reprex(ABC):
+    default_advertise: bool
 
     def __init__(
-        self, stmt: Union[cst.SimpleStatementLine, cst.BaseCompoundStatement], style: bool = False
+        self, code_block: CodeBlock, advertise: Optional[bool] = None, session_info: bool = False
     ):
-        self.stmt = stmt
-        self.style = style
+        self.code_block = code_block
+        self.advertise = self.default_advertise if advertise is None else advertise
+        self.session_info = session_info
 
-    def evaluate(self, scope: dict) -> Result:
-        try:
-            return Result(eval(str(self), scope, scope))
-        except SyntaxError:
-            exec(str(self), scope, scope)
-            return Result(NO_RETURN)
+    @abstractmethod
+    def __str__(self) -> str:  # pragma: no cover
+        pass
+
+
+class GitHubReprex(Reprex):
+    default_advertise: bool = True
 
     def __str__(self) -> str:
-        code = cst.Module(body=[self.stmt]).code.strip()
-        if self.style:
-            try:
-                from black import format_str, Mode
-            except ImportError:
-                raise ImportError("Must install black to restyle code.")
+        out = []
+        out.append("```python")
+        out.append(str(self.code_block))
+        out.append("```")
+        if self.advertise:
+            out.append("\n" + Advertisement().markdown())
+        if self.session_info:
+            out.append("\n<details><summary>Session Info</summary>")
+            out.append("```text")
+            out.append(str(SessionInfo()))
+            out.append("```")
+            out.append("</details>")
+        return "\n".join(out)
 
-            code = format_str(code, mode=Mode()).strip()
-        return code
+
+class HtmlReprex(Reprex):
+    default_advertise: bool = True
+
+    def __str__(self) -> str:
+        out = []
+        try:
+            from pygments import highlight
+            from pygments.lexers import PythonLexer
+            from pygments.formatters import HtmlFormatter
+
+            formatter = HtmlFormatter()
+            out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
+            out.append(highlight(str(self.code_block), PythonLexer(), formatter))
+        except ImportError:
+            out.append(f"<pre><code>{self.code_block}</code></pre>")
+
+        if self.advertise:
+            out.append(Advertisement().html())
+        if self.session_info:
+            out.append("<details><summary>Session Info</summary>")
+            out.append(f"<pre><code>{SessionInfo()}</code></pre>")
+            out.append("</details>")
+        return "\n".join(out)
 
 
-class Reprex:
-    """Class that takes Python code input and renders as a reprex output."""
+class PyScriptReprex(Reprex):
+    default_advertise: bool = False
 
-    def __init__(self, input: str, style: bool = False, comment: str = "#>"):
-        self.input: str = input
-        self.tree: cst.Module = cst.parse_module(input)
-        self.statements: List[Statement] = [
-            Statement(stmt, style=style) for stmt in self.tree.body
-        ]
-        self.namespace: dict = {}
-        self.results: List[Result] = [stmt.evaluate(self.namespace) for stmt in self.statements]
-        for res in self.results:
-            res.comment = comment
+    def __str__(self) -> str:
+        out = [str(self.code_block)]
+        if self.advertise:
+            out.append("\n" + Advertisement().code_comment())
+        if self.session_info:
+            out.append("")
+            sess_lines = str(SessionInfo()).split("\n")
+            out.extend("# " + line for line in sess_lines)
+        return "\n".join(out)
+
+
+class RtfReprex(Reprex):
+    default_advertise: bool = False
+
+    def __str__(self) -> str:
+        try:
+            from pygments import highlight
+            from pygments.lexers import PythonLexer
+            from pygments.formatters import RtfFormatter
+        except ImportError:
+            raise ImportError("Pygments is required for RTF output.")
+
+        out = str(self.code_block)
+        if self.advertise:
+            out += "\n\n" + Advertisement().text()
+        if self.session_info:
+            out += "\n\n" + str(SessionInfo())
+        return highlight(out, PythonLexer(), RtfFormatter())
+
+
+class SlackReprex(Reprex):
+    default_advertise: bool = False
 
     def __str__(self):
-        header = cst.Module(body=[], header=self.tree.header).code.strip()
-        code = "\n".join(
-            str(line) for line in chain.from_iterable(zip(self.statements, self.results)) if line
-        )
-        footer = cst.Module(body=[], footer=self.tree.footer).code.strip()
-        return "\n".join([header, code, footer]).strip()
+        out = []
+        out.append("```")
+        out.append(str(self.code_block))
+        out.append("```")
+        if self.advertise:
+            out.append("\n" + Advertisement().text())
+        if self.session_info:
+            out.append("\n```")
+            out.append(str(SessionInfo()))
+            out.append("```")
+        return "\n".join(out)
 
-    def _repr_html_(self):
-        return html(self)
 
-    def set_style(self, style: bool):
-        for stmt in self.statements:
-            stmt.style = style
+venues_dispatcher: Dict[str, Callable] = {
+    "gh": GitHubReprex,
+    "so": GitHubReprex,
+    "ds": GitHubReprex,
+    "html": HtmlReprex,
+    "py": PyScriptReprex,
+    "rtf": RtfReprex,
+    "slack": SlackReprex,
+}
 
-    def set_comment(self, comment: str):
-        for result in self.results:
-            result.comment = comment
+
+Venue = Enum("Venue", names={v.upper(): v for v in venues_dispatcher.keys()}, type=str)  # type: ignore
 
 
 def reprex(
@@ -103,20 +164,18 @@ def reprex(
     comment: str = "#>",
     print_=True,
     terminal=False,
-) -> Optional[str]:
-    reprex = Reprex(input, style=style, comment=comment)
-    if terminal and outfile is None and venue not in ["html", "rtf"]:
-        # Don't screw up lexing for HTML and RTF
-        reprex = display_terminal(reprex)
-    formatter = venues_dispatcher[venue]
-    if advertise is not None:
-        formatter = partial(formatter, advertise=advertise)
-    out = formatter(str(reprex), session_info=session_info) + "\n"
+) -> Reprex:
+    if outfile or venue in ["html", "rtf"]:
+        # Don't screw output file or lexing for HTML and RTF
+        terminal = False
+    code_block = CodeBlock(input, style=style, comment=comment, terminal=terminal)
+
+    reprex = venues_dispatcher[venue](
+        code_block=code_block, advertise=advertise, session_info=session_info
+    )
     if outfile is not None:
         with outfile.open("w") as fp:
-            fp.write(out)
-        return
+            fp.write(str(reprex) + "\n")
     if print_:
-        print(out)
-        return
-    return out
+        print(reprex)
+    return reprex

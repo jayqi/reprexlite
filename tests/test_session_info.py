@@ -8,3 +8,7 @@ def test_session_info():
     assert session_info
     assert platform.python_version() in session_info
     assert "pytest" in session_info
+
+    lines = session_info.split("\n")
+    for line in lines:
+        assert len(line) <= 80
