@@ -103,11 +103,3 @@ class CodeBlock:
         except ImportError:
             out.append(f"<pre><code>{self.code_block}</code></pre>")
         return "\n".join(out)
-
-    def set_style(self, style: bool):
-        for stmt in self.statements:
-            stmt.style = style
-
-    def set_comment(self, comment: str):
-        for result in self.results:
-            result.comment = comment

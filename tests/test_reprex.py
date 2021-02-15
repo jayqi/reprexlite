@@ -1,42 +1,67 @@
 import builtins
+import sys
 from textwrap import dedent
 
 import pytest
 
 from reprexlite.code import CodeBlock
-from reprexlite.reprex import venues_dispatcher
+from reprexlite.reprex import reprex, venues_dispatcher
+
+from tests.expected_reprexes import (
+    ASSETS_DIR,
+    expected_reprexes,
+    INPUT,
+    MockDateTime,
+    MockSessionInfo,
+    MOCK_VERSION,
+)
 
 
-INPUT = dedent(
-    """\
-    x = 2
-    x + 2
-    """
-)
-EXPECTED = dedent(
-    """\
-    x = 2
-    x + 2
-    #> 4
-    """
-)
+@pytest.fixture
+def patch_datetime(monkeypatch):
+    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "datetime", MockDateTime)
+
+
+@pytest.fixture
+def patch_version(monkeypatch):
+    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "__version__", MOCK_VERSION)
+
+
+@pytest.fixture
+def patch_session_info(monkeypatch):
+    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "SessionInfo", MockSessionInfo)
 
 
 @pytest.fixture
 def no_pygments(monkeypatch):
     import_orig = builtins.__import__
 
-    def mocked_import(name, globals, locals, fromlist, level):
-        if "pygments" in name:
+    def mocked_import(name, *args):
+        if name.startswith("pygments"):
             raise ImportError()
-        return import_orig(name, locals, fromlist, level)
+        return import_orig(name, *args)
 
     monkeypatch.setattr(builtins, "__import__", mocked_import)
 
 
-@pytest.mark.parametrize("venue", set(venues_dispatcher.keys()).difference({"rtf"}))
-def test_venue_formatter(venue, no_pygments):
-    reprex_class = venues_dispatcher[venue]
-    reprex = reprex_class(CodeBlock(INPUT))
+@pytest.mark.parametrize("ereprex", expected_reprexes, ids=[e.filename for e in expected_reprexes])
+def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
+    actual = reprex(INPUT, **ereprex.kwargs, print_=False)
+    with (ASSETS_DIR / ereprex.filename).open("r") as fp:
+        assert str(actual) + "\n" == fp.read()
+
+
+def test_html(patch_datetime, patch_version, no_pygments):
+    reprex_class = venues_dispatcher["html"]
+    code_block = CodeBlock(INPUT)
+    reprex = reprex_class(code_block)
     print(reprex)
-    assert EXPECTED.strip() in str(reprex)
+    expected = dedent(
+        """
+        <pre><code>x = 2
+        x + 2
+        #> 4</code></pre>
+        <p><sup>Created at DATETIME by <a href="https://github.com/jayqi/reprexlite">reprexlite</a> vVERSION</sup></p>
+        """
+    ).strip()
+    assert str(reprex) == expected

@@ -12,17 +12,17 @@ from reprexlite.version import __version__
 class Advertisement:
     pkg = "reprexlite"
     url = "https://github.com/jayqi/reprexlite"
-    ver = f"v{__version__}"
 
     def __init__(self):
         now = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
         self.created = f"Created at {now} by"
+        self.ver = f"v{__version__}"
 
     def markdown(self) -> str:
         return f"<sup>{self.created} [{self.pkg}]({self.url}) {self.ver}</sup>"
 
     def html(self) -> str:
-        return f'<p><sup>{self.created} <a href="{self.url}">{self.pkg}</a> {self.ver}</p>'
+        return f'<p><sup>{self.created} <a href="{self.url}">{self.pkg}</a> {self.ver}</sup></p>'
 
     def code_comment(self) -> str:
         return f"# {self.created} {self.pkg} {self.ver} <{self.url}>"
@@ -42,7 +42,7 @@ class Reprex(ABC):
         self.session_info = session_info
 
     @abstractmethod
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         pass
 
 
@@ -119,7 +119,7 @@ class RtfReprex(Reprex):
         if self.advertise:
             out += "\n\n" + Advertisement().text()
         if self.session_info:
-            out += "\n\n" + SessionInfo()
+            out += "\n\n" + str(SessionInfo())
         return highlight(out, PythonLexer(), RtfFormatter())
 
 

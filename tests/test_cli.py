@@ -27,18 +27,36 @@ EXPECTED = dedent(
 
 
 @pytest.fixture
-def mock_edit(monkeypatch):
-    def edit():
+def patch_edit(monkeypatch):
+    def mock_edit():
         return INPUT
 
-    monkeypatch.setattr(typer, "edit", edit)
+    monkeypatch.setattr(typer, "edit", mock_edit)
 
 
-def test_reprex(mock_edit):
+def test_reprex(patch_edit):
     result = runner.invoke(app)
     print(result.stdout)
     assert result.exit_code == 0
     assert EXPECTED in result.stdout
+
+
+def test_reprex_infile(tmp_path):
+    infile = tmp_path / "infile.py"
+    with infile.open("w") as fp:
+        fp.write(INPUT)
+    result = runner.invoke(app, ["-i", str(infile)])
+    assert result.exit_code == 0
+    assert EXPECTED in result.stdout
+
+
+def test_reprex_outfile(patch_edit, tmp_path):
+    outfile = tmp_path / "outfile.md"
+    result = runner.invoke(app, ["-o", str(outfile)])
+    assert result.exit_code == 0
+    with outfile.open("r") as fp:
+        assert EXPECTED in fp.read()
+    assert str(outfile) in result.stdout
 
 
 def test_help():
