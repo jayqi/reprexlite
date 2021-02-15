@@ -16,3 +16,6 @@ lint:
 
 test:
 	pytest -vv
+
+typecheck:
+	mypy reprexlite

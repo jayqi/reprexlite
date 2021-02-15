@@ -164,7 +164,7 @@ def reprex(
     comment: str = "#>",
     print_=True,
     terminal=False,
-) -> Optional[Reprex]:
+) -> Reprex:
     if outfile or venue in ["html", "rtf"]:
         # Don't screw output file or lexing for HTML and RTF
         terminal = False
@@ -176,8 +176,6 @@ def reprex(
     if outfile is not None:
         with outfile.open("w") as fp:
             fp.write(str(reprex) + "\n")
-        return
     if print_:
         print(reprex)
-        return
     return reprex

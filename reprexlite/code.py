@@ -14,6 +14,7 @@ class Result:
 
     def __init__(self, result: Any, comment: str = "#>"):
         self.result = result
+        self.comment = comment
 
     def __str__(self) -> str:
         if not self:
