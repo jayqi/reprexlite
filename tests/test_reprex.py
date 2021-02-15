@@ -1,84 +1,42 @@
-from collections import namedtuple
+import builtins
 from textwrap import dedent
-from reprexlite.reprex import Reprex
 
 import pytest
 
-
-Case = namedtuple("Case", ["input", "expected"])
-
-cases = [
-    Case(
-        """\
-        arr = [1, 2, 3, 4, 5]
-        [x + 1 for x in arr]
-        """,
-        """\
-        arr = [1, 2, 3, 4, 5]
-        [x + 1 for x in arr]
-        #> [2, 3, 4, 5, 6]
-        """,
-    ),
-    Case(
-        """\
-        status = False
-        if status:
-            # if True
-            x = 1
-        else:
-            # if False
-            x = 0
-        x
-        """,
-        """\
-        status = False
-        if status:
-            # if True
-            x = 1
-        else:
-            # if False
-            x = 0
-        x
-        #> 0
-        """,
-    ),
-    Case(
-        """\
-        def add_one(x: int):
-            return x + 1
-        add_one(1)
-        """,
-        """\
-        def add_one(x: int):
-            return x + 1
-        add_one(1)
-        #> 2
-        """,
-    ),
-    Case(
-        """\
-        # Here's a comment
-        x = 1
-        x + 1
-        # Here's another
-        """,
-        """\
-        # Here's a comment
-        x = 1
-        x + 1
-        #> 2
-        # Here's another
-        """,
-    ),
-]
+from reprexlite.code import CodeBlock
+from reprexlite.reprex import venues_dispatcher
 
 
-@pytest.mark.parametrize("case", cases)
-def test_source(case):
-    reprex = Reprex(dedent(case.input))
-    print("---")
-    print(str(reprex))
-    print("---")
-    print(dedent(case.expected))
-    print("---")
-    assert str(reprex) == dedent(case.expected).strip()
+INPUT = dedent(
+    """\
+    x = 2
+    x + 2
+    """
+)
+EXPECTED = dedent(
+    """\
+    x = 2
+    x + 2
+    #> 4
+    """
+)
+
+
+@pytest.fixture
+def no_pygments(monkeypatch):
+    import_orig = builtins.__import__
+
+    def mocked_import(name, globals, locals, fromlist, level):
+        if "pygments" in name:
+            raise ImportError()
+        return import_orig(name, locals, fromlist, level)
+
+    monkeypatch.setattr(builtins, "__import__", mocked_import)
+
+
+@pytest.mark.parametrize("venue", set(venues_dispatcher.keys()).difference({"rtf"}))
+def test_venue_formatter(venue, no_pygments):
+    reprex_class = venues_dispatcher[venue]
+    reprex = reprex_class(CodeBlock(INPUT))
+    print(reprex)
+    assert EXPECTED.strip() in str(reprex)

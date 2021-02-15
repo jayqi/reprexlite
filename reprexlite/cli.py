@@ -3,8 +3,7 @@ from typing import Optional
 
 import typer
 
-from reprexlite.reprex import reprex
-from reprexlite.venues import Venue
+from reprexlite.reprex import reprex, Venue
 from reprexlite.version import __version__
 
 app = typer.Typer()
@@ -67,7 +66,7 @@ def main(
         if input is None:
             input = ""
 
-    output = reprex(
+    rendered = reprex(
         input,
         outfile=outfile,
         venue=venue.value,
@@ -82,4 +81,4 @@ def main(
     if outfile:
         typer.echo(f"Wrote reprex to {outfile}")
     else:
-        typer.echo(output)
+        typer.echo(str(rendered) + "\n")
