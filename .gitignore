@@ -1,5 +1,11 @@
 .vscode
 
+# Docs
+docs/site
+docs/docs/changelog.md
+docs/docs/cli.md
+docs/docs/index.md
+
 ### Python
 
 # Byte-compiled / optimized / DLL files
