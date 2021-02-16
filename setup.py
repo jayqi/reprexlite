@@ -49,8 +49,9 @@ setup(
     packages=find_packages(),
     project_urls={
         "Bug Tracker": "https://github.com/jayqi/reprexlite/issues",
+        "Documentation": "https://jayqi.github.io/reprexlite/",
         "Source Code": "https://github.com/jayqi/reprexlite",
     },
     url="https://github.com/jayqi/reprexlite",
-    version="0.0.1",
+    version="0.1.0",
 )
