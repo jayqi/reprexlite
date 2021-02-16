@@ -505,17 +505,19 @@
 <div class="doc doc-contents first">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="reprexlite.session_info.Package">
+<h3 class="doc doc-heading" id="reprexlite.session_info.Package">
 
         <code>Package</code>
 
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
+<p>Interface for adapting <a href="https://docs.python.org/3/library/importlib.metadata.html#distributions"><code>importlib.metadata.Distribution</code></a>
+instances for introspection by <a href="#reprexlite.session_info.SessionInfo"><code>SessionInfo</code></a>.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-attribute">
-<h3 class="doc doc-heading" id="reprexlite.session_info.Package.name">
+<h4 class="doc doc-heading" id="reprexlite.session_info.Package.name">
 
 <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span></code>
 
@@ -524,13 +526,13 @@
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 
     </div>
 </div>
 <div class="doc doc-object doc-attribute">
-<h3 class="doc doc-heading" id="reprexlite.session_info.Package.version">
+<h4 class="doc doc-heading" id="reprexlite.session_info.Package.version">
 
 <code class="highlight language-python"><span class="n">version</span><span class="p">:</span> <span class="nb">str</span></code>
 
@@ -539,21 +541,21 @@
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 
     </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="reprexlite.session_info.Package.__init__">
+<h4 class="doc doc-heading" id="reprexlite.session_info.Package.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distribution</span><span class="p">:</span> <span class="n">Distribution</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distribution</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 <details class="quote">
           <summary>Source code in <code>reprexlite/session_info.py</code></summary>
@@ -569,17 +571,19 @@
 </div>
 </div>
 <div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="reprexlite.session_info.SessionInfo">
+<h3 class="doc doc-heading" id="reprexlite.session_info.SessionInfo">
 
         <code>SessionInfo</code>
 
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
+<p>Class for pretty-formatting Python session info. Includes details about your Python version,
+your operating system, and the Python packages installed in your current environment.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="reprexlite.session_info.SessionInfo.__init__">
+<h4 class="doc doc-heading" id="reprexlite.session_info.SessionInfo.__init__">
 
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -587,7 +591,7 @@
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 <details class="quote">
           <summary>Source code in <code>reprexlite/session_info.py</code></summary>
@@ -607,12 +611,12 @@
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="reprexlite.session_info.tabulate">
+<h3 class="doc doc-heading" id="reprexlite.session_info.tabulate">
 
-<code class="highlight language-python"><span class="n">tabulate</span><span class="p">(</span><span class="n">rows</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+<code class="highlight language-python"><span class="n">tabulate</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span></code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <details class="quote">
           <summary>Source code in <code>reprexlite/session_info.py</code></summary>

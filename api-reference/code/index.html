@@ -531,37 +531,102 @@
 <div class="doc doc-contents first">
 <div class="doc doc-children">
 <div class="doc doc-object doc-attribute">
-<h2 class="doc doc-heading" id="reprexlite.code.NO_RETURN">
+<h3 class="doc doc-heading" id="reprexlite.code.NO_RETURN">
 
 <code class="highlight language-python"><span class="n">NO_RETURN</span></code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
-
-    </div>
+<p>Explicit placeholder object for statements, which have no return value (as opposed to
+expressions).</p>
+</div>
 </div>
 <div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="reprexlite.code.CodeBlock">
+<h3 class="doc doc-heading" id="reprexlite.code.CodeBlock">
 
         <code>CodeBlock</code>
 
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
-<p>Class that takes Python code input and renders as a reprex output.</p>
+<p>Class that takes a block of Python code input and evaluates it. Call <code>str(...)</code> on an
+instance to get back a string containing the original source with evaluated outputs embedded
+as comments below each statement.</p>
+<p><strong>Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>input</code></td>
+<td><code>str</code></td>
+<td>
+<p>Block of Python code</p>
+</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td><code>bool</code></td>
+<td>
+<p>Whether to use black to autoformat code in returned string representation.</p>
+</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td><code>str</code></td>
+<td>
+<p>Line prefix to use when rendering the evaluated results.</p>
+</td>
+</tr>
+<tr>
+<td><code>terminal</code></td>
+<td><code>bool</code></td>
+<td>
+<p>Whether to apply syntax highlighting to the string representation.
+Requires optional dependency Pygments.</p>
+</td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td><code>libcst.Module</code></td>
+<td>
+<p>Parsed LibCST concrete syntax tree of input code.</p>
+</td>
+</tr>
+<tr>
+<td><code>statements</code></td>
+<td><code>List[Statement]</code></td>
+<td>
+<p>List of individual statements parsed from input code.</p>
+</td>
+</tr>
+<tr>
+<td><code>results</code></td>
+<td><code>List[Result]</code></td>
+<td>
+<p>List of evaluated results corresponding to each item of statements.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="reprexlite.code.CodeBlock.__init__">
+<h4 class="doc doc-heading" id="reprexlite.code.CodeBlock.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'#&gt;'</span><span class="p">,</span> <span class="n">terminal</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#&gt;'</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 <details class="quote">
           <summary>Source code in <code>reprexlite/code.py</code></summary>
@@ -588,27 +653,53 @@
 </div>
 </div>
 <div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="reprexlite.code.Result">
+<h3 class="doc doc-heading" id="reprexlite.code.Result">
 
         <code>Result</code>
 
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
-<p>Class that holds the result of evaluated code and generates a pretty-formatted string
-represetation.</p>
+<p>Class that holds the result of evaluated code. Use <code>str(...)</code> on an instance to produce a
+pretty-formatted comment block representation of the result.</p>
+<p><strong>Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><code>Any</code></td>
+<td>
+<p>Some Python object, intended to be the return value of evaluated Python code.</p>
+</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td><code>str</code></td>
+<td>
+<p>Line prefix to use when rendering the result for a reprex.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="reprexlite.code.Result.__init__">
+<h4 class="doc doc-heading" id="reprexlite.code.Result.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'#&gt;'</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#&gt;'</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 <details class="quote">
           <summary>Source code in <code>reprexlite/code.py</code></summary>
@@ -625,27 +716,56 @@ represetation.</p>
 </div>
 </div>
 <div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="reprexlite.code.Statement">
+<h3 class="doc doc-heading" id="reprexlite.code.Statement">
 
         <code>Statement</code>
 
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
-<p>Class that holds a LibCST parsed statement. It can evaluate it and return a Result, and it
-reproduces the source code as a string.</p>
+<p>Class that holds a LibCST parsed statement. The evaluate method will evaluate the statement
+and return a <a href="#reprexlite.code.Result"><code>Result</code></a> object. To recover the original source code
+for an instancement, call <code>str(...)</code> on it. You can optionally autoformat the returned source
+code, controlled by the <code>style</code> attribute.</p>
+<p><strong>Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stmt</code></td>
+<td><code>Union[libcst.SimpleStatementLine, libcst.BaseCompoundStatement]</code></td>
+<td>
+<p>LibCST parsed
+statement.</p>
+</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td><code>bool</code></td>
+<td>
+<p>Whether to autoformat the source code with black.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="reprexlite.code.Statement.__init__">
+<h4 class="doc doc-heading" id="reprexlite.code.Statement.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stmt</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">libcst</span><span class="o">.</span><span class="n">_nodes</span><span class="o">.</span><span class="n">statement</span><span class="o">.</span><span class="n">SimpleStatementLine</span><span class="p">,</span> <span class="n">libcst</span><span class="o">.</span><span class="n">_nodes</span><span class="o">.</span><span class="n">statement</span><span class="o">.</span><span class="n">BaseCompoundStatement</span><span class="p">],</span> <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stmt</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 <details class="quote">
           <summary>Source code in <code>reprexlite/code.py</code></summary>
@@ -661,12 +781,12 @@ reproduces the source code as a string.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="reprexlite.code.Statement.evaluate">
+<h4 class="doc doc-heading" id="reprexlite.code.Statement.evaluate">
 
-<code class="highlight language-python"><span class="n">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span></code>
+<code class="highlight language-python"><span class="n">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span></code>
 
 
-      </h3>
+      </h4>
 <div class="doc doc-contents ">
 <details class="quote">
           <summary>Source code in <code>reprexlite/code.py</code></summary>
