@@ -9,6 +9,10 @@ else:
 
 
 class SessionInfo:
+    """Class for pretty-formatting Python session info. Includes details about your Python version,
+    your operating system, and the Python packages installed in your current environment.
+    """
+
     def __init__(self):
         self.python_version = platform.python_version()
         self.python_build_date = platform.python_build()[1]
@@ -30,6 +34,10 @@ class SessionInfo:
 
 
 class Package:
+    """Interface for adapting [`importlib.metadata.Distribution`](https://docs.python.org/3/library/importlib.metadata.html#distributions)
+    instances for introspection by [`SessionInfo`][reprexlite.session_info.SessionInfo].
+    """
+
     def __init__(self, distribution: importlib_metadata.Distribution):
         self.distribution = distribution
 

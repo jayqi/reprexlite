@@ -58,10 +58,28 @@ def main(
     results will be embedded as comments below their associated lines.
 
     By default, your system's default command-line text editor will open for you to type or paste
-    in your code. This editor can be changed by setting the EDITOR environment variable.
+    in your code. This editor can be changed by setting the EDITOR environment variable. You can
+    instead specify an input file with the --infile / -i option
+
+    Additional markup will be added that is appropriate to the choice of venue option. For example,
+    for the default `gh` venue for GitHub Flavored Markdown, the final reprex will look like:
+
+    \b
+    ----------------------------------------
+    ```python
+    arr = [1, 2, 3, 4, 5]
+    [x + 1 for x in arr]
+    #> [2, 3, 4, 5, 6]
+    max(arr) - min(arr)
+    #> 4
+    ```
+    \b
+    <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.1.0</sup>
+    ----------------------------------------
 
     \b
     The supported venue formats are:
+    \b
     - gh : GitHub Flavored Markdown
     - so : StackOverflow, alias for gh
     - ds : Discourse, alias for gh

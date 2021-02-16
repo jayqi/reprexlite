@@ -10,6 +10,8 @@ from reprexlite.version import __version__
 
 
 class Advertisement:
+    """Class for generating the advertisement note for reprexlite."""
+
     pkg = "reprexlite"
     url = "https://github.com/jayqi/reprexlite"
 
@@ -32,14 +34,17 @@ class Advertisement:
 
 
 class Reprex(ABC):
+    """Abstract base class for a reprex instance. Concrete subclasses should implement the
+    formatting logic appropriate to a specific venue for sharing."""
+
     default_advertise: bool
 
     def __init__(
         self, code_block: CodeBlock, advertise: Optional[bool] = None, session_info: bool = False
     ):
-        self.code_block = code_block
-        self.advertise = self.default_advertise if advertise is None else advertise
-        self.session_info = session_info
+        self.code_block: CodeBlock = code_block
+        self.advertise: bool = self.default_advertise if advertise is None else advertise
+        self.session_info: bool = session_info
 
     @abstractmethod
     def __str__(self) -> str:  # pragma: no cover
@@ -47,6 +52,8 @@ class Reprex(ABC):
 
 
 class GitHubReprex(Reprex):
+    """Concrete implementation for rendering reprexes in GitHub Flavored Markdown."""
+
     default_advertise: bool = True
 
     def __str__(self) -> str:
@@ -66,6 +73,9 @@ class GitHubReprex(Reprex):
 
 
 class HtmlReprex(Reprex):
+    """Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is
+    available, the rendered HTML will have syntax highlighting for the Python code."""
+
     default_advertise: bool = True
 
     def __str__(self) -> str:
@@ -91,6 +101,8 @@ class HtmlReprex(Reprex):
 
 
 class PyScriptReprex(Reprex):
+    """Concrete implementation for rendering reprexes as a Python script."""
+
     default_advertise: bool = False
 
     def __str__(self) -> str:
@@ -105,6 +117,8 @@ class PyScriptReprex(Reprex):
 
 
 class RtfReprex(Reprex):
+    """Concrete implementation for rendering reprexes in Rich Text Format."""
+
     default_advertise: bool = False
 
     def __str__(self) -> str:
@@ -124,6 +138,8 @@ class RtfReprex(Reprex):
 
 
 class SlackReprex(Reprex):
+    """Concrete implementation for rendering reprexes as Slack markup."""
+
     default_advertise: bool = False
 
     def __str__(self):
@@ -149,9 +165,11 @@ venues_dispatcher: Dict[str, Callable] = {
     "rtf": RtfReprex,
     "slack": SlackReprex,
 }
+"""Mapping from venue keywords to their Reprex implementation."""
 
 
 Venue = Enum("Venue", names={v.upper(): v for v in venues_dispatcher.keys()}, type=str)  # type: ignore
+Venue.__doc__ = """Enum for valid venue options."""
 
 
 def reprex(
@@ -165,8 +183,55 @@ def reprex(
     print_=True,
     terminal=False,
 ) -> Reprex:
+    """Render reproducible examples of Python code for sharing. This function will evaluate your
+    code and returns an instance of a [`Reprex`](reprexlite.reprex.Reprex) subclass. Calling
+    `str(...)` on the `Reprex` object will return your code with the evaluated results embedded
+    as comments, plus additional markup appropriate to the sharing venue set by the `venue` keyword
+    argument.
+
+    For example, for the `gh` venue for GitHub Flavored Markdown, you'll get a reprex whose string
+    representation looks like:
+
+    ````
+    ```python
+    x = 2
+    x + 2
+    #> 4
+    ```
+
+    <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.1.0</sup>
+    ````
+
+    The supported `venue` formats are:
+
+    - `gh` : GitHub Flavored Markdown
+    - `so` : StackOverflow, alias for gh
+    - `ds` : Discourse, alias for gh
+    - `html` : HTML
+    - `py` : Python script
+    - `rtf` : Rich Text Format
+    - `slack` : Slack
+
+    Args:
+        input (str): Block of Python code
+        outfile (Optional[Path]): Optional file path to write reprex to. Defaults to None.
+        venue (str): Determines the output format by the venue you want to share the code. Defaults
+            to "gh" for GitHub Flavored Markdown.
+        advertise (Optional[bool]): Whether to include a note that links back to the reprexlite
+            package. Default `None` will use the default set by choice of `venue`.
+        session_info (bool): Whether to include additional details about your Python version,
+            operating system, and installed packages. Defaults to False.
+        style (bool): Whether to autoformat your code with black. Defaults to False.
+        comment (str): Line prefix to use for displaying evaluated results. Defaults to "#>".
+        print_ (bool): Whether to print your reprex to console. Defaults to True.
+        terminal (bool): Whether to use syntax highlighting for 256-color terminal display.
+            Requires optional dependency Pygments. Defaults to False.
+
+    Returns:
+        Instance of a `Reprex` concrete subclass for `venue`.
+    """
     if outfile or venue in ["html", "rtf"]:
-        # Don't screw output file or lexing for HTML and RTF
+        # Don't screw output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
     code_block = CodeBlock(input, style=style, comment=comment, terminal=terminal)
 
