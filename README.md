@@ -56,7 +56,7 @@ The reprexlite CLI allows you to create a reprex without entering Python. Simply
 reprex
 ```
 
-This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS for example, this will be `vi`. You can set your default editor using the `$EDITOR` environment variable—I'm personally a fan of `nano`.
+This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be `vi`. You can set your default editor using the `$EDITOR` environment variable—I'm personally a fan of `nano`.
 
 Once you're done, reprexlite will print out your reprex to console.
 
