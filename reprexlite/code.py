@@ -59,14 +59,17 @@ class Statement:
             return Result(NO_RETURN)
 
     def __str__(self) -> str:
-        code = cst.Module(body=[self.stmt]).code.strip()
+        code = cst.Module(body=[self.stmt]).code
         if self.style:
             try:
                 from black import format_str, Mode
             except ImportError:
                 raise ImportError("Must install black to restyle code.")
 
-            code = format_str(code, mode=Mode()).strip()
+            code = format_str(code, mode=Mode())
+        if code.endswith("\n"):
+            # Strip trailing newline without stripping deliberate ones.
+            code = code[:-1]
         return code
 
 
