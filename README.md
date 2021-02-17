@@ -36,7 +36,7 @@ pip install reprexlite
 Optional dependencies can be specified using the ["extras" mechanism](https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras), e.g., `reprexlite[pygments]`. Available extras are:
 
 - `black` : for optionally autoformatting your code
-- `pygmens` : for syntax highlighting and the RTF venue
+- `pygments` : for syntax highlighting and the RTF venue
 
 ### Development version
 
