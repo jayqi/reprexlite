@@ -2,6 +2,7 @@ site_name: reprexlite
 site_url: https://jayqi.github.io/reprexlite
 site_description: Render reproducible examples of Python code for sharing.
 repo_url: https://github.com/jayqi/reprexlite
+edit_uri: ""
 theme:
   name: material
 
