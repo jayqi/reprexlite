@@ -37,3 +37,12 @@ test:
 
 typecheck:
 	mypy reprexlite
+
+pdoc3:
+	pdoc reprexlite.code -o _temp --force
+	pdoc reprexlite.reprex -o _temp --force
+	pdoc reprexlite.session_info -o _temp --force
+	rm -rf docs/docs/api
+	mkdir docs/docs/api
+	mv _temp/reprexlite/* docs/docs/api/
+	rm -r _temp

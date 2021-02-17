@@ -14,6 +14,20 @@ nav:
       - reprexlite.session_info: "api-reference/session_info.md"
   - Changelog: "changelog.md"
 
+markdown_extensions:
+  - abbr
+  - attr_list
+  - def_list
+  - fenced_code
+  - footnotes
+  - tables
+  - admonition
+  - smarty
+  - toc
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite:
+
 plugins:
   - search
   - mkdocstrings:
