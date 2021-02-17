@@ -411,6 +411,7 @@
 <li>Changed reprexes to—by default—remove lines matching the <code>comment</code> prefix (<code>#&gt;</code> by default). This means that if your input code is a previously rendered reprex, the old results will be removed first and you effectively regenerate it.</li>
 <li>Added a new option <code>old_results</code> that—if set to True—will preserve such lines.</li>
 <li>Fixed a bug that caused intentional blank lines to be removed. (<a href="https://github.com/jayqi/reprexlite/pull/7">#7</a>)</li>
+<li>Added stdout capturing. Any content printed to stdout will be shown as a result in the reprex. (<a href="https://github.com/jayqi/reprexlite/pull/10">#10</a>)</li>
 </ul>
 <h2 id="v010-2021-02-15">v0.1.0 (2021-02-15)</h2>
 <p>Initial release! 🎉</p>
