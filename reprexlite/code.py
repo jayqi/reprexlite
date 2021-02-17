@@ -89,7 +89,30 @@ class CodeBlock:
         results (List[Result]): List of evaluated results corresponding to each item of statements.
     """
 
-    def __init__(self, input: str, style: bool = False, comment: str = "#>", terminal=False):
+    def __init__(
+        self,
+        input: str,
+        style: bool = False,
+        comment: str = "#>",
+        terminal=False,
+        old_results: bool = False,
+    ):
+        """Initializer method.
+
+        Args:
+            input (str): Block of Python code
+            style (bool): Whether to use black to autoformat code in returned string
+                representation. Defaults to False.
+            comment (str): Line prefix to use when rendering the evaluated results. Defaults to
+                "#>".
+            terminal (bool): Whether to apply syntax highlighting to the string representation.
+                Requires optional dependency Pygments. Defaults to False.
+            old_results (bool): Whether to keep old results, i.e., comment lines in input that
+                match the `comment` prefix. False means these lines are removed, in effect meaning
+                an inputted regex will have its results regenerated. Defaults to False.
+        """
+        if not old_results and comment in input:
+            input = "\n".join(line for line in input.split("\n") if not line.startswith(comment))
         self.input: str = input
         self.terminal = terminal
         # Parse code

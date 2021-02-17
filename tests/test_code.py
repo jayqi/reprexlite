@@ -112,3 +112,34 @@ def test_source(case):
     print(dedent(case.expected))
     print("---")
     assert str(code_block) == dedent(case.expected).strip()
+
+
+def test_old_results():
+    input = dedent(
+        """\
+        arr = [1, 2, 3, 4, 5]
+        [x + 1 for x in arr]
+        #> old line
+        """
+    )
+
+    # old_results = False (default)
+    expected_false = dedent(
+        """\
+        arr = [1, 2, 3, 4, 5]
+        [x + 1 for x in arr]
+        #> [2, 3, 4, 5, 6]
+        """
+    )
+    assert str(CodeBlock(input)) == expected_false.strip()
+
+    # old_results = True
+    expected_true = dedent(
+        """\
+        arr = [1, 2, 3, 4, 5]
+        [x + 1 for x in arr]
+        #> [2, 3, 4, 5, 6]
+        #> old line
+        """
+    )
+    assert str(CodeBlock(input, old_results=True)) == expected_true.strip()

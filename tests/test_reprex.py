@@ -65,3 +65,16 @@ def test_html(patch_datetime, patch_version, no_pygments):
         """
     ).strip()
     assert str(reprex) == expected
+
+
+def test_old_results():
+    input = dedent(
+        """\
+        arr = [1, 2, 3, 4, 5]
+        [x + 1 for x in arr]
+        #> old line
+        """
+    )
+
+    assert "#> old line" not in str(reprex(input))  # old_results False (default)
+    assert "#> old line" in str(reprex(input, old_results=True))  # old_results True

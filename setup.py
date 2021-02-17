@@ -53,5 +53,5 @@ setup(
         "Source Code": "https://github.com/jayqi/reprexlite",
     },
     url="https://github.com/jayqi/reprexlite",
-    version="0.1.0",
+    version="0.2.0",
 )

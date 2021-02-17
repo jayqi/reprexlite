@@ -180,6 +180,7 @@ def reprex(
     session_info: bool = False,
     style: bool = False,
     comment: str = "#>",
+    old_results: bool = False,
     print_=True,
     terminal=False,
 ) -> Reprex:
@@ -223,6 +224,9 @@ def reprex(
             operating system, and installed packages. Defaults to False.
         style (bool): Whether to autoformat your code with black. Defaults to False.
         comment (str): Line prefix to use for displaying evaluated results. Defaults to "#>".
+        old_results (bool): Whether to keep old results, i.e., comment lines in input that match
+            the `comment` prefix. False means these lines are removed, in effect meaning an
+            inputted regex will have its results regenerated. Defaults to False.
         print_ (bool): Whether to print your reprex to console. Defaults to True.
         terminal (bool): Whether to use syntax highlighting for 256-color terminal display.
             Requires optional dependency Pygments. Defaults to False.
@@ -230,10 +234,13 @@ def reprex(
     Returns:
         Instance of a `Reprex` concrete subclass for `venue`.
     """
+
     if outfile or venue in ["html", "rtf"]:
         # Don't screw output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
-    code_block = CodeBlock(input, style=style, comment=comment, terminal=terminal)
+    code_block = CodeBlock(
+        input, style=style, comment=comment, old_results=old_results, terminal=terminal
+    )
 
     reprex = venues_dispatcher[venue](
         code_block=code_block, advertise=advertise, session_info=session_info
