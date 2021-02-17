@@ -1,17 +1,25 @@
 # reprexlite: Python reproducible examples for sharing
 
 [![PyPI](https://img.shields.io/pypi/v/reprexlite.svg)](https://pypi.org/project/reprexlite/)
-[![Supported Python Versions](https://img.shields.io/pypi/pyversions/reprexlite)](https://pypi.org/project/reprexlite/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/reprexlite)](https://pypi.org/project/reprexlite/)
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
 **reprexlite** is tool for rendering **repr**oducible **ex**amples of Python code for sharing. It will execute your code and embed the outputs as comments below their associated lines. The rendered reprex can then be easily copied, pasted, and run as-is by anybody else. It is a lightweight alternative to [reprexpy](https://github.com/crew102/reprexpy) and is similarly meant as a port of the R package [reprex](https://github.com/tidyverse/reprex).
 
+Here's an example of output created by reprexlite:
+
+```python
+arr = [1, 2, 3, 4, 5]
+[x + 1 for x in arr]
+#> [2, 3, 4, 5, 6]
+```
+
 <a href="https://asciinema.org/a/391063" target="_blank"><img src="https://asciinema.org/a/391063.svg" width="480"/></a>
 
 #### Why reproducible examples?
 
-If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex.
+If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run.
 
 #### Why reprexlite?
 
@@ -24,6 +32,11 @@ reprexlite is available on PyPI:
 ```bash
 pip install reprexlite
 ```
+
+Optional dependencies can be specified using the ["extras" mechanism](https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras), e.g., `reprexlite[pygments]`. Available extras are:
+
+- `black` : for optionally autoformatting your code
+- `pygmens` : for syntax highlighting and the RTF venue
 
 ### Development version
 
@@ -49,6 +62,8 @@ Once you're done, reprexlite will print out your reprex to console.
 
 ### Python library
 
+The same functionality as the CLI is also available from the `reprex` function with an equivalent API:
+
 ```python
 from reprexlite import reprex
 
@@ -57,8 +72,11 @@ arr = [1, 2, 3, 4, 5]
 [x + 1 for x in arr]
 """
 
-print(reprex(code))
+reprex(code)
+#> <reprexlite.reprex.GitHubReprex object at 0x7fd4446f94f0>
 ```
+
+Under the hood, reprexlite is designed with a modular object-oriented architecture. See the [API documentation](https://jayqi.github.io/reprexlite/api-reference/reprex/) to learn more.
 
 ## Comparison to reprexpy
 
