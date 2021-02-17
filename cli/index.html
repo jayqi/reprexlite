@@ -410,6 +410,12 @@ Options:
   --comment TEXT                  Comment prefix to use for results returned
                                   by expressions.  [default: #&gt;]
 
+  --old-results                   Keep old results, i.e., lines that match the
+                                  prefix specified by the --comment option. If
+                                  not using this option, then such lines are
+                                  removed, meaning that an input that is a
+                                  reprex will be effectively regenerated.
+
   --version                       Show reprexlite version and exit.
   --install-completion [bash|zsh|fish|powershell|pwsh]
                                   Install completion for the specified shell.

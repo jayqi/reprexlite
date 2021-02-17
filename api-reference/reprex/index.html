@@ -1311,7 +1311,7 @@ formatting logic appropriate to a specific venue for sharing.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="reprexlite.reprex.reprex">
 
-<code class="highlight language-python"><span class="n">reprex</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">venue</span><span class="o">=</span><span class="s1">'gh'</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#&gt;'</span><span class="p">,</span> <span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">reprex</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">venue</span><span class="o">=</span><span class="s1">'gh'</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#&gt;'</span><span class="p">,</span> <span class="n">old_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1412,6 +1412,16 @@ operating system, and installed packages. Defaults to False.</p>
 <td><code>'#&gt;'</code></td>
 </tr>
 <tr>
+<td><code>old_results</code></td>
+<td><code>bool</code></td>
+<td>
+<p>Whether to keep old results, i.e., comment lines in input that match
+the <code>comment</code> prefix. False means these lines are removed, in effect meaning an
+inputted regex will have its results regenerated. Defaults to False.</p>
+</td>
+<td><code>False</code></td>
+</tr>
+<tr>
 <td><code>print_</code></td>
 <td><code>bool</code></td>
 <td>
@@ -1458,6 +1468,7 @@ Requires optional dependency Pygments. Defaults to False.</p>
     <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"#&gt;"</span><span class="p">,</span>
+    <span class="n">old_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Reprex</span><span class="p">:</span>
@@ -1501,6 +1512,9 @@ Requires optional dependency Pygments. Defaults to False.</p>
 <span class="sd">            operating system, and installed packages. Defaults to False.</span>
 <span class="sd">        style (bool): Whether to autoformat your code with black. Defaults to False.</span>
 <span class="sd">        comment (str): Line prefix to use for displaying evaluated results. Defaults to "#&gt;".</span>
+<span class="sd">        old_results (bool): Whether to keep old results, i.e., comment lines in input that match</span>
+<span class="sd">            the `comment` prefix. False means these lines are removed, in effect meaning an</span>
+<span class="sd">            inputted regex will have its results regenerated. Defaults to False.</span>
 <span class="sd">        print_ (bool): Whether to print your reprex to console. Defaults to True.</span>
 <span class="sd">        terminal (bool): Whether to use syntax highlighting for 256-color terminal display.</span>
 <span class="sd">            Requires optional dependency Pygments. Defaults to False.</span>
@@ -1508,10 +1522,13 @@ Requires optional dependency Pygments. Defaults to False.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        Instance of a `Reprex` concrete subclass for `venue`.</span>
 <span class="sd">    """</span>
+
     <span class="k">if</span> <span class="n">outfile</span> <span class="ow">or</span> <span class="n">venue</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"html"</span><span class="p">,</span> <span class="s2">"rtf"</span><span class="p">]:</span>
         <span class="c1"># Don't screw output file or lexing for HTML and RTF with terminal syntax highlighting</span>
         <span class="n">terminal</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">code_block</span> <span class="o">=</span> <span class="n">CodeBlock</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">comment</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="n">terminal</span><span class="p">)</span>
+    <span class="n">code_block</span> <span class="o">=</span> <span class="n">CodeBlock</span><span class="p">(</span>
+        <span class="nb">input</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">comment</span><span class="p">,</span> <span class="n">old_results</span><span class="o">=</span><span class="n">old_results</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="n">terminal</span>
+    <span class="p">)</span>
 
     <span class="n">reprex</span> <span class="o">=</span> <span class="n">venues_dispatcher</span><span class="p">[</span><span class="n">venue</span><span class="p">](</span>
         <span class="n">code_block</span><span class="o">=</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="n">advertise</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="n">session_info</span>

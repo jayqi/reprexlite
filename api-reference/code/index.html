@@ -620,7 +620,7 @@ Requires optional dependency Pygments.</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="reprexlite.code.CodeBlock.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#&gt;'</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#&gt;'</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">old_results</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -628,10 +628,92 @@ Requires optional dependency Pygments.</p>
 
       </h4>
 <div class="doc doc-contents ">
+<p>Initializer method.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>input</code></td>
+<td><code>str</code></td>
+<td>
+<p>Block of Python code</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td><code>bool</code></td>
+<td>
+<p>Whether to use black to autoformat code in returned string
+representation. Defaults to False.</p>
+</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td><code>str</code></td>
+<td>
+<p>Line prefix to use when rendering the evaluated results. Defaults to
+"#&gt;".</p>
+</td>
+<td><code>'#&gt;'</code></td>
+</tr>
+<tr>
+<td><code>terminal</code></td>
+<td><code>bool</code></td>
+<td>
+<p>Whether to apply syntax highlighting to the string representation.
+Requires optional dependency Pygments. Defaults to False.</p>
+</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>old_results</code></td>
+<td><code>bool</code></td>
+<td>
+<p>Whether to keep old results, i.e., comment lines in input that
+match the <code>comment</code> prefix. False means these lines are removed, in effect meaning
+an inputted regex will have its results regenerated. Defaults to False.</p>
+</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
 <details class="quote">
           <summary>Source code in <code>reprexlite/code.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"#&gt;"</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"#&gt;"</span><span class="p">,</span>
+    <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">old_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">"""Initializer method.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input (str): Block of Python code</span>
+<span class="sd">        style (bool): Whether to use black to autoformat code in returned string</span>
+<span class="sd">            representation. Defaults to False.</span>
+<span class="sd">        comment (str): Line prefix to use when rendering the evaluated results. Defaults to</span>
+<span class="sd">            "#&gt;".</span>
+<span class="sd">        terminal (bool): Whether to apply syntax highlighting to the string representation.</span>
+<span class="sd">            Requires optional dependency Pygments. Defaults to False.</span>
+<span class="sd">        old_results (bool): Whether to keep old results, i.e., comment lines in input that</span>
+<span class="sd">            match the `comment` prefix. False means these lines are removed, in effect meaning</span>
+<span class="sd">            an inputted regex will have its results regenerated. Defaults to False.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">old_results</span> <span class="ow">and</span> <span class="n">comment</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">:</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">input</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">comment</span><span class="p">))</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">input</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="n">terminal</span>
     <span class="c1"># Parse code</span>
