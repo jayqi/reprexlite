@@ -37,3 +37,10 @@ test:
 
 typecheck:
 	mypy reprexlite
+
+pdocs:
+	pdocs as_markdown reprexlite.code reprexlite.reprex reprexlite.session_info -o _temp
+	rm -rf docs/docs/api
+	mkdir docs/docs/api
+	mv _temp/reprexlite/* docs/docs/api/
+	rm -r _temp
