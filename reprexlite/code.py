@@ -1,6 +1,8 @@
+from contextlib import redirect_stdout
+from io import StringIO
 from itertools import chain
 from pprint import pformat
-from typing import Any, List, Union
+from typing import Any, List, Optional, Union
 
 import libcst as cst
 
@@ -19,14 +21,17 @@ class Result:
         comment (str): Line prefix to use when rendering the result for a reprex.
     """
 
-    def __init__(self, result: Any, comment: str = "#>"):
+    def __init__(self, result: Any, stdout: Optional[str] = None, comment: str = "#>"):
         self.result = result
+        self.stdout = stdout
         self.comment = comment
 
     def __str__(self) -> str:
-        if not self:
-            return ""
-        lines = pformat(self.result, indent=2, width=77).split("\n")
+        lines = []
+        if self.stdout:
+            lines.extend(self.stdout.split("\n"))
+        if self.result is not None or not self.stdout:
+            lines.extend(pformat(self.result, indent=2, width=77).split("\n"))
         return "\n".join(f"{self.comment} " + line for line in lines)
 
     def __bool__(self) -> bool:
@@ -52,11 +57,16 @@ class Statement:
         self.style = style
 
     def evaluate(self, scope: dict) -> Result:
-        try:
-            return Result(eval(str(self), scope, scope))
-        except SyntaxError:
-            exec(str(self), scope, scope)
-            return Result(NO_RETURN)
+        stdout_io = StringIO()
+        with redirect_stdout(stdout_io):
+            try:
+                result = eval(str(self), scope, scope)
+            except SyntaxError:
+                exec(str(self), scope, scope)
+                result = NO_RETURN
+        stdout = stdout_io.getvalue().strip()
+        stdout_io.close()
+        return Result(result, stdout=stdout)
 
     def __str__(self) -> str:
         code = cst.Module(body=[self.stmt]).code

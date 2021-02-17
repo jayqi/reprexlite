@@ -100,6 +100,20 @@ cases = [
         #> 3628800
         """,
     ),
+    Case(
+        """\
+        arr = [1, 2, 3, 4, 5]
+        print(f"start: {arr[0]}, end: {arr[-1]}")
+        [x + 1 for x in arr]
+        """,
+        """\
+        arr = [1, 2, 3, 4, 5]
+        print(f"start: {arr[0]}, end: {arr[-1]}")
+        #> start: 1, end: 5
+        [x + 1 for x in arr]
+        #> [2, 3, 4, 5, 6]
+        """,
+    ),
 ]
 
 
