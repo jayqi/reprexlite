@@ -514,19 +514,29 @@
                 
                 <h1 id="reprexlite-python-reproducible-examples-for-sharing">reprexlite: Python reproducible examples for sharing</h1>
 <p><a href="https://pypi.org/project/reprexlite/"><img alt="PyPI" src="https://img.shields.io/pypi/v/reprexlite.svg" /></a>
-<a href="https://pypi.org/project/reprexlite/"><img alt="Supported Python Versions" src="https://img.shields.io/pypi/pyversions/reprexlite" /></a>
+<a href="https://pypi.org/project/reprexlite/"><img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/reprexlite" /></a>
 <a href="https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain"><img alt="tests" src="https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main" /></a>
 <a href="https://codecov.io/gh/jayqi/reprexlite"><img alt="codecov" src="https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg" /></a></p>
 <p><strong>reprexlite</strong> is tool for rendering <strong>repr</strong>oducible <strong>ex</strong>amples of Python code for sharing. It will execute your code and embed the outputs as comments below their associated lines. The rendered reprex can then be easily copied, pasted, and run as-is by anybody else. It is a lightweight alternative to <a href="https://github.com/crew102/reprexpy">reprexpy</a> and is similarly meant as a port of the R package <a href="https://github.com/tidyverse/reprex">reprex</a>.</p>
+<p>Here's an example of output created by reprexlite:</p>
+<pre><code class="language-python">arr = [1, 2, 3, 4, 5]
+[x + 1 for x in arr]
+#&gt; [2, 3, 4, 5, 6]
+</code></pre>
 <p><a href="https://asciinema.org/a/391063" target="_blank"><img src="https://asciinema.org/a/391063.svg" width="480"/></a></p>
 <h4 id="why-reproducible-examples">Why reproducible examples?</h4>
-<p>If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex.</p>
+<p>If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run.</p>
 <h4 id="why-reprexlite">Why reprexlite?</h4>
 <p>reprexlite helps you create a self-contained reprex that can be easily copy-pasted and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment.</p>
 <h2 id="installation">Installation</h2>
 <p>reprexlite is available on PyPI:</p>
 <pre><code class="language-bash">pip install reprexlite
 </code></pre>
+<p>Optional dependencies can be specified using the <a href="https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras">"extras" mechanism</a>, e.g., <code>reprexlite[pygments]</code>. Available extras are:</p>
+<ul>
+<li><code>black</code> : for optionally autoformatting your code</li>
+<li><code>pygmens</code> : for syntax highlighting and the RTF venue</li>
+</ul>
 <h3 id="development-version">Development version</h3>
 <p>The development version of reprexlite is available on GitHub:</p>
 <pre><code class="language-bash">pip install https://github.com/jayqi/reprexlite.git#egg=reprexlite
@@ -536,9 +546,10 @@
 <p>The reprexlite CLI allows you to create a reprex without entering Python. Simply invoke the command</p>
 <pre><code class="language-bash">reprex
 </code></pre>
-<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS for example, this will be <code>vi</code>. You can set your default editor using the <code>$EDITOR</code> environment variable—I'm personally a fan of <code>nano</code>.</p>
+<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vi</code>. You can set your default editor using the <code>$EDITOR</code> environment variable—I'm personally a fan of <code>nano</code>.</p>
 <p>Once you're done, reprexlite will print out your reprex to console.</p>
 <h3 id="python-library">Python library</h3>
+<p>The same functionality as the CLI is also available from the <code>reprex</code> function with an equivalent API:</p>
 <pre><code class="language-python">from reprexlite import reprex
 
 code = &quot;&quot;&quot;
@@ -546,8 +557,10 @@ arr = [1, 2, 3, 4, 5]
 [x + 1 for x in arr]
 &quot;&quot;&quot;
 
-print(reprex(code))
+reprex(code)
+#&gt; &lt;reprexlite.reprex.GitHubReprex object at 0x7fd4446f94f0&gt;
 </code></pre>
+<p>Under the hood, reprexlite is designed with a modular object-oriented architecture. See the <a href="https://jayqi.github.io/reprexlite/api-reference/reprex/">API documentation</a> to learn more.</p>
 <h2 id="comparison-to-reprexpy">Comparison to reprexpy</h2>
 <p>Compared to reprexpy, reprexlite adds:</p>
 <ul>
