@@ -28,10 +28,16 @@ EXPECTED = dedent(
 
 @pytest.fixture
 def patch_edit(monkeypatch):
-    def mock_edit():
-        return INPUT
+    class EditPatch:
+        def __init__(self):
+            self.input = INPUT
 
-    monkeypatch.setattr(typer, "edit", mock_edit)
+        def mock_edit(self):
+            return self.input
+
+    patch = EditPatch()
+    monkeypatch.setattr(typer, "edit", patch.mock_edit)
+    return patch
 
 
 def test_reprex(patch_edit):
@@ -57,6 +63,30 @@ def test_reprex_outfile(patch_edit, tmp_path):
     with outfile.open("r") as fp:
         assert EXPECTED in fp.read()
     assert str(outfile) in result.stdout
+
+
+def test_old_results(patch_edit):
+    patch_edit.input = dedent(
+        """\
+        arr = [1, 2, 3, 4, 5]
+        [x + 1 for x in arr]
+        #> old line
+        """
+    )
+
+    # no --old-results (default)
+    result = runner.invoke(app)
+    print(result.stdout)
+    assert result.exit_code == 0
+    assert "#> old line" not in result.stdout
+    assert "#> [2, 3, 4, 5, 6]" in result.stdout
+
+    # with --old-results
+    result = runner.invoke(app, ["--old-results"])
+    print(result.stdout)
+    assert result.exit_code == 0
+    assert "#> old line" in result.stdout
+    assert "#> [2, 3, 4, 5, 6]" in result.stdout
 
 
 def test_help():

@@ -46,6 +46,15 @@ def main(
     comment: str = typer.Option(
         "#>", "--comment", help="Comment prefix to use for results returned by expressions."
     ),
+    old_results: Optional[bool] = typer.Option(
+        None,
+        "--old-results",
+        help=(
+            "Keep old results, i.e., lines that match the prefix specified by the --comment "
+            "option. If not using this option, then such lines are removed, meaning that an input "
+            "that is a reprex will be effectively regenerated."
+        ),
+    ),
     version: Optional[bool] = typer.Option(
         None,
         "--version",
@@ -104,6 +113,7 @@ def main(
         session_info=session_info if session_info else False,
         style=style if style else False,
         comment=comment,
+        old_results=old_results if old_results else False,
         print_=False,
         terminal=True,
     )
