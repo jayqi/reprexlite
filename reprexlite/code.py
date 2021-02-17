@@ -2,7 +2,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 from itertools import chain
 from pprint import pformat
-from typing import Any, List, Union
+from typing import Any, List, Optional, Union
 
 import libcst as cst
 
@@ -21,9 +21,9 @@ class Result:
         comment (str): Line prefix to use when rendering the result for a reprex.
     """
 
-    def __init__(self, result: Any, stdout: StringIO, comment: str = "#>"):
+    def __init__(self, result: Any, stdout: Optional[str] = None, comment: str = "#>"):
         self.result = result
-        self.stdout: str = stdout.getvalue().strip()
+        self.stdout = stdout
         self.comment = comment
 
     def __str__(self) -> str:
@@ -57,13 +57,15 @@ class Statement:
         self.style = style
 
     def evaluate(self, scope: dict) -> Result:
-        stdout = StringIO()
-        with redirect_stdout(stdout):
+        stdout_io = StringIO()
+        with redirect_stdout(stdout_io):
             try:
                 result = eval(str(self), scope, scope)
             except SyntaxError:
                 exec(str(self), scope, scope)
                 result = NO_RETURN
+        stdout = stdout_io.getvalue().strip()
+        stdout_io.close()
         return Result(result, stdout=stdout)
 
     def __str__(self) -> str:
