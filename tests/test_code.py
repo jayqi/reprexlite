@@ -70,6 +70,36 @@ cases = [
         # Here's another
         """,
     ),
+    Case(
+        """\
+        import math
+
+        math.factorial(10)
+        """,
+        """\
+        import math
+
+        math.factorial(10)
+        #> 3628800
+        """,
+    ),
+    Case(
+        """\
+        import math
+
+
+        # here's a comment
+        math.factorial(10)
+        """,
+        """\
+        import math
+
+
+        # here's a comment
+        math.factorial(10)
+        #> 3628800
+        """,
+    ),
 ]
 
 
