@@ -2,6 +2,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 from itertools import chain
 from pprint import pformat
+import traceback
 from typing import Any, List, Optional, Union
 
 import libcst as cst
@@ -30,12 +31,17 @@ class Result:
         lines = []
         if self.stdout:
             lines.extend(self.stdout.split("\n"))
-        if self.result is not None or not self.stdout:
+        if self.result is not NO_RETURN and (self.result is not None or not self.stdout):
+            # NO_RETURN -> don't print
+            # None and stdout -> don't print
+            # None and no stdout -> print
+            # Anything else -> print
             lines.extend(pformat(self.result, indent=2, width=77).split("\n"))
         return "\n".join(f"{self.comment} " + line for line in lines)
 
     def __bool__(self) -> bool:
-        return self.result is not NO_RETURN
+        # If result is NO_RETURN and blank stdout, nothing to print
+        return self.result is not NO_RETURN or bool(self.stdout)
 
 
 class Statement:
@@ -58,14 +64,19 @@ class Statement:
 
     def evaluate(self, scope: dict) -> Result:
         stdout_io = StringIO()
-        with redirect_stdout(stdout_io):
-            try:
-                result = eval(str(self), scope, scope)
-            except SyntaxError:
-                exec(str(self), scope, scope)
-                result = NO_RETURN
-        stdout = stdout_io.getvalue().strip()
-        stdout_io.close()
+        try:
+            with redirect_stdout(stdout_io):
+                try:
+                    result = eval(str(self).strip(), scope, scope)
+                except SyntaxError:
+                    exec(str(self).strip(), scope, scope)
+                    result = NO_RETURN
+            stdout = stdout_io.getvalue().strip()
+        except Exception:
+            result = NO_RETURN
+            stdout = traceback.format_exc().strip()
+        finally:
+            stdout_io.close()
         return Result(result, stdout=stdout)
 
     def __str__(self) -> str:
