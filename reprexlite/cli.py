@@ -3,7 +3,7 @@ from typing import Optional
 
 import typer
 
-from reprexlite.reprex import reprex, Venue
+from reprexlite.reprex import Venue, reprex
 from reprexlite.version import __version__
 
 app = typer.Typer()

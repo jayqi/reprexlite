@@ -6,7 +6,6 @@ import pytest
 
 from reprexlite.code import CodeBlock
 
-
 REPO_ROOT = Path(__file__).parents[1].resolve()
 
 Case = namedtuple("Case", ["input", "expected"])
@@ -150,7 +149,7 @@ cases = [
 
         sqrt("four")
         #> Traceback (most recent call last):
-        #>   File "{REPO_ROOT / "reprexlite" / "code.py"}", line 70, in evaluate
+        #>   File "{REPO_ROOT / "reprexlite" / "code.py"}", line 69, in evaluate
         #>     result = eval(str(self).strip(), scope, scope)
         #>   File "<string>", line 1, in <module>
         #>   File "<string>", line 2, in sqrt

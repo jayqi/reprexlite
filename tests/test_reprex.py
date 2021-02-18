@@ -6,14 +6,13 @@ import pytest
 
 from reprexlite.code import CodeBlock
 from reprexlite.reprex import reprex, venues_dispatcher
-
 from tests.expected_reprexes import (
     ASSETS_DIR,
-    expected_reprexes,
     INPUT,
+    MOCK_VERSION,
     MockDateTime,
     MockSessionInfo,
-    MOCK_VERSION,
+    expected_reprexes,
 )
 
 

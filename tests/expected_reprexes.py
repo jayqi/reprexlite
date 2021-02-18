@@ -7,8 +7,7 @@ from textwrap import dedent
 from typing import Any, Dict
 
 from reprexlite import reprex
-from reprexlite.session_info import SessionInfo, Package
-
+from reprexlite.session_info import Package, SessionInfo
 
 ASSETS_DIR = (Path(__file__).parent / "assets").resolve()
 
