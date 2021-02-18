@@ -1,9 +1,13 @@
 from collections import namedtuple
+from pathlib import Path
 from textwrap import dedent
-from reprexlite.code import CodeBlock
 
 import pytest
 
+from reprexlite.code import CodeBlock
+
+
+REPO_ROOT = Path(__file__).parents[1].resolve()
 
 Case = namedtuple("Case", ["input", "expected"])
 
@@ -112,6 +116,45 @@ cases = [
         #> start: 1, end: 5
         [x + 1 for x in arr]
         #> [2, 3, 4, 5, 6]
+        """,
+    ),
+    Case(
+        """\
+        def return_none():
+            return None
+
+        return_none()
+        """,
+        """\
+        def return_none():
+            return None
+
+        return_none()
+        #> None
+        """,
+    ),
+    Case(
+        """\
+        import math
+
+        def sqrt(x):
+            return math.sqrt(x)
+
+        sqrt("four")
+        """,
+        f"""\
+        import math
+
+        def sqrt(x):
+            return math.sqrt(x)
+
+        sqrt("four")
+        #> Traceback (most recent call last):
+        #>   File "{REPO_ROOT}/reprexlite/code.py", line 70, in evaluate
+        #>     result = eval(str(self).strip(), scope, scope)
+        #>   File "<string>", line 1, in <module>
+        #>   File "<string>", line 2, in sqrt
+        #> TypeError: must be real number, not str
         """,
     ),
 ]
