@@ -82,8 +82,8 @@ class HtmlReprex(Reprex):
         out = []
         try:
             from pygments import highlight
-            from pygments.lexers import PythonLexer
             from pygments.formatters import HtmlFormatter
+            from pygments.lexers import PythonLexer
 
             formatter = HtmlFormatter()
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
@@ -124,8 +124,8 @@ class RtfReprex(Reprex):
     def __str__(self) -> str:
         try:
             from pygments import highlight
-            from pygments.lexers import PythonLexer
             from pygments.formatters import RtfFormatter
+            from pygments.lexers import PythonLexer
         except ImportError:
             raise ImportError("Pygments is required for RTF output.")
 

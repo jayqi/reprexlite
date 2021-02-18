@@ -26,9 +26,11 @@ dist: clean-dist
 	python setup.py sdist bdist_wheel
 
 format:
+	isort reprexlite tests
 	black reprexlite tests
 
 lint:
+	isort --check-only reprexlite tests
 	black --check reprexlite tests
 	flake8 reprexlite tests
 

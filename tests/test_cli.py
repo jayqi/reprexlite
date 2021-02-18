@@ -8,7 +8,6 @@ from typer.testing import CliRunner
 from reprexlite.cli import app
 from reprexlite.version import __version__
 
-
 runner = CliRunner()
 
 INPUT = dedent(

@@ -7,7 +7,6 @@ from typing import Any, List, Optional, Union
 
 import libcst as cst
 
-
 NO_RETURN = object()
 """Explicit placeholder object for statements, which have no return value (as opposed to
 expressions)."""
@@ -83,7 +82,7 @@ class Statement:
         code = cst.Module(body=[self.stmt]).code
         if self.style:
             try:
-                from black import format_str, Mode
+                from black import Mode, format_str
             except ImportError:
                 raise ImportError("Must install black to restyle code.")
 
@@ -157,8 +156,8 @@ class CodeBlock:
         if self.terminal:
             try:
                 from pygments import highlight
-                from pygments.lexers import PythonLexer
                 from pygments.formatters import Terminal256Formatter
+                from pygments.lexers import PythonLexer
 
                 out = highlight(out, PythonLexer(), Terminal256Formatter())
             except ImportError:
@@ -169,8 +168,8 @@ class CodeBlock:
         out = []
         try:
             from pygments import highlight
-            from pygments.lexers import PythonLexer
             from pygments.formatters import HtmlFormatter
+            from pygments.lexers import PythonLexer
 
             formatter = HtmlFormatter()
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")

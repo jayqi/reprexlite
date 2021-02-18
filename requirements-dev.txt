@@ -2,6 +2,7 @@
 
 black
 flake8
+isort
 mkdocs>=1.1
 mkdocs-material
 mkdocstrings

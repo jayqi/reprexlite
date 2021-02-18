@@ -6,7 +6,6 @@ import pytest
 
 from reprexlite.code import CodeBlock
 
-
 REPO_ROOT = Path(__file__).parents[1].resolve()
 
 Case = namedtuple("Case", ["input", "expected"])
