@@ -10,9 +10,11 @@
 Here's an example of output created by reprexlite:
 
 ```python
-arr = [1, 2, 3, 4, 5]
-[x + 1 for x in arr]
-#> [2, 3, 4, 5, 6]
+import math
+
+arr = [1, 4, 9, 16, 25]
+[math.isqrt(x) for x in arr]
+#> [1, 2, 3, 4, 5]
 ```
 
 <a href="https://asciinema.org/a/391063" target="_blank"><img src="https://asciinema.org/a/391063.svg" width="480"/></a>
@@ -23,7 +25,7 @@ If you're asking for help or reporting a bug, you are more likely to succeed in 
 
 #### Why reprexlite?
 
-reprexlite helps you create a self-contained reprex that can be easily copy-pasted and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment.
+reprexlite helps you create a self-contained reprex that can be easily copied, paste, and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment. See ["Design Philosphy"](https://jayqi.github.io/reprexlite/philosophy/) for more on this topic.
 
 ## Installation
 
@@ -68,8 +70,10 @@ The same functionality as the CLI is also available from the `reprex` function w
 from reprexlite import reprex
 
 code = """
-arr = [1, 2, 3, 4, 5]
-[x + 1 for x in arr]
+import math
+
+arr = [1, 4, 9, 16, 25]
+[math.isqrt(x) for x in arr]
 """
 
 reprex(code)
