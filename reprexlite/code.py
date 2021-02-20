@@ -159,7 +159,7 @@ class CodeBlock:
                 from pygments.formatters import Terminal256Formatter
                 from pygments.lexers import PythonLexer
 
-                out = highlight(out, PythonLexer(), Terminal256Formatter())
+                out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
             except ImportError:
                 pass
         return out.strip()
@@ -171,9 +171,9 @@ class CodeBlock:
             from pygments.formatters import HtmlFormatter
             from pygments.lexers import PythonLexer
 
-            formatter = HtmlFormatter()
+            formatter = HtmlFormatter(style="friendly", wrapcode=True)
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
-            out.append(highlight(str(self.code_block), PythonLexer(), formatter))
+            out.append(highlight(str(self), PythonLexer(), formatter))
         except ImportError:
-            out.append(f"<pre><code>{self.code_block}</code></pre>")
+            out.append(f"<pre><code>{self}</code></pre>")
         return "\n".join(out)

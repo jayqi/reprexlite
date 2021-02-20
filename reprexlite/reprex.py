@@ -85,7 +85,9 @@ class HtmlReprex(Reprex):
             from pygments.formatters import HtmlFormatter
             from pygments.lexers import PythonLexer
 
-            formatter = HtmlFormatter()
+            formatter = HtmlFormatter(
+                style="friendly", lineanchors=True, linenos=True, wrapcode=True
+            )
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
             out.append(highlight(str(self.code_block), PythonLexer(), formatter))
         except ImportError:
