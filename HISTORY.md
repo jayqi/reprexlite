@@ -1,6 +1,6 @@
 # reprexlite Changelog
 
-## v0.2.0 (2021-02-17)
+## v0.2.0 (2021-02-20)
 
 - Removing old results from inputs: ([#8](https://github.com/jayqi/reprexlite/pull/8))
   - Changed reprexes to—by default—remove lines matching the `comment` prefix (`#>` by default). This means that if your input code is a previously rendered reprex, the old results will be removed first and you effectively regenerate it.
