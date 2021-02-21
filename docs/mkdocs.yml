@@ -4,15 +4,28 @@ site_description: Render reproducible examples of Python code for sharing.
 repo_url: https://github.com/jayqi/reprexlite
 theme:
   name: material
+  logo: images/reprexlite.svg
+  favicon: images/reprexlite_white_blue.svg
 
 nav:
   - Home: "index.md"
   - CLI Help: "cli.md"
   - API Reference:
+      - reprexlite: "api-reference/reprex.md"
       - reprexlite.code: "api-reference/code.md"
-      - reprexlite.reprex: "api-reference/reprex.md"
+      - reprexlite.formatting: "api-reference/formatting.md"
       - reprexlite.session_info: "api-reference/session_info.md"
   - Changelog: "changelog.md"
+
+extra_css:
+  - stylesheets/custom_mkdocstrings.css
+
+markdown_extensions:
+  - pymdownx.highlight:
+  - pymdownx.superfences:
+  - toc:
+      toc_depth: 4
+  - mdx_truly_sane_lists:
 
 plugins:
   - search
@@ -30,4 +43,6 @@ plugins:
             show_if_no_docstring: true
             show_signature_annotations: false
             show_source: true
-            heading_level: 3
+            heading_level: 2
+            group_by_category: true
+            show_category_heading: true
