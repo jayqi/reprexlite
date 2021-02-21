@@ -13,7 +13,7 @@
       
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/cli/">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/reprexlite_white_blue.svg">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
     
     
@@ -39,6 +39,8 @@
       
     
     
+    
+      <link rel="stylesheet" href="../stylesheets/custom_mkdocstrings.css">
     
     
       
@@ -77,8 +79,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href="https://jayqi.github.io/reprexlite" title="reprexlite" class="md-header-nav__button md-logo" aria-label="reprexlite">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../images/reprexlite.svg" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -170,8 +171,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://jayqi.github.io/reprexlite" title="reprexlite" class="md-nav__button md-logo" aria-label="reprexlite">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../images/reprexlite.svg" alt="logo">
 
     </a>
     reprexlite
@@ -261,6 +261,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../api-reference/reprex/" class="md-nav__link">
+        reprexlite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api-reference/code/" class="md-nav__link">
         reprexlite.code
       </a>
@@ -273,8 +285,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/reprex/" class="md-nav__link">
-        reprexlite.reprex
+      <a href="../api-reference/formatting/" class="md-nav__link">
+        reprexlite.formatting
       </a>
     </li>
   
@@ -347,15 +359,15 @@
                 
                 
                 <h1 id="cli-help-documentation">CLI Help Documentation</h1>
-<pre><code class="language-bash">reprex --help
-</code></pre>
-<pre><code>Usage: reprex [OPTIONS]
+<div class="highlight"><pre><span></span><code>reprex --help
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Usage: reprex [OPTIONS]
 
   Render reproducible examples of Python code for sharing. Your code will be
   executed and the results will be embedded as comments below their
   associated lines.
 
-  By default, your system's default command-line text editor will open for
+  By default, your system&#39;s default command-line text editor will open for
   you to type or paste in your code. This editor can be changed by setting
   the EDITOR environment variable. You can instead specify an input file
   with the --infile / -i option
@@ -399,7 +411,7 @@ Options:
 
   --advertise / --no-advertise    Whether to include footer that credits
                                   reprexlite. If unspecified, will depend on
-                                  specified venue's default.
+                                  specified venue&#39;s default.
 
   --session-info                  Whether to include details about session and
                                   installed packages.
@@ -424,7 +436,7 @@ Options:
                                   copy it or customize the installation.
 
   --help                          Show this message and exit.
-</code></pre>
+</code></pre></div>
                 
               
               
@@ -458,13 +470,13 @@ Options:
           </a>
         
         
-          <a href="../api-reference/code/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../api-reference/reprex/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                reprexlite.code
+                reprexlite
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
