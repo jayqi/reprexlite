@@ -10,7 +10,7 @@ Reprex is a portmanteau for **repr**oducible **ex**ample. It come to mean a cert
 >
 > <p style="text-align: right">― <a href="https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html#package-philosophy">"Package Philosophy,"</a> from the R reprex documentation</p>
 
-Part of what makes a good reprex is what you choose to put into it. But the other part is a good tool that lowers the barrier to making one. It should be easy to create a reprex in a format that others can copy, paste, and run. reprexlite aims to be such a tool for Python.
+Most of what makes a good reprex is what you choose to put into it (see ["Reprex Do's and Don'ts"](../dos-and-donts)). But another important part is a good tool that lowers the barrier to making one, so that you don't have that as an excuse. It should be easy to create a reprex in a format that others can simply copy, paste, and run. reprexlite aims to be such a tool for Python.
 
 ## Why reproducible examples?
 
@@ -25,9 +25,9 @@ If you have a problem, you are more likely to succeed in getting the help if you
 
 Actual working examples are also a great way to teach someone how to do something with code. They'll be able to see what you're doing, and to tinker with it themselves if they choose to. Furthermore, users reading documentation often would prefer to get to code that works as fast as possible, and a reprex is a great way to do that.
 
-## Reprex-style vs. doctest-style examples
+## vs. Copying from shell (doctest-style)
 
-doctest-style is a widely used standard for Python code examples. They are basically what you get if you copy and paste from an interactive Python REPL:
+A widely used standard for Python code examples is copying from an interactive Python shell. It is easily recognized from the `>>>` prompt before each code statement. Such a code example is sometimes called a "doctest" because the [`doctest` module](https://docs.python.org/3/library/doctest.html) from the Python standard library is able to parse it.
 
 ```python
 >>> import math
@@ -35,11 +35,11 @@ doctest-style is a widely used standard for Python code examples. They are basic
 2.0
 ```
 
-The [`doctest` module](https://docs.python.org/3/library/doctest.html) from the Python standard library supports testing such examples in the docstrings of your scripts. It is supported by many tools, like [Sphinx](https://www.sphinx-doc.org/en/1.4.9/markup/code.html). Many Python packages use it for their documentation, like [requests](https://requests.readthedocs.io/en/master/).
+This style of code example takes no special tools to generate: simply open a `python` shell from command line, write your code, and copy what comes out. Many Python packages use it for their documentation, like [requests](https://requests.readthedocs.io/en/master/). There is also tooling for parsing it. The doctest module can run such examples in the docstrings of your scripts, and test that the output matches what is written. Other tools like [Sphinx](https://www.sphinx-doc.org/en/1.4.9/markup/code.html) are able to parse it when rendering your documentation into other formats.
 
-A major drawback of doctest-style examples is that you can't just copy, paste, and run. The `>>>` prompt is not valid Python syntax. While IPython's interactive shell and Jupyter notebooks _do_ support executing code with the prompt, it won't work in a regular Python REPL or in Python scripts. Furthermore, since the outputs might be anything, they may not be valid Python syntax either.
+The drawback of doctest-style examples is that it is not valid Python syntax, so you can't just copy, paste, and run such an example. The `>>>` prompt is not valid syntax. While IPython's interactive shell and Jupyter notebooks _do_ support executing code with the prompt, it won't work in a regular Python REPL or in Python scripts. Furthermore, since the outputs might be anything, they may not be valid Python syntax either, depending on their `repr`. A barebones class for example, will look like `<__main__.MyClass object at 0x7f932a001400>` and is not valid syntax. While no special tools were needed to _generate_ the example, special tools, or a lot of manual deleting of `>>>` and outputs, are needed to _run_ it.
 
-In contrast, reprexes _are_ valid Python code. Anyone can copy, paste, and run a reprex with no modifications and no special tools.
+In contrast, reprexes _are_ valid Python code. Anyone can copy, paste, and run a reprex with special tools or manual editing required.
 
 ```python
 import math

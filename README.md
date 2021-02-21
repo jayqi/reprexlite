@@ -25,7 +25,7 @@ If you're asking for help or reporting a bug, you are more likely to succeed in 
 
 #### Why reprexlite?
 
-reprexlite helps you create a self-contained reprex that can be easily copied, paste, and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment. See ["Design Philosphy"](https://jayqi.github.io/reprexlite/philosophy/) for more on this topic.
+reprexlite helps you create a self-contained reprex that can be easily copied, paste, and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment. See ["Design Philosphy"](https://jayqi.github.io/reprexlite/design-philosophy/) for more on this topic.
 
 ## Installation
 
@@ -58,7 +58,7 @@ The reprexlite CLI allows you to create a reprex without entering Python. Simply
 reprex
 ```
 
-This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be `vi`. You can set your default editor using the `$EDITOR` environment variable—I'm personally a fan of `nano`.
+This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be `vim`. You can set your default editor using the `$EDITOR` environment variable—I'm personally a fan of `nano`.
 
 Once you're done, reprexlite will print out your reprex to console.
 
@@ -81,16 +81,3 @@ reprex(code)
 ```
 
 Under the hood, reprexlite is designed with a modular object-oriented architecture. See the [API documentation](https://jayqi.github.io/reprexlite/api-reference/reprex/) to learn more.
-
-## Comparison to reprexpy
-
-Compared to reprexpy, reprexlite adds:
-
-- A command-line interface so you can create reprexes without entering Python
-- Lighter dependencies (e.g., no dependence on IPython)
-
-However, reprexlite does not have:
-
-- Direct ability to read from or write to your OS clipboard.
-  - Instead, the CLI opens your default text editor which you can paste into.
-- Automatic upload of matplotlib plots to imgur.com.
