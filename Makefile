@@ -29,6 +29,9 @@ format:
 	isort reprexlite tests
 	black reprexlite tests
 
+generate-test-assets:
+	python tests/expected_reprexes.py
+
 lint:
 	isort --check-only reprexlite tests
 	black --check reprexlite tests

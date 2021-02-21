@@ -6,6 +6,8 @@ import sys
 from textwrap import dedent
 from typing import Any, Dict
 
+from tqdm import tqdm
+
 from reprexlite import reprex
 from reprexlite.session_info import Package, SessionInfo
 
@@ -129,7 +131,7 @@ def patch_session_info():
 if __name__ == "__main__":
     shutil.rmtree(ASSETS_DIR, ignore_errors=True)
     with patch_datetime(), patch_version(), patch_session_info():
-        for ereprex in expected_reprexes:
+        for ereprex in tqdm(expected_reprexes):
             outfile = ASSETS_DIR / ereprex.filename
             outfile.parent.mkdir(exist_ok=True)
-            reprex(INPUT, outfile=outfile, **ereprex.kwargs)
+            reprex(INPUT, outfile=outfile, **ereprex.kwargs, print_=False)

@@ -3,10 +3,12 @@
 black
 flake8
 isort
+mdx_truly_sane_lists==1.2
 mkdocs>=1.1
 mkdocs-material
 mkdocstrings
 mypy
 pytest
 pytest-cov
+tqdm
 wheel
