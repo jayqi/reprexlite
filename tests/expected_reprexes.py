@@ -66,10 +66,10 @@ MOCK_VERSION = "VERSION"
 
 @contextmanager
 def patch_version():
-    version = sys.modules["reprexlite.reprex"].__version__
-    sys.modules["reprexlite.reprex"].__version__ = MOCK_VERSION
+    version = sys.modules["reprexlite.formatting"].__version__
+    sys.modules["reprexlite.formatting"].__version__ = MOCK_VERSION
     yield
-    sys.modules["reprexlite.reprex"].__version__ = version
+    sys.modules["reprexlite.formatting"].__version__ = version
 
 
 class MockDateTime:
@@ -87,10 +87,10 @@ class MockDateTime:
 @contextmanager
 def patch_datetime():
 
-    datetime = sys.modules["reprexlite.reprex"].datetime
-    sys.modules["reprexlite.reprex"].datetime = MockDateTime
+    datetime = sys.modules["reprexlite.formatting"].datetime
+    sys.modules["reprexlite.formatting"].datetime = MockDateTime
     yield
-    sys.modules["reprexlite.reprex"].datetime = datetime
+    sys.modules["reprexlite.formatting"].datetime = datetime
 
 
 class MockPackage(Package):
@@ -121,9 +121,9 @@ class MockSessionInfo(SessionInfo):
 
 @contextmanager
 def patch_session_info():
-    sys.modules["reprexlite.reprex"].SessionInfo = MockSessionInfo
+    sys.modules["reprexlite.formatting"].SessionInfo = MockSessionInfo
     yield
-    sys.modules["reprexlite.reprex"].SessionInfo = SessionInfo
+    sys.modules["reprexlite.formatting"].SessionInfo = SessionInfo
 
 
 if __name__ == "__main__":
