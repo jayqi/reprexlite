@@ -1,5 +1,9 @@
 # reprexlite Changelog
 
+## v0.3.0 (Unreleased)
+
+- Changed submodule organization for code related to reprex formatting. This is now in the `formatting` submodule. ([#17](https://github.com/jayqi/reprexlite/pull/17))
+
 ## v0.2.0 (2021-02-20)
 
 - Removing old results from inputs: ([#8](https://github.com/jayqi/reprexlite/pull/8))

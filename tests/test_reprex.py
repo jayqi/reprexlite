@@ -5,7 +5,8 @@ from textwrap import dedent
 import pytest
 
 from reprexlite.code import CodeBlock
-from reprexlite.reprex import reprex, venues_dispatcher
+from reprexlite.formatting import venues_dispatcher
+from reprexlite.reprex import reprex
 from tests.expected_reprexes import (
     ASSETS_DIR,
     INPUT,
@@ -18,17 +19,17 @@ from tests.expected_reprexes import (
 
 @pytest.fixture
 def patch_datetime(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "datetime", MockDateTime)
+    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "datetime", MockDateTime)
 
 
 @pytest.fixture
 def patch_version(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "__version__", MOCK_VERSION)
+    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "__version__", MOCK_VERSION)
 
 
 @pytest.fixture
 def patch_session_info(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.reprex"], "SessionInfo", MockSessionInfo)
+    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "SessionInfo", MockSessionInfo)
 
 
 @pytest.fixture

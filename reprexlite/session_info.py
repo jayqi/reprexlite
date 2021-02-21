@@ -11,14 +11,22 @@ else:
 class SessionInfo:
     """Class for pretty-formatting Python session info. Includes details about your Python version,
     your operating system, and the Python packages installed in your current environment.
+
+    Attributes:
+        python_version (str): Python version for current session
+        python_build_date (str): Date
+        os (str): OS information for current session
+        packages (List[Package]): List of Python packages installed in current virtual environment.
     """
 
     def __init__(self):
-        self.python_version = platform.python_version()
-        self.python_build_date = platform.python_build()[1]
+        self.python_version: str = platform.python_version()
+        self.python_build_date: str = platform.python_build()[1]
 
-        self.os = platform.platform()
-        self.packages = [Package(distr) for distr in importlib_metadata.Distribution.discover()]
+        self.os: str = platform.platform()
+        self.packages: List[Package] = [
+            Package(distr) for distr in importlib_metadata.Distribution.discover()
+        ]
 
     def __str__(self):
         lines = ["-- Session Info --" + "-" * 60]
@@ -56,6 +64,14 @@ class Package:
 
 
 def tabulate(rows: List[Tuple[str, str]]) -> List[str]:
+    """Utility function for printing a two-column table as text with whitespace padding.
+
+    Args:
+        rows (List[Tuple[str, str]]): Rows of table as tuples of (left cell, right cell)
+
+    Returns:
+        Rows of table formatted as strings with whitespace padding
+    """
     left_max = max(len(row[0]) for row in rows)
     out = []
     for left, right in rows:
