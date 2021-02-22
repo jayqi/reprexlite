@@ -9,7 +9,8 @@ theme:
 
 nav:
   - Home: "index.md"
-  - Design Philosophy: "philosophy.md"
+  - Design Philosophy: "design-philosophy.md"
+  - Reprex Do's and Don'ts: "dos-and-donts.md"
   - CLI Help: "cli.md"
   - API Reference:
       - reprexlite: "api-reference/reprex.md"
