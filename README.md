@@ -29,7 +29,7 @@ If you're asking for help or reporting a bug, you are more likely to succeed in 
 
 reprexlite helps you create a self-contained reprex that can be easily copied, paste, and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment.
 
-See ["Design Philosphy"](https://jayqi.github.io/reprexlite/design-philosophy/) for more on both "Why reproducible examples?" and "Why reprexlite?"
+See ["Design Philosophy"](https://jayqi.github.io/reprexlite/design-philosophy/) for more on both "Why reproducible examples?" and "Why reprexlite?"
 
 ## Installation
 
