@@ -14,7 +14,7 @@ A good reprex depends on what you put into it (see ["Reprex Do's and Don'ts"](..
 
 ## Why reproducible examples?
 
-<div style="float: right; margin-left: 2ch; "><img src="../images/help-me-help-you.png" /><p style="font-size: small; text-align: center; margin-top: 0;">From the R reprex <a href="https://reprex.tidyverse.org/index.html">readme</a>.</p></div>
+<div style="float: right; margin-top: 24px; margin-left: 2ch; "><img src="../images/help-me-help-you.png" /><p style="font-size: small; text-align: center; margin-top: 0;">From the R reprex <a href="https://reprex.tidyverse.org/index.html">readme</a>.</p></div>
 
 ### If you're looking for help with a problem or bug...
 
