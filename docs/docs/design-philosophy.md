@@ -20,6 +20,8 @@ A good reprex depends on what you put into it (see ["Reprex Do's and Don'ts"](..
 
 ...you are more likely to succeed if you make it as easy as possible for others to help you. You are asking people to do work on your behalf. Remember: most open-source software maintainers and StackOverflow posters are volunteers and are not obligated to help you. Even someone who is obligated to help you would still be able to get to an answer more quickly if you make it easier for them to understand your problem.
 
+Plus, the exercise of writing the reprex might even help you figure out how to solve the problem yourself. This is basically the principle of [rubber duck debugging](https://rubberduckdebugging.com/).
+
 ### If you're writing a tutorial or documentation...
 
 ...actual working examples are valuable to your users. A reprex—with complete directly runnable code and showing the expected outputs—will show your audience what you're demonstrating, and also give them the option to easily try for themselves. Doing is often the most effective way of learning how to do something in code. And, with documentation especially, people often just want to arrive at working code for their use case as quickly as possible. Something that they can just copy and run is exactly what they're looking for.
