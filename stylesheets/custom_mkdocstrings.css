@@ -22,10 +22,8 @@ h5.doc.doc-heading {
 /* Bold function, method, and attribute names */
 .doc.doc-heading span {
     font-weight: bold;
-    /* font-size: xx-large; */
 }
 
 .doc.doc-heading span~span {
     font-weight: normal;
-    /* font-size: small; */
 }
