@@ -499,7 +499,7 @@
                   </a>
                 
                 
-                <h1 id="reprexlite-python-reproducible-examples-for-sharing">reprexlite: Python reproducible examples for sharing</h1>
+                <h1 id="reprexlite-python-reproducible-examples-for-sharing">reprexlite: Python reproducible examples for sharing<a class="headerlink" href="#reprexlite-python-reproducible-examples-for-sharing" title="Permanent link">&para;</a></h1>
 <p><a href="https://pypi.org/project/reprexlite/"><img alt="PyPI" src="https://img.shields.io/pypi/v/reprexlite.svg" /></a>
 <a href="https://pypi.org/project/reprexlite/"><img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/reprexlite" /></a>
 <a href="https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain"><img alt="tests" src="https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main" /></a>
@@ -515,7 +515,7 @@
 <p>If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run.</p>
 <h4>Why reprexlite?</h4>
 <p>reprexlite helps you create a self-contained reprex that can be easily copy-pasted and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment.</p>
-<h2 id="installation">Installation</h2>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>reprexlite is available on PyPI:</p>
 <div class="highlight"><pre><span></span><code>pip install reprexlite
 </code></pre></div>
@@ -524,18 +524,18 @@
 <li><code>black</code> : for optionally autoformatting your code</li>
 <li><code>pygments</code> : for syntax highlighting and the RTF venue</li>
 </ul>
-<h3 id="development-version">Development version</h3>
+<h3 id="development-version">Development version<a class="headerlink" href="#development-version" title="Permanent link">&para;</a></h3>
 <p>The development version of reprexlite is available on GitHub:</p>
 <div class="highlight"><pre><span></span><code>pip install https://github.com/jayqi/reprexlite.git#egg<span class="o">=</span>reprexlite
 </code></pre></div>
-<h2 id="quick-usage">Quick usage</h2>
-<h3 id="command-line-interface">Command-line interface</h3>
+<h2 id="quick-usage">Quick usage<a class="headerlink" href="#quick-usage" title="Permanent link">&para;</a></h2>
+<h3 id="command-line-interface">Command-line interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h3>
 <p>The reprexlite CLI allows you to create a reprex without entering Python. Simply invoke the command</p>
 <div class="highlight"><pre><span></span><code>reprex
 </code></pre></div>
 <p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vi</code>. You can set your default editor using the <code>$EDITOR</code> environment variable—I'm personally a fan of <code>nano</code>.</p>
 <p>Once you're done, reprexlite will print out your reprex to console.</p>
-<h3 id="python-library">Python library</h3>
+<h3 id="python-library">Python library<a class="headerlink" href="#python-library" title="Permanent link">&para;</a></h3>
 <p>The same functionality as the CLI is also available from the <code>reprex</code> function with an equivalent API:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reprexlite</span> <span class="kn">import</span> <span class="n">reprex</span>
 
@@ -548,7 +548,7 @@
 <span class="c1">#&gt; &lt;reprexlite.reprex.GitHubReprex object at 0x7fd4446f94f0&gt;</span>
 </code></pre></div>
 <p>Under the hood, reprexlite is designed with a modular object-oriented architecture. See the <a href="https://jayqi.github.io/reprexlite/api-reference/reprex/">API documentation</a> to learn more.</p>
-<h2 id="comparison-to-reprexpy">Comparison to reprexpy</h2>
+<h2 id="comparison-to-reprexpy">Comparison to reprexpy<a class="headerlink" href="#comparison-to-reprexpy" title="Permanent link">&para;</a></h2>
 <p>Compared to reprexpy, reprexlite adds:</p>
 <ul>
 <li>A command-line interface so you can create reprexes without entering Python</li>
