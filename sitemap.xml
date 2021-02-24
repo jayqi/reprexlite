@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://jayqi.github.io/reprexlite/</loc>
-     <lastmod>2021-02-23</lastmod>
+     <lastmod>2021-02-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jayqi.github.io/reprexlite/cli/</loc>
-     <lastmod>2021-02-23</lastmod>
+     <lastmod>2021-02-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jayqi.github.io/reprexlite/api-reference/reprex/</loc>
-     <lastmod>2021-02-23</lastmod>
+     <lastmod>2021-02-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jayqi.github.io/reprexlite/api-reference/code/</loc>
-     <lastmod>2021-02-23</lastmod>
+     <lastmod>2021-02-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jayqi.github.io/reprexlite/api-reference/formatting/</loc>
-     <lastmod>2021-02-23</lastmod>
+     <lastmod>2021-02-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jayqi.github.io/reprexlite/api-reference/session_info/</loc>
-     <lastmod>2021-02-23</lastmod>
+     <lastmod>2021-02-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jayqi.github.io/reprexlite/changelog/</loc>
-     <lastmod>2021-02-23</lastmod>
+     <lastmod>2021-02-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
