@@ -8,22 +8,24 @@ from reprexlite.code import CodeBlock
 
 REPO_ROOT = Path(__file__).parents[1].resolve()
 
-Case = namedtuple("Case", ["input", "expected"])
+Case = namedtuple("Case", ["id", "input", "expected"])
 
 cases = [
     Case(
-        """\
+        id="list comprehension",
+        input="""\
         arr = [1, 2, 3, 4, 5]
         [x + 1 for x in arr]
         """,
-        """\
+        expected="""\
         arr = [1, 2, 3, 4, 5]
         [x + 1 for x in arr]
         #> [2, 3, 4, 5, 6]
         """,
     ),
     Case(
-        """\
+        id="if-else",
+        input="""\
         status = False
         if status:
             # if True
@@ -33,7 +35,7 @@ cases = [
             x = 0
         x
         """,
-        """\
+        expected="""\
         status = False
         if status:
             # if True
@@ -46,12 +48,13 @@ cases = [
         """,
     ),
     Case(
-        """\
+        id="function def",
+        input="""\
         def add_one(x: int):
             return x + 1
         add_one(1)
         """,
-        """\
+        expected="""\
         def add_one(x: int):
             return x + 1
         add_one(1)
@@ -59,13 +62,14 @@ cases = [
         """,
     ),
     Case(
-        """\
+        id="leading/trailing comments",
+        input="""\
         # Here's a comment
         x = 1
         x + 1
         # Here's another
         """,
-        """\
+        expected="""\
         # Here's a comment
         x = 1
         x + 1
@@ -74,12 +78,13 @@ cases = [
         """,
     ),
     Case(
-        """\
+        id="import module",
+        input="""\
         import math
 
         math.factorial(10)
         """,
-        """\
+        expected="""\
         import math
 
         math.factorial(10)
@@ -87,14 +92,15 @@ cases = [
         """,
     ),
     Case(
-        """\
+        id="import module w/ comments",
+        input="""\
         import math
 
 
         # here's a comment
         math.factorial(10)
         """,
-        """\
+        expected="""\
         import math
 
 
@@ -104,12 +110,13 @@ cases = [
         """,
     ),
     Case(
-        """\
+        id="stdout",
+        input="""\
         arr = [1, 2, 3, 4, 5]
         print(f"start: {arr[0]}, end: {arr[-1]}")
         [x + 1 for x in arr]
         """,
-        """\
+        expected="""\
         arr = [1, 2, 3, 4, 5]
         print(f"start: {arr[0]}, end: {arr[-1]}")
         #> start: 1, end: 5
@@ -118,13 +125,14 @@ cases = [
         """,
     ),
     Case(
-        """\
+        id="return None",
+        input="""\
         def return_none():
             return None
 
         return_none()
         """,
-        """\
+        expected="""\
         def return_none():
             return None
 
@@ -133,7 +141,8 @@ cases = [
         """,
     ),
     Case(
-        """\
+        id="exception",
+        input="""\
         import math
 
         def sqrt(x):
@@ -141,7 +150,7 @@ cases = [
 
         sqrt("four")
         """,
-        f"""\
+        expected=f"""\
         import math
 
         def sqrt(x):
@@ -156,11 +165,31 @@ cases = [
         #> TypeError: must be real number, not str
         """,
     ),
+    Case(
+        id="try-except",
+        input="""\
+        class MyException(Exception): ...
+
+        try:
+            raise MyException
+        except MyException:
+            print("caught")
+        """,
+        expected="""\
+        class MyException(Exception): ...
+
+        try:
+            raise MyException
+        except MyException:
+            print("caught")
+        #> caught
+        """,
+    ),
 ]
 
 
-@pytest.mark.parametrize("case", cases)
-def test_source(case):
+@pytest.mark.parametrize("case", cases, ids=(c.id for c in cases))
+def test_code_block(case):
     code_block = CodeBlock(dedent(case.input))
     print("---")
     print(str(code_block))
