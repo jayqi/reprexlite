@@ -2,6 +2,8 @@
 
 This article discusses how to write an effective reprex. If you're asking for help or sharing code with someone, you will be much more likely to succeed if you have a good reprex. If you still need to be convinced why you should write a reprex or use reprexlite, check out the first half of ["Design Philosophy"](../design-philosophy/).
 
+Writing a good reprex takes thought and effort. A tool like reprexlite is not a magic bullet—it's meant to take care of the mechanical stuff so **you** can devote your energy towards coming up with the right content.
+
 Many of the key ideas in this article are borrowed from R reprex's ["Reprex do's and don'ts"](https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html) and StackOverflow's ["How to create a Minimal, Reproducible Example"](https://stackoverflow.com/help/minimal-reproducible-example).
 
 ## Your reprexes should be...
@@ -9,7 +11,8 @@ Many of the key ideas in this article are borrowed from R reprex's ["Reprex do's
 ### Minimal
 
 - **Do** use the smallest, simplest data possible.
-  - If working with the PyData stack, the [`sklearn.datasets` module](https://scikit-learn.org/stable/datasets.html#datasets) has convenient toy datasets like `iris`.
+  - If you need a dataframe, the [`sklearn.datasets` module](https://scikit-learn.org/stable/datasets.html#datasets) has convenient toy datasets like `iris`.
+  - The [Faker](https://faker.readthedocs.io/en/master/) library has utilities to help you generate fake data like names and addresses.
 - **Don't** include code unrelated to the specific thing you want to demonstrate.
   - **Do** ruthlessly remove unnecessary code. If you're not sure, try removing things bit by bit until it doesn't produce what you want anymore.
   - Consider starting your reprex from scratch. This helps force you to add in only what is needed.

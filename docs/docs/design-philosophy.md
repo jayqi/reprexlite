@@ -1,6 +1,6 @@
 # Design Philosophy
 
-Reprex is a portmanteau for **repr**oducible **ex**ample. This term and its ideal characteristics have been popularized within the R data science community, driven by the adoption of the [reprex](https://reprex.tidyverse.org/index.html) tidyverse package.
+Reprex is a portmanteau for **repr**oducible **ex**ample. This term and its associated approach to minimal reproducible examples have been popularized within the R data science community, driven by the adoption of the [reprex](https://reprex.tidyverse.org/index.html) tidyverse package.
 
 > The reprex code:
 >
@@ -10,7 +10,7 @@ Reprex is a portmanteau for **repr**oducible **ex**ample. This term and its idea
 >
 > <p style="text-align: right">― <a href="https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html#package-philosophy">"Package Philosophy,"</a> from the R reprex documentation</p>
 
-A good reprex depends on what you put into it (see ["Reprex Do's and Don'ts"](../dos-and-donts)). But it also helps to have a good tool that lowers the barrier to making one, so that you can't use formatting as an excuse not to. If you've put in the work of creating good content for an example, it should be easy to format it in a way that is readable and is easy to copy, paste, and run. The goal of reprexlite is to be such a tool for Python.
+Writing a good reprex takes thought and effort (see ["Reprex Do's and Don'ts"](../dos-and-donts) for tips). The goal of reprexlite is to be a tool for Python that handles the mechanical stuff—running your code, capturing the output, formatting everything—so you don't have to worry about it, and you can devote your full attention to the important, creative work of writing the content. The action of running your code and seeing the outputs can also be a helpful forcing function in really making sure your example works and produces what you intend.
 
 ## Why reproducible examples?
 

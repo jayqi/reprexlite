@@ -5,10 +5,12 @@
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
-**reprexlite** is tool for rendering **repr**oducible **ex**amples of Python code for sharing.
+**reprexlite** is tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a convenient CLI and lightweight dependencies, you can quickly get it up and running in any virtual environment.
+
+<img src="docs/docs/images/demo.gif" />
 
 - Paste or type some Python code that you're interested in sharing.
-- reprexlite will execute that code in an isolated namespace. Any returned outputs or standard out will be captured and displayed as comments below their associated code.
+- reprexlite will execute that code in an isolated namespace. Any returned values or standard output will be captured and displayed as comments below their associated code.
 - The final output can be easily copied, pasted, and run as-is by anybody you share the reprex with. Here's an example:
 
 ```python
@@ -21,19 +23,15 @@ list(zip(*grid))
 #> [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]
 ```
 
-<a href="https://asciinema.org/a/391063" target="_blank"><img src="https://asciinema.org/a/391063.svg" width="480"/></a>
+Writing a good reprex takes thought and effort (see ["Reprex Do's and Don'ts"](../dos-and-donts) for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.
+
+Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with `>>>` prompts from an interactive Python shell.
 
 reprexlite is a lightweight alternative to [reprexpy](https://github.com/crew102/reprexpy) and is similarly meant as a port of the R package [reprex](https://github.com/tidyverse/reprex).
 
-#### Why reproducible examples?
+### Why reproducible examples?
 
-If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run.
-
-#### Why reprexlite?
-
-reprexlite helps you create a self-contained reprex that can be easily copied, paste, and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment.
-
-See ["Design Philosophy"](https://jayqi.github.io/reprexlite/design-philosophy/) for more on both "Why reproducible examples?" and "Why reprexlite?"
+If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run. See ["Design Philosophy"](https://jayqi.github.io/reprexlite/design-philosophy/) for more on both "Why reproducible examples?" and "Why reprexlite?"
 
 ## Installation
 
@@ -98,6 +96,6 @@ reprex(code)
 #> #> [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]
 #> ```
 #>
-#> <sup>Created at 2021-02-21 10:27:37 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.2.0</sup>
-#> <reprexlite.formatting.GitHubReprex object at 0x7ff7bd3111c0>
+#> <sup>Created at 2021-02-26 00:32:00 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.0</sup>
+#> <reprexlite.formatting.GitHubReprex object at 0x109059f10>
 ```
