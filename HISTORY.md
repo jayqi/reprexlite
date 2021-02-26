@@ -1,7 +1,8 @@
 # reprexlite Changelog
 
-## v0.3.0 (Unreleased)
+## v0.3.0 (2021-02-25)
 
+- Updated pygments styling to use the "friendly" color scheme, which looks better for dark backgrounds. ([#15](https://github.com/jayqi/reprexlite/pull/17))
 - Changed submodule organization for code related to reprex formatting. This is now in the `formatting` submodule. ([#17](https://github.com/jayqi/reprexlite/pull/17))
 
 ## v0.2.0 (2021-02-20)

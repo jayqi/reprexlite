@@ -1,7 +1,7 @@
 from collections import defaultdict
 from pathlib import Path
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 
 def load_requirements(path: Path):
@@ -53,5 +53,5 @@ setup(
         "Source Code": "https://github.com/jayqi/reprexlite",
     },
     url="https://github.com/jayqi/reprexlite",
-    version="0.2.0",
+    version="0.3.0",
 )
