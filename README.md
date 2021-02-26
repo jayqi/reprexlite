@@ -5,9 +5,11 @@
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
-**reprexlite** is tool for rendering **repr**oducible **ex**amples of Python code for sharing. It will execute your code and embed the outputs as comments below their associated lines. The rendered reprex can then be easily copied, pasted, and run as-is by anybody else. It is a lightweight alternative to [reprexpy](https://github.com/crew102/reprexpy) and is similarly meant as a port of the R package [reprex](https://github.com/tidyverse/reprex).
+**reprexlite** is tool for rendering **repr**oducible **ex**amples of Python code for sharing.
 
-Here's an example of output created by reprexlite:
+- Paste or type some Python code that you're interested in sharing.
+- reprexlite will execute that code in an isolated namespace. Any returned outputs or standard out will be captured and displayed as comments below their associated code.
+- The final output can be easily copied, pasted, and run as-is by anybody you share the reprex with. Here's an example:
 
 ```python
 from itertools import product
@@ -20,6 +22,8 @@ list(zip(*grid))
 ```
 
 <a href="https://asciinema.org/a/391063" target="_blank"><img src="https://asciinema.org/a/391063.svg" width="480"/></a>
+
+reprexlite is a lightweight alternative to [reprexpy](https://github.com/crew102/reprexpy) and is similarly meant as a port of the R package [reprex](https://github.com/tidyverse/reprex).
 
 #### Why reproducible examples?
 
