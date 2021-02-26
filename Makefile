@@ -8,6 +8,9 @@ clean-dist:
 	rm -rf dist
 	rm -rf *.egg-info
 
+demo-render:
+	terminalizer render docs/demo.yml -o docs/docs/images/demo.gif
+
 docs:
 	echo "# CLI Help Documentation\n" > docs/docs/cli.md
 	@echo '```bash' >> docs/docs/cli.md
@@ -18,6 +21,7 @@ docs:
 	@reprex --help >> docs/docs/cli.md
 	@echo '```' >> docs/docs/cli.md
 	cp README.md docs/docs/index.md
+	sed 's|docs/docs/images/demo.gif|images/demo.gif|g' README.md > docs/docs/index.md
 	cp HISTORY.md docs/docs/changelog.md
 	cd docs && mkdocs build
 
