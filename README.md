@@ -7,7 +7,7 @@
 
 **reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a convenient CLI and lightweight dependencies, you can quickly get it up and running in any virtual environment.
 
-<img src="https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif" />
+<img src="https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif" width="640px" />
 
 - Paste or type some Python code that you're interested in sharing.
 - reprexlite will execute that code in an isolated namespace. Any returned values or standard output will be captured and displayed as comments below their associated code.
