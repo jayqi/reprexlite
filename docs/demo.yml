@@ -4,7 +4,7 @@ config:
   # like `/bin/bash -l`, `ls`, or any other commands
   # the default is bash for Linux
   # or powershell.exe for Windows
-  command: bash -l
+  # command: bash -l
 
   # Specify the current working directory path
   # the default is the current working directory path
@@ -110,7 +110,7 @@ config:
 
 # Records, feel free to edit them
 records:
-  - delay: 1
+  - delay: 0
     content: "\e[1;36m~\e[0m via \e[1;33m\U0001F40D  \e[0m\e[1;33m\e[0m\e[1;33mv3.9.0\e[0m\e[1;33m (\e[0m\e[1;33mdemo\e[0m\e[1;33m)\e[0m \r\nat \e[1;2;33m20:08:24\e[0m \e[1;32m❯\e[0m "
   - delay: 2000
     content: r
@@ -136,9 +136,9 @@ records:
     content: "\r\e(B\e[30;47mFile Name to Write:$ds0e.txt                                \r\e[17d^G\e(B\e[m Get Help\e[17;21H\e(B\e[30;47m^T\e(B\e[m To Files\e[17;41H\e(B\e[30;47mM-M\e(B\e[m Mac Format\e[61G\e(B\e[30;47mM-P\e(B\e[m Prepend\r\e[18d\e(B\e[30;47m^C\e(B\e[m Cancel\e[17G    \e(B\e[30;47mM-D\e(B\e[m DOS Format\e[41G\e(B\e[30;47mM-A\e(B\e[m Append\e[18;61H\e(B\e[30;47mM-B\e(B\e[m Backup File\e[16;29H"
   - delay: 1500
     content: "\r\e[17d\e[39;49m\e(B\e[m\e[J\e[1;71H\e(B\e[30;47m        \e[16;31H\e(B\e[m\e[1K \e(B\e[30;47m[ Wrote 6 lines ]\e(B\e[m\e[K\e[18;80H\e[18;1H\e[?1049l\r\e[?1l\e>"
-  - delay: 51
+  - delay: 50
     content: "```python\r\nfrom itertools import product\r\n\r\ngrid = list(product([1, 2, 3], [8, 16]))\r\ngrid\r\n#> [(1, 8), (1, 16), (2, 8), (2, 16), (3, 8), (3, 16)]\r\nlist(zip(*grid))\r\n#> [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]\r\n```\r\n\r\n<sup>Created at 2021-02-25 20:08:32 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.0</sup>\r\n\r\n"
   - delay: 50
     content: "\r\n\e[1;36m~\e[0m via \e[1;33m\U0001F40D  \e[0m\e[1;33m\e[0m\e[1;33mv3.9.0\e[0m\e[1;33m (\e[0m\e[1;33mdemo\e[0m\e[1;33m)\e[0m took \e[1;33m6s\e[0m \r\nat \e[1;2;33m20:08:32\e[0m \e[1;32m❯\e[0m "
   - delay: 8000
-    content: "\r\n"
+    content: " "
