@@ -44,6 +44,7 @@ pip install reprexlite
 Optional dependencies can be specified using the ["extras" mechanism](https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras), e.g., `reprexlite[black]`. Available extras are:
 
 - `black` : for optionally autoformatting your code
+- `ipython` : to use the `%%reprex` cell magic in IPython/Jupyter
 - `pygments` : for syntax highlighting and the RTF venue
 
 ### Development version
@@ -99,3 +100,7 @@ reprex(code)
 #> <sup>Created at 2021-02-26 00:32:00 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.0</sup>
 #> <reprexlite.formatting.GitHubReprex object at 0x109059f10>
 ```
+
+### IPython/Jupyter Cell Magic
+
+If you're in IPython or Jupyter, you can `import reprexlite` and then use the cell magic `%%reprex` to render a reprex from that cell's Python code. The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.

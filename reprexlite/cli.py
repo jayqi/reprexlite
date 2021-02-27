@@ -84,7 +84,7 @@ def main(
     #> 4
     ```
     \b
-    <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.1.0</sup>
+    <sup>Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.1</sup>
     ----------------------------------------
 
     \b

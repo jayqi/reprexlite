@@ -12,6 +12,7 @@ nav:
   - Design Philosophy: "design-philosophy.md"
   - Reprex Do's and Don'ts: "dos-and-donts.md"
   - CLI Help: "cli.md"
+  - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
   - API Reference:
       - reprexlite: "api-reference/reprex.md"
       - reprexlite.code: "api-reference/code.md"
@@ -31,7 +32,8 @@ markdown_extensions:
   - mdx_truly_sane_lists:
 
 plugins:
-  - search
+  - search:
+  - mkdocs-jupyter:
   - mkdocstrings:
       default_handler: python
       handlers:
