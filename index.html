@@ -14,7 +14,7 @@
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/">
       
       <link rel="shortcut icon" href="images/reprexlite_white_blue.svg">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.2">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
@@ -234,6 +234,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#why-reproducible-examples" class="md-nav__link">
+    Why reproducible examples?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
   </a>
@@ -280,17 +287,40 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#comparison-to-reprexpy" class="md-nav__link">
-    Comparison to reprexpy
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-philosophy/" class="md-nav__link">
+        Design Philosophy
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dos-and-donts/" class="md-nav__link">
+        Reprex Do's and Don'ts
+      </a>
     </li>
   
 
@@ -321,14 +351,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
-      <label class="md-nav__link" for="__nav_3">
+      <label class="md-nav__link" for="__nav_5">
         API Reference
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           API Reference
         </label>
@@ -428,6 +458,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#why-reproducible-examples" class="md-nav__link">
+    Why reproducible examples?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
   </a>
@@ -474,13 +511,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#comparison-to-reprexpy" class="md-nav__link">
-    Comparison to reprexpy
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -503,22 +533,31 @@
 <a href="https://pypi.org/project/reprexlite/"><img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/reprexlite" /></a>
 <a href="https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain"><img alt="tests" src="https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main" /></a>
 <a href="https://codecov.io/gh/jayqi/reprexlite"><img alt="codecov" src="https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg" /></a></p>
-<p><strong>reprexlite</strong> is tool for rendering <strong>repr</strong>oducible <strong>ex</strong>amples of Python code for sharing. It will execute your code and embed the outputs as comments below their associated lines. The rendered reprex can then be easily copied, pasted, and run as-is by anybody else. It is a lightweight alternative to <a href="https://github.com/crew102/reprexpy">reprexpy</a> and is similarly meant as a port of the R package <a href="https://github.com/tidyverse/reprex">reprex</a>.</p>
-<p>Here's an example of output created by reprexlite:</p>
-<div class="highlight"><pre><span></span><code><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span>
-<span class="c1">#&gt; [2, 3, 4, 5, 6]</span>
+<p><strong>reprexlite</strong> is a tool for rendering <strong>repr</strong>oducible <strong>ex</strong>amples of Python code for sharing. With a convenient CLI and lightweight dependencies, you can quickly get it up and running in any virtual environment.</p>
+<p><img src="images/demo.gif" /></p>
+<ul>
+<li>Paste or type some Python code that you're interested in sharing.</li>
+<li>reprexlite will execute that code in an isolated namespace. Any returned values or standard output will be captured and displayed as comments below their associated code.</li>
+<li>The rendered reprex will be printed for you to share. Its format can be easily copied, pasted, and run as-is by someone else. Here's an example of an outputted reprex:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]))</span>
+<span class="n">grid</span>
+<span class="c1">#&gt; [(1, 8), (1, 16), (2, 8), (2, 16), (3, 8), (3, 16)]</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">grid</span><span class="p">))</span>
+<span class="c1">#&gt; [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]</span>
 </code></pre></div>
-<p><a href="https://asciinema.org/a/391063" target="_blank"><img src="https://asciinema.org/a/391063.svg" width="480"/></a></p>
-<h4 id="why-reproducible-examples">Why reproducible examples?<a class="headerlink" href="#why-reproducible-examples" title="Permanent link">&para;</a></h4>
-<p>If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run.</p>
-<h4 id="why-reprexlite">Why reprexlite?<a class="headerlink" href="#why-reprexlite" title="Permanent link">&para;</a></h4>
-<p>reprexlite helps you create a self-contained reprex that can be easily copy-pasted and run. Your code runs in an isolated namespace. The reprex is formatted so that it is valid Python code with outputs as comments, unlike copying from a REPL. reprexlite is also very lightweight and has a convenient CLI, so you can easily and quickly get it up and running in a virtual environment.</p>
+<p>Writing a good reprex takes thought and effort (see <a href="../dos-and-donts">"Reprex Do's and Don'ts"</a> for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.</p>
+<p>Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with <code>&gt;&gt;&gt;</code> prompts from an interactive Python shell.</p>
+<p>reprexlite is a lightweight alternative to <a href="https://github.com/crew102/reprexpy">reprexpy</a> and is similarly meant as a port of the R package <a href="https://github.com/tidyverse/reprex">reprex</a>.</p>
+<h3 id="why-reproducible-examples">Why reproducible examples?<a class="headerlink" href="#why-reproducible-examples" title="Permanent link">&para;</a></h3>
+<p>If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run. See <a href="https://jayqi.github.io/reprexlite/design-philosophy/">"Design Philosophy"</a> for more on both "Why reproducible examples?" and "Why reprexlite?"</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>reprexlite is available on PyPI:</p>
 <div class="highlight"><pre><span></span><code>pip install reprexlite
 </code></pre></div>
-<p>Optional dependencies can be specified using the <a href="https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras">"extras" mechanism</a>, e.g., <code>reprexlite[pygments]</code>. Available extras are:</p>
+<p>Optional dependencies can be specified using the <a href="https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras">"extras" mechanism</a>, e.g., <code>reprexlite[black]</code>. Available extras are:</p>
 <ul>
 <li><code>black</code> : for optionally autoformatting your code</li>
 <li><code>pygments</code> : for syntax highlighting and the RTF venue</li>
@@ -529,38 +568,38 @@
 </code></pre></div>
 <h2 id="quick-usage">Quick usage<a class="headerlink" href="#quick-usage" title="Permanent link">&para;</a></h2>
 <h3 id="command-line-interface">Command-line interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h3>
-<p>The reprexlite CLI allows you to create a reprex without entering Python. Simply invoke the command</p>
+<p>The reprexlite CLI allows you to create a reprex without entering a Python session. Simply invoke the command:</p>
 <div class="highlight"><pre><span></span><code>reprex
 </code></pre></div>
-<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vi</code>. You can set your default editor using the <code>$EDITOR</code> environment variable—I'm personally a fan of <code>nano</code>.</p>
+<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vim</code>. You can set your default editor using the <code>$EDITOR</code> environment variable—I'm personally a fan of <code>nano</code>.</p>
 <p>Once you're done, reprexlite will print out your reprex to console.</p>
+<p>To see available options, use the <code>--help</code> flag.</p>
 <h3 id="python-library">Python library<a class="headerlink" href="#python-library" title="Permanent link">&para;</a></h3>
-<p>The same functionality as the CLI is also available from the <code>reprex</code> function with an equivalent API:</p>
+<p>The same functionality as the CLI is also available from the <code>reprex</code> function with an equivalent API. Simply pass a string with your code, and it will print out the reprex, as well as return a <code>Reprex</code> object that contains all the data and formatting machinery. See the <a href="https://jayqi.github.io/reprexlite/api-reference/reprex/">API documentation</a> for more details.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reprexlite</span> <span class="kn">import</span> <span class="n">reprex</span>
 
 <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">arr = [1, 2, 3, 4, 5]</span>
-<span class="s2">[x + 1 for x in arr]</span>
+<span class="s2">from itertools import product</span>
+
+<span class="s2">grid = list(product([1, 2, 3], [8, 16]))</span>
+<span class="s2">grid</span>
+<span class="s2">list(zip(*grid))</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="n">reprex</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
-<span class="c1">#&gt; &lt;reprexlite.reprex.GitHubReprex object at 0x7fd4446f94f0&gt;</span>
+<span class="c1">#&gt; ```python</span>
+<span class="c1">#&gt; from itertools import product</span>
+<span class="c1">#&gt;</span>
+<span class="c1">#&gt; grid = list(product([1, 2, 3], [8, 16]))</span>
+<span class="c1">#&gt; grid</span>
+<span class="c1">#&gt; #&gt; [(1, 8), (1, 16), (2, 8), (2, 16), (3, 8), (3, 16)]</span>
+<span class="c1">#&gt; list(zip(*grid))</span>
+<span class="c1">#&gt; #&gt; [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]</span>
+<span class="c1">#&gt; ```</span>
+<span class="c1">#&gt;</span>
+<span class="c1">#&gt; &lt;sup&gt;Created at 2021-02-26 00:32:00 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.0&lt;/sup&gt;</span>
+<span class="c1">#&gt; &lt;reprexlite.formatting.GitHubReprex object at 0x109059f10&gt;</span>
 </code></pre></div>
-<p>Under the hood, reprexlite is designed with a modular object-oriented architecture. See the <a href="https://jayqi.github.io/reprexlite/api-reference/reprex/">API documentation</a> to learn more.</p>
-<h2 id="comparison-to-reprexpy">Comparison to reprexpy<a class="headerlink" href="#comparison-to-reprexpy" title="Permanent link">&para;</a></h2>
-<p>Compared to reprexpy, reprexlite adds:</p>
-<ul>
-<li>A command-line interface so you can create reprexes without entering Python</li>
-<li>Lighter dependencies (e.g., no dependence on IPython)</li>
-</ul>
-<p>However, reprexlite does not have:</p>
-<ul>
-<li>Direct ability to read from or write to your OS clipboard.<ul>
-<li>Instead, the CLI opens your default text editor which you can paste into.</li>
-</ul>
-</li>
-<li>Automatic upload of matplotlib plots to imgur.com.</li>
-</ul>
                 
               
               
@@ -579,13 +618,13 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
       
-        <a href="cli/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="design-philosophy/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              CLI Help
+              Design Philosophy
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -613,10 +652,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.f5903571.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.3981fc68.min.js"></script>
+      <script src="assets/javascripts/bundle.ca5457b8.min.js"></script>
       
     
   </body>
