@@ -103,6 +103,6 @@ reprex(code)
 
 ### IPython/Jupyter Cell Magic
 
-reprexlite has an IPython cell magic `%%reprex` that will automatically be registered if it detects that you have IPython installed. (You can also install them together with `reprexlite[ipython]`.) That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/), in [Jupyter](https://jupyter.org/), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py).
+reprexlite has an optional IPython extension with a `%%reprex` cell magic. The extension is available if you have IPython installed. (You can install them together as `reprexlite[ipython]`.) That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/), in [Jupyter](https://jupyter.org/), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py).
 
-Simply `import reprexlite` and then put `%%reprex` at the top of a cell you want to create a reprex for. The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.
+Simply load the extension with `%%load_ext reprexlite` and then put `%%reprex` at the top of a cell you want to create a reprex for. The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.

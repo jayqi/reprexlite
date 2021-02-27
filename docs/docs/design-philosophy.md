@@ -56,7 +56,7 @@ The primary design goal of reprexlite is that it should be **quick and convenien
 
 - **Lightweight**. reprexlite needs to be in your virtual environment to be able to run your code. By having minimal and lightweight dependencies itself, reprexlite is quick to install and is unlikely to conflict with your other dependencies.
 - **Easy access**. reprexlite comes with a CLI, so you can quickly create a reprex without needing to start a Python shell or to import anything.
-  - **And flexible**. The CLI isn't the only option. The [Python library](../api-reference/reprex/) provides programmatic access, and there is optional [IPython/Jupyter integration](../ipython-jupyter-magic/) as a cell magic.
+  - **And flexible**. The CLI isn't the only option. The [Python library](../api-reference/reprex/) provides programmatic access, and there is an optional [IPython/Jupyter extension](../ipython-jupyter-magic/) for use with a cell magic.
 
 The API, including the available configuration and naming of parameters, mostly matches both [R reprex](https://reprex.tidyverse.org/) and [reprexpy](https://github.com/crew102/reprexpy). The intent is that anyone familiar with these other tools can quickly feel comfortable with reprexlite.
 
