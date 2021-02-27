@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48mm"
-   height="48mm"
-   viewBox="0 0 48 48"
+   width="44.112957mm"
+   height="44.112957mm"
+   viewBox="0 0 44.112957 44.112957"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
-   sodipodi:docname="reprexlite_logo.svg"
+   sodipodi:docname="reprexlite_white_blue.svg"
    inkscape:export-filename="/Users/jqi/Desktop/drawing.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
@@ -21,14 +21,14 @@
      id="defs2" />
   <sodipodi:namedview
      id="base"
-     pagecolor="#ffffff"
+     pagecolor="#888888"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.6023835"
-     inkscape:cx="76.851057"
-     inkscape:cy="82.257932"
+     inkscape:cx="69.141446"
+     inkscape:cy="74.548429"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -36,7 +36,7 @@
      inkscape:window-width="1536"
      inkscape:window-height="915"
      inkscape:window-x="0"
-     inkscape:window-y="143"
+     inkscape:window-y="121"
      inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -45,8 +45,8 @@
     <inkscape:grid
        type="xygrid"
        id="grid862"
-       originx="-29.113335"
-       originy="-62.110108" />
+       originx="-31.15317"
+       originy="-64.149914" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -64,16 +64,16 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-29.113335,-62.110106)">
+     transform="translate(-31.15317,-64.149912)">
     <circle
-       style="fill:#464cb4;stroke:#ffffff;stroke-width:2.88704;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       style="fill:#464cb4;fill-opacity:1;stroke:none;stroke-width:2.88704;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path860"
        cx="53.209648"
        cy="86.20639"
        r="22.056479" />
     <text
        xml:space="preserve"
-       style="font-size:24.44359999999999999px;line-height:1.25;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono';fill:#ffffff;stroke-width:0.25462;fill-opacity:1;"
+       style="font-size:24.4436px;line-height:1.25;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono';fill:#ffffff;fill-opacity:1;stroke-width:0.25462"
        x="38.980408"
        y="94.245567"
        id="text835"><tspan
@@ -81,6 +81,6 @@
          id="tspan833"
          x="38.980408"
          y="94.245567"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.44359999999999999px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Bold';fill:#ffffff;stroke-width:0.25462;fill-opacity:1;">#&gt;</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.4436px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Bold';fill:#ffffff;fill-opacity:1;stroke-width:0.25462">#&gt;</tspan></text>
   </g>
 </svg>
