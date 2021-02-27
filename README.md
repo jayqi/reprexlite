@@ -59,7 +59,7 @@ pip install https://github.com/jayqi/reprexlite.git#egg=reprexlite
 
 ### Command-line interface
 
-The reprexlite CLI allows you to create a reprex without entering a Python session. Simply invoke the command:
+The primary way to use reprexlite is through the CLI. It allows you to create a reprex without entering a Python session. Simply invoke the command:
 
 ```bash
 reprex
@@ -103,4 +103,6 @@ reprex(code)
 
 ### IPython/Jupyter Cell Magic
 
-If you're in IPython or Jupyter, you can `import reprexlite` and then use the cell magic `%%reprex` to render a reprex from that cell's Python code. The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.
+reprexlite has an IPython cell magic `%%reprex` that will automatically be registered if it detects that you have IPython installed. (You can also install them together with `reprexlite[ipython]`.) That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/), in [Jupyter](https://jupyter.org/), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py).
+
+Simply `import reprexlite` and then put `%%reprex` at the top of a cell you want to create a reprex for. The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.

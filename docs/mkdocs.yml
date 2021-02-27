@@ -21,7 +21,7 @@ nav:
   - Changelog: "changelog.md"
 
 extra_css:
-  - stylesheets/custom_mkdocstrings.css
+  - css/custom_mkdocstrings.css
 
 markdown_extensions:
   - pymdownx.highlight:
