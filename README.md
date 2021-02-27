@@ -5,13 +5,13 @@
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
-**reprexlite** is tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a convenient CLI and lightweight dependencies, you can quickly get it up and running in any virtual environment.
+**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a convenient CLI and lightweight dependencies, you can quickly get it up and running in any virtual environment.
 
 <img src="docs/docs/images/demo.gif" />
 
 - Paste or type some Python code that you're interested in sharing.
 - reprexlite will execute that code in an isolated namespace. Any returned values or standard output will be captured and displayed as comments below their associated code.
-- The final output can be easily copied, pasted, and run as-is by anybody you share the reprex with. Here's an example:
+- The rendered reprex will be printed for you to share. Its format can be easily copied, pasted, and run as-is by someone else. Here's an example of an outputted reprex:
 
 ```python
 from itertools import product
