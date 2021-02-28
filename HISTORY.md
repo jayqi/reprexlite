@@ -1,5 +1,9 @@
 # reprexlite Changelog
 
+## v0.4.0 (2021-02-27)
+
+- Adds optional IPython extension that enables `%%reprex` cell magic. See [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for usage. ([#21](https://github.com/jayqi/reprexlite/pull/21))
+
 ## v0.3.1 (2021-02-26)
 
 - Documentation improvements. ([#14](https://github.com/jayqi/reprexlite/pull/14), [#19](https://github.com/jayqi/reprexlite/pull/19))

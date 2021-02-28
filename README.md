@@ -44,6 +44,7 @@ pip install reprexlite
 Optional dependencies can be specified using the ["extras" mechanism](https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras), e.g., `reprexlite[black]`. Available extras are:
 
 - `black` : for optionally autoformatting your code
+- `ipython` : to use the `%%reprex` cell magic in IPython/Jupyter
 - `pygments` : for syntax highlighting and the RTF venue
 
 ### Development version
@@ -58,7 +59,7 @@ pip install https://github.com/jayqi/reprexlite.git#egg=reprexlite
 
 ### Command-line interface
 
-The reprexlite CLI allows you to create a reprex without entering a Python session. Simply invoke the command:
+The primary way to use reprexlite is through the CLI. It allows you to create a reprex without entering a Python session. Simply invoke the command:
 
 ```bash
 reprex
@@ -99,3 +100,26 @@ reprex(code)
 #> <sup>Created at 2021-02-26 00:32:00 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.0</sup>
 #> <reprexlite.formatting.GitHubReprex object at 0x109059f10>
 ```
+
+### IPython/Jupyter Cell Magic
+
+reprexlite has an optional IPython extension with a `%%reprex` cell magic. That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/) (requires IPython), in [Jupyter](https://jupyter.org/) (requires Jupyter), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py) (requires `ipykernel`).
+
+To use, simply load the extension with
+
+```python
+%%load_ext reprexlite
+```
+
+and then put `%%reprex` at the top of a cell you want to create a reprex for:
+
+```python
+%%reprex
+from itertools import product
+
+grid = list(product([1, 2, 3], [8, 16]))
+grid
+list(zip(*grid))
+```
+
+The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.

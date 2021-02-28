@@ -6,3 +6,6 @@ black
 
 ## extras: pygments
 Pygments
+
+## extras: ipython
+ipython

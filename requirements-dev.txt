@@ -1,10 +1,11 @@
--e .[black,pygments]
+-e .[black,pygments,ipython]
 
 black
 flake8
 isort
 mdx_truly_sane_lists==1.2
 mkdocs>=1.1
+mkdocs-jupyter
 mkdocs-material
 mkdocstrings
 mypy
