@@ -5,7 +5,7 @@
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
-**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a convenient CLI and lightweight dependencies, you can quickly get it up and running in any virtual environment.
+**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. Optional [IPython cell magic](#ipythonjupyter-cell-magic) for easy use in Jupyter or VS Code. Inspired by R's [reprex](https://reprex.tidyverse.org/).
 
 <img src="https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif" width="640px" />
 
@@ -65,7 +65,7 @@ The primary way to use reprexlite is through the CLI. It allows you to create a 
 reprex
 ```
 
-This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be `vim`. You can set your default editor using the `$EDITOR` environment variable—I'm personally a fan of `nano`.
+This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be `vim`. You can set your default editor using the [`$EDITOR` environment variable](https://askubuntu.com/a/432530)—I'm personally a fan of `nano`.
 
 Once you're done, reprexlite will print out your reprex to console.
 
@@ -103,7 +103,7 @@ reprex(code)
 
 ### IPython/Jupyter Cell Magic
 
-reprexlite has an optional IPython extension with a `%%reprex` cell magic. That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/) (requires IPython), in [Jupyter](https://jupyter.org/) (requires Jupyter), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py) (requires `ipykernel`).
+reprexlite has an optional IPython extension with a `%%reprex` cell magic. That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/) (requires IPython), in [Jupyter](https://jupyter.org/) (requires Jupyter), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py) (requires `ipykernel`). This can be handy if you're already working in a Jupyter notebook and want to share some code and output, which otherwise doesn't neatly copy and paste in a nice format.
 
 To use, simply load the extension with
 
@@ -122,4 +122,4 @@ grid
 list(zip(*grid))
 ```
 
-The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.
+The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (note single `%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.
