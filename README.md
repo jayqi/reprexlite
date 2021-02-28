@@ -103,7 +103,7 @@ reprex(code)
 
 ### IPython/Jupyter Cell Magic
 
-reprexlite has an optional IPython extension with a `%%reprex` cell magic. The extension is available if you have IPython installed. (You can install them together as `reprexlite[ipython]`.) That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/), in [Jupyter](https://jupyter.org/), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py).
+reprexlite has an optional IPython extension with a `%%reprex` cell magic. That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/) (requires IPython), in [Jupyter](https://jupyter.org/) (requires Jupyter), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py) (requires `ipykernel`).
 
 To use, simply load the extension with
 
