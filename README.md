@@ -105,4 +105,21 @@ reprex(code)
 
 reprexlite has an optional IPython extension with a `%%reprex` cell magic. The extension is available if you have IPython installed. (You can install them together as `reprexlite[ipython]`.) That means you can easily create a reprex in an [IPython shell](https://ipython.readthedocs.io/en/stable/), in [Jupyter](https://jupyter.org/), or in [VS Code's Interactive Python window](https://code.visualstudio.com/docs/python/jupyter-support-py).
 
-Simply load the extension with `%%load_ext reprexlite` and then put `%%reprex` at the top of a cell you want to create a reprex for. The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.
+To use, simply load the extension with
+
+```python
+%%load_ext reprexlite
+```
+
+and then put `%%reprex` at the top of a cell you want to create a reprex for:
+
+```python
+%%reprex
+from itertools import product
+
+grid = list(product([1, 2, 3], [8, 16]))
+grid
+list(zip(*grid))
+```
+
+The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (single-`%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.
