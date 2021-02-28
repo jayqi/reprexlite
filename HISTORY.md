@@ -1,5 +1,9 @@
 # reprexlite Changelog
 
+## v0.4.1 (2021-02-27)
+
+- Added missing LICENSE file.
+
 ## v0.4.0 (2021-02-27)
 
 - Adds optional IPython extension that enables `%%reprex` cell magic. See [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for usage. ([#21](https://github.com/jayqi/reprexlite/pull/21))
