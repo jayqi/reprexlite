@@ -1,4 +1,4 @@
--e .[black,pygments, ipython]
+-e .[black,pygments,ipython]
 
 black
 flake8
