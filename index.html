@@ -562,7 +562,7 @@
 <a href="https://pypi.org/project/reprexlite/"><img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/reprexlite" /></a>
 <a href="https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain"><img alt="tests" src="https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main" /></a>
 <a href="https://codecov.io/gh/jayqi/reprexlite"><img alt="codecov" src="https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg" /></a></p>
-<p><strong>reprexlite</strong> is a tool for rendering <strong>repr</strong>oducible <strong>ex</strong>amples of Python code for sharing. With a convenient CLI and lightweight dependencies, you can quickly get it up and running in any virtual environment.</p>
+<p><strong>reprexlite</strong> is a tool for rendering <strong>repr</strong>oducible <strong>ex</strong>amples of Python code for sharing. With a <a href="#command-line-interface">convenient CLI</a> and lightweight dependencies, you can quickly get it up and running in any virtual environment. Optional <a href="#ipythonjupyter-cell-magic">IPython cell magic</a> for easy use in Jupyter or VS Code. Inspired by R's <a href="https://reprex.tidyverse.org/">reprex</a>.</p>
 <p><img src="images/demo.gif" width="640px" /></p>
 <ul>
 <li>Paste or type some Python code that you're interested in sharing.</li>
@@ -601,7 +601,7 @@
 <p>The primary way to use reprexlite is through the CLI. It allows you to create a reprex without entering a Python session. Simply invoke the command:</p>
 <div class="highlight"><pre><span></span><code>reprex
 </code></pre></div>
-<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vim</code>. You can set your default editor using the <code>$EDITOR</code> environment variable—I'm personally a fan of <code>nano</code>.</p>
+<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vim</code>. You can set your default editor using the <a href="https://askubuntu.com/a/432530"><code>$EDITOR</code> environment variable</a>—I'm personally a fan of <code>nano</code>.</p>
 <p>Once you're done, reprexlite will print out your reprex to console.</p>
 <p>To see available options, use the <code>--help</code> flag.</p>
 <h3 id="python-library">Python library<a class="headerlink" href="#python-library" title="Permanent link">&para;</a></h3>
@@ -631,7 +631,7 @@
 <span class="c1">#&gt; &lt;reprexlite.formatting.GitHubReprex object at 0x109059f10&gt;</span>
 </code></pre></div>
 <h3 id="ipythonjupyter-cell-magic">IPython/Jupyter Cell Magic<a class="headerlink" href="#ipythonjupyter-cell-magic" title="Permanent link">&para;</a></h3>
-<p>reprexlite has an optional IPython extension with a <code>%%reprex</code> cell magic. That means you can easily create a reprex in an <a href="https://ipython.readthedocs.io/en/stable/">IPython shell</a> (requires IPython), in <a href="https://jupyter.org/">Jupyter</a> (requires Jupyter), or in <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VS Code's Interactive Python window</a> (requires <code>ipykernel</code>).</p>
+<p>reprexlite has an optional IPython extension with a <code>%%reprex</code> cell magic. That means you can easily create a reprex in an <a href="https://ipython.readthedocs.io/en/stable/">IPython shell</a> (requires IPython), in <a href="https://jupyter.org/">Jupyter</a> (requires Jupyter), or in <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VS Code's Interactive Python window</a> (requires <code>ipykernel</code>). This can be handy if you're already working in a Jupyter notebook and want to share some code and output, which otherwise doesn't neatly copy and paste in a nice format.</p>
 <p>To use, simply load the extension with</p>
 <div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">load_ext</span> <span class="n">reprexlite</span>
 </code></pre></div>
@@ -643,7 +643,7 @@
 <span class="n">grid</span>
 <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">grid</span><span class="p">))</span>
 </code></pre></div>
-<p>The magic accepts the same inline option flags as the CLI. Use the line magic <code>%reprex</code> (single-<code>%</code>) to print out help. See the <a href="https://jayqi.github.io/reprexlite/ipython-jupyter-magic/">documentation</a> for more details.</p>
+<p>The magic accepts the same inline option flags as the CLI. Use the line magic <code>%reprex</code> (note single <code>%</code>) to print out help. See the <a href="https://jayqi.github.io/reprexlite/ipython-jupyter-magic/">documentation</a> for more details.</p>
                 
               
               
