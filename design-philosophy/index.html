@@ -40,7 +40,7 @@
     
     
     
-      <link rel="stylesheet" href="../stylesheets/custom_mkdocstrings.css">
+      <link rel="stylesheet" href="../css/custom_mkdocstrings.css">
     
     
       
@@ -341,18 +341,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../ipython-jupyter-magic/" class="md-nav__link">
+        IPython/Jupyter Magic
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
-      <label class="md-nav__link" for="__nav_5">
+      <label class="md-nav__link" for="__nav_6">
         API Reference
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           API Reference
         </label>
@@ -554,7 +569,10 @@
 <p>The primary design goal of reprexlite is that it should be <strong>quick and convenient</strong> to use. That objective drove the emphasis on following the design characteristics:</p>
 <ul>
 <li><strong>Lightweight</strong>. reprexlite needs to be in your virtual environment to be able to run your code. By having minimal and lightweight dependencies itself, reprexlite is quick to install and is unlikely to conflict with your other dependencies.</li>
-<li><strong>Quick access</strong>. reprexlite comes with a CLI, so you can quickly create a reprex without needing to start a Python shell or to import anything.</li>
+<li><strong>Easy access</strong>. reprexlite comes with a CLI, so you can quickly create a reprex without needing to start a Python shell or to import anything.<ul>
+<li><strong>And flexible</strong>. The CLI isn't the only option. The <a href="../api-reference/reprex/">Python library</a> provides programmatic access, and there is an optional <a href="../ipython-jupyter-magic/">IPython/Jupyter extension</a> for use with a cell magic.</li>
+</ul>
+</li>
 </ul>
 <p>The API, including the available configuration and naming of parameters, mostly matches both <a href="https://reprex.tidyverse.org/">R reprex</a> and <a href="https://github.com/crew102/reprexpy">reprexpy</a>. The intent is that anyone familiar with these other tools can quickly feel comfortable with reprexlite.</p>
 <p>As a secondary objective, the reprexlite library is designed so that its underlying functionality is accessible and extensible. It has a modular object-oriented design based on composition. Individual parts, like the code parsing or the output formatting, can be used independently, extended, or replaced. Additionally, the library is thoroughly type-annotated and documented.</p>

@@ -40,7 +40,7 @@
     
     
     
-      <link rel="stylesheet" href="stylesheets/custom_mkdocstrings.css">
+      <link rel="stylesheet" href="css/custom_mkdocstrings.css">
     
     
       
@@ -282,6 +282,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ipythonjupyter-cell-magic" class="md-nav__link">
+    IPython/Jupyter Cell Magic
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -347,18 +354,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="ipython-jupyter-magic/" class="md-nav__link">
+        IPython/Jupyter Magic
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
-      <label class="md-nav__link" for="__nav_5">
+      <label class="md-nav__link" for="__nav_6">
         API Reference
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           API Reference
         </label>
@@ -506,6 +528,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ipythonjupyter-cell-magic" class="md-nav__link">
+    IPython/Jupyter Cell Magic
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -560,6 +589,7 @@
 <p>Optional dependencies can be specified using the <a href="https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras">"extras" mechanism</a>, e.g., <code>reprexlite[black]</code>. Available extras are:</p>
 <ul>
 <li><code>black</code> : for optionally autoformatting your code</li>
+<li><code>ipython</code> : to use the <code>%%reprex</code> cell magic in IPython/Jupyter</li>
 <li><code>pygments</code> : for syntax highlighting and the RTF venue</li>
 </ul>
 <h3 id="development-version">Development version<a class="headerlink" href="#development-version" title="Permanent link">&para;</a></h3>
@@ -568,7 +598,7 @@
 </code></pre></div>
 <h2 id="quick-usage">Quick usage<a class="headerlink" href="#quick-usage" title="Permanent link">&para;</a></h2>
 <h3 id="command-line-interface">Command-line interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h3>
-<p>The reprexlite CLI allows you to create a reprex without entering a Python session. Simply invoke the command:</p>
+<p>The primary way to use reprexlite is through the CLI. It allows you to create a reprex without entering a Python session. Simply invoke the command:</p>
 <div class="highlight"><pre><span></span><code>reprex
 </code></pre></div>
 <p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vim</code>. You can set your default editor using the <code>$EDITOR</code> environment variable—I'm personally a fan of <code>nano</code>.</p>
@@ -600,6 +630,20 @@
 <span class="c1">#&gt; &lt;sup&gt;Created at 2021-02-26 00:32:00 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.0&lt;/sup&gt;</span>
 <span class="c1">#&gt; &lt;reprexlite.formatting.GitHubReprex object at 0x109059f10&gt;</span>
 </code></pre></div>
+<h3 id="ipythonjupyter-cell-magic">IPython/Jupyter Cell Magic<a class="headerlink" href="#ipythonjupyter-cell-magic" title="Permanent link">&para;</a></h3>
+<p>reprexlite has an optional IPython extension with a <code>%%reprex</code> cell magic. That means you can easily create a reprex in an <a href="https://ipython.readthedocs.io/en/stable/">IPython shell</a> (requires IPython), in <a href="https://jupyter.org/">Jupyter</a> (requires Jupyter), or in <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VS Code's Interactive Python window</a> (requires <code>ipykernel</code>).</p>
+<p>To use, simply load the extension with</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">load_ext</span> <span class="n">reprexlite</span>
+</code></pre></div>
+<p>and then put <code>%%reprex</code> at the top of a cell you want to create a reprex for:</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">reprex</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]))</span>
+<span class="n">grid</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">grid</span><span class="p">))</span>
+</code></pre></div>
+<p>The magic accepts the same inline option flags as the CLI. Use the line magic <code>%reprex</code> (single-<code>%</code>) to print out help. See the <a href="https://jayqi.github.io/reprexlite/ipython-jupyter-magic/">documentation</a> for more details.</p>
                 
               
               
