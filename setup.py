@@ -42,6 +42,7 @@ setup(
     entry_points={"console_scripts": ["reprex=reprexlite.cli:app"]},
     extras_require={k: v for k, v in requirements.items() if k != "base"},
     install_requires=requirements["base"],
+    license="MIT",
     long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,
