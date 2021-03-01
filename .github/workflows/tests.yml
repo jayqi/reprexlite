@@ -50,9 +50,16 @@ jobs:
         shell: bash
         run: |
           make dist
-          python -m pip install dist/reprexlite-*.whl --no-deps --force-reinstall
-          python -m pip install dist/reprexlite-*.tar.gz --no-deps --force-reinstall
+          python -m venv .venv-whl
+          source .venv-whl/bin/activate
+          python -m pip install dist/reprexlite-*.whl
           reprex --version
+          deactivate
+          python -m venv .venv-sdist
+          source .venv-sdist/bin/activate
+          python -m pip install dist/reprexlite-*.tar.gz
+          reprex --version
+          deactivate
 
       - name: Test building documentation
         run: |
