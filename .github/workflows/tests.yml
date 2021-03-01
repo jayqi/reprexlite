@@ -50,13 +50,29 @@ jobs:
         shell: bash
         run: |
           make dist
+
+          echo "=== Testing wheel installation ==="
           python -m venv .venv-whl
-          source .venv-whl/bin/activate
+          if [[ -f .venv-whl/bin/activate ]]; then
+            # Unix
+            source .venv-whl/bin/activate
+          else
+            # Windows
+            . .venv-whl/Scripts/activate
+          fi
           python -m pip install dist/reprexlite-*.whl
           reprex --version
           deactivate
+
+          echo "=== Testing source installation ==="
           python -m venv .venv-sdist
-          source .venv-sdist/bin/activate
+          if [[ -f .venv-sdist/bin/activate ]]; then
+            # Unix
+            source .venv-sdist/bin/activate
+          else
+            # Windows
+            . .venv-whl/Scripts/activate
+          fi
           python -m pip install dist/reprexlite-*.tar.gz
           reprex --version
           deactivate
