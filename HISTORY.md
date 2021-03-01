@@ -3,6 +3,7 @@
 ## v0.4.2 (2021-02-28)
 
 - Added support for parsing code copied from an interactive Python shell (REPL) with `>>>` prompts. ([#29](https://github.com/jayqi/reprexlite/pull/29))
+- Fixed issue where `tests` module was unintentionally included in distribution ([#30](https://github.com/jayqi/reprexlite/pull/30)).
 
 ## v0.4.1 (2021-02-27)
 

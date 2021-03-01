@@ -42,11 +42,12 @@ setup(
     entry_points={"console_scripts": ["reprex=reprexlite.cli:app"]},
     extras_require={k: v for k, v in requirements.items() if k != "base"},
     install_requires=requirements["base"],
+    license="MIT",
     long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,
     name="reprexlite",
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests"]),
     project_urls={
         "Bug Tracker": "https://github.com/jayqi/reprexlite/issues",
         "Documentation": "https://jayqi.github.io/reprexlite/",
