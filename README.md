@@ -25,7 +25,7 @@ list(zip(*grid))
 
 Writing a good reprex takes thought and effort (see ["Reprex Do's and Don'ts"](https://jayqi.github.io/reprexlite/dos-and-donts) for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.
 
-Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with `>>>` prompts from an interactive Python shell.
+Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with `>>>` prompts from an interactive Python shell. In fact, reprexlite can parse code with `>>>` prompts and convert it into a reprex for you instead.
 
 reprexlite is a lightweight alternative to [reprexpy](https://github.com/crew102/reprexpy) and is similarly meant as a port of the R package [reprex](https://github.com/tidyverse/reprex).
 

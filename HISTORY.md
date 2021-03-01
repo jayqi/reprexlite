@@ -1,12 +1,16 @@
 # reprexlite Changelog
 
+## v0.4.2 (2021-02-28)
+
+- Added support for parsing code copied from an interactive Python shell (REPL) with `>>>` prompts. ([#29](https://github.com/jayqi/reprexlite/pull/29))
+
 ## v0.4.1 (2021-02-27)
 
 - Added missing LICENSE file.
 
 ## v0.4.0 (2021-02-27)
 
-- Adds optional IPython extension that enables `%%reprex` cell magic. See [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for usage. ([#21](https://github.com/jayqi/reprexlite/pull/21))
+- Added optional IPython extension that enables `%%reprex` cell magic. See [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for usage. ([#21](https://github.com/jayqi/reprexlite/pull/21))
 
 ## v0.3.1 (2021-02-26)
 
