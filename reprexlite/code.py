@@ -131,6 +131,8 @@ class CodeBlock:
                 match the `comment` prefix. False means these lines are removed, in effect meaning
                 an inputted regex will have its results regenerated. Defaults to False.
         """
+        if any(line.startswith(">>>") for line in input.split("\n")):
+            input = repl_to_reprex_code(input, comment=comment)
         if not old_results and comment in input:
             input = "\n".join(line for line in input.split("\n") if not line.startswith(comment))
         self.input: str = input
@@ -177,3 +179,24 @@ class CodeBlock:
         except ImportError:
             out.append(f"<pre><code>{self}</code></pre>")
         return "\n".join(out)
+
+
+def repl_to_reprex_code(input: str, comment: str = "#>") -> str:
+    """Reformat a code block copied from a Python REPL to a reprex-style code block.
+
+    Args:
+        input (str): code block
+        comment (str): Line prefix to use when rendering the evaluated results. Defaults to "#>".
+
+    Returns:
+        Reformatted code block in reprex-style.
+    """
+    out = []
+    for line in input.split("\n"):
+        if line.startswith(">>>") or line.startswith("..."):
+            out.append(line[4:])
+        elif line.strip() == "":
+            out.append(line)
+        else:
+            out.append(comment + " " + line)
+    return "\n".join(out)

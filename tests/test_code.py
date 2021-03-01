@@ -4,7 +4,7 @@ from textwrap import dedent
 
 import pytest
 
-from reprexlite.code import CodeBlock
+from reprexlite.code import CodeBlock, repl_to_reprex_code
 
 REPO_ROOT = Path(__file__).parents[1].resolve()
 
@@ -185,6 +185,25 @@ cases = [
         #> caught
         """,
     ),
+    Case(
+        id="repl code",
+        input="""\
+        >>> def add_one(x: int):
+        ...     return x + 1
+        ...
+        >>> # Now add 1
+        >>> add_one(1)
+        2 # old result
+        """,
+        expected="""\
+        def add_one(x: int):
+            return x + 1
+
+        # Now add 1
+        add_one(1)
+        #> 2
+        """,
+    ),
 ]
 
 
@@ -228,3 +247,29 @@ def test_old_results():
         """
     )
     assert str(CodeBlock(input, old_results=True)) == expected_true.strip()
+
+
+def test_repl_to_reprex_code():
+    input = dedent(
+        """\
+        >>> def add_one(x: int):
+        ...     return x + 1
+        ...
+        >>> # Now add 1
+        >>> add_one(1)
+        2
+        """
+    )
+    expected = dedent(
+        """\
+        def add_one(x: int):
+            return x + 1
+
+        # Now add 1
+        add_one(1)
+        #> 2
+        """
+    )
+
+    assert repl_to_reprex_code(input) == expected
+    assert str(CodeBlock(input)) + "\n" == expected

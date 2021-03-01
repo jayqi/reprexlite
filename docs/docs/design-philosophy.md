@@ -50,6 +50,8 @@ math.sqrt(4)
 #> 2.0
 ```
 
+If this has convinced you, you can take advantage of reprexlite's ability to parse doctest-style code and easily convert those examples to reprexes instead.
+
 ## reprexlite's Design
 
 The primary design goal of reprexlite is that it should be **quick and convenient** to use. That objective drove the emphasis on following the design characteristics:
