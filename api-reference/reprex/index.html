@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
       <link rel="stylesheet" href="../../css/custom_mkdocstrings.css">
     
     
@@ -332,7 +334,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
+  <a href="#reprexlite.reprex-functions" class="md-nav__link">
     Functions
   </a>
   
@@ -441,7 +443,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
+  <a href="#reprexlite.reprex-functions" class="md-nav__link">
     Functions
   </a>
   
@@ -478,35 +480,52 @@
                 
                 
                 <h1 id="reprexlite">reprexlite<a class="headerlink" href="#reprexlite" title="Permanent link">&para;</a></h1>
-<div class="doc doc-object doc-module">
-<div class="doc doc-contents first">
-<div class="doc doc-children">
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="reprexlite.reprex.reprex">
-
-<code class="highlight language-python"><span class="n">reprex</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">venue</span><span class="o">=</span><span class="s1">'gh'</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'#&gt;'</span><span class="p">,</span> <span class="n">old_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.reprex.reprex" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Render reproducible examples of Python code for sharing. This function will evaluate your
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+<h2 id="reprexlite.reprex-functions">Functions<a href="#reprexlite.reprex-functions" class="headerlink" title="Permanent link">&para;</a></h2>
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="reprexlite.reprex.reprex" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">reprex</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">venue</span><span class="o">=</span><span class="s1">&#39;gh&#39;</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&gt;&#39;</span><span class="p">,</span> <span class="n">old_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#reprexlite.reprex.reprex" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Render reproducible examples of Python code for sharing. This function will evaluate your
 code and returns an instance of a <a href="../formatting/#reprexlite.formatting.Reprex"><code>Reprex</code></a> subclass. Calling
 <code>str(...)</code> on the <code>Reprex</code> object will return your code with the evaluated results embedded
 as comments, plus additional markup appropriate to the sharing venue set by the <code>venue</code> keyword
 argument.</p>
 <p>For example, for the <code>gh</code> venue for GitHub Flavored Markdown, you'll get a reprex whose string
 representation looks like:</p>
-<div class="highlight">
-<pre><span></span><code>```python
+<div class="highlight"><pre><span></span><code>```python
 x = 2
 x + 2
 #&gt; 4
 ```
 
 &lt;sup&gt;Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.1.0&lt;/sup&gt;
-</code></pre>
-</div>
+</code></pre></div>
 <p>The supported <code>venue</code> formats are:</p>
 <ul>
 <li><code>gh</code> : GitHub Flavored Markdown</li>
@@ -517,144 +536,122 @@ x + 2
 <li><code>rtf</code> : Rich Text Format</li>
 <li><code>slack</code> : Slack</li>
 </ul>
+
 <p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>input</code></td>
-<td><code>str</code></td>
-<td>
-<p>Block of Python code</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>outfile</code></td>
-<td><code>Optional[pathlib.Path]</code></td>
-<td>
-<p>Optional file path to write reprex to. Defaults to None.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>venue</code></td>
-<td><code>str</code></td>
-<td>
-<p>Determines the output format by the venue you want to share the code. Defaults
-to "gh" for GitHub Flavored Markdown.</p>
-</td>
-<td><code>'gh'</code></td>
-</tr>
-<tr>
-<td><code>advertise</code></td>
-<td><code>Optional[bool]</code></td>
-<td>
-<p>Whether to include a note that links back to the reprexlite
-package. Default <code>None</code> will use the default set by choice of <code>venue</code>.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>session_info</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to include additional details about your Python version,
-operating system, and installed packages. Defaults to False.</p>
-</td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>style</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to autoformat your code with black. Defaults to False.</p>
-</td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>comment</code></td>
-<td><code>str</code></td>
-<td>
-<p>Line prefix to use for displaying evaluated results. Defaults to "#&gt;".</p>
-</td>
-<td><code>'#&gt;'</code></td>
-</tr>
-<tr>
-<td><code>old_results</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to keep old results, i.e., comment lines in input that match
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>input</code></td>
+        <td><code>str</code></td>
+        <td><p>Block of Python code</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>outfile</code></td>
+        <td><code>Optional[pathlib.Path]</code></td>
+        <td><p>Optional file path to write reprex to. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>venue</code></td>
+        <td><code>str</code></td>
+        <td><p>Determines the output format by the venue you want to share the code. Defaults
+to "gh" for GitHub Flavored Markdown.</p></td>
+        <td><code>&#39;gh&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>Whether to include a note that links back to the reprexlite
+package. Default <code>None</code> will use the default set by choice of <code>venue</code>.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include additional details about your Python version,
+operating system, and installed packages. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>style</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to autoformat your code with black. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>comment</code></td>
+        <td><code>str</code></td>
+        <td><p>Line prefix to use for displaying evaluated results. Defaults to "#&gt;".</p></td>
+        <td><code>&#39;#&gt;&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>old_results</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to keep old results, i.e., comment lines in input that match
 the <code>comment</code> prefix. False means these lines are removed, in effect meaning an
-inputted regex will have its results regenerated. Defaults to False.</p>
-</td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>print_</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to print your reprex to console. Defaults to True.</p>
-</td>
-<td><code>True</code></td>
-</tr>
-<tr>
-<td><code>terminal</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to use syntax highlighting for 256-color terminal display.
-Requires optional dependency Pygments. Defaults to False.</p>
-</td>
-<td><code>False</code></td>
-</tr>
-</tbody>
+inputted regex will have its results regenerated. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>print_</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to print your reprex to console. Defaults to True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>terminal</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to use syntax highlighting for 256-color terminal display.
+Requires optional dependency Pygments. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Returns:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Reprex</code></td>
-<td>
-<p>Instance of a <code>Reprex</code> concrete subclass for <code>venue</code>.</p>
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Reprex</code></td>
+      <td><p>Instance of a <code>Reprex</code> concrete subclass for <code>venue</code>.</p></td>
+    </tr>
+  </tbody>
 </table>
-<details class="quote">
+        <details class="quote">
           <summary>Source code in <code>reprexlite/reprex.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">reprex</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reprex</span><span class="p">(</span>
     <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">venue</span><span class="o">=</span><span class="s2">"gh"</span><span class="p">,</span>
+    <span class="n">venue</span><span class="o">=</span><span class="s2">&quot;gh&quot;</span><span class="p">,</span>
     <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"#&gt;"</span><span class="p">,</span>
+    <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#&gt;&quot;</span><span class="p">,</span>
     <span class="n">old_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Reprex</span><span class="p">:</span>
-    <span class="sd">"""Render reproducible examples of Python code for sharing. This function will evaluate your</span>
+    <span class="sd">&quot;&quot;&quot;Render reproducible examples of Python code for sharing. This function will evaluate your</span>
 <span class="sd">    code and returns an instance of a [`Reprex`][reprexlite.formatting.Reprex] subclass. Calling</span>
 <span class="sd">    `str(...)` on the `Reprex` object will return your code with the evaluated results embedded</span>
 <span class="sd">    as comments, plus additional markup appropriate to the sharing venue set by the `venue` keyword</span>
 <span class="sd">    argument.</span>
 
-<span class="sd">    For example, for the `gh` venue for GitHub Flavored Markdown, you'll get a reprex whose string</span>
+<span class="sd">    For example, for the `gh` venue for GitHub Flavored Markdown, you&#39;ll get a reprex whose string</span>
 <span class="sd">    representation looks like:</span>
 
 <span class="sd">    ````</span>
@@ -681,13 +678,13 @@ Requires optional dependency Pygments. Defaults to False.</p>
 <span class="sd">        input (str): Block of Python code</span>
 <span class="sd">        outfile (Optional[Path]): Optional file path to write reprex to. Defaults to None.</span>
 <span class="sd">        venue (str): Determines the output format by the venue you want to share the code. Defaults</span>
-<span class="sd">            to "gh" for GitHub Flavored Markdown.</span>
+<span class="sd">            to &quot;gh&quot; for GitHub Flavored Markdown.</span>
 <span class="sd">        advertise (Optional[bool]): Whether to include a note that links back to the reprexlite</span>
 <span class="sd">            package. Default `None` will use the default set by choice of `venue`.</span>
 <span class="sd">        session_info (bool): Whether to include additional details about your Python version,</span>
 <span class="sd">            operating system, and installed packages. Defaults to False.</span>
 <span class="sd">        style (bool): Whether to autoformat your code with black. Defaults to False.</span>
-<span class="sd">        comment (str): Line prefix to use for displaying evaluated results. Defaults to "#&gt;".</span>
+<span class="sd">        comment (str): Line prefix to use for displaying evaluated results. Defaults to &quot;#&gt;&quot;.</span>
 <span class="sd">        old_results (bool): Whether to keep old results, i.e., comment lines in input that match</span>
 <span class="sd">            the `comment` prefix. False means these lines are removed, in effect meaning an</span>
 <span class="sd">            inputted regex will have its results regenerated. Defaults to False.</span>
@@ -697,10 +694,10 @@ Requires optional dependency Pygments. Defaults to False.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Instance of a `Reprex` concrete subclass for `venue`.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">outfile</span> <span class="ow">or</span> <span class="n">venue</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"html"</span><span class="p">,</span> <span class="s2">"rtf"</span><span class="p">]:</span>
-        <span class="c1"># Don't screw output file or lexing for HTML and RTF with terminal syntax highlighting</span>
+    <span class="k">if</span> <span class="n">outfile</span> <span class="ow">or</span> <span class="n">venue</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="s2">&quot;rtf&quot;</span><span class="p">]:</span>
+        <span class="c1"># Don&#39;t screw output file or lexing for HTML and RTF with terminal syntax highlighting</span>
         <span class="n">terminal</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">code_block</span> <span class="o">=</span> <span class="n">CodeBlock</span><span class="p">(</span>
         <span class="nb">input</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">comment</span><span class="p">,</span> <span class="n">old_results</span><span class="o">=</span><span class="n">old_results</span><span class="p">,</span> <span class="n">terminal</span><span class="o">=</span><span class="n">terminal</span>
@@ -710,19 +707,27 @@ Requires optional dependency Pygments. Defaults to False.</p>
         <span class="n">code_block</span><span class="o">=</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="n">advertise</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="n">session_info</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="n">outfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">outfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
-            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">outfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">print_</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">reprex</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">reprex</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
                 
               
               

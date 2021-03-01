@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
       <link rel="stylesheet" href="../../css/custom_mkdocstrings.css">
     
     
@@ -356,7 +358,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
+  <a href="#reprexlite.formatting-attributes" class="md-nav__link">
     Attributes
   </a>
   
@@ -376,7 +378,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#classes" class="md-nav__link">
+  <a href="#reprexlite.formatting-classes" class="md-nav__link">
     Classes
   </a>
   
@@ -510,7 +512,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
+  <a href="#reprexlite.formatting-attributes" class="md-nav__link">
     Attributes
   </a>
   
@@ -530,7 +532,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#classes" class="md-nav__link">
+  <a href="#reprexlite.formatting-classes" class="md-nav__link">
     Classes
   </a>
   
@@ -616,216 +618,331 @@
                 
                 
                 <h1 id="reprexliteformatting">reprexlite.formatting<a class="headerlink" href="#reprexliteformatting" title="Permanent link">&para;</a></h1>
-<div class="doc doc-object doc-module">
-<div class="doc doc-contents first">
-<div class="doc doc-children">
-<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
-<div class="doc doc-object doc-attribute">
-<h3 class="doc doc-heading" id="reprexlite.formatting.venues_dispatcher">
 
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h2 id="reprexlite.formatting-attributes">Attributes<a href="#reprexlite.formatting-attributes" class="headerlink" title="Permanent link">&para;</a></h2>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="reprexlite.formatting.venues_dispatcher" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">venues_dispatcher</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">reprexlite</span><span class="o">.</span><span class="n">formatting</span><span class="o">.</span><span class="n">Reprex</span><span class="p">]]</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.venues_dispatcher" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Mapping from venue keywords to their Reprex implementation.</p>
-</div>
-</div>
-<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.Advertisement">
+<a href="#reprexlite.formatting.venues_dispatcher" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents ">
+
+      <p>Mapping from venue keywords to their Reprex implementation.</p>
+    </div>
+
+  </div>
+
+
+<h2 id="reprexlite.formatting-classes">Classes<a href="#reprexlite.formatting-classes" class="headerlink" title="Permanent link">&para;</a></h2>
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.Advertisement" class="doc doc-heading">
         <code>Advertisement</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Class for generating the advertisement note for reprexlite.</p>
+<a href="#reprexlite.formatting.Advertisement" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Class for generating the advertisement note for reprexlite.</p>
+
 <p><strong>Attributes:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>timestamp</code></td>
-<td><code>str</code></td>
-<td>
-<p>Timestamp of instance instantiation</p>
-</td>
-</tr>
-<tr>
-<td><code>version</code></td>
-<td><code>str</code></td>
-<td>
-<p>Version of reprexlite</p>
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>timestamp</code></td>
+        <td><code>str</code></td>
+        <td><p>Timestamp of instance instantiation</p></td>
+      </tr>
+      <tr>
+        <td><code>version</code></td>
+        <td><code>str</code></td>
+        <td><p>Version of reprexlite</p></td>
+      </tr>
+  </tbody>
 </table>
-<div class="doc doc-children">
-<div class="doc doc-object doc-attribute">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Advertisement.pkg">
 
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.Advertisement.pkg" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">pkg</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement.pkg" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
+<a href="#reprexlite.formatting.Advertisement.pkg" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
 
     </div>
-</div>
-<div class="doc doc-object doc-attribute">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Advertisement.url">
 
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.Advertisement.url" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">url</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement.url" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
+<a href="#reprexlite.formatting.Advertisement.url" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
 
     </div>
-</div>
-<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h4>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Advertisement.__init__">
 
+  </div>
+
+
+
+
+<h4 id="reprexlite.formatting.Advertisement-methods">Methods<a href="#reprexlite.formatting.Advertisement-methods" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.Advertisement.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement.__init__" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S %Z"</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Advertisement.code_comment">
+<a href="#reprexlite.formatting.Advertisement.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S %Z&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.Advertisement.code_comment" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement.code_comment" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Render reprexlite advertisement as a comment in Python code.</p>
-<details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Render reprexlite advertisement as a comment in Python code."""</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">"# </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Advertisement.html">
+<a href="#reprexlite.formatting.Advertisement.code_comment" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Render reprexlite advertisement as a comment in Python code.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement as a comment in Python code.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.Advertisement.html" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement.html" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Render reprexlite advertisement in HTML.</p>
-<details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Render reprexlite advertisement in HTML."""</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">"&lt;p&gt;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by "</span>
-        <span class="sa">f</span><span class="s1">'&lt;a href="</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s1">"&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s1">&lt;/a&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&lt;/sup&gt;&lt;/p&gt;'</span>
-    <span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Advertisement.markdown">
+<a href="#reprexlite.formatting.Advertisement.html" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Render reprexlite advertisement in HTML.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in HTML.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by &quot;</span>
+        <span class="sa">f</span><span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s1">&lt;/a&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&lt;/sup&gt;&lt;/p&gt;&#39;</span>
+    <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.Advertisement.markdown" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement.markdown" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Render reprexlite advertisement in GitHub Flavored Markdown.</p>
-<details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Render reprexlite advertisement in GitHub Flavored Markdown."""</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&lt;/sup&gt;"</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Advertisement.text">
+<a href="#reprexlite.formatting.Advertisement.markdown" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Render reprexlite advertisement in GitHub Flavored Markdown.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&lt;/sup&gt;&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.Advertisement.text" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Advertisement.text" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Render reprexlite advertisement in plain text.</p>
-<details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Render reprexlite advertisement in plain text."""</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&gt;"</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.GitHubReprex">
+<a href="#reprexlite.formatting.Advertisement.text" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Render reprexlite advertisement in plain text.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in plain text.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.GitHubReprex" class="doc doc-heading">
         <code>GitHubReprex</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.GitHubReprex" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Concrete implementation for rendering reprexes in GitHub Flavored Markdown.</p>
-<div class="doc doc-children">
-<h4 id="attributes_1">Attributes<a class="headerlink" href="#attributes_1" title="Permanent link">&para;</a></h4>
-<div class="doc doc-object doc-attribute">
-<h5 class="doc doc-heading" id="reprexlite.formatting.GitHubReprex.default_advertise">
+<a href="#reprexlite.formatting.GitHubReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents ">
+
+      <p>Concrete implementation for rendering reprexes in GitHub Flavored Markdown.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h4 id="reprexlite.formatting.GitHubReprex-attributes">Attributes<a href="#reprexlite.formatting.GitHubReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.GitHubReprex.default_advertise" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.GitHubReprex.default_advertise" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Default for whether to include reprexlite advertisement for this venue format.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.GitHubReprex.__init__">
+<a href="#reprexlite.formatting.GitHubReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.GitHubReprex.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
@@ -833,52 +950,90 @@
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#reprexlite.formatting.GitHubReprex.__init__" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<details class="quote">
+<a href="#reprexlite.formatting.GitHubReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.HtmlReprex">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.HtmlReprex" class="doc doc-heading">
         <code>HtmlReprex</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.HtmlReprex" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is
-available, the rendered HTML will have syntax highlighting for the Python code.</p>
-<div class="doc doc-children">
-<h4 id="attributes_2">Attributes<a class="headerlink" href="#attributes_2" title="Permanent link">&para;</a></h4>
-<div class="doc doc-object doc-attribute">
-<h5 class="doc doc-heading" id="reprexlite.formatting.HtmlReprex.default_advertise">
+<a href="#reprexlite.formatting.HtmlReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents ">
+
+      <p>Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is
+available, the rendered HTML will have syntax highlighting for the Python code.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h4 id="reprexlite.formatting.HtmlReprex-attributes">Attributes<a href="#reprexlite.formatting.HtmlReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.HtmlReprex.default_advertise" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.HtmlReprex.default_advertise" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Default for whether to include reprexlite advertisement for this venue format.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.HtmlReprex.__init__">
+<a href="#reprexlite.formatting.HtmlReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.HtmlReprex.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
@@ -886,51 +1041,89 @@ available, the rendered HTML will have syntax highlighting for the Python code.<
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#reprexlite.formatting.HtmlReprex.__init__" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<details class="quote">
+<a href="#reprexlite.formatting.HtmlReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.PyScriptReprex">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.PyScriptReprex" class="doc doc-heading">
         <code>PyScriptReprex</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.PyScriptReprex" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Concrete implementation for rendering reprexes as a Python script.</p>
-<div class="doc doc-children">
-<h4 id="attributes_3">Attributes<a class="headerlink" href="#attributes_3" title="Permanent link">&para;</a></h4>
-<div class="doc doc-object doc-attribute">
-<h5 class="doc doc-heading" id="reprexlite.formatting.PyScriptReprex.default_advertise">
+<a href="#reprexlite.formatting.PyScriptReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents ">
+
+      <p>Concrete implementation for rendering reprexes as a Python script.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h4 id="reprexlite.formatting.PyScriptReprex-attributes">Attributes<a href="#reprexlite.formatting.PyScriptReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.PyScriptReprex.default_advertise" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.PyScriptReprex.default_advertise" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Default for whether to include reprexlite advertisement for this venue format.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.PyScriptReprex.__init__">
+<a href="#reprexlite.formatting.PyScriptReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.PyScriptReprex.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
@@ -938,125 +1131,188 @@ available, the rendered HTML will have syntax highlighting for the Python code.<
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#reprexlite.formatting.PyScriptReprex.__init__" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<details class="quote">
+<a href="#reprexlite.formatting.PyScriptReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.Reprex">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.Reprex" class="doc doc-heading">
         <code>Reprex</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Reprex" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Abstract base class for a reprex instance. Concrete subclasses should implement the
+<a href="#reprexlite.formatting.Reprex" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Abstract base class for a reprex instance. Concrete subclasses should implement the
 formatting logic appropriate to a specific venue for sharing. Call <code>str(...)</code> on an instance
 to return the formatted reprex.</p>
+
 <p><strong>Attributes:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>code_block</code></td>
-<td><code>CodeBlock</code></td>
-<td>
-<p>instance of <a href="../code/#reprexlite.code.CodeBlock"><code>CodeBlock</code></a></p>
-</td>
-</tr>
-<tr>
-<td><code>advertise</code></td>
-<td><code>bool</code></td>
-<td>
-<p>whether to render reprexlite advertisement</p>
-</td>
-</tr>
-<tr>
-<td><code>session_info</code></td>
-<td><code>bool</code></td>
-<td>
-<p>whether to render session info</p>
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>code_block</code></td>
+        <td><code>CodeBlock</code></td>
+        <td><p>instance of <a href="../code/#reprexlite.code.CodeBlock"><code>CodeBlock</code></a></p></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to render reprexlite advertisement</p></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to render session info</p></td>
+      </tr>
+  </tbody>
 </table>
-<div class="doc doc-children">
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.Reprex.__init__">
 
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.Reprex.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#reprexlite.formatting.Reprex.__init__" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<details class="quote">
+<a href="#reprexlite.formatting.Reprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.RtfReprex">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.RtfReprex" class="doc doc-heading">
         <code>RtfReprex</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.RtfReprex" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Concrete implementation for rendering reprexes in Rich Text Format.</p>
-<div class="doc doc-children">
-<h4 id="attributes_4">Attributes<a class="headerlink" href="#attributes_4" title="Permanent link">&para;</a></h4>
-<div class="doc doc-object doc-attribute">
-<h5 class="doc doc-heading" id="reprexlite.formatting.RtfReprex.default_advertise">
+<a href="#reprexlite.formatting.RtfReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents ">
+
+      <p>Concrete implementation for rendering reprexes in Rich Text Format.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h4 id="reprexlite.formatting.RtfReprex-attributes">Attributes<a href="#reprexlite.formatting.RtfReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.RtfReprex.default_advertise" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.RtfReprex.default_advertise" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Default for whether to include reprexlite advertisement for this venue format.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.RtfReprex.__init__">
+<a href="#reprexlite.formatting.RtfReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.RtfReprex.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
@@ -1064,51 +1320,89 @@ to return the formatted reprex.</p>
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#reprexlite.formatting.RtfReprex.__init__" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<details class="quote">
+<a href="#reprexlite.formatting.RtfReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.SlackReprex">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.SlackReprex" class="doc doc-heading">
         <code>SlackReprex</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.SlackReprex" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Concrete implementation for rendering reprexes as Slack markup.</p>
-<div class="doc doc-children">
-<h4 id="attributes_5">Attributes<a class="headerlink" href="#attributes_5" title="Permanent link">&para;</a></h4>
-<div class="doc doc-object doc-attribute">
-<h5 class="doc doc-heading" id="reprexlite.formatting.SlackReprex.default_advertise">
+<a href="#reprexlite.formatting.SlackReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents ">
+
+      <p>Concrete implementation for rendering reprexes as Slack markup.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h4 id="reprexlite.formatting.SlackReprex-attributes">Attributes<a href="#reprexlite.formatting.SlackReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.SlackReprex.default_advertise" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
 
 
-      <a class="headerlink" href="#reprexlite.formatting.SlackReprex.default_advertise" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<p>Default for whether to include reprexlite advertisement for this venue format.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h5 class="doc doc-heading" id="reprexlite.formatting.SlackReprex.__init__">
+<a href="#reprexlite.formatting.SlackReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+    <div class="doc doc-contents ">
+
+      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.SlackReprex.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
@@ -1116,40 +1410,69 @@ to return the formatted reprex.</p>
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#reprexlite.formatting.SlackReprex.__init__" title="Permanent link">&para;</a></h5>
-<div class="doc doc-contents ">
-<details class="quote">
+<a href="#reprexlite.formatting.SlackReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="reprexlite.formatting.Venue">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.Venue" class="doc doc-heading">
         <code>Venue</code>
 
 
 
-      <a class="headerlink" href="#reprexlite.formatting.Venue" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents ">
-<p>Enum for valid venue options.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<a href="#reprexlite.formatting.Venue" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Enum for valid venue options.</p>
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
                 
               
               

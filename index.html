@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
       <link rel="stylesheet" href="css/custom_mkdocstrings.css">
     
     
@@ -578,7 +580,7 @@
 <span class="c1">#&gt; [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]</span>
 </code></pre></div>
 <p>Writing a good reprex takes thought and effort (see <a href="https://jayqi.github.io/reprexlite/dos-and-donts">"Reprex Do's and Don'ts"</a> for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.</p>
-<p>Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with <code>&gt;&gt;&gt;</code> prompts from an interactive Python shell.</p>
+<p>Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with <code>&gt;&gt;&gt;</code> prompts from an interactive Python shell. In fact, reprexlite can parse code with <code>&gt;&gt;&gt;</code> prompts and convert it into a reprex for you instead.</p>
 <p>reprexlite is a lightweight alternative to <a href="https://github.com/crew102/reprexpy">reprexpy</a> and is similarly meant as a port of the R package <a href="https://github.com/tidyverse/reprex">reprex</a>.</p>
 <h3 id="why-reproducible-examples">Why reproducible examples?<a class="headerlink" href="#why-reproducible-examples" title="Permanent link">&para;</a></h3>
 <p>If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run. See <a href="https://jayqi.github.io/reprexlite/design-philosophy/">"Design Philosophy"</a> for more on both "Why reproducible examples?" and "Why reprexlite?"</p>
