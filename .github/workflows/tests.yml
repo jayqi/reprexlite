@@ -31,7 +31,7 @@ jobs:
           make typecheck
 
   tests:
-    name: ${{ matrix.os }}, Python ${{ matrix.python-version }}
+    name: "Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})"
     needs: code-quality
     runs-on: ${{ matrix.os }}
     strategy:
@@ -115,3 +115,20 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
+
+  notify:
+    name: Notify failed build
+    needs: [code-quality, tests]
+    if: failure() && github.event.pull_request == null
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          RUN_NUMBER: ${{ github.run_number}}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        with:
+          filename: .github/failed_build_issue_template.md
