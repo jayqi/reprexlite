@@ -102,9 +102,7 @@ def main(
         with infile.open("r") as fp:
             input = fp.read()
     else:
-        input = typer.edit()
-        if input is None:
-            input = ""
+        input = typer.edit() or ""
 
     rendered = reprex(
         input,
