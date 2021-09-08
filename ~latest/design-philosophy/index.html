@@ -1,0 +1,678 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Render reproducible examples of Python code for sharing.">
+      
+      
+      
+      
+        <link rel="canonical" href="https://jayqi.github.io/reprexlite/~latest/design-philosophy/">
+      
+      <link rel="icon" href="../images/reprexlite_white_blue.svg">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Design Philosophy - reprexlite</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../css/custom_mkdocstrings.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#design-philosophy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="reprexlite" class="md-header__button md-logo" aria-label="reprexlite" data-md-component="logo">
+      
+  <img src="../images/reprexlite.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            reprexlite
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design Philosophy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/jayqi/reprexlite/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="reprexlite" class="md-nav__button md-logo" aria-label="reprexlite" data-md-component="logo">
+      
+  <img src="../images/reprexlite.svg" alt="logo">
+
+    </a>
+    reprexlite
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jayqi/reprexlite/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Design Philosophy
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Design Philosophy
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-reproducible-examples" class="md-nav__link">
+    Why reproducible examples?
+  </a>
+  
+    <nav class="md-nav" aria-label="Why reproducible examples?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-youre-looking-for-help-with-a-problem-or-bug" class="md-nav__link">
+    If you're looking for help with a problem or bug...
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-youre-writing-a-tutorial-or-documentation" class="md-nav__link">
+    If you're writing a tutorial or documentation...
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reprex-vs-copying-from-shell-doctest-style" class="md-nav__link">
+    Reprex vs. Copying from shell (doctest-style)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reprexlites-design" class="md-nav__link">
+    reprexlite's Design
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    Limitations
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dos-and-donts/" class="md-nav__link">
+        Reprex Do's and Don'ts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        CLI Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipython-jupyter-magic/" class="md-nav__link">
+        IPython/Jupyter Magic
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        API Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/reprex/" class="md-nav__link">
+        reprexlite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/code/" class="md-nav__link">
+        reprexlite.code
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/formatting/" class="md-nav__link">
+        reprexlite.formatting
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/session_info/" class="md-nav__link">
+        reprexlite.session_info
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-reproducible-examples" class="md-nav__link">
+    Why reproducible examples?
+  </a>
+  
+    <nav class="md-nav" aria-label="Why reproducible examples?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-youre-looking-for-help-with-a-problem-or-bug" class="md-nav__link">
+    If you're looking for help with a problem or bug...
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-youre-writing-a-tutorial-or-documentation" class="md-nav__link">
+    If you're writing a tutorial or documentation...
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reprex-vs-copying-from-shell-doctest-style" class="md-nav__link">
+    Reprex vs. Copying from shell (doctest-style)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reprexlites-design" class="md-nav__link">
+    reprexlite's Design
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    Limitations
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jayqi/reprexlite/edit/master/docs/design-philosophy.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="design-philosophy">Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permanent link">&para;</a></h1>
+<p>Reprex is a portmanteau for <strong>repr</strong>oducible <strong>ex</strong>ample. This term and its associated approach to minimal reproducible examples have been popularized within the R data science community, driven by the adoption of the <a href="https://reprex.tidyverse.org/index.html">reprex</a> tidyverse package.</p>
+<blockquote>
+<p>The reprex code:</p>
+<ul>
+<li>Must run and, therefore, should be run by <strong>the person posting</strong>. No faking it.</li>
+<li>Should be easy for others to digest, so <strong>they don’t necessarily have to run it</strong>. You are encouraged to include selected bits of output.</li>
+<li>Should be easy for others to copy + paste + run, <strong>if and only if they so choose</strong>. Don’t let inclusion of output break executability.</li>
+</ul>
+<p><p style="text-align: right">― <a href="https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html#package-philosophy">"Package Philosophy,"</a> from the R reprex documentation</p></p>
+</blockquote>
+<p>Writing a good reprex takes thought and effort (see <a href="../dos-and-donts">"Reprex Do's and Don'ts"</a> for tips). The goal of reprexlite is to be a tool for Python that handles the mechanical stuff—running your code, capturing the output, formatting everything—so you don't have to worry about it, and you can devote your full attention to the important, creative work of writing the content. The action of running your code and seeing the outputs can also be a helpful forcing function in really making sure your example works and produces what you intend.</p>
+<h2 id="why-reproducible-examples">Why reproducible examples?<a class="headerlink" href="#why-reproducible-examples" title="Permanent link">&para;</a></h2>
+<div style="float: right; margin-top: 24px; margin-left: 2ch; "><img src="../images/help-me-help-you.png" /><p style="font-size: small; text-align: center; margin-top: 0;">From the R reprex <a href="https://reprex.tidyverse.org/index.html">readme</a>.</p></div>
+
+<h3 id="if-youre-looking-for-help-with-a-problem-or-bug">If you're looking for help with a problem or bug...<a class="headerlink" href="#if-youre-looking-for-help-with-a-problem-or-bug" title="Permanent link">&para;</a></h3>
+<p>...you are more likely to succeed if you make it as easy as possible for others to help you. You are asking people to do work on your behalf. Remember: most open-source software maintainers and StackOverflow posters are volunteers and are not obligated to help you. Even someone who is obligated to help you would still be able to get to an answer more quickly if you make it easier for them to understand your problem.</p>
+<p>Plus, the exercise of writing the reprex might even help you figure out how to solve the problem yourself. This is basically the principle of <a href="https://rubberduckdebugging.com/">rubber duck debugging</a>.</p>
+<h3 id="if-youre-writing-a-tutorial-or-documentation">If you're writing a tutorial or documentation...<a class="headerlink" href="#if-youre-writing-a-tutorial-or-documentation" title="Permanent link">&para;</a></h3>
+<p>...actual working examples are valuable to your users. A reprex—with complete directly runnable code and showing the expected outputs—will show your audience what you're demonstrating, and also give them the option to easily try for themselves. Doing is often the most effective way of learning how to do something in code. And, with documentation especially, people often just want to arrive at working code for their use case as quickly as possible. Something that they can just copy and run is exactly what they're looking for.</p>
+<h2 id="reprex-vs-copying-from-shell-doctest-style">Reprex vs. Copying from shell (doctest-style)<a class="headerlink" href="#reprex-vs-copying-from-shell-doctest-style" title="Permanent link">&para;</a></h2>
+<p>A widely used approach for Python code examples is copying from an interactive Python shell. It is easily recognized from the <code>&gt;&gt;&gt;</code> prompt before each code statement. Such a code example is sometimes called a "doctest" because the <a href="https://docs.python.org/3/library/doctest.html"><code>doctest</code> module</a> from the Python standard library is able to parse it.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="mf">2.0</span>
+</code></pre></div>
+<p>This style of code example takes no special tools to generate: simply open a <code>python</code> shell from command line, write your code, and copy what you see. Many Python packages use it for their documentation, e.g., <a href="https://requests.readthedocs.io/en/master/">requests</a>. There is also tooling for parsing it. The doctest module can run such examples in the docstrings of your scripts, and test that the output matches what is written. Other tools like <a href="https://www.sphinx-doc.org/en/1.4.9/markup/code.html">Sphinx</a> are able to parse it when rendering your documentation into other formats.</p>
+<p>The drawback of doctest-style examples is that they are <em>not</em> valid Python syntax, so you can't just copy, paste, and run such  examples. The <code>&gt;&gt;&gt;</code> prompt is not valid. While IPython's interactive shell and Jupyter notebooks <em>do</em> support executing code with the prompt, it won't work in a regular Python REPL or in Python scripts. Furthermore, since the outputs might be anything, they may not be valid Python syntax either, depending on their <code>repr</code>. A barebones class, for example, will look like <code>&lt;__main__.MyClass object at 0x7f932a001400&gt;</code> and is not valid.</p>
+<p>So, while no special tools were needed to <em>generate</em> a doctest-style example, either special tools or manual editing are needed to <em>run</em> it. This puts the burden on the person you're sharing with, which is counterproductive. As discussed in the previous section, we want reproducible examples to make it <em>easier</em> for others to run your code.</p>
+<p>In contrast, reprexes <em>are</em> valid Python code. Anyone can copy, paste, and run a reprex without any special tools or manual editing required.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1">#&gt; 2.0</span>
+</code></pre></div>
+<p>If this has convinced you, you can take advantage of reprexlite's ability to parse doctest-style code and easily convert those examples to reprexes instead.</p>
+<h2 id="reprexlites-design">reprexlite's Design<a class="headerlink" href="#reprexlites-design" title="Permanent link">&para;</a></h2>
+<p>The primary design goal of reprexlite is that it should be <strong>quick and convenient</strong> to use. That objective drove the emphasis on following the design characteristics:</p>
+<ul>
+<li><strong>Lightweight</strong>. reprexlite needs to be in your virtual environment to be able to run your code. By having minimal and lightweight dependencies itself, reprexlite is quick to install and is unlikely to conflict with your other dependencies.</li>
+<li><strong>Easy access</strong>. reprexlite comes with a CLI, so you can quickly create a reprex without needing to start a Python shell or to import anything.<ul>
+<li><strong>And flexible</strong>. The CLI isn't the only option. The <a href="../api-reference/reprex/">Python library</a> provides programmatic access, and there is an optional <a href="../ipython-jupyter-magic/">IPython/Jupyter extension</a> for use with a cell magic.</li>
+</ul>
+</li>
+</ul>
+<p>The API, including the available configuration and naming of parameters, mostly matches both <a href="https://reprex.tidyverse.org/">R reprex</a> and <a href="https://github.com/crew102/reprexpy">reprexpy</a>. The intent is that anyone familiar with these other tools can quickly feel comfortable with reprexlite.</p>
+<p>As a secondary objective, the reprexlite library is designed so that its underlying functionality is accessible and extensible. It has a modular object-oriented design based on composition. Individual parts, like the code parsing or the output formatting, can be used independently, extended, or replaced. Additionally, the library is thoroughly type-annotated and documented.</p>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<p>Compared to <a href="https://reprex.tidyverse.org/">R reprex</a> and <a href="https://github.com/crew102/reprexpy">reprexpy</a>, reprexlite does trade off some capabilities in favor of our design objective. Known limitations include:</p>
+<ul>
+<li><strong>No clipboard integration.</strong> The two main Python clipboard libraries, <a href="https://github.com/asweigart/pyperclip">pyperclip</a> and <a href="https://github.com/adityarathod/xerox">xerox</a>, have non-Python dependencies on some OSes that make them sometimes difficult to install. However, command-line editor support built-in to the CLI is nearly as easy as reading from clipboard, and has the added benefit that you can see the code before it gets executed.</li>
+<li><strong>No plot image support.</strong> Both R reprex and reprexpy support automatically uploading plots to imgur.com and injecting the link into your outputted reprex. This always seemed to me like a weird default as it could lead to inadvertent leaking of private data.</li>
+<li><strong>Code is not run in a subprocess, so it's not perfectly isolated.</strong> reprexlite runs the code using <code>eval</code> and <code>exec</code> with a fresh namespace, but otherwise still executes code within the main Python process. That means, for example, modules that are stateful or have been monkeypatched could potentially leak that state into the reprex.</li>
+</ul>
+<p>By not supporting the first two functionalities, reprexlite has significantly fewer and simpler dependencies. Both of these features, while convenient, could lead to unintentional code execution or leaking data to the public web. From that perspective, I believe this is a worthwhile tradeoff.</p>
+<p>The third limitation is one where feedback is welcome. Hopefully it will only matter in unusual edge cases. If you have ideas for mitigation for the current <code>eval</code>-<code>exec</code> implementation, please <a href="https://github.com/jayqi/reprexlite/issues">open an issue on GitHub</a>. A subprocess-based implementation would solve this, but would be more difficult to capture output from—any implementation ideas for this approach are also welcome.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../dos-and-donts/" class="md-footer__link md-footer__link--next" aria-label="Next: Reprex Do&#39;s and Don&#39;ts" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Reprex Do's and Don'ts
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
