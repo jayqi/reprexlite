@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: ubuntu-latest, Python 3.8
+    name: Build docs from main
     runs-on: ubuntu-latest
 
     steps:
@@ -26,8 +26,9 @@ jobs:
         run: |
           make docs
 
-      - name: Deploy docs site
-        uses: JamesIves/github-pages-deploy-action@4.0.0
-        with:
-          branch: gh-pages
-          folder: "./docs/site"
+      - name: Deploy docs to gh-pages
+        run: |
+          git fetch origin gh-pages --depth=1
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          mike deploy --push ~latest --title=latest
