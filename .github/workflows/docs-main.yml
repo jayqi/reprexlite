@@ -27,6 +27,7 @@ jobs:
           make docs
 
       - name: Deploy docs to gh-pages
+        working-directory: docs
         run: |
           git fetch origin gh-pages --depth=1
           git config user.name github-actions[bot]
