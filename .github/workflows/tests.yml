@@ -68,32 +68,19 @@ jobs:
         shell: bash
         run: |
           make dist
-
+          if [[ ${{ matrix.os }} == "windows-latest" ]]; then
+            PYTHON_BIN=Scripts/python
+          else
+            PYTHON_BIN=bin/python
+          fi
           echo "=== Testing wheel installation ==="
           python -m venv .venv-whl
-          if [[ -f .venv-whl/bin/activate ]]; then
-            # Unix
-            source .venv-whl/bin/activate
-          else
-            # Windows
-            . .venv-whl/Scripts/activate
-          fi
-          python -m pip install dist/reprexlite-*.whl
-          reprex --version
-          deactivate
-
+          .venv-whl/$PYTHON_BIN -m pip install dist/reprexlite-*.whl
+          .venv-whl/$PYTHON_BIN -m reprexlite --version
           echo "=== Testing source installation ==="
           python -m venv .venv-sdist
-          if [[ -f .venv-sdist/bin/activate ]]; then
-            # Unix
-            source .venv-sdist/bin/activate
-          else
-            # Windows
-            . .venv-whl/Scripts/activate
-          fi
-          python -m pip install dist/reprexlite-*.tar.gz
-          reprex --version
-          deactivate
+          .venv-sdist/$PYTHON_BIN -m pip install dist/reprexlite-*.tar.gz
+          .venv-sdist/$PYTHON_BIN -m reprexlite --version
 
       - name: Test building documentation
         run: |
@@ -101,7 +88,9 @@ jobs:
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == 3.8
 
       - name: Deploy site preview to Netlify
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == 3.8
+        if: |
+          matrix.os == 'ubuntu-latest' && matrix.python-version == 3.8
+          && github.event.pull_request != null
         uses: nwtgck/actions-netlify@v1.1
         with:
           publish-dir: "./docs/site"
