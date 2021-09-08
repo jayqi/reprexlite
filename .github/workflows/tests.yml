@@ -75,11 +75,13 @@ jobs:
           fi
           echo "=== Testing wheel installation ==="
           python -m venv .venv-whl
+          .venv-whl/$PYTHON_BIN -m pip install --upgrade pip
           .venv-whl/$PYTHON_BIN -m pip install dist/reprexlite-*.whl
           .venv-whl/$PYTHON_BIN -m reprexlite --version
           echo "=== Testing source installation ==="
           python -m venv .venv-sdist
-          .venv-sdist/$PYTHON_BIN -m pip install dist/reprexlite-*.tar.gz
+          .venv-sdist/$PYTHON_BIN -m pip install --upgrade pip
+          .venv-sdist/$PYTHON_BIN -m pip install dist/reprexlite-*.tar.gz --force-reinstall
           .venv-sdist/$PYTHON_BIN -m reprexlite --version
 
       - name: Test building documentation
