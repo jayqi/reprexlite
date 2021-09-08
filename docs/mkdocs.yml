@@ -6,6 +6,8 @@ theme:
   name: material
   logo: images/reprexlite.svg
   favicon: images/reprexlite_white_blue.svg
+  features:
+    - navigation.top
 
 nav:
   - Home: "index.md"
@@ -51,3 +53,7 @@ plugins:
             heading_level: 2
             group_by_category: true
             show_category_heading: true
+
+extra:
+  version:
+    provider: mike

@@ -23,7 +23,7 @@ list(zip(*grid))
 #> [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]
 ```
 
-Writing a good reprex takes thought and effort (see ["Reprex Do's and Don'ts"](https://jayqi.github.io/reprexlite/dos-and-donts) for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.
+Writing a good reprex takes thought and effort (see ["Reprex Do's and Don'ts"](https://jayqi.github.io/reprexlite/stable/dos-and-donts) for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.
 
 Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with `>>>` prompts from an interactive Python shell. In fact, reprexlite can parse code with `>>>` prompts and convert it into a reprex for you instead.
 
@@ -31,7 +31,7 @@ reprexlite is a lightweight alternative to [reprexpy](https://github.com/crew102
 
 ### Why reproducible examples?
 
-If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run. See ["Design Philosophy"](https://jayqi.github.io/reprexlite/design-philosophy/) for more on both "Why reproducible examples?" and "Why reprexlite?"
+If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run. See ["Design Philosophy"](https://jayqi.github.io/reprexlite/stable/design-philosophy/) for more on both "Why reproducible examples?" and "Why reprexlite?"
 
 ## Installation
 
@@ -73,7 +73,7 @@ To see available options, use the `--help` flag.
 
 ### Python library
 
-The same functionality as the CLI is also available from the `reprex` function with an equivalent API. Simply pass a string with your code, and it will print out the reprex, as well as return a `Reprex` object that contains all the data and formatting machinery. See the [API documentation](https://jayqi.github.io/reprexlite/api-reference/reprex/) for more details.
+The same functionality as the CLI is also available from the `reprex` function with an equivalent API. Simply pass a string with your code, and it will print out the reprex, as well as return a `Reprex` object that contains all the data and formatting machinery. See the [API documentation](https://jayqi.github.io/reprexlite/stable/api-reference/reprex/) for more details.
 
 ```python
 from reprexlite import reprex
@@ -122,4 +122,4 @@ grid
 list(zip(*grid))
 ```
 
-The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (note single `%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/ipython-jupyter-magic/) for more details.
+The magic accepts the same inline option flags as the CLI. Use the line magic `%reprex` (note single `%`) to print out help. See the [documentation](https://jayqi.github.io/reprexlite/stable/ipython-jupyter-magic/) for more details.
