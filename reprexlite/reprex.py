@@ -1,8 +1,44 @@
 from pathlib import Path
 from typing import Optional
 
-from reprexlite.code import CodeBlock
+from reprexlite.code import (
+    DEFAULT_COMMENT,
+    DEFAULT_CONTINUATION,
+    DEFAULT_PROMPT,
+    CodeBlock,
+)
 from reprexlite.formatting import Reprex, venues_dispatcher
+
+
+def removeprefix(s: str, prefix: str):
+    if s.startswith(prefix):
+        return s[len(prefix) :]
+    else:
+        return s
+
+
+def parse_input_to_code(
+    input: str,
+    prompt: Optional[str] = None,
+    continuation: Optional[str] = None,
+    comment: Optional[str] = None,
+    keep_old_results: bool = False,
+):
+    lines = input.split("\n")
+    code = ""
+    for line in lines:
+        if prompt and line.startswith(prompt + " "):
+            code += removeprefix(line, prompt + " ") + "\n"
+        elif continuation and line.startswith(continuation + " "):
+            code += removeprefix(line, continuation + " ") + "\n"
+        elif (comment and line.startswith(comment + " ")) or (prompt and continuation):
+            if keep_old_results:
+                code += "#" + line + "\n"
+            else:
+                continue
+        else:
+            code += line + "\n"
+    return code
 
 
 def reprex(
@@ -12,8 +48,13 @@ def reprex(
     advertise: Optional[bool] = None,
     session_info: bool = False,
     style: bool = False,
-    comment: str = "#>",
-    old_results: bool = False,
+    prompt: str = DEFAULT_PROMPT,
+    continuation: str = DEFAULT_CONTINUATION,
+    comment: str = DEFAULT_COMMENT,
+    input_prompt: Optional[str] = None,
+    input_continuation: Optional[str] = None,
+    input_comment: Optional[str] = None,
+    keep_old_results: bool = False,
     print_=True,
     terminal=False,
 ) -> Reprex:
@@ -71,12 +112,34 @@ def reprex(
     if outfile or venue in ["html", "rtf"]:
         # Don't screw output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
-    code_block = CodeBlock(
-        input, style=style, comment=comment, old_results=old_results, terminal=terminal
+
+    if input_prompt or input_continuation or input_comment:
+        # User specified custom prefixes
+        code = parse_input_to_code(
+            input=input,
+            prompt=prompt,
+            continuation=continuation,
+            comment=comment,
+            keep_old_results=keep_old_results,
+        )
+    elif any(line.startswith(">>>") for line in input.split("\n")):
+        # Check if doctest format
+        code = parse_input_to_code(
+            input=input, prompt=">>>", continuation="...", keep_old_results=keep_old_results
+        )
+    else:
+        # Assume reprex format
+        code = parse_input_to_code(
+            input=input, comment=DEFAULT_COMMENT, keep_old_results=keep_old_results
+        )
+
+    code_block = CodeBlock.parse_and_evaluate(code)
+    output = code_block.format(
+        style=style, prompt=prompt, continuation=continuation, comment=comment, terminal=terminal
     )
 
     reprex = venues_dispatcher[venue](
-        code_block=code_block, advertise=advertise, session_info=session_info
+        code_block=output, advertise=advertise, session_info=session_info
     )
     if outfile is not None:
         with outfile.open("w") as fp:

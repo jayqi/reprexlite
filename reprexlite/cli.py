@@ -47,7 +47,15 @@ def main(
     comment: str = typer.Option(
         "#>", "--comment", help="Comment prefix to use for results returned by expressions."
     ),
-    old_results: Optional[bool] = typer.Option(
+    prompt: str = typer.Option(
+        "", "--prompt", help="Primary prompt prefix to use for first line of code of expressions."
+    ),
+    continuation: str = typer.Option(
+        "",
+        "--continuation",
+        help="Secondary prompt prefix to use for continuation lines of code of expressions.",
+    ),
+    keep_old_results: Optional[bool] = typer.Option(
         None,
         "--old-results",
         help=(
@@ -109,10 +117,12 @@ def main(
         outfile=outfile,
         venue=venue.value,
         advertise=advertise,
-        session_info=session_info if session_info else False,
-        style=style if style else False,
+        session_info=session_info or False,
+        style=style or False,
         comment=comment,
-        old_results=old_results if old_results else False,
+        prompt=prompt,
+        continuation=continuation,
+        keep_old_results=keep_old_results or False,
         print_=False,
         terminal=True,
     )
