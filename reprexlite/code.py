@@ -71,9 +71,16 @@ class Statement:
                     exec(str(self).strip(), scope, scope)
                     result = NO_RETURN
             stdout = stdout_io.getvalue().strip()
-        except Exception:
+        except Exception as exc:
             result = NO_RETURN
-            stdout = traceback.format_exc().strip()
+            # Skip first step of traceback, since that is this evaluate method
+            if exc.__traceback__ is not None:
+                tb = exc.__traceback__.tb_next
+                stdout = (
+                    "Traceback (most recent call last):\n"
+                    + "".join(line for line in traceback.format_tb(tb))
+                    + f"{type(exc).__name__}: {exc}"
+                )
         finally:
             stdout_io.close()
         return Result(result, stdout=stdout)
