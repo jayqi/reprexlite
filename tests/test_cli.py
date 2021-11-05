@@ -77,14 +77,14 @@ def test_old_results(patch_edit):
     result = runner.invoke(app)
     print(result.stdout)
     assert result.exit_code == 0
-    assert "#> old line" not in result.stdout
+    assert "old line" not in result.stdout
     assert "#> [2, 3, 4, 5, 6]" in result.stdout
 
     # with --old-results
-    result = runner.invoke(app, ["--old-results"])
+    result = runner.invoke(app, ["--keep-old-results"])
     print(result.stdout)
     assert result.exit_code == 0
-    assert "#> old line" in result.stdout
+    assert "# old line" in result.stdout
     assert "#> [2, 3, 4, 5, 6]" in result.stdout
 
 

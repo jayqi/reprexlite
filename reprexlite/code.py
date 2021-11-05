@@ -135,7 +135,10 @@ class Statement:
             for line in lines:
                 if line.strip() == "":
                     # Whitespace line
-                    out += f"{prompt} " + line
+                    out += f"{prompt} " + line + "\n"
+                elif line.startswith("#"):
+                    # Comment line
+                    out += f"{prompt} " + line + "\n"
                 else:
                     # Code line
                     if not primary_found:
@@ -143,7 +146,7 @@ class Statement:
                         primary_found = True
                     else:
                         out += f"\n{continuation} " + line
-        return out
+        return out.strip()
 
 
 def validate_prompts(prompt: str, continuation: str):
@@ -216,7 +219,7 @@ class CodeBlock:
                 out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
             except ImportError:
                 pass
-        return out.strip()
+        return out + "\n"
 
     def __str__(self):
         return self.format()

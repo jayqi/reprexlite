@@ -53,7 +53,7 @@ def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
 
 def test_html(patch_datetime, patch_version, no_pygments):
     reprex_class = venues_dispatcher["html"]
-    code_block = CodeBlock(INPUT)
+    code_block = CodeBlock.parse_and_evaluate(INPUT)
     reprex = reprex_class(code_block)
     print(reprex)
     expected = dedent(
@@ -67,6 +67,42 @@ def test_html(patch_datetime, patch_version, no_pygments):
     assert str(reprex) == expected
 
 
+def test_custom_prefixes(patch_datetime, patch_version):
+    input = dedent(
+        """\
+        $$ def add_one(x: int):
+        %%     return x + 1
+        %%
+        $$ # Now add 1
+        $$ add_one(1)
+        #^ old result
+        """
+    )
+    actual = reprex(input, input_prompt="$$", input_continuation="%%", input_comment="#^")
+    expected = dedent(
+        """\
+        ```python
+        def add_one(x: int):
+            return x + 1
+
+        # Now add 1
+        add_one(1)
+        #> 2
+        ```
+
+        <sup>Created at DATETIME by [reprexlite](https://github.com/jayqi/reprexlite) vVERSION</sup>        """
+    )
+
+    print("---input---")
+    print(input)
+    print("---actual---")
+    print(actual)
+    print("---expected---")
+    print(expected)
+
+    assert actual == expected
+
+
 def test_old_results():
     input = dedent(
         """\
@@ -76,5 +112,5 @@ def test_old_results():
         """
     )
 
-    assert "#> old line" not in str(reprex(input))  # old_results False (default)
-    assert "#> old line" in str(reprex(input, old_results=True))  # old_results True
+    assert "old line" not in str(reprex(input))  # old_results False (default)
+    assert "# old line" in str(reprex(input, keep_old_results=True))  # old_results True

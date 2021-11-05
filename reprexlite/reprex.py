@@ -8,37 +8,7 @@ from reprexlite.code import (
     CodeBlock,
 )
 from reprexlite.formatting import Reprex, venues_dispatcher
-
-
-def removeprefix(s: str, prefix: str):
-    if s.startswith(prefix):
-        return s[len(prefix) :]
-    else:
-        return s
-
-
-def parse_input_to_code(
-    input: str,
-    prompt: Optional[str] = None,
-    continuation: Optional[str] = None,
-    comment: Optional[str] = None,
-    keep_old_results: bool = False,
-):
-    lines = input.split("\n")
-    code = ""
-    for line in lines:
-        if prompt and line.startswith(prompt + " "):
-            code += removeprefix(line, prompt + " ") + "\n"
-        elif continuation and line.startswith(continuation + " "):
-            code += removeprefix(line, continuation + " ") + "\n"
-        elif (comment and line.startswith(comment + " ")) or (prompt and continuation):
-            if keep_old_results:
-                code += "#" + line + "\n"
-            else:
-                continue
-        else:
-            code += line + "\n"
-    return code
+from reprexlite.parsing import parse_input_to_code
 
 
 def reprex(
@@ -97,9 +67,19 @@ def reprex(
         session_info (bool): Whether to include additional details about your Python version,
             operating system, and installed packages. Defaults to False.
         style (bool): Whether to autoformat your code with black. Defaults to False.
+        prompt (str): Line prefix to use for primary prompt of code statements. Defaults to empty
+            string.
+        continuation (str): Line prefix to use for secondary prompt of additional lines of code
+            statements. Defaults to empty string.
         comment (str): Line prefix to use for displaying evaluated results. Defaults to "#>".
-        old_results (bool): Whether to keep old results, i.e., comment lines in input that match
-            the `comment` prefix. False means these lines are removed, in effect meaning an
+        input_prompt (Optional[str]): Optionally declare primary prompt prefix for parsing input.
+            Not needed if input is reprex or doctest format.
+        input_continuation (Optional[str]): Optionally declare secondary prompt prefix for parsing
+            input. Not needed if input is reprex or doctest format.
+        input_comment (Optional[str]): Optionally declare prefix of evaluation results for parsing
+            input. Not needed if input is reprex or doctest format.
+        keep_old_results (bool): Whether to keep old results, i.e., comment lines in input that
+            match the `comment` prefix. False means these lines are removed, in effect meaning an
             inputted regex will have its results regenerated. Defaults to False.
         print_ (bool): Whether to print your reprex to console. Defaults to True.
         terminal (bool): Whether to use syntax highlighting for 256-color terminal display.
@@ -113,26 +93,13 @@ def reprex(
         # Don't screw output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
 
-    if input_prompt or input_continuation or input_comment:
-        # User specified custom prefixes
-        code = parse_input_to_code(
-            input=input,
-            prompt=prompt,
-            continuation=continuation,
-            comment=comment,
-            keep_old_results=keep_old_results,
-        )
-    elif any(line.startswith(">>>") for line in input.split("\n")):
-        # Check if doctest format
-        code = parse_input_to_code(
-            input=input, prompt=">>>", continuation="...", keep_old_results=keep_old_results
-        )
-    else:
-        # Assume reprex format
-        code = parse_input_to_code(
-            input=input, comment=DEFAULT_COMMENT, keep_old_results=keep_old_results
-        )
-
+    code = parse_input_to_code(
+        input,
+        prompt=input_prompt,
+        continuation=input_continuation,
+        comment=input_comment,
+        keep_old_results=keep_old_results,
+    )
     code_block = CodeBlock.parse_and_evaluate(code)
     output = code_block.format(
         style=style, prompt=prompt, continuation=continuation, comment=comment, terminal=terminal

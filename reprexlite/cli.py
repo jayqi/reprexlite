@@ -44,9 +44,6 @@ def main(
     style: Optional[bool] = typer.Option(
         None, "--style", help="Autoformat code with black. Requires black to be installed."
     ),
-    comment: str = typer.Option(
-        "#>", "--comment", help="Comment prefix to use for results returned by expressions."
-    ),
     prompt: str = typer.Option(
         "", "--prompt", help="Primary prompt prefix to use for first line of code of expressions."
     ),
@@ -55,9 +52,12 @@ def main(
         "--continuation",
         help="Secondary prompt prefix to use for continuation lines of code of expressions.",
     ),
+    comment: str = typer.Option(
+        "#>", "--comment", help="Comment prefix to use for results returned by expressions."
+    ),
     keep_old_results: Optional[bool] = typer.Option(
         None,
-        "--old-results",
+        "--keep-old-results",
         help=(
             "Keep old results, i.e., lines that match the prefix specified by the --comment "
             "option. If not using this option, then such lines are removed, meaning that an input "
@@ -119,9 +119,9 @@ def main(
         advertise=advertise,
         session_info=session_info or False,
         style=style or False,
-        comment=comment,
         prompt=prompt,
         continuation=continuation,
+        comment=comment,
         keep_old_results=keep_old_results or False,
         print_=False,
         terminal=True,
