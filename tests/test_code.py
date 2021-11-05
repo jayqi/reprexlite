@@ -199,6 +199,23 @@ cases = [
         #> 2
         """,
     ),
+    Case(
+        id="__name__",
+        input="""
+        __name__
+
+        class MyClass: ...
+        MyClass.__module__
+        """,
+        expected="""
+        __name__
+        #> '__reprex__'
+
+        class MyClass: ...
+        MyClass.__module__
+        #> '__reprex__'
+        """,
+    ),
 ]
 
 

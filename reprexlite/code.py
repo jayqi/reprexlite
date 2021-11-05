@@ -62,13 +62,15 @@ class Statement:
         self.style = style
 
     def evaluate(self, scope: dict) -> Result:
+        if "__name__" not in scope:
+            scope["__name__"] = "__reprex__"
         stdout_io = StringIO()
         try:
             with redirect_stdout(stdout_io):
                 try:
-                    result = eval(str(self).strip(), scope, scope)
+                    result = eval(str(self).strip(), scope)
                 except SyntaxError:
-                    exec(str(self).strip(), scope, scope)
+                    exec(str(self).strip(), scope)
                     result = NO_RETURN
             stdout = stdout_io.getvalue().strip()
         except Exception as exc:
