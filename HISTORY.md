@@ -1,5 +1,9 @@
 # reprexlite Changelog
 
+## v0.4.3 (2021-11-05)
+
+- Added explicit setting of code evaluation namespace's `__name__` to `'__reprex__'`. Previously this was unset and would get inferred, and weird things like `'builtins'` would turn up. ([PR #29](https://github.com/jayqi/reprexlite/pull/44))
+
 ## v0.4.2 (2021-02-28)
 
 - Added support for parsing code copied from an interactive Python shell (REPL) with `>>>` prompts. ([#29](https://github.com/jayqi/reprexlite/pull/29))
