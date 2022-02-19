@@ -1,5 +1,9 @@
 # reprexlite Changelog
 
+## v0.5.0 (Unreleased)
+
+- Added experimental IPython interactive editor which can be launched via command line with `reprex --ipython`. This modified IPython editor will run every cell automatically as a reprex.
+
 ## v0.4.3 (2021-11-05)
 
 - Added explicit setting of code evaluation namespace's `__name__` to `'__reprex__'`. Previously this was unset and would get inferred, and weird things like `'builtins'` would turn up. ([PR #44](https://github.com/jayqi/reprexlite/pull/44))

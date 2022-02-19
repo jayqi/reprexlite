@@ -4,6 +4,10 @@ from typing import Optional
 
 from IPython import InteractiveShell
 from IPython.core.magic import Magics, line_cell_magic, magics_class
+from IPython.core.release import version as ipython_version
+from IPython.core.usage import default_banner_parts
+from IPython.terminal.interactiveshell import TerminalInteractiveShell
+from IPython.terminal.ipapp import TerminalIPythonApp
 from typer.testing import CliRunner
 
 import reprexlite.cli
@@ -63,3 +67,31 @@ def load_ipython_extension(ipython: InteractiveShell):
     """
 
     ipython.register_magics(ReprexMagics)
+
+
+ipython_banner_parts = default_banner_parts[:-1].copy()
+ipython_banner_parts.append(
+    f"reprexlite {__version__} -- Interactive editor via IPython {ipython_version}."
+)
+
+
+class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
+    """Subclass of IPython's TerminalInteractiveShell that automatically runs all cells using the
+    %%reprex cell magic."""
+
+    banner1 = "".join(ipython_banner_parts)
+
+    def run_cell(self, raw_cell, *args, **kwargs):
+        if raw_cell != "exit":
+            raw_cell = "%%reprex\n" + raw_cell
+        super().run_cell(raw_cell, *args, **kwargs)
+
+    def init_magics(self):
+        super().init_magics()
+        self.register_magics(ReprexMagics)
+
+
+class ReprexTerminalIPythonApp(TerminalIPythonApp):
+    """Subclass of TerminalIPythonApp that launches ReprexTerminalInteractiveShell."""
+
+    interactive_shell_class = ReprexTerminalInteractiveShell
