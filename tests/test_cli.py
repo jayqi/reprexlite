@@ -88,6 +88,14 @@ def test_old_results(patch_edit):
     assert "#> [2, 3, 4, 5, 6]" in result.stdout
 
 
+def test_ipython_editor():
+    """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
+    to inject input into the IPython shell."""
+    result = runner.invoke(app, ["--ipython"])
+    assert result.exit_code == 0
+    assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
+
+
 def test_help():
     """Test the CLI with --help flag."""
     result = runner.invoke(app, ["--help"])

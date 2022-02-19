@@ -71,7 +71,7 @@ def load_ipython_extension(ipython: InteractiveShell):
 
 ipython_banner_parts = default_banner_parts[:-1].copy()
 ipython_banner_parts.append(
-    f"reprexlite {__version__} -- Interactive editor via IPython {ipython_version}."
+    f"reprexlite {__version__} -- Interactive reprex editor via IPython {ipython_version}."
 )
 
 
