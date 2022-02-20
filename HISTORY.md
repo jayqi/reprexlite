@@ -1,6 +1,6 @@
 # reprexlite Changelog
 
-## v0.5.0 (Unreleased)
+## v0.5.0 (2020-02-20)
 
 - Added experimental IPython interactive editor which can be launched via command line with `reprex --ipython`. This modified IPython editor will run every cell automatically as a reprex.
 
