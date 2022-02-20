@@ -1,16 +1,20 @@
 from textwrap import dedent
 
-from IPython.testing.globalipapp import get_ipython
+from IPython.terminal.interactiveshell import TerminalInteractiveShell
+from IPython.testing import globalipapp
 import pytest
 
 from reprexlite import reprex
 
 
-@pytest.fixture(scope="module")
-def ipython():
-    ipython = get_ipython()
+@pytest.fixture()
+def ipython(monkeypatch):
+    monkeypatch.setattr(TerminalInteractiveShell, "_instance", None)
+    ipython = globalipapp.start_ipython()
     ipython.magic("load_ext reprexlite")
-    return ipython
+    yield ipython
+    ipython.run_cell("exit")
+    del globalipapp.start_ipython.already_called
 
 
 def test_line_magic(ipython, capsys):

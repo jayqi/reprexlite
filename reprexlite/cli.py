@@ -17,6 +17,18 @@ def version_callback(version: bool):
         raise typer.Exit()
 
 
+def ipython_callback(ipython: bool):
+    """Launch IPython-based interactive editor."""
+    if ipython:
+        try:
+            from reprexlite.ipython import ReprexTerminalIPythonApp
+        except ModuleNotFoundError:
+            typer.echo("ipython is required to be installed to use IPython interactive editor.")
+            raise typer.Exit(code=1)
+        ReprexTerminalIPythonApp.launch_instance(argv=[])
+        raise typer.Exit()
+
+
 @app.command()
 def main(
     infile: Optional[Path] = typer.Option(
@@ -54,6 +66,16 @@ def main(
             "Keep old results, i.e., lines that match the prefix specified by the --comment "
             "option. If not using this option, then such lines are removed, meaning that an input "
             "that is a reprex will be effectively regenerated."
+        ),
+    ),
+    ipython: Optional[bool] = typer.Option(
+        None,
+        "--ipython",
+        callback=ipython_callback,
+        is_eager=True,
+        help=(
+            "[experimental] Launch interactive IPython editor where all cells are automatically "
+            "run as reprexes. Currently only supports default options. Requires IPython."
         ),
     ),
     version: Optional[bool] = typer.Option(
