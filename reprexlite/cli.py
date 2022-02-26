@@ -1,10 +1,12 @@
+from enum import Enum
 from pathlib import Path
 from typing import Optional
 
 import typer
 
-from reprexlite.formatting import Venue
-from reprexlite.reprex import reprex
+from reprexlite.config import ParsingMethod, ReprexConfig
+from reprexlite.formatting import venues_dispatcher
+from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
 
 app = typer.Typer()
@@ -29,6 +31,10 @@ def ipython_callback(ipython: bool):
         raise typer.Exit()
 
 
+Venue = Enum("Venue", names={v.upper(): v for v in venues_dispatcher.keys()}, type=str)  # type: ignore
+Venue.__doc__ = """Enum for valid venue options."""
+
+
 @app.command()
 def main(
     infile: Optional[Path] = typer.Option(
@@ -37,29 +43,36 @@ def main(
     outfile: Optional[Path] = typer.Option(
         None, "--outfile", "-o", help="Write output to file instead of printing to console."
     ),
+    # Formatting
     venue: Venue = typer.Option(
         "gh",
         "--venue",
         "-v",
-        help="Output format appropriate to the venue where you plan to share this code.",
+        help="",
     ),
     advertise: Optional[bool] = typer.Option(
         None,
-        help="Whether to include footer that credits reprexlite. "
-        "If unspecified, will depend on specified venue's default.",
+        help="",
     ),
     session_info: Optional[bool] = typer.Option(
         None,
         "--session-info",
-        help="Whether to include details about session and installed packages.",
+        help="",
     ),
-    style: Optional[bool] = typer.Option(
-        None, "--style", help="Autoformat code with black. Requires black to be installed."
+    style: Optional[bool] = typer.Option(None, "--style", help=""),
+    prompt: str = typer.Option("", help=""),
+    continuation: str = typer.Option(
+        "", help="Comment prefix to use for results returned by expressions."
     ),
     comment: str = typer.Option(
-        "#>", "--comment", help="Comment prefix to use for results returned by expressions."
+        "#>", help="Comment prefix to use for results returned by expressions."
     ),
-    old_results: Optional[bool] = typer.Option(
+    # Parsing
+    parsing_method: ParsingMethod = "auto",
+    input_prompt: Optional[str] = typer.Option(None),
+    input_continuation: Optional[str] = typer.Option(None),
+    input_comment: Optional[str] = typer.Option(None),
+    keep_old_results: Optional[bool] = typer.Option(
         None,
         "--old-results",
         help=(
@@ -68,6 +81,7 @@ def main(
             "that is a reprex will be effectively regenerated."
         ),
     ),
+    # Callbacks
     ipython: Optional[bool] = typer.Option(
         None,
         "--ipython",
@@ -126,20 +140,26 @@ def main(
     else:
         input = typer.edit() or ""
 
-    rendered = reprex(
-        input,
-        outfile=outfile,
+    config = ReprexConfig(
         venue=venue.value,
         advertise=advertise,
-        session_info=session_info if session_info else False,
-        style=style if style else False,
+        session_info=session_info or False,
+        style=style or False,
+        prompt=prompt,
+        continuation=continuation,
         comment=comment,
-        old_results=old_results if old_results else False,
-        print_=False,
-        terminal=True,
+        parsing_method=parsing_method.value,
+        input_prompt=input_prompt,
+        input_continuation=input_continuation,
+        input_comment=input_comment,
+        keep_old_results=keep_old_results or False,
     )
 
+    reprex = Reprex.from_input(input=input, config=config).evaluate()
+
     if outfile:
+        with outfile.open("w") as fp:
+            fp.write(reprex.format(terminal=False) + "\n")
         typer.echo(f"Wrote reprex to {outfile}")
     else:
-        typer.echo(str(rendered) + "\n")
+        typer.echo(reprex.format(terminal=True) + "\n")

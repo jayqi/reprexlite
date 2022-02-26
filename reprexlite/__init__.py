@@ -1,4 +1,4 @@
-from reprexlite.reprex import reprex
+from reprexlite.reprexes import Reprex, ReprexConfig, reprex
 from reprexlite.version import __version__  # noqa: F401
 
 try:
@@ -7,5 +7,7 @@ except ImportError:
     pass
 
 __all__ = [
+    "Reprex",
+    "ReprexConfig",
     "reprex",
 ]
