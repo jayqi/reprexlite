@@ -1,3 +1,5 @@
+"""This script generates expected reprex test assets."""
+
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
