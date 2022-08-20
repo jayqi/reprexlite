@@ -31,6 +31,7 @@ class RawResult(BaseResult):
     pretty-formatted comment block representation of the result.
 
     Attributes:
+        config (ReprexConfig): Configuration for formatting and parsing
         raw (Any): Some Python object that is the raw return value of evaluated Python code.
         stdout (str): Standard output from evaluated Python code.
     """
@@ -59,7 +60,14 @@ class RawResult(BaseResult):
 
 
 @dataclass
-class StrResult(BaseResult):
+class ParsedResult(BaseResult):
+    """Class that holds parsed result from reading a reprex.
+
+    Attributes:
+        config (ReprexConfig): Configuration for formatting and parsing
+        lines (List[str]): String content of result parsed from a reprex
+    """
+
     lines: List[str]
 
     def __str__(self) -> str:
@@ -74,7 +82,7 @@ class StrResult(BaseResult):
 
     def __repr__(self) -> str:
         joined = "\n".join(self.lines)
-        return f"<StrResult '{to_snippet(joined, 10)}'>"
+        return f"<ParsedResult '{to_snippet(joined, 10)}'>"
 
 
 @dataclass
@@ -140,7 +148,7 @@ class Statement:
 
     @property
     def raw_code(self):
-        return cst.Module(body=[self.stmt]).code.strip()
+        return cst.Module(body=[self.stmt]).code.rstrip()
 
     @property
     def code(self):
@@ -175,7 +183,7 @@ class Statement:
                         primary_found = True
                     else:
                         out += f"{self.config.continuation} " + line + "\n"
-        return out.strip()
+        return out.rstrip()
 
     def __bool__(self):
         return True
@@ -239,7 +247,7 @@ class Reprex:
             if line_type is LineType.CODE:
                 # Flush results
                 if current_result_block:
-                    results += [StrResult(config=config, lines=current_result_block)]
+                    results += [ParsedResult(config=config, lines=current_result_block)]
                     current_result_block = []
                 # Append line to current code
                 current_code_block.append(line_content)
@@ -272,7 +280,7 @@ class Reprex:
         # Flush results
         if current_result_block:
             # Create result
-            results += [StrResult(config=config, lines=current_result_block)]
+            results += [ParsedResult(config=config, lines=current_result_block)]
             # Result current result block
             current_result_block = []
         # Pad results to equal length
@@ -334,7 +342,6 @@ def to_snippet(s: str, n: int):
 def reprex(
     input: str,
     outfile: Optional[Path] = None,
-    venue="gh",
     print_=True,
     terminal=False,
     **kwargs,
@@ -390,11 +397,10 @@ def reprex(
         Instance of a `Reprex` concrete subclass for `venue`.
     """
 
-    if venue in ["html", "rtf"]:
+    config = ReprexConfig(**kwargs)
+    if config.venue in ["html", "rtf"]:
         # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
-
-    config = ReprexConfig(**kwargs)
     reprex = Reprex.from_input(input, config=config).evaluate()
     formatted_reprex = reprex.format(terminal=terminal)
     if outfile is not None:
