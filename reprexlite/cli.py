@@ -155,7 +155,7 @@ def main(
         keep_old_results=keep_old_results or False,
     )
 
-    reprex = Reprex.from_input(input=input, config=config).evaluate()
+    reprex = Reprex.from_input(input=input, config=config).to_evaluated()
 
     if outfile:
         with outfile.open("w") as fp:

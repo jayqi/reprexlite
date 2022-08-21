@@ -7,7 +7,7 @@ from itertools import chain
 from pathlib import Path
 from pprint import pformat
 import traceback
-from typing import Any, List, Optional, Sequence, Tuple, Union
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 import libcst as cst
 
@@ -141,10 +141,10 @@ class Statement:
         finally:
             stdout_io.close()
 
-        if result or stdout:
-            return RawResult(config=self.config, raw=result, stdout=stdout)
-        else:
+        if (result is NO_RAW_VALUE or result is None) and not stdout:
             return NullResult(config=config)
+        else:
+            return RawResult(config=self.config, raw=result, stdout=stdout)
 
     @property
     def raw_code(self):
@@ -211,6 +211,7 @@ class Reprex:
     config: ReprexConfig
     statements: List[Statement]
     results: List[Union[BaseResult, NullResult]]
+    scope: Optional[Dict[str, Any]] = None
 
     def __post_init__(self):
         if len(self.statements) != len(self.results):
@@ -287,14 +288,14 @@ class Reprex:
         results += [NullResult(config=config)] * (len(statements) - len(results))
         return cls(config=config, statements=statements, results=results)
 
-    def evaluate(self, scope: Optional[dict] = None):
+    def to_evaluated(self, scope: Optional[Dict[str, Any]] = None) -> "Reprex":
         if scope is None:
-            scope = {}
+            self.scope = {}
         statements = [copy(statement) for statement in self.statements]
         if self.config.keep_old_results:
             pass
-        results = [statement.evaluate(scope=scope) for statement in statements]
-        return type(self)(config=self.config, statements=statements, results=results)
+        results = [statement.evaluate(scope=self.scope) for statement in statements]
+        return type(self)(config=self.config, statements=statements, results=results, scope=scope)
 
     def __str__(self) -> str:
         return "\n".join(
@@ -347,13 +348,13 @@ def reprex(
     **kwargs,
 ) -> Reprex:
     """Render reproducible examples of Python code for sharing. This function will evaluate your
-    code and returns an instance of a [`Reprex`][reprexlite.formatting.Reprex] subclass. Calling
-    `str(...)` on the `Reprex` object will return your code with the evaluated results embedded
-    as comments, plus additional markup appropriate to the sharing venue set by the `venue` keyword
-    argument.
+    code and, by default, print out your code with the evaluated results embedded as comments,
+    along with additional markup appropriate to the sharing venue set by the `venue` keyword
+    argument. The function returns an instance of [`Reprex`][reprexlite.reprexes.Reprex] which
+    holds the relevant data.
 
-    For example, for the `gh` venue for GitHub Flavored Markdown, you'll get a reprex whose string
-    representation looks like:
+    For example, for the `gh` venue for GitHub Flavored Markdown, you'll get a reprex whose
+    formatted output looks like:
 
     ````
     ```python
@@ -394,14 +395,14 @@ def reprex(
             Requires optional dependency Pygments. Defaults to False.
 
     Returns:
-        Instance of a `Reprex` concrete subclass for `venue`.
+        Instance of `Reprex`
     """
 
     config = ReprexConfig(**kwargs)
     if config.venue in ["html", "rtf"]:
         # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
-    reprex = Reprex.from_input(input, config=config).evaluate()
+    reprex = Reprex.from_input(input, config=config).to_evaluated()
     formatted_reprex = reprex.format(terminal=terminal)
     if outfile is not None:
         with outfile.open("w") as fp:
