@@ -1,6 +1,7 @@
 from contextlib import redirect_stdout
 from copy import copy
 from dataclasses import dataclass
+from dataclasses import replace as dataclass_replace
 from distutils.command.config import config
 from io import StringIO
 from itertools import chain
@@ -293,7 +294,20 @@ class Reprex:
             self.scope = {}
         statements = [copy(statement) for statement in self.statements]
         if self.config.keep_old_results:
-            pass
+            if self.config.comment:
+                prefix = self.config.comment + " "
+            else:
+                prefix = "#> "
+            for idx, result in enumerate(self.results):
+                if not isinstance(result, NullResult):
+                    this_statement = statements[idx]
+                    new_trailing = dataclass_replace(
+                        this_statement.stmt.trailing_whitespace,
+                        comment=cst.Comment(prefix + str(result)),
+                    )
+                    this_statement = dataclass_replace(
+                        this_statement.stmt, trailing_whitespace=new_trailing
+                    )
         results = [statement.evaluate(scope=self.scope) for statement in statements]
         return type(self)(config=self.config, statements=statements, results=results, scope=scope)
 

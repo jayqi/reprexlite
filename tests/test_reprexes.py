@@ -3,6 +3,7 @@ from textwrap import dedent
 
 import pytest
 
+from reprexlite.config import ReprexConfig
 from reprexlite.reprexes import Reprex
 
 Case = namedtuple("Case", ["id", "input", "expected"])
@@ -215,7 +216,7 @@ def test_reprex_from_input(case):
     print("\n---ACTUAL 1-----\n")
     print(str(r))
     print("\n---ACTUAL 2-----\n")
-    print(str(r))
+    print(str(rr))
     print("\n--------------\n")
 
     assert str(r) == dedent(case.expected.rstrip())
@@ -223,4 +224,29 @@ def test_reprex_from_input(case):
 
 
 def test_keep_old_results():
-    pass
+    input = dedent(
+        """\
+        2+2
+        #> 4
+
+        "a" + "b"
+        #> 'ab'
+        """
+    )
+    expected = dedent(
+        """\
+        2+2
+        #> #> 4
+
+        "a" + "b"
+        #> #> 'ab'
+        """
+    )
+    r = Reprex.from_input(input, config=ReprexConfig(keep_old_results=True)).to_evaluated()
+    print("\n---EXPECTED---\n")
+    print(expected)
+    print("\n---ACTUAL-----\n")
+    print(str(r))
+    print("\n--------------\n")
+
+    assert str(r) == expected
