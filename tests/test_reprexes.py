@@ -208,19 +208,28 @@ cases = [
 
 @pytest.mark.parametrize("case", cases, ids=(c.id for c in cases))
 def test_reprex_from_input(case):
-    r = Reprex.from_input(dedent(case.input)).to_evaluated()
-    rr = r.to_evaluated()  # Evaluation should be idempotent with default configuration
+    r = Reprex.from_input(dedent(case.input))
 
     print("\n---EXPECTED---\n")
     print(dedent(case.expected))
-    print("\n---ACTUAL 1-----\n")
+    print("\n---ACTUAL-----\n")
     print(str(r))
-    print("\n---ACTUAL 2-----\n")
-    print(str(rr))
     print("\n--------------\n")
 
     assert str(r) == dedent(case.expected.rstrip())
-    assert str(rr) == dedent(case.expected.rstrip())
+
+
+@pytest.mark.parametrize("case", cases, ids=(c.id for c in cases))
+def test_reprex_from_input_with_old_results(case):
+    r = Reprex.from_input(dedent(case.expected))
+
+    print("\n---EXPECTED---\n")
+    print(dedent(case.expected))
+    print("\n---ACTUAL-----\n")
+    print(str(r))
+    print("\n--------------\n")
+
+    assert r.results_match()
 
 
 def test_keep_old_results():
@@ -237,12 +246,15 @@ def test_keep_old_results():
         """\
         2+2
         #> #> 4
+        #> 4
 
         "a" + "b"
         #> #> 'ab'
+        #> 'ab'
         """
     )
-    r = Reprex.from_input(input, config=ReprexConfig(keep_old_results=True)).to_evaluated()
+    r = Reprex.from_input(input, config=ReprexConfig(keep_old_results=True))
+    assert r.results_match()
     print("\n---EXPECTED---\n")
     print(expected)
     print("\n---ACTUAL-----\n")

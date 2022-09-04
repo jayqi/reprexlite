@@ -1,7 +1,5 @@
 from contextlib import redirect_stdout
-from copy import copy
 from dataclasses import dataclass
-from dataclasses import replace as dataclass_replace
 from distutils.command.config import config
 from io import StringIO
 from itertools import chain
@@ -22,12 +20,7 @@ expressions)."""
 
 
 @dataclass
-class BaseResult:
-    config: ReprexConfig
-
-
-@dataclass
-class RawResult(BaseResult):
+class RawResult:
     """Class that holds the result of evaluated code. Use `str(...)` on an instance to produce a
     pretty-formatted comment block representation of the result.
 
@@ -37,6 +30,7 @@ class RawResult(BaseResult):
         stdout (str): Standard output from evaluated Python code.
     """
 
+    config: ReprexConfig
     raw: Any = NO_RAW_VALUE
     stdout: Optional[str] = None
 
@@ -59,9 +53,17 @@ class RawResult(BaseResult):
     def __repr__(self) -> str:
         return f"<RawResult '{to_snippet(str(self.raw), 10)}'>"
 
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, RawResult):
+            return self.raw == other.raw and self.stdout == other.stdout
+        elif isinstance(other, ParsedResult):
+            return str(self) == other.as_result_str()
+        else:
+            return False
+
 
 @dataclass
-class ParsedResult(BaseResult):
+class ParsedResult:
     """Class that holds parsed result from reading a reprex.
 
     Attributes:
@@ -69,14 +71,21 @@ class ParsedResult(BaseResult):
         lines (List[str]): String content of result parsed from a reprex
     """
 
+    config: ReprexConfig
     lines: List[str]
 
     def __str__(self) -> str:
+        return "\n".join(self.prefix * 2 + line for line in self.lines)
+
+    def as_result_str(self) -> str:
+        return "\n".join(self.prefix + line for line in self.lines)
+
+    @property
+    def prefix(self) -> str:
         if self.config.comment:
-            prefix = self.config.comment + " "
+            return self.config.comment + " "
         else:
-            prefix = ""
-        return "\n".join(prefix + line for line in self.lines)
+            return ""
 
     def __bool__(self) -> bool:
         return bool(self.lines)
@@ -85,9 +94,19 @@ class ParsedResult(BaseResult):
         joined = "\n".join(self.lines)
         return f"<ParsedResult '{to_snippet(joined, 10)}'>"
 
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, ParsedResult):
+            return self.lines == other.lines
+        elif isinstance(other, RawResult):
+            return self.as_result_str() == str(other)
+        else:
+            return False
+
 
 @dataclass
-class NullResult(BaseResult):
+class NullResult:
+    config: ReprexConfig
+
     def __str__(self) -> str:
         raise NotImplementedError
 
@@ -95,7 +114,13 @@ class NullResult(BaseResult):
         return False
 
     def __repr__(self) -> str:
-        return "<NullResultt>"
+        return "<NullResult>"
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, NullResult):
+            return True
+        else:
+            return False
 
 
 @dataclass
@@ -211,15 +236,21 @@ class Reprex:
 
     config: ReprexConfig
     statements: List[Statement]
-    results: List[Union[BaseResult, NullResult]]
-    scope: Optional[Dict[str, Any]] = None
+    results: List[Union[RawResult, NullResult]]
+    old_results: List[ParsedResult]
+    scope: Dict[str, Any]
 
     def __post_init__(self):
-        if len(self.statements) != len(self.results):
+        if len(self.statements) != len(self.results) != len(self.results):
             raise Exception
 
     @classmethod
-    def from_input(cls, input: str, config=None):
+    def from_input(
+        cls,
+        input: str,
+        config: Optional[ReprexConfig] = None,
+        scope: Optional[Dict[str, Any]] = None,
+    ):
         if config is None:
             config = ReprexConfig()
         if config.parsing_method == ParsingMethod.AUTO:
@@ -235,21 +266,26 @@ class Reprex:
             )
         else:
             raise Exception
-        return cls.from_input_lines(lines, config=config)
+        return cls.from_input_lines(lines, config=config, scope=scope)
 
     @classmethod
-    def from_input_lines(cls, lines: Sequence[Tuple[str, LineType]], config=None):
+    def from_input_lines(
+        cls,
+        lines: Sequence[Tuple[str, LineType]],
+        config: Optional[ReprexConfig] = None,
+        scope: Optional[Dict[str, Any]] = None,
+    ):
         if config is None:
             config = ReprexConfig()
         statements = []
-        results = []
+        old_results = []
         current_code_block = []
         current_result_block = []
         for line_content, line_type in lines:
             if line_type is LineType.CODE:
                 # Flush results
                 if current_result_block:
-                    results += [ParsedResult(config=config, lines=current_result_block)]
+                    old_results += [ParsedResult(config=config, lines=current_result_block)]
                     current_result_block = []
                 # Append line to current code
                 current_code_block.append(line_content)
@@ -258,63 +294,63 @@ class Reprex:
                 if current_code_block:
                     # Parse code and create Statements
                     tree: cst.Module = cst.parse_module("\n".join(current_code_block))
-                    statements += [Statement(config=config, stmt=stmt) for stmt in tree.header]
-                    statements += [Statement(config=config, stmt=stmt) for stmt in tree.body]
-                    statements += [Statement(config=config, stmt=stmt) for stmt in tree.footer]
+                    new_statements = (
+                        [Statement(config=config, stmt=stmt) for stmt in tree.header]
+                        + [Statement(config=config, stmt=stmt) for stmt in tree.body]
+                        + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
+                    )
+                    statements += new_statements
                     # Pad results with NullResults
-                    results += [NullResult(config=config)] * (len(tree.body) - 1)
+                    old_results += [NullResult(config=config)] * (len(new_statements) - 1)
                     # Reset current code block
                     current_code_block = []
                 # Append line to current results
                 current_result_block.append(line_content)
         # Flush code
         if current_code_block:
-            # Parse code and create Statements
-            tree: cst.Module = cst.parse_module("\n".join(current_code_block))
-            new_statements = (
-                [Statement(config=config, stmt=stmt) for stmt in tree.header]
-                + [Statement(config=config, stmt=stmt) for stmt in tree.body]
-                + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
-            )
-            statements += new_statements
+            if all(not line for line in current_code_block):
+                # Case where all lines are whitespace
+                new_statements = tuple(
+                    Statement(config=config, stmt=cst.EmptyLine()) for _ in current_code_block
+                )
+            else:
+                # Parse code and create Statements
+                tree: cst.Module = cst.parse_module("\n".join(current_code_block))
+                new_statements = (
+                    [Statement(config=config, stmt=stmt) for stmt in tree.header]
+                    + [Statement(config=config, stmt=stmt) for stmt in tree.body]
+                    + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
+                )
             # Pad results with NullResults
-            results += [NullResult(config=config)] * (len(new_statements) - 1)
+            statements += new_statements
+            old_results += [NullResult(config=config)] * (len(new_statements) - 1)
         # Flush results
         if current_result_block:
             # Create result
-            results += [ParsedResult(config=config, lines=current_result_block)]
+            old_results += [ParsedResult(config=config, lines=current_result_block)]
             # Result current result block
             current_result_block = []
         # Pad results to equal length
-        results += [NullResult(config=config)] * (len(statements) - len(results))
-        return cls(config=config, statements=statements, results=results)
+        old_results += [NullResult(config=config)] * (len(statements) - len(old_results))
 
-    def to_evaluated(self, scope: Optional[Dict[str, Any]] = None) -> "Reprex":
+        # Evaluate for new results
         if scope is None:
-            self.scope = {}
-        statements = [copy(statement) for statement in self.statements]
-        if self.config.keep_old_results:
-            if self.config.comment:
-                prefix = self.config.comment + " "
-            else:
-                prefix = "#> "
-            for idx, result in enumerate(self.results):
-                if not isinstance(result, NullResult):
-                    this_statement = statements[idx]
-                    new_trailing = dataclass_replace(
-                        this_statement.stmt.trailing_whitespace,
-                        comment=cst.Comment(prefix + str(result)),
-                    )
-                    this_statement = dataclass_replace(
-                        this_statement.stmt, trailing_whitespace=new_trailing
-                    )
-        results = [statement.evaluate(scope=self.scope) for statement in statements]
-        return type(self)(config=self.config, statements=statements, results=results, scope=scope)
+            scope = {}
+        results = [statement.evaluate(scope=scope) for statement in statements]
+        return cls(
+            config=config,
+            statements=statements,
+            results=results,
+            old_results=old_results,
+            scope=scope,
+        )
 
     def __str__(self) -> str:
-        return "\n".join(
-            str(line) for line in chain.from_iterable(zip(self.statements, self.results)) if line
-        ).strip()
+        if self.config.keep_old_results:
+            lines = chain.from_iterable(zip(self.statements, self.old_results, self.results))
+        else:
+            lines = chain.from_iterable(zip(self.statements, self.results))
+        return "\n".join(str(line) for line in lines if line)
 
     def format(self, terminal: bool = False):
         out = str(self)
@@ -345,6 +381,11 @@ class Reprex:
         except ImportError:
             out.append(f"<pre><code>{self.format()}</code></pre>")
         return "\n".join(out)
+
+    def results_match(self):
+        return all(
+            result == old_result for result, old_result in zip(self.results, self.old_results)
+        )
 
 
 def to_snippet(s: str, n: int):
