@@ -58,7 +58,7 @@ class ReprexMagics(Magics):
         # Cell magic, render reprex
         with patch_edit(cell):
             result = runner.invoke(reprexlite.cli.app, line.split())
-            print(result.stdout.strip() + "\n")
+            print(result.stdout, end="")
 
 
 def load_ipython_extension(ipython: InteractiveShell):

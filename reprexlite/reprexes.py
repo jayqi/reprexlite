@@ -457,11 +457,11 @@ def reprex(
     if config.venue in ["html", "rtf"]:
         # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
-    reprex = Reprex.from_input(input, config=config).to_evaluated()
+    reprex = Reprex.from_input(input, config=config)
     formatted_reprex = reprex.format(terminal=terminal)
     if outfile is not None:
         with outfile.open("w") as fp:
-            fp.write(reprex.format(terminal=False) + "\n")
+            fp.write(reprex.format(terminal=False))
     if print_:
         print(formatted_reprex)
     return formatted_reprex

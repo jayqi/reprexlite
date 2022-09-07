@@ -26,6 +26,10 @@ def test_ipython_editor(reprexlite_ipython, capsys):
     )
     reprexlite_ipython.run_cell(input)
     captured = capsys.readouterr()
+    expected = str(reprex(input, print_=False))
+    print("\n---EXPECTED---\n")
+    print(expected)
+    print("\n---ACTUAL-----\n")
     print(captured.out)
-    expected = str(reprex(input))
-    assert captured.out == expected + "\n\n"
+    print("\n--------------\n")
+    assert captured.out == expected

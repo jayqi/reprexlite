@@ -33,6 +33,14 @@ def test_cell_magic(ipython, capsys):
     )
     ipython.run_cell_magic("reprex", line="--no-advertise --session-info", cell=input)
     captured = capsys.readouterr()
+    expected = reprex(
+        input, advertise=False, session_info=True, print_=False, terminal=True
+    ).format()
+
+    print("\n---EXPECTED---\n")
+    print(expected)
+    print("\n---ACTUAL-----\n")
     print(captured.out)
-    expected = str(reprex(input, advertise=False, session_info=True, print_=False))
-    assert captured.out == expected + "\n\n"
+    print("\n--------------\n")
+
+    assert captured.out == expected

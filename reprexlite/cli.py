@@ -15,7 +15,7 @@ app = typer.Typer()
 def version_callback(version: bool):
     """Print reprexlite version to console."""
     if version:
-        typer.echo(__version__)
+        print(__version__)
         raise typer.Exit()
 
 
@@ -25,7 +25,7 @@ def ipython_callback(ipython: bool):
         try:
             from reprexlite.ipython import ReprexTerminalIPythonApp
         except ModuleNotFoundError:
-            typer.echo("ipython is required to be installed to use IPython interactive editor.")
+            print("ipython is required to be installed to use IPython interactive editor.")
             raise typer.Exit(code=1)
         ReprexTerminalIPythonApp.launch_instance(argv=[])
         raise typer.Exit()
@@ -155,11 +155,11 @@ def main(
         keep_old_results=keep_old_results or False,
     )
 
-    reprex = Reprex.from_input(input=input, config=config).to_evaluated()
+    reprex = Reprex.from_input(input=input, config=config)
 
     if outfile:
         with outfile.open("w") as fp:
-            fp.write(reprex.format(terminal=False) + "\n")
-        typer.echo(f"Wrote reprex to {outfile}")
+            fp.write(reprex.format(terminal=False))
+        print(f"Wrote reprex to {outfile}")
     else:
-        typer.echo(reprex.format(terminal=True) + "\n")
+        print(reprex.format(terminal=True), end="")
