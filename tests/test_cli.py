@@ -7,6 +7,7 @@ from typer.testing import CliRunner
 
 from reprexlite.cli import app
 from reprexlite.version import __version__
+from tests.utils import remove_ansi_escape
 
 runner = CliRunner()
 
@@ -43,7 +44,7 @@ def test_reprex(patch_edit):
     result = runner.invoke(app)
     print(result.stdout)
     assert result.exit_code == 0
-    assert EXPECTED in result.stdout
+    assert EXPECTED in remove_ansi_escape(result.stdout)
 
 
 def test_reprex_infile(tmp_path):
@@ -52,7 +53,7 @@ def test_reprex_infile(tmp_path):
         fp.write(INPUT)
     result = runner.invoke(app, ["-i", str(infile)])
     assert result.exit_code == 0
-    assert EXPECTED in result.stdout
+    assert EXPECTED in remove_ansi_escape(result.stdout)
 
 
 def test_reprex_outfile(patch_edit, tmp_path):

@@ -1,10 +1,9 @@
 import builtins
 import sys
-from textwrap import dedent
 
 import pytest
 
-from reprexlite.formatting import venues_dispatcher
+# from reprexlite.formatting import venues_dispatcher
 from reprexlite.reprexes import reprex
 from tests.expected_reprexes import (
     ASSETS_DIR,
@@ -14,6 +13,8 @@ from tests.expected_reprexes import (
     MockSessionInfo,
     expected_reprexes,
 )
+
+# from textwrap import dedent
 
 
 @pytest.fixture

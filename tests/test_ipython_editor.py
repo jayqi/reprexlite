@@ -5,6 +5,7 @@ import pytest
 
 from reprexlite import reprex
 from reprexlite.ipython import ReprexTerminalInteractiveShell
+from tests.utils import remove_ansi_escape
 
 
 @pytest.fixture()
@@ -32,4 +33,4 @@ def test_ipython_editor(reprexlite_ipython, capsys):
     print("\n---ACTUAL-----\n")
     print(captured.out)
     print("\n--------------\n")
-    assert captured.out == expected
+    assert remove_ansi_escape(captured.out) == expected
