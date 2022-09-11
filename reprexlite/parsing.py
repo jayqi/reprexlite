@@ -1,7 +1,11 @@
 from enum import Enum
 from typing import Iterator, Optional, Tuple
 
-from reprexlite.exceptions import InvalidInputPrefixes, PromptLengthMismatchError
+from reprexlite.exceptions import (
+    InvalidInputPrefixesError,
+    NoPrefixMatchError,
+    PromptLengthMismatchError,
+)
 
 
 def removeprefix(s: str, prefix: str):
@@ -25,7 +29,7 @@ def parse(
     comment: Optional[str],
 ) -> Iterator[Tuple[str, LineType]]:
     if not any([prompt, continuation, comment]):
-        raise InvalidInputPrefixes(
+        raise InvalidInputPrefixesError(
             "Cannot parse input if all of prompt, continuation, and comment are blank."
         )
     if len(prompt or "") != len(continuation or ""):
@@ -34,7 +38,7 @@ def parse(
             "equal lengths."
         )
 
-    for line in input.split("\n"):
+    for line_no, line in enumerate(input.split("\n")):
 
         # Case 1: With Prompt/Continuation, no Comment (e.g., doctest style)
         if prompt and not comment:
@@ -62,8 +66,13 @@ def parse(
                 yield removeprefix(line, continuation), LineType.CODE
             elif line.startswith(comment):
                 yield removeprefix(line, comment), LineType.RESULT
+            elif line == "":
+                yield line, LineType.CODE
             else:
-                raise Exception("Parsing error.")
+                raise NoPrefixMatchError(
+                    f"Line {line_no+1} does not match any of prompt, continuation, or comment "
+                    f"prefixes: '{line}'"
+                )
 
 
 def parse_reprex(input: str):

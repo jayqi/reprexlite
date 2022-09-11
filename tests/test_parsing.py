@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from reprexlite.parsing import LineType, auto_parse, parse_doctest, parse_reprex
+from reprexlite.parsing import LineType, auto_parse, parse, parse_doctest, parse_reprex
 
 
 def test_parse_reprex():
@@ -59,19 +59,19 @@ def test_parse_doctest():
     assert actual == expected
 
 
-def test_auto_parse():
+def test_parse_with_both_prompt_and_comment():
     input = """\
-    import math
-
-    def sqrt(x):
-        return math.sqrt(x)
-
-    # Here's a comment
-    sqrt(4)
+    >>> import math
+    >>>
+    >>> def sqrt(x):
+    ...     return math.sqrt(x)
+    ...
+    >>> # Here's a comment
+    >>> sqrt(4)
     #> 2.0
     """
 
-    actual = list(auto_parse(dedent(input)))
+    actual = list(parse(dedent(input), prompt=">>>", continuation="...", comment="#>"))
     expected = [
         ("import math", LineType.CODE),
         ("", LineType.CODE),
@@ -85,3 +85,45 @@ def test_auto_parse():
     ]
 
     assert actual == expected
+
+
+def test_auto_parse():
+    input_reprex = """\
+    import math
+
+    def sqrt(x):
+        return math.sqrt(x)
+
+    # Here's a comment
+    sqrt(4)
+    #> 2.0
+    """
+
+    input_doctest = """\
+    >>> import math
+    >>>
+    >>> def sqrt(x):
+    ...     return math.sqrt(x)
+    ...
+    >>> # Here's a comment
+    >>> sqrt(4)
+    2.0
+    """
+
+    expected = [
+        ("import math", LineType.CODE),
+        ("", LineType.CODE),
+        ("def sqrt(x):", LineType.CODE),
+        ("    return math.sqrt(x)", LineType.CODE),
+        ("", LineType.CODE),
+        ("# Here's a comment", LineType.CODE),
+        ("sqrt(4)", LineType.CODE),
+        ("2.0", LineType.RESULT),
+        ("", LineType.CODE),
+    ]
+
+    actual_reprex = list(auto_parse(dedent(input_reprex)))
+    assert actual_reprex == expected
+
+    actual_doctest = list(auto_parse(dedent(input_doctest)))
+    assert actual_doctest == expected

@@ -2,7 +2,7 @@ class ReprexliteException(Exception):
     """Base class for reprexlite exceptions."""
 
 
-class InvalidInputPrefixes(ValueError, ReprexliteException):
+class InvalidInputPrefixesError(ValueError, ReprexliteException):
     pass
 
 
@@ -11,4 +11,8 @@ class MissingDependencyError(ImportError, ReprexliteException):
 
 
 class PromptLengthMismatchError(ReprexliteException):
+    pass
+
+
+class NoPrefixMatchError(ValueError, ReprexliteException):
     pass
