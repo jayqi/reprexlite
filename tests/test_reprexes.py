@@ -208,6 +208,7 @@ cases = [
 
 @pytest.mark.parametrize("case", cases, ids=(c.id for c in cases))
 def test_reprex_from_input(case):
+    """Test that Reprex.from_input parses inputs as expected and evaluates to correct results."""
     r = Reprex.from_input(dedent(case.input))
 
     print("\n---EXPECTED---\n")
@@ -221,6 +222,7 @@ def test_reprex_from_input(case):
 
 @pytest.mark.parametrize("case", cases, ids=(c.id for c in cases))
 def test_reprex_from_input_with_old_results(case):
+    """Test that Reprex.from_input parses inputs with old results as expected."""
     r = Reprex.from_input(dedent(case.expected))
 
     print("\n---EXPECTED---\n")
@@ -233,6 +235,7 @@ def test_reprex_from_input_with_old_results(case):
 
 
 def test_keep_old_results():
+    """Test that Reprex output with old results is as expected."""
     input = dedent(
         """\
         2+2
