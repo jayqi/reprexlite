@@ -4,7 +4,7 @@ from typing import Optional
 
 import typer
 
-from reprexlite.config import ParsingMethod, ReprexConfig
+from reprexlite.config import CONFIG_DOCS, ParsingMethod, ReprexConfig
 from reprexlite.formatting import venues_dispatcher
 from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
@@ -48,38 +48,23 @@ def main(
         "gh",
         "--venue",
         "-v",
-        help="",
+        help=CONFIG_DOCS["venue"],
     ),
-    advertise: Optional[bool] = typer.Option(
-        None,
-        help="",
-    ),
+    advertise: Optional[bool] = typer.Option(None, help=CONFIG_DOCS["advertise"]),
     session_info: Optional[bool] = typer.Option(
-        None,
-        "--session-info",
-        help="",
+        None, "--session-info", help=CONFIG_DOCS["session_info"]
     ),
-    style: Optional[bool] = typer.Option(None, "--style", help=""),
-    prompt: str = typer.Option("", help=""),
-    continuation: str = typer.Option(
-        "", help="Comment prefix to use for results returned by expressions."
-    ),
-    comment: str = typer.Option(
-        "#>", help="Comment prefix to use for results returned by expressions."
-    ),
+    style: Optional[bool] = typer.Option(None, "--style", help=CONFIG_DOCS["style"]),
+    prompt: str = typer.Option("", help=CONFIG_DOCS["prompt"]),
+    continuation: str = typer.Option("", help=CONFIG_DOCS["continuation"]),
+    comment: str = typer.Option("#>", help=CONFIG_DOCS["comment"]),
     # Parsing
-    parsing_method: ParsingMethod = "auto",
-    input_prompt: Optional[str] = typer.Option(None),
-    input_continuation: Optional[str] = typer.Option(None),
-    input_comment: Optional[str] = typer.Option(None),
+    parsing_method: ParsingMethod = typer.Option("auto", help=CONFIG_DOCS["parsing_method"]),
+    input_prompt: Optional[str] = typer.Option(None, help=CONFIG_DOCS["input_prompt"]),
+    input_continuation: Optional[str] = typer.Option(None, help=CONFIG_DOCS["input_continuation"]),
+    input_comment: Optional[str] = typer.Option(None, help=CONFIG_DOCS["input_comment"]),
     keep_old_results: Optional[bool] = typer.Option(
-        None,
-        "--old-results",
-        help=(
-            "Keep old results, i.e., lines that match the prefix specified by the --comment "
-            "option. If not using this option, then such lines are removed, meaning that an input "
-            "that is a reprex will be effectively regenerated."
-        ),
+        None, "--keep-old-results", help=CONFIG_DOCS["keep_old_results"]
     ),
     # Callbacks
     ipython: Optional[bool] = typer.Option(
@@ -120,7 +105,7 @@ def main(
     #> 4
     ```
     \b
-    <sup>Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.1</sup>
+    <sup>Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v{{version}}</sup>
     ----------------------------------------
 
     \b
@@ -163,3 +148,6 @@ def main(
         print(f"Wrote reprex to {outfile}")
     else:
         print(reprex.format(terminal=True), end="")
+
+
+main.__doc__ = main.__doc__.replace("{{version}}", __version__)

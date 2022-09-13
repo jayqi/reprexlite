@@ -10,9 +10,10 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 import libcst as cst
 
-from reprexlite.config import ParsingMethod, ReprexConfig
+from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
 from reprexlite.formatting import venues_dispatcher
 from reprexlite.parsing import LineType, auto_parse, parse
+from reprexlite.version import __version__
 
 NO_RAW_VALUE = object()
 """Explicit placeholder object for results of statements, which have no return value (as opposed to
@@ -418,7 +419,7 @@ def reprex(
     #> 4
     ```
 
-    <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.1.0</sup>
+    <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v{{version}}</sup>
     ````
 
     The supported `venue` formats are:
@@ -432,22 +433,7 @@ def reprex(
     - `slack` : Slack
 
     Args:
-        input (str): Block of Python code
-        outfile (Optional[Path]): Optional file path to write reprex to. Defaults to None.
-        venue (str): Determines the output format by the venue you want to share the code. Defaults
-            to "gh" for GitHub Flavored Markdown.
-        advertise (Optional[bool]): Whether to include a note that links back to the reprexlite
-            package. Default `None` will use the default set by choice of `venue`.
-        session_info (bool): Whether to include additional details about your Python version,
-            operating system, and installed packages. Defaults to False.
-        style (bool): Whether to autoformat your code with black. Defaults to False.
-        comment (str): Line prefix to use for displaying evaluated results. Defaults to "#>".
-        old_results (bool): Whether to keep old results, i.e., comment lines in input that match
-            the `comment` prefix. False means these lines are removed, in effect meaning an
-            inputted regex will have its results regenerated. Defaults to False.
-        print_ (bool): Whether to print your reprex to console. Defaults to True.
-        terminal (bool): Whether to use syntax highlighting for 256-color terminal display.
-            Requires optional dependency Pygments. Defaults to False.
+    {{args}}
 
     Returns:
         Instance of `Reprex`
@@ -465,3 +451,8 @@ def reprex(
     if print_:
         print(formatted_reprex)
     return formatted_reprex
+
+
+reprex.__doc__ = reprex.__doc__.replace("{{version}}", __version__).replace(
+    "{{args}}", format_args_google_style()
+)

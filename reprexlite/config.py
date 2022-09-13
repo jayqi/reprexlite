@@ -1,12 +1,13 @@
-from dataclasses import dataclass
+import dataclasses
 from enum import Enum
+import textwrap
 from typing import Optional
 
 from reprexlite.exceptions import PromptLengthMismatchError
 from reprexlite.formatting import venues_dispatcher
 
 
-@dataclass
+@dataclasses.dataclass
 class ReprexConfig:
     # Formatting
     venue: str = "gh"
@@ -58,12 +59,17 @@ class ReprexConfig:
         return self.comment
 
 
-_config_docs = {
+class ParsingMethod(str, Enum):
+    AUTO = "auto"
+    DECLARED = "declared"
+
+
+CONFIG_DOCS = {
     # Formatting
     "venue": "Output format appropriate to the venue where you plan to share this code.",
     "advertise": (
-        "Whether to include footer that credits reprexlite. ",
-        "If unspecified, will depend on specified venue's default.",
+        "Whether to include footer that credits reprexlite. "
+        "If unspecified, will depend on specified venue's default."
     ),
     "session_info": "Include details about session and installed packages.",
     "style": "Autoformat code with black. Requires black to be installed.",
@@ -93,6 +99,20 @@ _config_docs = {
 }
 
 
-class ParsingMethod(str, Enum):
-    AUTO = "auto"
-    DECLARED = "declared"
+def format_args_google_style():
+    docs = []
+    for field in dataclasses.fields(ReprexConfig):
+        field_name = field.name
+        try:
+            field_type = field.type.__name__
+        except AttributeError:
+            field_type = str(field.type)
+        docs.extend(
+            textwrap.wrap(
+                f"{field_name} ({field_type}): {CONFIG_DOCS[field_name]}",
+                width=99,
+                initial_indent=" " * 8,
+                subsequent_indent=" " * 12,
+            )
+        )
+    return "\n".join(docs)[4:]

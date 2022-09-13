@@ -28,7 +28,7 @@ def parse(
     continuation: Optional[str],
     comment: Optional[str],
 ) -> Iterator[Tuple[str, LineType]]:
-    if not any([prompt, continuation, comment]):
+    if not any((prompt, continuation, comment)):
         raise InvalidInputPrefixesError(
             "Cannot parse input if all of prompt, continuation, and comment are blank."
         )

@@ -1,5 +1,8 @@
 from textwrap import dedent
 
+import pytest
+
+from reprexlite.exceptions import InvalidInputPrefixesError
 from reprexlite.parsing import LineType, auto_parse, parse, parse_doctest, parse_reprex
 
 
@@ -85,6 +88,14 @@ def test_parse_with_both_prompt_and_comment():
     ]
 
     assert actual == expected
+
+
+def test_parse_all_blank_prefixes():
+    input = """\
+    2+2
+    """
+    with pytest.raises(InvalidInputPrefixesError):
+        list(parse(dedent(input), prompt=None, continuation=None, comment=None))
 
 
 def test_auto_parse():
