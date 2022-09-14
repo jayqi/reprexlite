@@ -150,4 +150,5 @@ def main(
         print(reprex.format(terminal=True), end="")
 
 
-main.__doc__ = main.__doc__.replace("{{version}}", __version__)
+if main.__doc__:
+    main.__doc__ = main.__doc__.replace("{{version}}", __version__)

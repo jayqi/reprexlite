@@ -41,7 +41,7 @@ def parse(
     for line_no, line in enumerate(input.split("\n")):
 
         # Case 1: With Prompt/Continuation, no Comment (e.g., doctest style)
-        if prompt and not comment:
+        if prompt and continuation and not comment:
             if line.startswith(prompt):
                 yield removeprefix(line, prompt), LineType.CODE
             elif line.startswith(continuation):
@@ -52,14 +52,14 @@ def parse(
                 yield line, LineType.RESULT
 
         # Case 2: No Prompt or Continuation, with Comment (e.g., reprex style)
-        elif not prompt and comment:
+        elif not prompt and not continuation and comment:
             if line.startswith(comment):
                 yield removeprefix(line, comment), LineType.RESULT
             else:
                 yield line, LineType.CODE
 
         # Case 3: Both Prompt/Contiuation and Comment
-        else:
+        elif prompt and continuation and comment:
             if line.startswith(prompt):
                 yield removeprefix(line, prompt), LineType.CODE
             elif line.startswith(continuation):
@@ -73,6 +73,9 @@ def parse(
                     f"Line {line_no+1} does not match any of prompt, continuation, or comment "
                     f"prefixes: '{line}'"
                 )
+
+        else:
+            raise Exception("Unexpected case.")
 
 
 def parse_reprex(input: str):

@@ -9,6 +9,12 @@ from reprexlite.formatting import venues_dispatcher
 
 @dataclasses.dataclass
 class ReprexConfig:
+    """Configuration for formatting and parsing
+
+    Attributes:
+    {{attributes}}
+    """
+
     # Formatting
     venue: str = "gh"
     advertise: Optional[bool] = None
@@ -116,3 +122,7 @@ def format_args_google_style():
             )
         )
     return "\n".join(docs)[4:]
+
+
+if ReprexConfig.__doc__:
+    ReprexConfig.__doc__ = ReprexConfig.__doc__.replace("{{args}}", format_args_google_style())

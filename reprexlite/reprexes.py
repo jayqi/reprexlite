@@ -1,6 +1,5 @@
 from contextlib import redirect_stdout
 from dataclasses import dataclass
-from distutils.command.config import config
 from io import StringIO
 from itertools import chain
 from pathlib import Path
@@ -132,17 +131,17 @@ class Statement:
     code, controlled by the `style` attribute.
 
     Attributes:
+        config (ReprexConfig): Configuration for formatting and parsing
         stmt (Union[libcst.SimpleStatementLine, libcst.BaseCompoundStatement]): LibCST parsed
             statement.
-        style (bool): Whether to autoformat the source code with black.
     """
 
     config: ReprexConfig
     stmt: Union[cst.SimpleStatementLine, cst.BaseCompoundStatement, cst.EmptyLine]
 
-    def evaluate(self, scope: dict) -> RawResult:
+    def evaluate(self, scope: dict) -> Union[RawResult, NullResult]:
         if isinstance(self.stmt, cst.EmptyLine):
-            return NullResult(config=config)
+            return NullResult(config=self.config)
 
         if "__name__" not in scope:
             scope["__name__"] = "__reprex__"
@@ -169,7 +168,7 @@ class Statement:
             stdout_io.close()
 
         if (result is NO_RAW_VALUE or result is None) and not stdout:
-            return NullResult(config=config)
+            return NullResult(config=self.config)
         else:
             return RawResult(config=self.config, raw=result, stdout=stdout)
 
@@ -221,24 +220,21 @@ class Statement:
 
 @dataclass
 class Reprex:
-    """Container class for a reprex, which holds a Python script and potential results from
-    evaluation.
+    """Container class for a reprex, which holds Python code and results from evaluation.
 
     Attributes:
-        input (str): Block of Python code
-        style (bool): Whether to use black to autoformat code in returned string representation.
-        comment (str): Line prefix to use when rendering the evaluated results.
-        terminal (bool): Whether to apply syntax highlighting to the string representation.
-            Requires optional dependency Pygments.
-        tree (libcst.Module): Parsed LibCST concrete syntax tree of input code.
-        statements (List[Statement]): List of individual statements parsed from input code.
-        results (List[Result]): List of evaluated results corresponding to each item of statements.
+        config (ReprexConfig): Configuration for formatting and parsing
+        statements (List[Statement]): List of parsed Python code statements
+        results (List[Union[RawResult, NullResult]]): List of results evaluated from statements
+        old_results (List[Union[ParsedResult, NullResult]]): List of any old results parsed from
+            input code
+        scope (Dict[str, Any]): Dictionary holding the scope that the reprex was evaluated in.
     """
 
     config: ReprexConfig
     statements: List[Statement]
     results: List[Union[RawResult, NullResult]]
-    old_results: List[ParsedResult]
+    old_results: List[Union[ParsedResult, NullResult]]
     scope: Dict[str, Any]
 
     def __post_init__(self):
@@ -278,10 +274,10 @@ class Reprex:
     ):
         if config is None:
             config = ReprexConfig()
-        statements = []
-        old_results = []
-        current_code_block = []
-        current_result_block = []
+        statements: List[Statement] = []
+        old_results: List[Union[ParsedResult, NullResult]] = []
+        current_code_block: List[str] = []
+        current_result_block: List[str] = []
         for line_content, line_type in lines:
             if line_type is LineType.CODE:
                 # Flush results
@@ -311,12 +307,14 @@ class Reprex:
         if current_code_block:
             if all(not line for line in current_code_block):
                 # Case where all lines are whitespace
-                new_statements = tuple(
+                new_statements = [
                     Statement(config=config, stmt=cst.EmptyLine()) for _ in current_code_block
-                )
+                ]
             else:
                 # Parse code and create Statements
-                tree: cst.Module = cst.parse_module("\n".join(current_code_block))
+                tree: cst.Module = cst.parse_module(  # type: ignore[no-redef]
+                    "\n".join(current_code_block)
+                )
                 new_statements = (
                     [Statement(config=config, stmt=stmt) for stmt in tree.header]
                     + [Statement(config=config, stmt=stmt) for stmt in tree.body]
@@ -453,6 +451,7 @@ def reprex(
     return formatted_reprex
 
 
-reprex.__doc__ = reprex.__doc__.replace("{{version}}", __version__).replace(
-    "{{args}}", format_args_google_style()
-)
+if reprex.__doc__:
+    reprex.__doc__ = reprex.__doc__.replace("{{version}}", __version__).replace(
+        "{{args}}", format_args_google_style()
+    )
