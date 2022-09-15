@@ -3,7 +3,11 @@ from enum import Enum
 import textwrap
 from typing import Optional
 
-from reprexlite.exceptions import PromptLengthMismatchError
+from reprexlite.exceptions import (
+    InvalidParsingMethodError,
+    InvalidVenueError,
+    PromptLengthMismatchError,
+)
 from reprexlite.formatting import venues_dispatcher
 
 
@@ -33,7 +37,10 @@ class ReprexConfig:
     def __post_init__(self):
         # Validate venue
         if self.venue not in venues_dispatcher:
-            raise Exception
+            raise InvalidVenueError(
+                f"{self.venue} is not a valid value for parsing method."
+                f"Valid values are: {list(venues_dispatcher.keys())}"
+            )
         # Validate prompt and continuation prefixes
         if len(self.prompt) != len(self.continuation):
             raise PromptLengthMismatchError(
@@ -44,7 +51,10 @@ class ReprexConfig:
         try:
             ParsingMethod(self.parsing_method)
         except ValueError:
-            raise Exception
+            raise InvalidParsingMethodError(
+                f"{self.parsing_method} is not a valid value for parsing method."
+                f"Valid values are: {[pm.value for pm in ParsingMethod]}"
+            )
 
     @property
     def resolved_input_prompt(self):

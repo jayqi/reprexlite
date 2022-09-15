@@ -6,6 +6,14 @@ class InvalidInputPrefixesError(ValueError, ReprexliteException):
     pass
 
 
+class InvalidParsingMethodError(ValueError, ReprexliteException):
+    pass
+
+
+class InvalidVenueError(ValueError, ReprexliteException):
+    pass
+
+
 class MissingDependencyError(ImportError, ReprexliteException):
     pass
 
