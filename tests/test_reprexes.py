@@ -265,3 +265,38 @@ def test_keep_old_results():
     print("\n--------------\n")
 
     assert str(r) == expected
+
+
+def test_reprex_auto_parse_doctest():
+    """Test that Reprex works with doctest input as expected."""
+    input = dedent(
+        """\
+        >>> 2+2
+        4
+
+        >>> for i in range(2):
+        ...     print(i)
+        0
+        1
+        """
+    )
+    expected = dedent(
+        """\
+        2+2
+        #> 4
+
+        for i in range(2):
+            print(i)
+        #> 0
+        #> 1
+        """
+    )
+    r = Reprex.from_input(input)
+    assert r.results_match()
+    print("\n---EXPECTED---\n")
+    print(expected)
+    print("\n---ACTUAL-----\n")
+    print(str(r))
+    print("\n--------------\n")
+
+    assert str(r) == expected
