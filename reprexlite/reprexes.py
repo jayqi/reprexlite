@@ -349,7 +349,10 @@ class Reprex:
             lines = chain.from_iterable(zip(self.statements, self.old_results, self.results))
         else:
             lines = chain.from_iterable(zip(self.statements, self.results))
-        return "\n".join(str(line) for line in lines if line)
+        out = "\n".join(str(line) for line in lines if line)
+        if not out.endswith("\n"):
+            out += "\n"
+        return out
 
     def format(self, terminal: bool = False):
         out = str(self)

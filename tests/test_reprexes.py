@@ -4,7 +4,8 @@ from textwrap import dedent
 import pytest
 
 from reprexlite.config import ReprexConfig
-from reprexlite.reprexes import Reprex
+from reprexlite.reprexes import Reprex, reprex
+from tests.utils import assert_str_equals
 
 Case = namedtuple("Case", ["id", "input", "expected"])
 
@@ -211,13 +212,7 @@ def test_reprex_from_input(case):
     """Test that Reprex.from_input parses inputs as expected and evaluates to correct results."""
     r = Reprex.from_input(dedent(case.input))
 
-    print("\n---EXPECTED---\n")
-    print(dedent(case.expected))
-    print("\n---ACTUAL-----\n")
-    print(str(r))
-    print("\n--------------\n")
-
-    assert str(r) == dedent(case.expected.rstrip())
+    assert_str_equals(dedent(case.expected), str(r))
 
 
 @pytest.mark.parametrize("case", cases, ids=(c.id for c in cases))
@@ -225,13 +220,8 @@ def test_reprex_from_input_with_old_results(case):
     """Test that Reprex.from_input parses inputs with old results as expected."""
     r = Reprex.from_input(dedent(case.expected))
 
-    print("\n---EXPECTED---\n")
-    print(dedent(case.expected))
-    print("\n---ACTUAL-----\n")
-    print(str(r))
-    print("\n--------------\n")
-
     assert r.results_match()
+    assert_str_equals(dedent(case.expected), str(r))
 
 
 def test_keep_old_results():
@@ -258,13 +248,7 @@ def test_keep_old_results():
     )
     r = Reprex.from_input(input, config=ReprexConfig(keep_old_results=True))
     assert r.results_match()
-    print("\n---EXPECTED---\n")
-    print(expected)
-    print("\n---ACTUAL-----\n")
-    print(str(r))
-    print("\n--------------\n")
-
-    assert str(r) == expected
+    assert_str_equals(expected, str(r))
 
 
 def test_reprex_auto_parse_doctest():
@@ -293,10 +277,41 @@ def test_reprex_auto_parse_doctest():
     )
     r = Reprex.from_input(input)
     assert r.results_match()
-    print("\n---EXPECTED---\n")
-    print(expected)
-    print("\n---ACTUAL-----\n")
-    print(str(r))
-    print("\n--------------\n")
+    assert_str_equals(expected, str(r))
 
-    assert str(r) == expected
+
+def test_reprex_custom_input_format():
+    """Test that Reprex works with doctest input as expected."""
+    input = dedent(
+        """\
+        aaaa 2+2
+        cc 4
+
+        aaaa for i in range(2):
+        bbbb     print(i)
+        cc 0
+        cc 1
+        """
+    )
+    expected = dedent(
+        """\
+        2+2
+        #> 4
+
+        for i in range(2):
+            print(i)
+        #> 0
+        #> 1
+        """
+    )
+    r = Reprex.from_input(
+        input,
+        config=ReprexConfig(
+            parsing_method="declared",
+            input_prompt="aaaa",
+            input_continuation="bbbb",
+            input_comment="cc",
+        ),
+    )
+    assert r.results_match()
+    assert_str_equals(expected, str(r))
