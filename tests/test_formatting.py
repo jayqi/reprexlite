@@ -1,11 +1,12 @@
 import builtins
 import sys
+from textwrap import dedent
 
 import pytest
 
-# from reprexlite.formatting import venues_dispatcher
+from reprexlite.formatting import venues_dispatcher
 from reprexlite.reprexes import reprex
-from tests.expected_reprexes import (
+from tests.expected_formatted import (
     ASSETS_DIR,
     INPUT,
     MOCK_VERSION,
@@ -13,8 +14,6 @@ from tests.expected_reprexes import (
     MockSessionInfo,
     expected_reprexes,
 )
-
-# from textwrap import dedent
 
 
 @pytest.fixture
@@ -51,17 +50,14 @@ def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
         assert str(actual) + "\n" == fp.read()
 
 
-# def test_html(patch_datetime, patch_version, no_pygments):
-#     reprex_class = venues_dispatcher["html"]
-#     code_block = CodeBlock(INPUT)
-#     reprex = reprex_class(code_block)
-#     print(reprex)
-#     expected = dedent(
-#         """
-#         <pre><code>x = 2
-#         x + 2
-#         #> 4</code></pre>
-#         <p><sup>Created at DATETIME by <a href="https://github.com/jayqi/reprexlite">reprexlite</a> vVERSION</sup></p>
-#         """
-#     ).strip()
-#     assert str(reprex) == expected
+def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
+    actual = reprex(INPUT, venue="html")
+    expected = dedent(
+        """
+        <pre><code>x = 2
+        x + 2
+        #> 4</code></pre>
+        <p><sup>Created at DATETIME by <a href="https://github.com/jayqi/reprexlite">reprexlite</a> vVERSION</sup></p>
+        """
+    ).strip()
+    assert str(actual) == expected
