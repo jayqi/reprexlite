@@ -7,7 +7,7 @@ from reprexlite.version import __version__
 
 
 class Formatter(ABC):
-    """Abstract base class for a reprex instance. Concrete subclasses should implement the
+    """Abstract base class for a reprex formatter. Concrete subclasses should implement the
     formatting logic appropriate to a specific venue for sharing. Call `str(...)` on an instance
     to return the formatted reprex.
 

@@ -26,7 +26,7 @@ exclude = ["tests/assets"]
 
 [tool.ruff.isort]
 known-first-party = ["reprexlite"]
-profile = "black"
+known-third-party = ["IPython"]
 force-sort-within-sections = true
 
 [tool.mypy]

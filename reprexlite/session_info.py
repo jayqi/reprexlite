@@ -44,7 +44,7 @@ class SessionInfo:
 class Package:
     """Interface for adapting [`importlib.metadata.Distribution`](https://docs.python.org/3/library/importlib.metadata.html#distributions)
     instances for introspection by [`SessionInfo`][reprexlite.session_info.SessionInfo].
-    """
+    """  # noqa: E501
 
     def __init__(self, distribution: importlib_metadata.Distribution):
         self.distribution = distribution

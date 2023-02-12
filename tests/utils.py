@@ -1,5 +1,4 @@
 import re
-from textwrap import dedent
 
 # https://stackoverflow.com/a/14693789/5957621
 ANSI_ESCAPE_REGEX = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")

@@ -31,7 +31,9 @@ def ipython_callback(ipython: bool):
         raise typer.Exit()
 
 
-Venue = Enum("Venue", names={v.upper(): v for v in venues_dispatcher.keys()}, type=str)  # type: ignore
+Venue = Enum(  # type: ignore
+    "Venue", names={v.upper(): v for v in venues_dispatcher.keys()}, type=str
+)
 Venue.__doc__ = """Enum for valid venue options."""
 
 
@@ -118,7 +120,7 @@ def main(
     - py : Python script
     - rtf : Rich Text Format
     - slack : Slack
-    """
+    """  # noqa: E501
     if infile:
         with infile.open("r") as fp:
             input = fp.read()

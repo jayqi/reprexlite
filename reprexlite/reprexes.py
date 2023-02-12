@@ -438,7 +438,7 @@ def reprex(
 
     Returns:
         Instance of `Reprex`
-    """
+    """  # noqa: E501
 
     config = ReprexConfig(**kwargs)
     if config.venue in ["html", "rtf"]:

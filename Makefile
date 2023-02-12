@@ -32,16 +32,15 @@ dist: clean-dist
 	python setup.py sdist bdist_wheel
 
 format:
-	isort reprexlite tests
+	ruff reprexlite tests --fix
 	black reprexlite tests
 
 generate-test-assets:
 	python tests/expected_reprexes.py
 
 lint:
-	isort --check-only reprexlite tests
 	black --check reprexlite tests
-	flake8 reprexlite tests
+	ruff reprexlite tests
 
 test:
 	pytest -vv
