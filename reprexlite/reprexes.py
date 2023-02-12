@@ -7,6 +7,11 @@ from pprint import pformat
 import traceback
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
+try:
+    from typing import Self  # type: ignore  # Python 3.11+
+except ImportError:
+    from typing_extensions import Self
+
 import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
@@ -213,7 +218,7 @@ class Statement:
                         out += f"{self.config.continuation} " + line + "\n"
         return out.rstrip()
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return True
 
     def __repr__(self) -> str:
@@ -239,7 +244,7 @@ class Reprex:
     old_results: List[Union[ParsedResult, NullResult]]
     scope: Dict[str, Any]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if len(self.statements) != len(self.results) != len(self.results):
             raise Exception
 
@@ -249,7 +254,7 @@ class Reprex:
         input: str,
         config: Optional[ReprexConfig] = None,
         scope: Optional[Dict[str, Any]] = None,
-    ):
+    ) -> Self:
         if config is None:
             config = ReprexConfig()
         if config.parsing_method == ParsingMethod.AUTO:
@@ -273,7 +278,7 @@ class Reprex:
         lines: Sequence[Tuple[str, LineType]],
         config: Optional[ReprexConfig] = None,
         scope: Optional[Dict[str, Any]] = None,
-    ):
+    ) -> Self:
         if config is None:
             config = ReprexConfig()
         statements: List[Statement] = []
@@ -356,7 +361,7 @@ class Reprex:
             out += "\n"
         return out
 
-    def format(self, terminal: bool = False):
+    def format(self, terminal: bool = False) -> str:
         out = str(self)
         if terminal:
             try:
@@ -372,7 +377,7 @@ class Reprex:
             out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
         )
 
-    def _repr_html_(self):
+    def _repr_html_(self) -> str:
         out = []
         try:
             from pygments import highlight
@@ -386,13 +391,13 @@ class Reprex:
             out.append(f"<pre><code>{self.format()}</code></pre>")
         return "\n".join(out)
 
-    def results_match(self):
+    def results_match(self) -> bool:
         return all(
             result == old_result for result, old_result in zip(self.results, self.old_results)
         )
 
 
-def to_snippet(s: str, n: int):
+def to_snippet(s: str, n: int) -> str:
     if len(s) <= n:
         return rf"{s}"
     else:
@@ -402,8 +407,8 @@ def to_snippet(s: str, n: int):
 def reprex(
     input: str,
     outfile: Optional[Path] = None,
-    print_=True,
-    terminal=False,
+    print_: bool = True,
+    terminal: bool = False,
     **kwargs,
 ) -> Reprex:
     """Render reproducible examples of Python code for sharing. This function will evaluate your
