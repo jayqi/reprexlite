@@ -2,16 +2,22 @@ from contextlib import contextmanager
 import re
 from typing import Optional
 
-from IPython import InteractiveShell
-from IPython.core.magic import Magics, line_cell_magic, magics_class
-from IPython.core.release import version as ipython_version
-from IPython.core.usage import default_banner_parts
-from IPython.terminal.interactiveshell import TerminalInteractiveShell
-from IPython.terminal.ipapp import TerminalIPythonApp
 from typer.testing import CliRunner
 
 import reprexlite.cli
+from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.version import __version__
+
+try:
+    from IPython import InteractiveShell
+    from IPython.core.magic import Magics, line_cell_magic, magics_class
+    from IPython.core.release import version as ipython_version
+    from IPython.core.usage import default_banner_parts
+    from IPython.terminal.interactiveshell import TerminalInteractiveShell
+    from IPython.terminal.ipapp import TerminalIPythonApp
+except ModuleNotFoundError:
+    raise IPythonNotFoundError
+
 
 runner = CliRunner()
 

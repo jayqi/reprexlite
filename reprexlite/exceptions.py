@@ -14,6 +14,10 @@ class InvalidVenueError(ValueError, ReprexliteException):
     pass
 
 
+class IPythonNotFoundError(ModuleNotFoundError, ReprexliteException):
+    pass
+
+
 class MissingDependencyError(ImportError, ReprexliteException):
     pass
 

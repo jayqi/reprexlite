@@ -5,6 +5,7 @@ from typing import Optional
 import typer
 
 from reprexlite.config import CONFIG_DOCS, ParsingMethod, ReprexConfig
+from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.formatting import venues_dispatcher
 from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
@@ -24,8 +25,11 @@ def ipython_callback(ipython: bool):
     if ipython:
         try:
             from reprexlite.ipython import ReprexTerminalIPythonApp
-        except ModuleNotFoundError:
-            print("ipython is required to be installed to use IPython interactive editor.")
+        except IPythonNotFoundError:
+            print(
+                "IPythonNotFoundError: ipython is required to be installed to use the IPython "
+                "interactive editor."
+            )
             raise typer.Exit(code=1)
         ReprexTerminalIPythonApp.launch_instance(argv=[])
         raise typer.Exit()
