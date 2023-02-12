@@ -25,7 +25,18 @@ class Formatter(ABC):
     def format(
         cls, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
     ) -> str:
-        pass
+        """Format a reprex string.
+
+        Args:
+            reprex_str (str): String containing code from a Reprex instance.
+            advertise (Optional[bool], optional): Whether to include the advertisement for
+                reprexlite. Defaults to None, which is equivalent to False.
+            session_info (bool, optional): Whether to include detailed session information.
+                Defaults to False.
+
+        Returns:
+            str: String containing formatted reprex code.
+        """
 
 
 venues_dispatcher: Dict[str, Type[Formatter]] = {}
