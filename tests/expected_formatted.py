@@ -94,7 +94,6 @@ class MockDateTime:
 
 @contextmanager
 def patch_datetime():
-
     datetime = sys.modules["reprexlite.formatting"].datetime
     sys.modules["reprexlite.formatting"].datetime = MockDateTime
     yield

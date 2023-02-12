@@ -19,7 +19,7 @@ class SessionInfo:
         packages (List[Package]): List of Python packages installed in current virtual environment.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.python_version: str = platform.python_version()
         self.python_build_date: str = platform.python_build()[1]
 
@@ -28,7 +28,7 @@ class SessionInfo:
             Package(distr) for distr in importlib_metadata.Distribution.discover()
         ]
 
-    def __str__(self):
+    def __str__(self) -> str:
         lines = ["-- Session Info --" + "-" * 60]
         lines += tabulate(
             [

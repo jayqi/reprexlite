@@ -39,7 +39,6 @@ def parse(
         )
 
     for line_no, line in enumerate(input.split("\n")):
-
         # Case 1: With Prompt/Continuation, no Comment (e.g., doctest style)
         if prompt and continuation and not comment:
             if line.startswith(prompt):

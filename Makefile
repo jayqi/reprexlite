@@ -46,4 +46,4 @@ test:
 	pytest -vv
 
 typecheck:
-	mypy reprexlite --show-error-codes
+	mypy reprexlite --show-error-codes --install-types --non-interactive

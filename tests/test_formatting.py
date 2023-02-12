@@ -4,7 +4,6 @@ from textwrap import dedent
 
 import pytest
 
-from reprexlite.formatting import venues_dispatcher
 from reprexlite.reprexes import reprex
 from tests.expected_formatted import (
     ASSETS_DIR,
@@ -58,6 +57,6 @@ def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
         x + 2
         #> 4</code></pre>
         <p><sup>Created at DATETIME by <a href="https://github.com/jayqi/reprexlite">reprexlite</a> vVERSION</sup></p>
-        """
+        """  # noqa: E501
     ).strip()
     assert str(actual) == expected

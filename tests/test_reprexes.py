@@ -4,7 +4,7 @@ from textwrap import dedent
 import pytest
 
 from reprexlite.config import ReprexConfig
-from reprexlite.reprexes import Reprex, reprex
+from reprexlite.reprexes import Reprex
 from tests.utils import assert_str_equals
 
 Case = namedtuple("Case", ["id", "input", "expected"])

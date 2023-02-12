@@ -173,11 +173,13 @@ class Statement:
             return RawResult(config=self.config, raw=result, stdout=stdout)
 
     @property
-    def raw_code(self):
+    def raw_code(self) -> str:
+        if isinstance(self.stmt, cst.EmptyLine):
+            return cst.Module(body=[], header=[self.stmt]).code.rstrip()
         return cst.Module(body=[self.stmt]).code.rstrip()
 
     @property
-    def code(self):
+    def code(self) -> str:
         code = self.raw_code
         if self.config.style:
             try:
