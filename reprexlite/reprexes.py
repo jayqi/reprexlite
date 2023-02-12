@@ -410,7 +410,7 @@ def reprex(
     print_: bool = True,
     terminal: bool = False,
     **kwargs,
-) -> Reprex:
+) -> str:
     """Render reproducible examples of Python code for sharing. This function will evaluate your
     code and, by default, print out your code with the evaluated results embedded as comments,
     along with additional markup appropriate to the sharing venue set by the `venue` keyword
@@ -444,7 +444,7 @@ def reprex(
     {{args}}
 
     Returns:
-        Instance of `Reprex`
+        (str) Formatted reprex
     """  # noqa: E501
 
     config = ReprexConfig(**kwargs)
