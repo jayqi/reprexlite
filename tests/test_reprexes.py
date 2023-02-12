@@ -4,8 +4,9 @@ from textwrap import dedent
 import pytest
 
 from reprexlite.config import ReprexConfig
-from reprexlite.reprexes import Reprex
-from tests.utils import assert_str_equals
+from reprexlite.exceptions import UnexpectedError
+from reprexlite.reprexes import ParsedResult, RawResult, Reprex
+from tests.utils import assert_equals, assert_not_equals, assert_str_equals
 
 Case = namedtuple("Case", ["id", "input", "expected"])
 
@@ -220,7 +221,7 @@ def test_reprex_from_input_with_old_results(case):
     """Test that Reprex.from_input parses inputs with old results as expected."""
     r = Reprex.from_input(dedent(case.expected))
 
-    assert r.results_match()
+    assert r.results_match
     assert_str_equals(dedent(case.expected), str(r))
 
 
@@ -247,7 +248,7 @@ def test_keep_old_results():
         """
     )
     r = Reprex.from_input(input, config=ReprexConfig(keep_old_results=True))
-    assert r.results_match()
+    assert r.results_match
     assert_str_equals(expected, str(r))
 
 
@@ -276,7 +277,7 @@ def test_reprex_auto_parse_doctest():
         """
     )
     r = Reprex.from_input(input)
-    assert r.results_match()
+    assert r.results_match
     assert_str_equals(expected, str(r))
 
 
@@ -313,5 +314,151 @@ def test_reprex_custom_input_format():
             input_comment="cc",
         ),
     )
-    assert r.results_match()
+    assert r.results_match
     assert_str_equals(expected, str(r))
+
+
+def test_raw_result_printing():
+    config = ReprexConfig()
+    # Stdout and raw
+    assert str(RawResult(raw=2, stdout="hello", config=config)) == "#> hello\n#> 2"
+    # No stdout and raw
+    assert str(RawResult(raw=2, stdout=None, config=config)) == "#> 2"
+    # Stdout and no raw
+    assert str(RawResult(raw=None, stdout="hello", config=config)) == "#> hello"
+    # No Stdout and None value
+    with pytest.raises(UnexpectedError):
+        str(RawResult(raw=None, stdout=None, config=config))
+
+
+def test_raw_result_repr():
+    config = ReprexConfig()
+    assert repr(RawResult(raw=2, stdout="hello", config=config)) == "<RawResult '2'>"
+    assert (
+        repr(RawResult(raw="12345678901", stdout="hello", config=config))
+        == "<RawResult '1234567890...'>"
+    )
+
+
+def parsed_result_printing():
+    config = ReprexConfig()
+
+    assert str(ParsedResult(lines=["1", "2"], config=config)) == "#> #> 1\n#> #> 2"
+
+    with pytest.raises(UnexpectedError):
+        str(ParsedResult(lines=[], config=config))
+
+
+def test_parsed_result_repr():
+    config = ReprexConfig()
+    assert repr(ParsedResult(lines=["1"], config=config)) == "<ParsedResult '1'>"
+    assert repr(ParsedResult(lines=["1", "2"], config=config)) == "<ParsedResult '1\\n2'>"
+    assert (
+        repr(ParsedResult(lines=[str(i + 1) for i in range(10)], config=config))
+        == "<ParsedResult '1\\n2\\n3\\n4...'>"
+    )
+
+
+def test_raw_result_comparisons():
+    config = ReprexConfig()
+
+    # equal
+    assert_equals(
+        RawResult(raw=None, stdout=None, config=config),
+        RawResult(raw=None, stdout=None, config=config),
+    )
+    assert_equals(
+        RawResult(raw=1, stdout=None, config=config), RawResult(raw=1, stdout=None, config=config)
+    )
+    assert_equals(
+        RawResult(raw=None, stdout="hello", config=config),
+        RawResult(raw=None, stdout="hello", config=config),
+    )
+
+    # not equal
+    assert_not_equals(
+        RawResult(raw=None, stdout=None, config=config),
+        RawResult(raw=1, stdout=None, config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=None, stdout=None, config=config),
+        RawResult(raw=None, stdout="hello", config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=None, stdout=None, config=config),
+        RawResult(raw=1, stdout="hello", config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout=None, config=config), RawResult(raw=2, stdout=None, config=config)
+    )
+    assert_not_equals(
+        RawResult(raw=None, stdout="hello", config=config),
+        RawResult(raw=None, stdout="goodbye", config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout="hello", config=config),
+        RawResult(raw=2, stdout="hello", config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout="hello", config=config),
+        RawResult(raw=1, stdout="goodbye", config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout="hello", config=config),
+        RawResult(raw=2, stdout="goodbye", config=config),
+    )
+
+
+def test_parsed_result_comparisions():
+    config = ReprexConfig()
+
+
+def test_raw_result_to_parsed_result_comparisons():
+    config = ReprexConfig()
+
+    # equal
+    assert_equals(
+        RawResult(raw=None, stdout=None, config=config), ParsedResult(lines=[], config=config)
+    )
+    assert_equals(
+        RawResult(raw=2, stdout=None, config=config), ParsedResult(lines=["2"], config=config)
+    )
+    assert_equals(
+        RawResult(raw=None, stdout="hello", config=config),
+        ParsedResult(lines=["hello"], config=config),
+    )
+    assert_equals(
+        RawResult(raw=2, stdout="hello", config=config),
+        ParsedResult(lines=["hello", "2"], config=config),
+    )
+
+    # not equal
+    assert_not_equals(
+        RawResult(raw=None, stdout=None, config=config), ParsedResult(lines=["1"], config=config)
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout=None, config=config), ParsedResult(lines=[], config=config)
+    )
+    assert_not_equals(
+        RawResult(raw=None, stdout="hello", config=config), ParsedResult(lines=[], config=config)
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout=None, config=config),
+        ParsedResult(lines=["2"], config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=None, stdout="hello", config=config),
+        ParsedResult(lines=["goodbye"], config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout="hello", config=config),
+        ParsedResult(lines=["goodbye", "2"], config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=1, stdout=None, config=config),
+        ParsedResult(lines=["hello", "1"], config=config),
+    )
+    assert_not_equals(
+        RawResult(raw=None, stdout="hello", config=config),
+        ParsedResult(lines=["hello", "1"], config=config),
+    )

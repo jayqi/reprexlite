@@ -15,13 +15,10 @@ except ImportError:
 import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
+from reprexlite.exceptions import UnexpectedError
 from reprexlite.formatting import venues_dispatcher
 from reprexlite.parsing import LineType, auto_parse, parse
 from reprexlite.version import __version__
-
-NO_RAW_VALUE = object()
-"""Explicit placeholder object for results of statements, which have no return value (as opposed to
-expressions)."""
 
 
 @dataclass
@@ -36,24 +33,25 @@ class RawResult:
     """
 
     config: ReprexConfig
-    raw: Any = NO_RAW_VALUE
-    stdout: Optional[str] = None
+    raw: Any
+    stdout: Optional[str]
 
     def __str__(self) -> str:
+        if not self:
+            raise UnexpectedError(
+                "Should not print a RawResult if it tests False. If you see this error from "
+                "normal usage, please report at https://github.com/jayqi/reprexlite/issues"
+            )
         lines = []
         if self.stdout:
             lines.extend(self.stdout.split("\n"))
-        if self.raw is not NO_RAW_VALUE and (self.raw is not None or not self.stdout):
-            # NO_RAW_VALUE -> don't print
-            # None and stdout -> don't print
-            # None and no stdout -> print
-            # Anything else -> print
+        if self.raw is not None:
             lines.extend(pformat(self.raw, indent=2, width=77).split("\n"))
         return "\n".join(f"{self.config.comment} " + line for line in lines)
 
     def __bool__(self) -> bool:
-        # If result is NO_RETURN and blank stdout, nothing to print
-        return self.raw is not NO_RAW_VALUE or bool(self.stdout)
+        """Tests whether instance contains anything to print."""
+        return not (self.raw is None and self.stdout is None)
 
     def __repr__(self) -> str:
         return f"<RawResult '{to_snippet(str(self.raw), 10)}'>"
@@ -61,10 +59,8 @@ class RawResult:
     def __eq__(self, other: Any) -> bool:
         if isinstance(other, RawResult):
             return self.raw == other.raw and self.stdout == other.stdout
-        elif isinstance(other, ParsedResult):
-            return str(self) == other.as_result_str()
         else:
-            return False
+            return NotImplemented
 
 
 @dataclass
@@ -80,6 +76,11 @@ class ParsedResult:
     lines: List[str]
 
     def __str__(self) -> str:
+        if not self:
+            raise UnexpectedError(
+                "Should not print a ParsedResult if it tests False. If you see this error from "
+                "normal usage, please report at https://github.com/jayqi/reprexlite/issues"
+            )
         return "\n".join(self.prefix * 2 + line for line in self.lines)
 
     def as_result_str(self) -> str:
@@ -93,39 +94,22 @@ class ParsedResult:
             return ""
 
     def __bool__(self) -> bool:
+        """Tests whether instance contains anything to print."""
         return bool(self.lines)
 
     def __repr__(self) -> str:
-        joined = "\n".join(self.lines)
+        joined = "\\n".join(self.lines)
         return f"<ParsedResult '{to_snippet(joined, 10)}'>"
 
     def __eq__(self, other: Any) -> bool:
         if isinstance(other, ParsedResult):
             return self.lines == other.lines
         elif isinstance(other, RawResult):
-            return self.as_result_str() == str(other)
+            if not bool(self) and not bool(other):
+                return True
+            return self and other and self.as_result_str() == str(other)
         else:
-            return False
-
-
-@dataclass
-class NullResult:
-    config: ReprexConfig
-
-    def __str__(self) -> str:
-        raise NotImplementedError
-
-    def __bool__(self) -> bool:
-        return False
-
-    def __repr__(self) -> str:
-        return "<NullResult>"
-
-    def __eq__(self, other: object) -> bool:
-        if isinstance(other, NullResult):
-            return True
-        else:
-            return False
+            return NotImplemented
 
 
 @dataclass
@@ -144,9 +128,9 @@ class Statement:
     config: ReprexConfig
     stmt: Union[cst.SimpleStatementLine, cst.BaseCompoundStatement, cst.EmptyLine]
 
-    def evaluate(self, scope: dict) -> Union[RawResult, NullResult]:
+    def evaluate(self, scope: dict) -> RawResult:
         if isinstance(self.stmt, cst.EmptyLine):
-            return NullResult(config=self.config)
+            return RawResult(config=self.config, raw=None, stdout=None)
 
         if "__name__" not in scope:
             scope["__name__"] = "__reprex__"
@@ -154,13 +138,15 @@ class Statement:
         try:
             with redirect_stdout(stdout_io):
                 try:
+                    # Treat as a single expression
                     result = eval(str(self).strip(), scope)
                 except SyntaxError:
+                    # Treat as a statement
                     exec(str(self).strip(), scope)
-                    result = NO_RAW_VALUE
+                    result = None
             stdout = stdout_io.getvalue().strip()
         except Exception as exc:
-            result = NO_RAW_VALUE
+            result = None
             # Skip first step of traceback, since that is this evaluate method
             if exc.__traceback__ is not None:
                 tb = exc.__traceback__.tb_next
@@ -172,10 +158,7 @@ class Statement:
         finally:
             stdout_io.close()
 
-        if (result is NO_RAW_VALUE or result is None) and not stdout:
-            return NullResult(config=self.config)
-        else:
-            return RawResult(config=self.config, raw=result, stdout=stdout)
+        return RawResult(config=self.config, raw=result, stdout=stdout or None)
 
     @property
     def raw_code(self) -> str:
@@ -232,16 +215,16 @@ class Reprex:
     Attributes:
         config (ReprexConfig): Configuration for formatting and parsing
         statements (List[Statement]): List of parsed Python code statements
-        results (List[Union[RawResult, NullResult]]): List of results evaluated from statements
-        old_results (List[Union[ParsedResult, NullResult]]): List of any old results parsed from
+        results (List[RawResult]): List of results evaluated from statements
+        old_results (List[ParsedResult]): List of any old results parsed from
             input code
         scope (Dict[str, Any]): Dictionary holding the scope that the reprex was evaluated in.
     """
 
     config: ReprexConfig
     statements: List[Statement]
-    results: List[Union[RawResult, NullResult]]
-    old_results: List[Union[ParsedResult, NullResult]]
+    results: List[RawResult]
+    old_results: List[ParsedResult]
     scope: Dict[str, Any]
 
     def __post_init__(self) -> None:
@@ -282,7 +265,7 @@ class Reprex:
         if config is None:
             config = ReprexConfig()
         statements: List[Statement] = []
-        old_results: List[Union[ParsedResult, NullResult]] = []
+        old_results: List[ParsedResult] = []
         current_code_block: List[str] = []
         current_result_block: List[str] = []
         for line_content, line_type in lines:
@@ -304,8 +287,10 @@ class Reprex:
                         + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
                     )
                     statements += new_statements
-                    # Pad results with NullResults
-                    old_results += [NullResult(config=config)] * (len(new_statements) - 1)
+                    # Pad results with empty results
+                    old_results += [ParsedResult(config=config, lines=[])] * (
+                        len(new_statements) - 1
+                    )
                     # Reset current code block
                     current_code_block = []
                 # Append line to current results
@@ -327,9 +312,9 @@ class Reprex:
                     + [Statement(config=config, stmt=stmt) for stmt in tree.body]
                     + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
                 )
-            # Pad results with NullResults
+            # Pad results with empty results
             statements += new_statements
-            old_results += [NullResult(config=config)] * (len(new_statements) - 1)
+            old_results += [ParsedResult(config=config, lines=[])] * (len(new_statements) - 1)
         # Flush results
         if current_result_block:
             # Create result
@@ -337,7 +322,9 @@ class Reprex:
             # Result current result block
             current_result_block = []
         # Pad results to equal length
-        old_results += [NullResult(config=config)] * (len(statements) - len(old_results))
+        old_results += [ParsedResult(config=config, lines=[])] * (
+            len(statements) - len(old_results)
+        )
 
         # Evaluate for new results
         if scope is None:
@@ -360,6 +347,12 @@ class Reprex:
         if not out.endswith("\n"):
             out += "\n"
         return out
+
+    @property
+    def results_match(self) -> bool:
+        return all(
+            result == old_result for result, old_result in zip(self.results, self.old_results)
+        )
 
     def format(self, terminal: bool = False) -> str:
         out = str(self)
@@ -390,11 +383,6 @@ class Reprex:
         except ImportError:
             out.append(f"<pre><code>{self.format()}</code></pre>")
         return "\n".join(out)
-
-    def results_match(self) -> bool:
-        return all(
-            result == old_result for result, old_result in zip(self.results, self.old_results)
-        )
 
 
 def to_snippet(s: str, n: int) -> str:
