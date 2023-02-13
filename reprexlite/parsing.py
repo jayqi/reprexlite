@@ -5,6 +5,7 @@ from reprexlite.exceptions import (
     InvalidInputPrefixesError,
     NoPrefixMatchError,
     PromptLengthMismatchError,
+    UnexpectedError,
 )
 
 
@@ -14,7 +15,11 @@ def removeprefix(s: str, prefix: str):
     elif s.startswith(prefix):
         return s[len(prefix) :]
     else:
-        return s
+        raise UnexpectedError(  # pragma: nocover
+            "removeprefix should not be called when not matching prefix. "
+            "If you see this error under normal useage, please report at "
+            "https://github.com/jayqi/reprexlite/issues"
+        )
 
 
 class LineType(Enum):
@@ -74,7 +79,10 @@ def parse(
                 )
 
         else:
-            raise Exception("Unexpected case.")
+            raise UnexpectedError(  # pragma: nocover
+                "Unexpected case when using parse. If you see this error under normal useage, "
+                "please report at https://github.com/jayqi/reprexlite/issues"
+            )
 
 
 def parse_reprex(input: str):

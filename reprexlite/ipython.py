@@ -15,8 +15,11 @@ try:
     from IPython.core.usage import default_banner_parts
     from IPython.terminal.interactiveshell import TerminalInteractiveShell
     from IPython.terminal.ipapp import TerminalIPythonApp
-except ModuleNotFoundError:
-    raise IPythonNotFoundError
+except ModuleNotFoundError as e:
+    if e.name == "IPython":
+        raise IPythonNotFoundError(*e.args, name="IPython")
+    else:
+        raise
 
 
 runner = CliRunner()

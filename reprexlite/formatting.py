@@ -2,6 +2,11 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Dict, Optional, Type
 
+from reprexlite.exceptions import (
+    NotAFormatterError,
+    PygmentsNotFoundError,
+    UnexpectedError,
+)
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
@@ -47,7 +52,7 @@ def register_formatter(venue: str):
     def registrar(cls):
         global venues_dispatcher
         if not isinstance(cls, type) or not issubclass(cls, Formatter):
-            raise Exception
+            raise NotAFormatterError("Only subclasses of Formatter can be registered.")
         venues_dispatcher[venue] = cls
         return cls
 
@@ -157,8 +162,13 @@ class RtfFormatter(Formatter):
             from pygments import highlight
             from pygments.formatters import RtfFormatter
             from pygments.lexers import PythonLexer
-        except ImportError:
-            raise ImportError("Pygments is required for RTF output.")
+        except ModuleNotFoundError as e:
+            if e.name == "pygments":
+                raise PygmentsNotFoundError(
+                    "Pygments is required for RTF output.", name="pygments"
+                )
+            else:
+                raise
 
         out = str(reprex_str)
         if advertise:

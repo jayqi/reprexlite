@@ -15,7 +15,7 @@ except ImportError:
 import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
-from reprexlite.exceptions import UnexpectedError
+from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
 from reprexlite.formatting import venues_dispatcher
 from reprexlite.parsing import LineType, auto_parse, parse
 from reprexlite.version import __version__
@@ -172,8 +172,11 @@ class Statement:
         if self.config.style:
             try:
                 from black import Mode, format_str
-            except ImportError:
-                raise ImportError("Must install black to restyle code.")
+            except ModuleNotFoundError as e:
+                if e.name == "black":
+                    raise BlackNotFoundError("Must install black to restyle code.", name="black")
+                else:
+                    raise
 
             code = format_str(code, mode=Mode())
         return code

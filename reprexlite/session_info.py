@@ -58,9 +58,9 @@ class Package:
         return self.distribution.version
 
     def __lt__(self, other) -> bool:
-        if not isinstance(other, Package):
-            raise ValueError
-        return self.name < other.name
+        if isinstance(other, Package):
+            return self.name < other.name
+        return NotImplemented  # pragma: nocover
 
 
 def tabulate(rows: List[Tuple[str, str]]) -> List[str]:

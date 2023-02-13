@@ -2,7 +2,11 @@ from textwrap import dedent
 
 import pytest
 
-from reprexlite.exceptions import InvalidInputPrefixesError
+from reprexlite.exceptions import (
+    InvalidInputPrefixesError,
+    NoPrefixMatchError,
+    PromptLengthMismatchError,
+)
 from reprexlite.parsing import LineType, auto_parse, parse, parse_doctest, parse_reprex
 
 
@@ -138,3 +142,17 @@ def test_auto_parse():
 
     actual_doctest = list(auto_parse(dedent(input_doctest)))
     assert actual_doctest == expected
+
+
+def test_prompt_continuation_length_mismatch():
+    with pytest.raises(PromptLengthMismatchError):
+        next(parse("2+2", prompt="123", continuation="1234", comment=None))
+    with pytest.raises(PromptLengthMismatchError):
+        next(parse("", prompt=">>>", continuation=None, comment=None))
+    with pytest.raises(PromptLengthMismatchError):
+        next(parse("", prompt=None, continuation="...", comment=None))
+
+
+def test_no_prefix_match_error():
+    with pytest.raises(NoPrefixMatchError):
+        list(parse("2+2", prompt=">>>", continuation=">>>", comment="#>"))

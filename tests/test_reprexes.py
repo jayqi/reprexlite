@@ -1,10 +1,11 @@
+import builtins
 from collections import namedtuple
 from textwrap import dedent
 
 import pytest
 
 from reprexlite.config import ReprexConfig
-from reprexlite.exceptions import UnexpectedError
+from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
 from reprexlite.reprexes import ParsedResult, RawResult, Reprex
 from tests.utils import assert_equals, assert_not_equals, assert_str_equals
 
@@ -462,3 +463,45 @@ def test_raw_result_to_parsed_result_comparisons():
         RawResult(raw=None, stdout="hello", config=config),
         ParsedResult(lines=["hello", "1"], config=config),
     )
+
+
+@pytest.fixture
+def no_black(monkeypatch):
+    import_orig = builtins.__import__
+
+    def mocked_import(name, *args):
+        if name.startswith("black"):
+            raise ModuleNotFoundError(name="black")
+        return import_orig(name, *args)
+
+    monkeypatch.setattr(builtins, "__import__", mocked_import)
+
+
+@pytest.fixture
+def black_bad_dependency(monkeypatch):
+    """ModuleNotFoundError inside black"""
+    module_name = "dependency_of_black"
+    import_orig = builtins.__import__
+
+    def mocked_import(name, *args):
+        if name.startswith("black"):
+            raise ModuleNotFoundError(name=module_name)
+        return import_orig(name, *args)
+
+    monkeypatch.setattr(builtins, "__import__", mocked_import)
+    yield module_name
+
+
+def test_no_black(no_black):
+    with pytest.raises(BlackNotFoundError):
+        reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
+        reprex.format()
+
+
+def test_black_bad_dependency(black_bad_dependency, monkeypatch):
+    with pytest.raises(ModuleNotFoundError) as exc_info:
+        reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
+        reprex.format()
+    assert not isinstance(exc_info.type, BlackNotFoundError)
+    assert exc_info.value.name != "black"
+    assert exc_info.value.name == black_bad_dependency
