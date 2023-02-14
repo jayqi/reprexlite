@@ -44,3 +44,12 @@ class PygmentsNotFoundError(ModuleNotFoundError, ReprexliteException):
 
 class UnexpectedError(ReprexliteException):
     """Raised when an unexpected case happens."""
+
+    def __init__(self, msg: str, *args: object):
+        if not msg.endswith(" "):
+            msg += " "
+        msg += (
+            "If you see this error from normal usage, please report at "
+            "https://github.com/jayqi/reprexlite/issues"
+        )
+        super().__init__(msg, *args)

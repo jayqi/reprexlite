@@ -17,8 +17,6 @@ def removeprefix(s: str, prefix: str):
     else:
         raise UnexpectedError(  # pragma: nocover
             "removeprefix should not be called when not matching prefix. "
-            "If you see this error under normal useage, please report at "
-            "https://github.com/jayqi/reprexlite/issues"
         )
 
 
@@ -79,10 +77,7 @@ def parse(
                 )
 
         else:
-            raise UnexpectedError(  # pragma: nocover
-                "Unexpected case when using parse. If you see this error under normal useage, "
-                "please report at https://github.com/jayqi/reprexlite/issues"
-            )
+            raise UnexpectedError("Unexpected case when using parse.")  # pragma: nocover
 
 
 def parse_reprex(input: str):

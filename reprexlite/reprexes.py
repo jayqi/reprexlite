@@ -15,7 +15,11 @@ except ImportError:
 import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
-from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
+from reprexlite.exceptions import (
+    BlackNotFoundError,
+    InvalidParsingMethodError,
+    UnexpectedError,
+)
 from reprexlite.formatting import venues_dispatcher
 from reprexlite.parsing import LineType, auto_parse, parse
 from reprexlite.version import __version__
@@ -38,10 +42,7 @@ class RawResult:
 
     def __str__(self) -> str:
         if not self:
-            raise UnexpectedError(
-                "Should not print a RawResult if it tests False. If you see this error from "
-                "normal usage, please report at https://github.com/jayqi/reprexlite/issues"
-            )
+            raise UnexpectedError("Should not print a RawResult if it tests False.")
         lines = []
         if self.stdout:
             lines.extend(self.stdout.split("\n"))
@@ -54,7 +55,9 @@ class RawResult:
         return not (self.raw is None and self.stdout is None)
 
     def __repr__(self) -> str:
-        return f"<RawResult '{to_snippet(str(self.raw), 10)}'>"
+        return (
+            f"<RawResult '{to_snippet(str(self.raw), 10)}' '{to_snippet(str(self.stdout), 10)}'>"
+        )
 
     def __eq__(self, other: Any) -> bool:
         if isinstance(other, RawResult):
@@ -77,10 +80,7 @@ class ParsedResult:
 
     def __str__(self) -> str:
         if not self:
-            raise UnexpectedError(
-                "Should not print a ParsedResult if it tests False. If you see this error from "
-                "normal usage, please report at https://github.com/jayqi/reprexlite/issues"
-            )
+            raise UnexpectedError("Should not print a ParsedResult if it tests False.")
         return "\n".join(self.prefix * 2 + line for line in self.lines)
 
     def as_result_str(self) -> str:
@@ -139,10 +139,10 @@ class Statement:
             with redirect_stdout(stdout_io):
                 try:
                     # Treat as a single expression
-                    result = eval(str(self).strip(), scope)
+                    result = eval(self.code.strip(), scope)
                 except SyntaxError:
                     # Treat as a statement
-                    exec(str(self).strip(), scope)
+                    exec(self.code.strip(), scope)
                     result = None
             stdout = stdout_io.getvalue().strip()
         except Exception as exc:
@@ -231,8 +231,11 @@ class Reprex:
     scope: Dict[str, Any]
 
     def __post_init__(self) -> None:
-        if len(self.statements) != len(self.results) != len(self.results):
-            raise Exception
+        if not (len(self.statements) == len(self.results) == len(self.old_results)):
+            raise UnexpectedError(
+                "statements, results, and old_results should all be the same length. "
+                f"Got: {(len(self.statements), len(self.results), len(self.old_results))}."
+            )
 
     @classmethod
     def from_input(
@@ -255,7 +258,9 @@ class Reprex:
                 )
             )
         else:
-            raise Exception
+            raise UnexpectedError(  # pragma: nocover
+                f"Parsing method {config.parsing_method} is not implemented."
+            )
         return cls.from_input_lines(lines, config=config, scope=scope)
 
     @classmethod
@@ -290,7 +295,7 @@ class Reprex:
                         + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
                     )
                     statements += new_statements
-                    # Pad results with empty results
+                    # Pad results with empty results, 1 fewer because of current_result_block
                     old_results += [ParsedResult(config=config, lines=[])] * (
                         len(new_statements) - 1
                     )
@@ -301,10 +306,8 @@ class Reprex:
         # Flush code
         if current_code_block:
             if all(not line for line in current_code_block):
-                # Case where all lines are whitespace
-                new_statements = [
-                    Statement(config=config, stmt=cst.EmptyLine()) for _ in current_code_block
-                ]
+                # Case where all lines are whitespace: strip and don't add
+                new_statements = []
             else:
                 # Parse code and create Statements
                 tree: cst.Module = cst.parse_module(  # type: ignore[no-redef]
@@ -315,15 +318,12 @@ class Reprex:
                     + [Statement(config=config, stmt=stmt) for stmt in tree.body]
                     + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
                 )
-            # Pad results with empty results
+            # Pad results with empty results, 1 fewer because of current_result_block
             statements += new_statements
             old_results += [ParsedResult(config=config, lines=[])] * (len(new_statements) - 1)
         # Flush results
         if current_result_block:
-            # Create result
             old_results += [ParsedResult(config=config, lines=current_result_block)]
-            # Result current result block
-            current_result_block = []
         # Pad results to equal length
         old_results += [ParsedResult(config=config, lines=[])] * (
             len(statements) - len(old_results)
@@ -366,7 +366,7 @@ class Reprex:
                 from pygments.lexers import PythonLexer
 
                 out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
-            except ImportError:
+            except ModuleNotFoundError as e:
                 pass
         formatter = venues_dispatcher[self.config.venue]
         return formatter.format(

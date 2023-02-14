@@ -6,7 +6,7 @@ import pytest
 
 from reprexlite.config import ReprexConfig
 from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
-from reprexlite.reprexes import ParsedResult, RawResult, Reprex
+from reprexlite.reprexes import ParsedResult, RawResult, Reprex, reprex
 from tests.utils import assert_equals, assert_not_equals, assert_str_equals
 
 Case = namedtuple("Case", ["id", "input", "expected"])
@@ -319,6 +319,57 @@ def test_reprex_custom_input_format():
     assert_str_equals(expected, str(r))
 
 
+def test_reprex_custom_prompts():
+    """Test that Reprex works with custom output prompts."""
+    input = dedent(
+        """\
+        2+2
+        #> 4
+
+        # I'm a comment
+        for i in range(2):
+            print(i)
+        #> 0
+        #> 1
+        """
+    )
+    expected = dedent(
+        """\
+        $$$$ 2+2
+        || 4
+        $$$$
+        $$$$ # I'm a comment
+        $$$$ for i in range(2):
+        ----     print(i)
+        || 0
+        || 1
+        """
+    )
+    r = Reprex.from_input(
+        input,
+        config=ReprexConfig(
+            prompt="$$$$", continuation="----", comment="||", parsing_method="auto"
+        ),
+    )
+    assert r.results_match
+    assert_str_equals(expected, str(r))
+
+
+def test_trailing_results_no_newline():
+    """Test case with trailing results and no newline"""
+    input = "2+2\n#> 4"
+    r = Reprex.from_input(input, config=ReprexConfig())
+    assert r.results_match
+    assert_str_equals(input + "\n", str(r))
+
+
+def test_statement_repr():
+    r = Reprex.from_input("2+2")
+    assert repr(r.statements[0]) == "<Statement '2+2'>"
+    r = Reprex.from_input("12345+67890")
+    assert repr(r.statements[0]) == "<Statement '12345+6789...'>"
+
+
 def test_raw_result_printing():
     config = ReprexConfig()
     # Stdout and raw
@@ -327,27 +378,36 @@ def test_raw_result_printing():
     assert str(RawResult(raw=2, stdout=None, config=config)) == "#> 2"
     # Stdout and no raw
     assert str(RawResult(raw=None, stdout="hello", config=config)) == "#> hello"
-    # No Stdout and None value
+    # No Stdout and no raw
     with pytest.raises(UnexpectedError):
         str(RawResult(raw=None, stdout=None, config=config))
 
 
 def test_raw_result_repr():
     config = ReprexConfig()
-    assert repr(RawResult(raw=2, stdout="hello", config=config)) == "<RawResult '2'>"
+    assert repr(RawResult(raw=2, stdout=None, config=config)) == "<RawResult '2' 'None'>"
+    assert repr(RawResult(raw=None, stdout="hello", config=config)) == "<RawResult 'None' 'hello'>"
+    assert repr(RawResult(raw=2, stdout="hello", config=config)) == "<RawResult '2' 'hello'>"
     assert (
-        repr(RawResult(raw="12345678901", stdout="hello", config=config))
-        == "<RawResult '1234567890...'>"
+        repr(RawResult(raw="12345678901", stdout="abcdefghijk", config=config))
+        == "<RawResult '1234567890...' 'abcdefghij...'>"
     )
 
 
-def parsed_result_printing():
-    config = ReprexConfig()
-
-    assert str(ParsedResult(lines=["1", "2"], config=config)) == "#> #> 1\n#> #> 2"
+def test_parsed_result_printing():
+    assert str(ParsedResult(lines=["1", "2"], config=ReprexConfig())) == "#> #> 1\n#> #> 2"
+    assert (
+        str(
+            ParsedResult(
+                lines=["1", "2"],
+                config=ReprexConfig(prompt=">>>", continuation="...", comment=None),
+            )
+        )
+        == "1\n2"
+    )
 
     with pytest.raises(UnexpectedError):
-        str(ParsedResult(lines=[], config=config))
+        str(ParsedResult(lines=[], config=ReprexConfig()))
 
 
 def test_parsed_result_repr():
@@ -369,7 +429,8 @@ def test_raw_result_comparisons():
         RawResult(raw=None, stdout=None, config=config),
     )
     assert_equals(
-        RawResult(raw=1, stdout=None, config=config), RawResult(raw=1, stdout=None, config=config)
+        RawResult(raw=1, stdout=None, config=config),
+        RawResult(raw=1, stdout=None, config=config),
     )
     assert_equals(
         RawResult(raw=None, stdout="hello", config=config),
@@ -390,7 +451,8 @@ def test_raw_result_comparisons():
         RawResult(raw=1, stdout="hello", config=config),
     )
     assert_not_equals(
-        RawResult(raw=1, stdout=None, config=config), RawResult(raw=2, stdout=None, config=config)
+        RawResult(raw=1, stdout=None, config=config),
+        RawResult(raw=2, stdout=None, config=config),
     )
     assert_not_equals(
         RawResult(raw=None, stdout="hello", config=config),
@@ -408,10 +470,38 @@ def test_raw_result_comparisons():
         RawResult(raw=1, stdout="hello", config=config),
         RawResult(raw=2, stdout="goodbye", config=config),
     )
+    assert_not_equals(
+        RawResult(raw=1, stdout=None, config=config),
+        1,
+    )
 
 
 def test_parsed_result_comparisions():
     config = ReprexConfig()
+
+    # equal
+    assert_equals(
+        ParsedResult(lines=[], config=config),
+        ParsedResult(lines=[], config=config),
+    )
+    assert_equals(
+        ParsedResult(lines=["hello", "1"], config=config),
+        ParsedResult(lines=["hello", "1"], config=config),
+    )
+
+    # not equal
+    assert_not_equals(
+        ParsedResult(lines=[], config=config),
+        ParsedResult(lines=["hello"], config=config),
+    )
+    assert_not_equals(
+        ParsedResult(lines=["hello", "1"], config=config),
+        ParsedResult(lines=["goodbye", "1"], config=config),
+    )
+    assert_not_equals(
+        ParsedResult(lines=["hello"], config=config),
+        "hello",
+    )
 
 
 def test_raw_result_to_parsed_result_comparisons():
@@ -419,10 +509,12 @@ def test_raw_result_to_parsed_result_comparisons():
 
     # equal
     assert_equals(
-        RawResult(raw=None, stdout=None, config=config), ParsedResult(lines=[], config=config)
+        RawResult(raw=None, stdout=None, config=config),
+        ParsedResult(lines=[], config=config),
     )
     assert_equals(
-        RawResult(raw=2, stdout=None, config=config), ParsedResult(lines=["2"], config=config)
+        RawResult(raw=2, stdout=None, config=config),
+        ParsedResult(lines=["2"], config=config),
     )
     assert_equals(
         RawResult(raw=None, stdout="hello", config=config),
@@ -435,13 +527,16 @@ def test_raw_result_to_parsed_result_comparisons():
 
     # not equal
     assert_not_equals(
-        RawResult(raw=None, stdout=None, config=config), ParsedResult(lines=["1"], config=config)
+        RawResult(raw=None, stdout=None, config=config),
+        ParsedResult(lines=["1"], config=config),
     )
     assert_not_equals(
-        RawResult(raw=1, stdout=None, config=config), ParsedResult(lines=[], config=config)
+        RawResult(raw=1, stdout=None, config=config),
+        ParsedResult(lines=[], config=config),
     )
     assert_not_equals(
-        RawResult(raw=None, stdout="hello", config=config), ParsedResult(lines=[], config=config)
+        RawResult(raw=None, stdout="hello", config=config),
+        ParsedResult(lines=[], config=config),
     )
     assert_not_equals(
         RawResult(raw=1, stdout=None, config=config),
@@ -465,6 +560,25 @@ def test_raw_result_to_parsed_result_comparisons():
     )
 
 
+def test_style_with_black():
+    input = dedent(
+        """\
+        [1, 2,]
+        """
+    )
+    expected = dedent(
+        """\
+        [
+            1,
+            2,
+        ]
+        """
+    )
+    reprex = Reprex.from_input(input=input, config=ReprexConfig(style=True))
+    reprex.statements[0].raw_code == input.strip()
+    reprex.statements[0].raw_code == expected.strip()
+
+
 @pytest.fixture
 def no_black(monkeypatch):
     import_orig = builtins.__import__
@@ -475,6 +589,12 @@ def no_black(monkeypatch):
         return import_orig(name, *args)
 
     monkeypatch.setattr(builtins, "__import__", mocked_import)
+
+
+def test_no_black(no_black):
+    with pytest.raises(BlackNotFoundError):
+        reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
+        reprex.format()
 
 
 @pytest.fixture
@@ -492,12 +612,6 @@ def black_bad_dependency(monkeypatch):
     yield module_name
 
 
-def test_no_black(no_black):
-    with pytest.raises(BlackNotFoundError):
-        reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
-        reprex.format()
-
-
 def test_black_bad_dependency(black_bad_dependency, monkeypatch):
     with pytest.raises(ModuleNotFoundError) as exc_info:
         reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
@@ -505,3 +619,52 @@ def test_black_bad_dependency(black_bad_dependency, monkeypatch):
     assert not isinstance(exc_info.type, BlackNotFoundError)
     assert exc_info.value.name != "black"
     assert exc_info.value.name == black_bad_dependency
+
+
+@pytest.fixture
+def no_pygments(monkeypatch):
+    import_orig = builtins.__import__
+
+    def mocked_import(name, *args):
+        if name.startswith("pygments"):
+            raise ModuleNotFoundError(name="pygments")
+        return import_orig(name, *args)
+
+    monkeypatch.setattr(builtins, "__import__", mocked_import)
+
+
+def test_no_pygments_terminal(no_pygments):
+    """Test that format for terminal works even if pygments is not installed."""
+    r = Reprex.from_input("2+2")
+    assert_str_equals(r.format(terminal=False), r.format(terminal=True))
+
+
+def test_repr_html():
+    """Test rich HTML display for Jupyter Notebooks runs without error."""
+    r = Reprex.from_input("2+2")
+    r._repr_html_()
+
+
+def test_repr_html_no_pygments(no_pygments):
+    """Test that rich HTML display for Jupyter Notebooks runs without error even if pygments is not
+    installed."""
+    r = Reprex.from_input("2+2")
+    r._repr_html_()
+
+
+def test_reprex_init_bad_lengths_error():
+    r = Reprex.from_input("2+2")
+    with pytest.raises(UnexpectedError):
+        Reprex(
+            config=ReprexConfig(),
+            statements=r.statements,
+            results=r.results,
+            old_results=[],
+            scope=r.scope,
+        )
+
+
+def test_reprex_function_write_to_file(tmp_path):
+    rendered = reprex("2+2", outfile=tmp_path / "rendered.txt")
+    with (tmp_path / "rendered.txt").open("r") as fp:
+        assert rendered == fp.read()
