@@ -8,6 +8,7 @@ mkdocs-jupyter
 mkdocs-material>=7.2.6
 mkdocstrings[python-legacy]>=0.15.2
 mypy
+pip>=21.3
 pytest
 pytest-cov
 ruff
