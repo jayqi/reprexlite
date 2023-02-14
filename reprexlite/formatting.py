@@ -36,7 +36,7 @@ class Formatter(ABC):
                 Defaults to False.
 
         Returns:
-            str: String containing formatted reprex code.
+            str: String containing formatted reprex code. Ends with newline.
         """
 
 
@@ -81,7 +81,7 @@ class GitHubFormatter(Formatter):
             out.append(str(SessionInfo()))
             out.append("```")
             out.append("</details>")
-        return "\n".join(out)
+        return "\n".join(out) + "\n"
 
 
 @register_formatter(venue="html")
@@ -112,12 +112,12 @@ class HtmlFormatter(Formatter):
             out.append(f"<pre><code>{reprex_str}</code></pre>")
 
         if advertise:
-            out.append(Advertisement().html())
+            out.append(Advertisement().html().strip())
         if session_info:
             out.append("<details><summary>Session Info</summary>")
             out.append(f"<pre><code>{SessionInfo()}</code></pre>")
             out.append("</details>")
-        return "\n".join(out)
+        return "\n".join(out) + "\n"
 
 
 @register_formatter(venue="py")
@@ -139,7 +139,7 @@ class PyScriptFormatter(Formatter):
             out.append("")
             sess_lines = str(SessionInfo()).split("\n")
             out.extend("# " + line for line in sess_lines)
-        return "\n".join(out)
+        return "\n".join(out) + "\n"
 
 
 @register_formatter(venue="rtf")
@@ -171,7 +171,7 @@ class RtfFormatter(Formatter):
             out += "\n\n" + Advertisement().text()
         if session_info:
             out += "\n\n" + str(SessionInfo())
-        return highlight(out, PythonLexer(), RtfFormatter())
+        return highlight(out, PythonLexer(), RtfFormatter()) + "\n"
 
 
 @register_formatter(venue="slack")
@@ -196,7 +196,7 @@ class SlackFormatter(Formatter):
             out.append("\n```")
             out.append(str(SessionInfo()))
             out.append("```")
-        return "\n".join(out)
+        return "\n".join(out) + "\n"
 
 
 class Advertisement:

@@ -15,6 +15,7 @@ from tests.expected_formatted import (
     MockSessionInfo,
     expected_reprexes,
 )
+from tests.utils import assert_str_equals
 
 
 @pytest.fixture
@@ -36,7 +37,8 @@ def patch_session_info(monkeypatch):
 def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
     actual = reprex(INPUT, **ereprex.kwargs, print_=False)
     with (ASSETS_DIR / ereprex.filename).open("r") as fp:
-        assert str(actual) + "\n" == fp.read()
+        assert str(actual) == fp.read()
+        assert str(actual).endswith("\n")
 
 
 @pytest.fixture
@@ -54,14 +56,15 @@ def no_pygments(monkeypatch):
 def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
     actual = reprex(INPUT, venue="html")
     expected = dedent(
-        """
+        """\
         <pre><code>x = 2
         x + 2
         #> 4</code></pre>
         <p><sup>Created at DATETIME by <a href="https://github.com/jayqi/reprexlite">reprexlite</a> vVERSION</sup></p>
         """  # noqa: E501
-    ).strip()
-    assert str(actual) == expected
+    )
+    assert_str_equals(expected, str(actual))
+    assert str(actual).endswith("\n")
 
 
 def test_rtf_no_pygments(patch_datetime, patch_version, no_pygments):
