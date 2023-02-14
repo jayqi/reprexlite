@@ -29,7 +29,7 @@ docs:
 
 
 dist: clean-dist
-	python setup.py sdist bdist_wheel
+	python -m build
 
 format:
 	ruff reprexlite tests --fix
