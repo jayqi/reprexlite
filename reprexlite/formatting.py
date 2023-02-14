@@ -2,11 +2,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Dict, Optional, Type
 
-from reprexlite.exceptions import (
-    NotAFormatterError,
-    PygmentsNotFoundError,
-    UnexpectedError,
-)
+from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 

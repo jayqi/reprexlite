@@ -15,11 +15,7 @@ except ImportError:
 import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
-from reprexlite.exceptions import (
-    BlackNotFoundError,
-    InvalidParsingMethodError,
-    UnexpectedError,
-)
+from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
 from reprexlite.formatting import venues_dispatcher
 from reprexlite.parsing import LineType, auto_parse, parse
 from reprexlite.version import __version__
@@ -366,7 +362,7 @@ class Reprex:
                 from pygments.lexers import PythonLexer
 
                 out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
-            except ModuleNotFoundError as e:
+            except ModuleNotFoundError:
                 pass
         formatter = venues_dispatcher[self.config.venue]
         return formatter.format(
@@ -383,7 +379,7 @@ class Reprex:
             formatter = HtmlFormatter(style="friendly", wrapcode=True)
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
             out.append(highlight(self.format(), PythonLexer(), formatter))
-        except ImportError:
+        except ModuleNotFoundError:
             out.append(f"<pre><code>{self.format()}</code></pre>")
         return "\n".join(out)
 
