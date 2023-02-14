@@ -103,7 +103,7 @@ class ParsedResult:
         elif isinstance(other, RawResult):
             if not bool(self) and not bool(other):
                 return True
-            return self and other and self.as_result_str() == str(other)
+            return bool(self) and bool(other) and self.as_result_str() == str(other)
         else:
             return NotImplemented
 
