@@ -319,7 +319,7 @@ def test_reprex_custom_input_format():
     assert_str_equals(expected, str(r))
 
 
-def test_reprex_custom_prompts():
+def test_reprex_custom_output_prompts_auto_parsing():
     """Test that Reprex works with custom output prompts."""
     input = dedent(
         """\
@@ -349,6 +349,72 @@ def test_reprex_custom_prompts():
         input,
         config=ReprexConfig(
             prompt="$$$$", continuation="----", comment="||", parsing_method="auto"
+        ),
+    )
+    assert r.results_match
+    assert_str_equals(expected, str(r))
+
+
+def test_reprex_custom_prompts_input_and_output():
+    """Test that Reprex works with custom prompts for both input and output."""
+    input = dedent(
+        """\
+        $$$$ 2+2
+        || 4
+        $$$$
+        $$$$ # I'm a comment
+        $$$$ for i in range(2):
+        ----     print(i)
+        || 0
+        || 1
+        """
+    )
+    r = Reprex.from_input(
+        input,
+        config=ReprexConfig(
+            prompt="$$$$", continuation="----", comment="||", parsing_method="declared"
+        ),
+    )
+    assert r.results_match
+    assert_str_equals(input, str(r))
+
+
+def test_reprex_custom_prompts_different_input_and_output():
+    """Test that Reprex works with different custom prompts for input and output."""
+    input = dedent(
+        """\
+        ! 2+2
+        ?? 4
+        !
+        ! # I'm a comment
+        ! for i in range(2):
+        *     print(i)
+        ?? 0
+        ?? 1
+        """
+    )
+    expected = dedent(
+        """\
+        $$$$ 2+2
+        || 4
+        $$$$
+        $$$$ # I'm a comment
+        $$$$ for i in range(2):
+        ----     print(i)
+        || 0
+        || 1
+        """
+    )
+    r = Reprex.from_input(
+        input,
+        config=ReprexConfig(
+            prompt="$$$$",
+            continuation="----",
+            comment="||",
+            input_prompt="!",
+            input_continuation="*",
+            input_comment="??",
+            parsing_method="declared",
         ),
     )
     assert r.results_match
