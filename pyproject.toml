@@ -33,11 +33,11 @@ ipython = ["ipython"]
 reprex = "reprexlite.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/jayqi/reprexlite"
-Repository = "https://github.com/jayqi/reprexlite"
-Documentation = "https://jayqi.github.io/reprexlite/"
-Issues = "https://github.com/jayqi/reprexlite/issues"
-Changelog = "https://jayqi.github.io/reprexlite/stable/changelog/"
+"Homepage" = "https://jayqi.github.io/reprexlite/"
+"Repository" = "https://github.com/jayqi/reprexlite"
+"Documentation" = "https://jayqi.github.io/reprexlite/"
+"Bug Tracker" = "https://github.com/jayqi/reprexlite/issues"
+"Changelog" = "https://jayqi.github.io/reprexlite/stable/changelog/"
 
 
 [tool.black]
