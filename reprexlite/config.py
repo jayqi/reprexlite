@@ -1,6 +1,6 @@
 import dataclasses
-from enum import Enum
 import textwrap
+from enum import Enum
 from typing import Optional
 
 from reprexlite.exceptions import (
@@ -8,7 +8,7 @@ from reprexlite.exceptions import (
     InvalidVenueError,
     PromptLengthMismatchError,
 )
-from reprexlite.formatting import venues_dispatcher
+from reprexlite.formatting import formatter_registry
 
 
 @dataclasses.dataclass
@@ -36,10 +36,10 @@ class ReprexConfig:
 
     def __post_init__(self):
         # Validate venue
-        if self.venue not in venues_dispatcher:
+        if self.venue not in formatter_registry:
             raise InvalidVenueError(
                 f"{self.venue} is not a valid value for parsing method."
-                f"Valid values are: {list(venues_dispatcher.keys())}"
+                f"Valid values are: {list(formatter_registry.keys())}"
             )
         # Validate prompt and continuation prefixes
         if len(self.prompt) != len(self.continuation):

@@ -6,7 +6,7 @@ import typer
 
 from reprexlite.config import CONFIG_DOCS, ParsingMethod, ReprexConfig
 from reprexlite.exceptions import IPythonNotFoundError
-from reprexlite.formatting import venues_dispatcher
+from reprexlite.formatting import formatter_registry
 from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
 
@@ -36,7 +36,7 @@ def ipython_callback(ipython: bool):
 
 
 Venue = Enum(  # type: ignore
-    "Venue", names={v.upper(): v for v in venues_dispatcher.keys()}, type=str
+    "Venue", names={v.upper(): v for v in formatter_registry.keys()}, type=str
 )
 Venue.__doc__ = """Enum for valid venue options."""
 

@@ -1,10 +1,10 @@
+import traceback
 from contextlib import redirect_stdout
 from dataclasses import dataclass
 from io import StringIO
 from itertools import chain
 from pathlib import Path
 from pprint import pformat
-import traceback
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 try:
@@ -16,7 +16,7 @@ import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
 from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
-from reprexlite.formatting import venues_dispatcher
+from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
 from reprexlite.version import __version__
 
@@ -110,10 +110,7 @@ class ParsedResult:
 
 @dataclass
 class Statement:
-    """Class that holds a LibCST parsed statement. The evaluate method will evaluate the statement
-    and return a [`Result`][reprexlite.code.Result] object. To recover the original source code
-    for an instancement, call `str(...)` on it. You can optionally autoformat the returned source
-    code, controlled by the `style` attribute.
+    """Dataclass that holds a LibCST parsed statement. of code.
 
     Attributes:
         config (ReprexConfig): Configuration for formatting and parsing
@@ -125,6 +122,14 @@ class Statement:
     stmt: Union[cst.SimpleStatementLine, cst.BaseCompoundStatement, cst.EmptyLine]
 
     def evaluate(self, scope: dict) -> RawResult:
+        """Evaluate code statement and produce a RawResult dataclass instance.
+
+        Args:
+            scope (dict): scope to use for evaluation
+
+        Returns:
+            RawResult: Dataclass instance holding evaluation results.
+        """
         if isinstance(self.stmt, cst.EmptyLine):
             return RawResult(config=self.config, raw=None, stdout=None)
 
@@ -158,12 +163,14 @@ class Statement:
 
     @property
     def raw_code(self) -> str:
+        """Raw code of contained statement as a string."""
         if isinstance(self.stmt, cst.EmptyLine):
             return cst.Module(body=[], header=[self.stmt]).code.rstrip()
         return cst.Module(body=[self.stmt]).code.rstrip()
 
     @property
     def code(self) -> str:
+        """Code of contained statement. May be autoformatted depending on configuration."""
         code = self.raw_code
         if self.config.style:
             try:
@@ -201,6 +208,7 @@ class Statement:
         return out.rstrip()
 
     def __bool__(self) -> bool:
+        """Tests whether this instance contains anything to print. Always true for Statement."""
         return True
 
     def __repr__(self) -> str:
@@ -209,15 +217,14 @@ class Statement:
 
 @dataclass
 class Reprex:
-    """Container class for a reprex, which holds Python code and results from evaluation.
+    """Dataclass for a reprex, which holds Python code and results from evaluation.
 
     Attributes:
         config (ReprexConfig): Configuration for formatting and parsing
         statements (List[Statement]): List of parsed Python code statements
         results (List[RawResult]): List of results evaluated from statements
-        old_results (List[ParsedResult]): List of any old results parsed from
-            input code
-        scope (Dict[str, Any]): Dictionary holding the scope that the reprex was evaluated in.
+        old_results (List[ParsedResult]): List of any old results parsed from input code
+        scope (Dict[str, Any]): Dictionary holding the scope that the reprex was evaluated in
     """
 
     config: ReprexConfig
@@ -240,6 +247,19 @@ class Reprex:
         config: Optional[ReprexConfig] = None,
         scope: Optional[Dict[str, Any]] = None,
     ) -> Self:
+        """Create a Reprex instance from parsing and evaluating code from a string.
+
+        Args:
+            input (str): Input code
+            config (Optional[ReprexConfig], optional): Configuration. Defaults to None, which will
+                use default settings.
+            scope (Optional[Dict[str, Any]], optional): Dictionary holding scope that the parsed
+                code will be evaluated with. Defaults to None, which will create an empty
+                dictionary.
+
+        Returns:
+            Reprex: New instance of Reprex.
+        """
         if config is None:
             config = ReprexConfig()
         if config.parsing_method == ParsingMethod.AUTO:
@@ -266,6 +286,19 @@ class Reprex:
         config: Optional[ReprexConfig] = None,
         scope: Optional[Dict[str, Any]] = None,
     ) -> Self:
+        """Creates a Reprex instance from the output of [parse][reprexlite.parsing.parse].
+
+        Args:
+            lines (Sequence[Tuple[str, LineType]]): Output from parse.
+            config (Optional[ReprexConfig], optional): Configuration. Defaults to None, which will
+                use default settings.
+            scope (Optional[Dict[str, Any]], optional): Dictionary holding scope that the parsed
+                code will be evaluated with. Defaults to None, which will create an empty
+                dictionary.
+
+        Returns:
+            Reprex: New instance of Reprex.
+        """
         if config is None:
             config = ReprexConfig()
         statements: List[Statement] = []
@@ -349,6 +382,7 @@ class Reprex:
 
     @property
     def results_match(self) -> bool:
+        """Whether results of evaluating code match old results parsed from input."""
         return all(
             result == old_result for result, old_result in zip(self.results, self.old_results)
         )
@@ -364,12 +398,13 @@ class Reprex:
                 out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
             except ModuleNotFoundError:
                 pass
-        formatter = venues_dispatcher[self.config.venue]
+        formatter = formatter_registry[self.config.venue]
         return formatter.format(
             out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
         )
 
     def _repr_html_(self) -> str:
+        """HTML representation. Used for rendering in Jupyter."""
         out = []
         try:
             from pygments import highlight

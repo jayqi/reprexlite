@@ -40,16 +40,22 @@ class Formatter(ABC):
         """
 
 
-venues_dispatcher: Dict[str, Type[Formatter]] = {}
-"""Mapping from venue keywords to their Formatter implementation."""
+formatter_registry: Dict[str, Type[Formatter]] = {}
+"""Registry of formatters keyed by venue keywords."""
 
 
 def register_formatter(venue: str):
+    """Decorator that registers a formatter implementation.
+
+    Args:
+        venue (str): Keyword to register formatter to.
+    """
+
     def registrar(cls):
-        global venues_dispatcher
+        global formatter_registry
         if not isinstance(cls, type) or not issubclass(cls, Formatter):
             raise NotAFormatterError("Only subclasses of Formatter can be registered.")
-        venues_dispatcher[venue] = cls
+        formatter_registry[venue] = cls
         return cls
 
     return registrar

@@ -1,0 +1,3 @@
+# reprexlite.config
+
+::: reprexlite.config

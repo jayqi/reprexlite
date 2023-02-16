@@ -1,3 +1,0 @@
-# reprexlite.code
-
-::: reprexlite.code
