@@ -15,6 +15,7 @@ nav:
   - Reprex Do's and Don'ts: "dos-and-donts.md"
   - CLI Help: "cli.md"
   - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
+  - Alternatives: "alternatives.md"
   - API Reference:
       - reprexlite: "api-reference/reprex.md"
       - reprexlite.config: "api-reference/config.md"
@@ -29,6 +30,9 @@ extra_css:
   - css/custom_mkdocstrings.css
 
 markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.highlight:
   - pymdownx.superfences:
   - toc:
@@ -56,9 +60,9 @@ plugins:
             group_by_category: true
             inherited_members: true
             # Docstrings options
-            show_if_no_docstring: true
+            show_if_no_docstring: false
             # Signatures/annotation options
-            show_signature_annotations: false
+            show_signature_annotations: true
             # Additional options
             show_source: true
 
