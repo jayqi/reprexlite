@@ -1,3 +1,0 @@
-# reprexlite
-
-::: reprexlite.reprex
