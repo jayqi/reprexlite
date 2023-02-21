@@ -1,3 +1,13 @@
+span.header-link-icon {
+    vertical-align: baseline !important;
+}
+
+.header-link-icon>svg {
+    height: 61.8%;
+}
+
+/* mkdocstrings custom style */
+
 .doc.doc-heading {
     padding-left: 1ch;
     padding-bottom: 5px;
