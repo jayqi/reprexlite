@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import Dict, Optional, Type
+from typing import Dict, List, Optional, Type
 
 from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
@@ -20,6 +20,8 @@ class Formatter(ABC):
 
     default_advertise: bool
     """Default for whether to include reprexlite advertisement for this venue format."""
+    venue_keys: List[str] = []
+    """Venue keywords that map to this formatter."""
 
     @classmethod
     @abstractmethod
@@ -56,6 +58,7 @@ def register_formatter(venue: str):
         if not isinstance(cls, type) or not issubclass(cls, Formatter):
             raise NotAFormatterError("Only subclasses of Formatter can be registered.")
         formatter_registry[venue] = cls
+        cls.venue_keys.append(venue)
         return cls
 
     return registrar
