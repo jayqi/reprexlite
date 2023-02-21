@@ -34,7 +34,7 @@ def patch_edit(monkeypatch):
         def __init__(self):
             self.input = INPUT
 
-        def mock_edit(self):
+        def mock_edit(self, *args, **kwargs):
             return self.input
 
     patch = EditPatch()
@@ -106,7 +106,7 @@ def test_old_results(patch_edit):
 def test_ipython_editor():
     """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
     to inject input into the IPython shell."""
-    result = runner.invoke(app, ["--ipython"])
+    result = runner.invoke(app, ["-e", "ipython"])
     assert result.exit_code == 0
     assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
 
@@ -114,7 +114,7 @@ def test_ipython_editor():
 def test_ipython_editor_not_installed(no_ipython):
     """Test for expected error when opening the IPython interactive editor without IPython
     installed"""
-    result = runner.invoke(app, ["--ipython"])
+    result = runner.invoke(app, ["-e", "ipython"])
     assert result.exit_code == 1
     assert "ipython is required" in result.stdout
 
