@@ -65,6 +65,7 @@ select = [
 ]
 src = ["reprexlite", "tests"]
 exclude = ["tests/assets"]
+unfixable = ["F"]
 
 [tool.ruff.isort]
 known-first-party = ["reprexlite"]
