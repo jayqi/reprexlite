@@ -19,7 +19,6 @@ from reprexlite.config import ParsingMethod, ReprexConfig
 from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
 from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
-from reprexlite.version import __version__
 
 
 @dataclasses.dataclass
@@ -384,6 +383,8 @@ class Reprex:
                 and all(left == right for left, right in zip(self.results, other.results))
                 and all(left == right for left, right in zip(self.old_results, other.old_results))
             )
+        else:
+            return NotImplemented
 
     def __str__(self) -> str:
         if self.config.keep_old_results:
@@ -419,7 +420,7 @@ class Reprex:
         )
 
     def __repr__(self) -> str:
-        return f"<Reprex ({len(self.statements)})>"
+        return f"<Reprex ({len(self.statements)}) '{to_snippet(str(self), 10)}'>"
 
     def _repr_html_(self) -> str:
         """HTML representation. Used for rendering in Jupyter."""
@@ -449,7 +450,7 @@ def reprex(
     outfile: Optional[Union[str, os.PathLike]] = None,
     print_: bool = True,
     terminal: bool = False,
-    config: ReprexConfig = None,
+    config: Optional[ReprexConfig] = None,
     **kwargs,
 ) -> Reprex:
     """A convenient functional interface to render reproducible examples of Python code for
@@ -468,7 +469,7 @@ def reprex(
     #> 4
     ```
 
-    <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v{{version}}</sup>
+    <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite)</sup>
     ````
 
 
