@@ -31,7 +31,7 @@ def patch_edit(input: str):
     is a trick to hook up the IPython cell magic's cell contents to the typer CLI app.
     """
 
-    def return_input() -> str:
+    def return_input(*args, **kwargs) -> str:
         return input
 
     original = reprexlite.cli.typer.edit
@@ -67,7 +67,11 @@ class ReprexMagics(Magics):
         # Cell magic, render reprex
         with patch_edit(cell):
             result = runner.invoke(reprexlite.cli.app, line.split())
-            print(result.stdout, end="")
+            if result.exit_code == 0:
+                print(result.stdout, end="")
+            else:
+                print("reprexlite encountered an error.")
+                print(result.exception, end="")
 
 
 def load_ipython_extension(ipython: InteractiveShell):
@@ -90,9 +94,23 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
 
     banner1 = "".join(ipython_banner_parts)
 
-    def run_cell(self, raw_cell, *args, **kwargs):
-        if raw_cell != "exit":
-            raw_cell = "%%reprex\n" + raw_cell
+    LOAD_HISTORY_STRINGS_PATCHED = False
+
+    def run_cell(self, raw_cell: str, *args, **kwargs):
+        if not self.LOAD_HISTORY_STRINGS_PATCHED:
+            original = self.pt_app.history.load_history_strings
+
+            def patched():
+                for s in original():
+                    if s.startswith("%%reprex\n"):
+                        s = s[9:]
+                    yield s
+
+            self.pt_app.history.load_history_strings = patched
+
+        if raw_cell not in {"exit", "exit()"}:
+            if not raw_cell.startswith("%%reprex"):
+                raw_cell = "%%reprex\n" + raw_cell
         super().run_cell(raw_cell, *args, **kwargs)
 
     def init_magics(self):
