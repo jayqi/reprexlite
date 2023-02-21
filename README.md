@@ -5,7 +5,7 @@
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
-**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional [IPython extension with cell magic](#ipythonjupyter-cell-magic) for easy use in Jupyter or VS Code. This project is inspired by R's [reprex](https://reprex.tidyverse.org/).
+**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional [IPython extension with cell magic](#ipythonjupyter-cell-magic) for easy use in Jupyter or VS Code. This project is inspired by R's [reprex](https://reprex.tidyverse.org/) package.
 
 <img src="https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif" width="640px" />
 
@@ -108,7 +108,7 @@ reprexlite has an optional IPython extension with a `%%reprex` cell magic. That 
 To use, simply load the extension with
 
 ```python
-%%load_ext reprexlite
+%load_ext reprexlite
 ```
 
 and then put `%%reprex` at the top of a cell you want to create a reprex for:
