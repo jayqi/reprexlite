@@ -4,9 +4,10 @@ from textwrap import dedent
 
 import pytest
 
+from reprexlite.config import ReprexConfig
 from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
 from reprexlite.formatting import register_formatter
-from reprexlite.reprexes import reprex
+from reprexlite.reprexes import Reprex
 from tests.expected_formatted import (
     ASSETS_DIR,
     INPUT,
@@ -35,7 +36,8 @@ def patch_session_info(monkeypatch):
 
 @pytest.mark.parametrize("ereprex", expected_reprexes, ids=[e.filename for e in expected_reprexes])
 def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
-    actual = reprex(INPUT, **ereprex.kwargs, print_=False)
+    r = Reprex.from_input(INPUT, ReprexConfig(**ereprex.kwargs))
+    actual = r.format()
     with (ASSETS_DIR / ereprex.filename).open("r") as fp:
         assert str(actual) == fp.read()
         assert str(actual).endswith("\n")
@@ -54,7 +56,8 @@ def no_pygments(monkeypatch):
 
 
 def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
-    actual = reprex(INPUT, venue="html")
+    r = Reprex.from_input(INPUT, ReprexConfig(venue="html"))
+    actual = r.format()
     expected = dedent(
         """\
         <pre><code>x = 2
@@ -69,7 +72,8 @@ def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
 
 def test_rtf_no_pygments(patch_datetime, patch_version, no_pygments):
     with pytest.raises(PygmentsNotFoundError):
-        reprex(INPUT, venue="rtf")
+        r = Reprex.from_input(INPUT, ReprexConfig(venue="rtf"))
+        r.format()
 
 
 @pytest.fixture
@@ -90,7 +94,8 @@ def pygments_bad_dependency(monkeypatch):
 def test_rtf_pygments_bad_dependency(patch_datetime, patch_version, pygments_bad_dependency):
     """Test that a bad import inside pygments does not trigger PygmentsNotFoundError"""
     with pytest.raises(ModuleNotFoundError) as exc_info:
-        reprex(INPUT, venue="rtf")
+        r = Reprex.from_input(INPUT, ReprexConfig(venue="rtf"))
+        r.format()
     assert not isinstance(exc_info.type, PygmentsNotFoundError)
     assert exc_info.value.name != "pygments"
     assert exc_info.value.name == pygments_bad_dependency

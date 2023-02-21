@@ -1,10 +1,11 @@
-import traceback
 from contextlib import redirect_stdout
-from dataclasses import dataclass
+import dataclasses
 from io import StringIO
 from itertools import chain
+import os
 from pathlib import Path
 from pprint import pformat
+import traceback
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 try:
@@ -14,14 +15,14 @@ except ImportError:
 
 import libcst as cst
 
-from reprexlite.config import ParsingMethod, ReprexConfig, format_args_google_style
+from reprexlite.config import ParsingMethod, ReprexConfig
 from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
 from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
 from reprexlite.version import __version__
 
 
-@dataclass
+@dataclasses.dataclass
 class RawResult:
     """Class that holds the result of evaluated code. Use `str(...)` on an instance to produce a
     pretty-formatted comment block representation of the result.
@@ -62,7 +63,7 @@ class RawResult:
             return NotImplemented
 
 
-@dataclass
+@dataclasses.dataclass
 class ParsedResult:
     """Class that holds parsed result from reading a reprex.
 
@@ -108,7 +109,7 @@ class ParsedResult:
             return NotImplemented
 
 
-@dataclass
+@dataclasses.dataclass
 class Statement:
     """Dataclass that holds a LibCST parsed statement. of code.
 
@@ -214,8 +215,13 @@ class Statement:
     def __repr__(self) -> str:
         return f"<Statement '{to_snippet(self.code, 10)}'>"
 
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, Statement):
+            return self.raw_code == other.raw_code
+        return NotImplemented
 
-@dataclass
+
+@dataclasses.dataclass
 class Reprex:
     """Dataclass for a reprex, which holds Python code and results from evaluation.
 
@@ -370,6 +376,15 @@ class Reprex:
             scope=scope,
         )
 
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, Reprex):
+            return (
+                self.config == other.config
+                and all(left == right for left, right in zip(self.statements, other.statements))
+                and all(left == right for left, right in zip(self.results, other.results))
+                and all(left == right for left, right in zip(self.old_results, other.old_results))
+            )
+
     def __str__(self) -> str:
         if self.config.keep_old_results:
             lines = chain.from_iterable(zip(self.statements, self.old_results, self.results))
@@ -403,6 +418,9 @@ class Reprex:
             out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
         )
 
+    def __repr__(self) -> str:
+        return f"<Reprex ({len(self.statements)})>"
+
     def _repr_html_(self) -> str:
         """HTML representation. Used for rendering in Jupyter."""
         out = []
@@ -428,16 +446,17 @@ def to_snippet(s: str, n: int) -> str:
 
 def reprex(
     input: str,
-    outfile: Optional[Path] = None,
+    outfile: Optional[Union[str, os.PathLike]] = None,
     print_: bool = True,
     terminal: bool = False,
+    config: ReprexConfig = None,
     **kwargs,
-) -> str:
-    """Render reproducible examples of Python code for sharing. This function will evaluate your
-    code and, by default, print out your code with the evaluated results embedded as comments,
-    along with additional markup appropriate to the sharing venue set by the `venue` keyword
-    argument. The function returns an instance of [`Reprex`][reprexlite.reprexes.Reprex] which
-    holds the relevant data.
+) -> Reprex:
+    """A convenient functional interface to render reproducible examples of Python code for
+    sharing. This function will evaluate your code and, by default, print out your code with the
+    evaluated results embedded as comments, formatted with additional markup appropriate to the
+    sharing venue set by the `venue` keyword argument. The function returns an instance of
+    [`Reprex`][reprexlite.reprexes.Reprex] which holds the relevant data.
 
     For example, for the `gh` venue for GitHub Flavored Markdown, you'll get a reprex whose
     formatted output looks like:
@@ -452,38 +471,37 @@ def reprex(
     <sup>Created at 2021-02-15 16:58:47 PST by [reprexlite](https://github.com/jayqi/reprexlite) v{{version}}</sup>
     ````
 
-    The supported `venue` formats are:
-
-    - `gh` : GitHub Flavored Markdown
-    - `so` : StackOverflow, alias for gh
-    - `ds` : Discourse, alias for gh
-    - `html` : HTML
-    - `py` : Python script
-    - `rtf` : Rich Text Format
-    - `slack` : Slack
 
     Args:
-    {{args}}
+        input (str): Input code to create a reprex for.
+        outfile (Optional[str | os.PathLike]): If provided, path to write formatted reprex
+            output to. Defaults to None, which does not write to any file.
+        print_ (bool): Whether to print formatted reprex output to console.
+        terminal (bool): Whether currently in a terminal. If true, will automatically apply code
+            highlighting if pygments is installed.
+        config (Optional[ReprexConfig]): Instance of the configuration dataclass. Default of none
+            will instantiate one with default values.
+        **kwargs: Configuration options from [ReprexConfig][reprexlite.config.ReprexConfig]. Any
+            provided values will override values from provided config or the defaults.
 
     Returns:
-        (str) Formatted reprex
+        (Reprex) Reprex instance
     """  # noqa: E501
+
+    if config is None:
+        config = ReprexConfig(**kwargs)
+    else:
+        config = dataclasses.replace(config, **kwargs)
 
     config = ReprexConfig(**kwargs)
     if config.venue in ["html", "rtf"]:
         # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
-    reprex = Reprex.from_input(input, config=config)
-    formatted_reprex = reprex.format(terminal=terminal)
+    r = Reprex.from_input(input, config=config)
+    output = r.format(terminal=terminal)
     if outfile is not None:
-        with outfile.open("w") as fp:
-            fp.write(reprex.format(terminal=False))
+        with Path(outfile).open("w") as fp:
+            fp.write(r.format(terminal=False))
     if print_:
-        print(formatted_reprex)
-    return formatted_reprex
-
-
-if reprex.__doc__:
-    reprex.__doc__ = reprex.__doc__.replace("{{version}}", __version__).replace(
-        "{{args}}", format_args_google_style()
-    )
+        print(output)
+    return r

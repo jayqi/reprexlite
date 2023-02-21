@@ -6,9 +6,9 @@ from textwrap import dedent
 from IPython.testing import globalipapp
 import pytest
 
-from reprexlite import reprex
 from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.ipython import ReprexTerminalInteractiveShell
+from reprexlite.reprexes import Reprex
 from tests.utils import remove_ansi_escape
 
 
@@ -57,7 +57,9 @@ def test_ipython_editor(reprexlite_ipython, capsys):
     )
     reprexlite_ipython.run_cell(input)
     captured = capsys.readouterr()
-    expected = str(reprex(input, print_=False))
+    r = Reprex.from_input(input)
+    expected = r.format()
+
     print("\n---EXPECTED---\n")
     print(expected)
     print("\n---ACTUAL-----\n")

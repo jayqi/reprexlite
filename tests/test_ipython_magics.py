@@ -7,14 +7,15 @@ from IPython.terminal.interactiveshell import TerminalInteractiveShell
 from IPython.testing import globalipapp
 import pytest
 
-from reprexlite import reprex
+from reprexlite.config import ReprexConfig
+from reprexlite.reprexes import Reprex
 
 
 @pytest.fixture()
 def ipython(monkeypatch):
     monkeypatch.setattr(TerminalInteractiveShell, "_instance", None)
     ipython = globalipapp.start_ipython()
-    ipython.magic("load_ext reprexlite")
+    ipython.run_line_magic("load_ext", "reprexlite")
     yield ipython
     ipython.run_cell("exit")
     del globalipapp.start_ipython.already_called
@@ -48,9 +49,9 @@ def test_cell_magic(ipython, capsys):
     )
     ipython.run_cell_magic("reprex", line="--no-advertise --session-info", cell=input)
     captured = capsys.readouterr()
-    expected = reprex(
-        input, advertise=False, session_info=True, print_=False, terminal=True
-    ).format()
+
+    r = Reprex.from_input(input, config=ReprexConfig(advertise=False, session_info=True))
+    expected = r.format(terminal=True)
 
     print("\n---EXPECTED---\n")
     print(expected)

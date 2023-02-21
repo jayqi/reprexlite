@@ -730,7 +730,13 @@ def test_reprex_init_bad_lengths_error():
         )
 
 
-def test_reprex_function_write_to_file(tmp_path):
-    rendered = reprex("2+2", outfile=tmp_path / "rendered.txt")
+def test_reprex_function(tmp_path):
+    input = "2+2"
+    expected = Reprex.from_input(input)
+    actual = reprex("2+2", outfile=tmp_path / "rendered.txt")
+
+    assert actual == expected
+
+    # Test writing to file
     with (tmp_path / "rendered.txt").open("r") as fp:
-        assert rendered == fp.read()
+        assert expected.format() == fp.read()
