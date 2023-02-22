@@ -6,6 +6,14 @@ span.header-link-icon {
     height: 61.8%;
 }
 
+/* don't wrap table cell */
+
+th.no-wrap,
+td.no-wrap {
+    white-space: nowrap;
+}
+
+
 /* mkdocstrings custom style */
 
 .doc.doc-heading {
