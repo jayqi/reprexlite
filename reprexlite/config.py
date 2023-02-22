@@ -1,5 +1,4 @@
-import dataclasses
-import textwrap
+from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional
 
@@ -11,28 +10,122 @@ from reprexlite.exceptions import (
 from reprexlite.formatting import formatter_registry
 
 
-@dataclasses.dataclass
-class ReprexConfig:
-    """Configuration for formatting and parsing
+class ParsingMethod(str, Enum):
+    """Methods for parsing input strings.
 
-    Attributes:
-    {{attributes}}
+    Args:
+        AUTO (str): Automatically identify reprex-style or doctest-style input.
+        DECLARED (str): Use configured values for parsing.
+    """
+
+    AUTO = "auto"
+    DECLARED = "declared"
+
+
+@dataclass
+class ReprexConfig:
+    """Configuration dataclass for reprexlite. Used to configure input parsing and output
+    formatting.
     """
 
     # Formatting
-    venue: str = "gh"
-    advertise: Optional[bool] = None
-    session_info: bool = False
-    style: bool = False
-    prompt: str = ""
-    continuation: str = ""
-    comment: str = "#>"
+    venue: str = field(
+        default="gh",
+        metadata={
+            "help": (
+                "Key to identify the output venue that the reprex will be shared in. Used to "
+                'select an appropriate formatter. See "Venues Formatting" documentation for '
+                "formats included with reprexlite."
+            )
+        },
+    )
+    advertise: Optional[bool] = field(
+        default=None,
+        metadata={
+            "help": (
+                "Whether to include a footer that credits reprexlite. If unspecified, will depend "
+                "on specified venue formatter's default."
+            )
+        },
+    )
+    session_info: bool = field(
+        default=False,
+        metadata={
+            "help": (
+                "Include details about session and environment that the reprex was generated with."
+            )
+        },
+    )
+    style: bool = field(
+        default=False,
+        metadata={
+            "help": "Whether to autoformat code with black. Requires black to be installed."
+        },
+    )
+    prompt: str = field(
+        default="",
+        metadata={"help": "Prefix to use as primary prompt for code lines."},
+    )
+    continuation: str = field(
+        default="",
+        metadata={"help": "Prefix to use as secondary prompt for continued code lines."},
+    )
+    comment: str = field(
+        default="#>",
+        metadata={"help": "Prefix to use for results returned by expressions."},
+    )
+    keep_old_results: bool = field(
+        default=False,
+        metadata={
+            "help": (
+                "Whether to additionally include results of expressions detected in the original "
+                "input when formatting the reprex output."
+            )
+        },
+    )
     # Parsing
-    parsing_method: str = "auto"
-    input_prompt: Optional[str] = None
-    input_continuation: Optional[str] = None
-    input_comment: Optional[str] = None
-    keep_old_results: bool = False
+    parsing_method: str = field(
+        default="auto",
+        metadata={
+            "help": (
+                "Method for parsing input. 'auto' will automatically detect either default "
+                "reprex-style input or standard doctest-style input. 'declared' will allow you to "
+                "specify custom line prefixes. Values for 'prompt', 'continuation', and 'comment' "
+                "will be used for both output formatting and input parsing, unless the associated "
+                "'input_*' override settings are supplied."
+            )
+        },
+    )
+    input_prompt: Optional[str] = field(
+        default=None,
+        metadata={
+            "help": (
+                "Prefix to use as primary prompt for code lines when parsing input. Only used if "
+                "'parsing_method' is 'declared'. If not set, 'prompt' is used for both input "
+                "parsing and output formatting."
+            )
+        },
+    )
+    input_continuation: Optional[str] = field(
+        default=None,
+        metadata={
+            "help": (
+                "Prefix to use as secondary prompt for continued code lines when parsing input. "
+                "Only used if 'parsing_method' is 'declared'. If not set, 'prompt' is used for "
+                "both input parsing and output formatting."
+            )
+        },
+    )
+    input_comment: Optional[str] = field(
+        default=None,
+        metadata={
+            "help": (
+                "Prefix to use for results returned by expressions when parsing input. Only used "
+                "if 'parsing_method' is 'declared'. If not set, 'prompt' is used for both input "
+                "parsing and output formatting."
+            )
+        },
+    )
 
     def __post_init__(self):
         # Validate venue
@@ -74,65 +167,29 @@ class ReprexConfig:
             return self.input_comment
         return self.comment
 
-
-class ParsingMethod(str, Enum):
-    AUTO = "auto"
-    DECLARED = "declared"
-
-
-CONFIG_DOCS = {
-    # Formatting
-    "venue": "Output format appropriate to the venue where you plan to share this code.",
-    "advertise": (
-        "Whether to include footer that credits reprexlite. "
-        "If unspecified, will depend on specified venue's default."
-    ),
-    "session_info": "Include details about session and installed packages.",
-    "style": "Autoformat code with black. Requires black to be installed.",
-    "prompt": "Prefix to use as primary prompt for code lines.",
-    "continuation": "Prefix to use as secondary prompt for continued code lines.",
-    "comment": "Comment prefix to use for results returned by expressions.",
-    # Parsing
-    "parsing_method": (
-        "Method for parsing input. 'auto' will appropriate detect default "
-        "reprex-style input or standard doctest-style input. 'declared'"
-    ),
-    "input_prompt": (
-        "Prefix for primary prompts when parsing input. Only used if parsing method "
-        "is 'declared'."
-    ),
-    "input_continuation": (
-        "Prefix for continuation prompts when parsing input. Only used if "
-        "parsing method is 'declared'."
-    ),
-    "input_comment": (
-        "Prefix for result lines when parsing input. Only used if parsing method is 'declared'."
-    ),
-    "keep_old_results": (
-        "Keep any existing evaluation results detected in input as comments. If "
-        "false, these will be stripped."
-    ),
-}
+    @classmethod
+    def get_help(cls, field_name: str):
+        return cls.__dataclass_fields__[field_name].metadata["help"]
 
 
-def format_args_google_style():
-    docs = []
-    for field in dataclasses.fields(ReprexConfig):
-        field_name = field.name
-        try:
-            field_type = field.type.__name__
-        except AttributeError:
-            field_type = str(field.type)
-        docs.extend(
-            textwrap.wrap(
-                f"{field_name} ({field_type}): {CONFIG_DOCS[field_name]}",
-                width=99,
-                initial_indent=" " * 8,
-                subsequent_indent=" " * 12,
-            )
-        )
-    return "\n".join(docs)[4:]
+# def format_args_google_style():
+#     docs = []
+#     for field in dataclasses.fields(ReprexConfig):
+#         field_name = field.name
+#         try:
+#             field_type = field.type.__name__
+#         except AttributeError:
+#             field_type = str(field.type)
+#         docs.extend(
+#             textwrap.wrap(
+#                 f"{field_name} ({field_type}): {CONFIG_DOCS[field_name]}",
+#                 width=99,
+#                 initial_indent=" " * 8,
+#                 subsequent_indent=" " * 12,
+#             )
+#         )
+#     return "\n".join(docs)[4:]
 
 
-if ReprexConfig.__doc__:
-    ReprexConfig.__doc__ = ReprexConfig.__doc__.replace("{{args}}", format_args_google_style())
+# if ReprexConfig.__doc__:
+#     ReprexConfig.__doc__ = ReprexConfig.__doc__.replace("{{args}}", format_args_google_style())
