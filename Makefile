@@ -23,7 +23,7 @@ docs:
 	sed 's|https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif|images/demo.gif|g' README.md \
 		| sed 's|https://jayqi.github.io/reprexlite/stable/||g' \
 		> docs/docs/index.md
-	sed 's|https://jayqi.github.io/reprexlite/stable/||g' HISTORY.md \
+	sed 's|https://jayqi.github.io/reprexlite/stable/||g' CHANGELOG.md \
 		> docs/docs/changelog.md
 	cd docs && mkdocs build
 
