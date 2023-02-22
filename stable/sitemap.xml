@@ -1,38 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://jayqi.github.io/reprexlite/v0.5/design-philosophy/</loc>
-         <lastmod>2022-02-20</lastmod>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/</loc>
+         <lastmod>2023-02-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jayqi.github.io/reprexlite/v0.5/dos-and-donts/</loc>
-         <lastmod>2022-02-20</lastmod>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/changelog/</loc>
+         <lastmod>2023-02-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jayqi.github.io/reprexlite/v0.5/ipython-jupyter-magic/</loc>
-         <lastmod>2022-02-20</lastmod>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/cli/</loc>
+         <lastmod>2023-02-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jayqi.github.io/reprexlite/v0.5/api-reference/code/</loc>
-         <lastmod>2022-02-20</lastmod>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/design-philosophy/</loc>
+         <lastmod>2023-02-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jayqi.github.io/reprexlite/v0.5/api-reference/formatting/</loc>
-         <lastmod>2022-02-20</lastmod>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/dos-and-donts/</loc>
+         <lastmod>2023-02-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jayqi.github.io/reprexlite/v0.5/api-reference/reprex/</loc>
-         <lastmod>2022-02-20</lastmod>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/ipython-jupyter-magic/</loc>
+         <lastmod>2023-02-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jayqi.github.io/reprexlite/v0.5/api-reference/session_info/</loc>
-         <lastmod>2022-02-20</lastmod>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/api-reference/code/</loc>
+         <lastmod>2023-02-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/api-reference/formatting/</loc>
+         <lastmod>2023-02-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/api-reference/reprex/</loc>
+         <lastmod>2023-02-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jayqi.github.io/reprexlite/v0.5.0/api-reference/session_info/</loc>
+         <lastmod>2023-02-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
