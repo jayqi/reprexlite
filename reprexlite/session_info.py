@@ -19,7 +19,7 @@ class SessionInfo:
         packages (List[Package]): List of Python packages installed in current virtual environment.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.python_version: str = platform.python_version()
         self.python_build_date: str = platform.python_build()[1]
 
@@ -28,7 +28,7 @@ class SessionInfo:
             Package(distr) for distr in importlib_metadata.Distribution.discover()
         ]
 
-    def __str__(self):
+    def __str__(self) -> str:
         lines = ["-- Session Info --" + "-" * 60]
         lines += tabulate(
             [
@@ -44,7 +44,7 @@ class SessionInfo:
 class Package:
     """Interface for adapting [`importlib.metadata.Distribution`](https://docs.python.org/3/library/importlib.metadata.html#distributions)
     instances for introspection by [`SessionInfo`][reprexlite.session_info.SessionInfo].
-    """
+    """  # noqa: E501
 
     def __init__(self, distribution: importlib_metadata.Distribution):
         self.distribution = distribution
@@ -58,9 +58,9 @@ class Package:
         return self.distribution.version
 
     def __lt__(self, other) -> bool:
-        if not isinstance(other, Package):
-            raise ValueError
-        return self.name < other.name
+        if isinstance(other, Package):
+            return self.name < other.name
+        return NotImplemented  # pragma: nocover
 
 
 def tabulate(rows: List[Tuple[str, str]]) -> List[str]:

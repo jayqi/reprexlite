@@ -1,3 +1,4 @@
+import builtins
 import subprocess
 from textwrap import dedent
 
@@ -6,7 +7,9 @@ import typer
 from typer.testing import CliRunner
 
 from reprexlite.cli import app
+from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.version import __version__
+from tests.utils import remove_ansi_escape
 
 runner = CliRunner()
 
@@ -31,7 +34,7 @@ def patch_edit(monkeypatch):
         def __init__(self):
             self.input = INPUT
 
-        def mock_edit(self):
+        def mock_edit(self, *args, **kwargs):
             return self.input
 
     patch = EditPatch()
@@ -39,11 +42,23 @@ def patch_edit(monkeypatch):
     return patch
 
 
+@pytest.fixture
+def no_ipython(monkeypatch):
+    import_orig = builtins.__import__
+
+    def mocked_import(name, *args):
+        if name.startswith("reprexlite.ipython"):
+            raise IPythonNotFoundError
+        return import_orig(name, *args)
+
+    monkeypatch.setattr(builtins, "__import__", mocked_import)
+
+
 def test_reprex(patch_edit):
     result = runner.invoke(app)
     print(result.stdout)
     assert result.exit_code == 0
-    assert EXPECTED in result.stdout
+    assert EXPECTED in remove_ansi_escape(result.stdout)
 
 
 def test_reprex_infile(tmp_path):
@@ -52,7 +67,7 @@ def test_reprex_infile(tmp_path):
         fp.write(INPUT)
     result = runner.invoke(app, ["-i", str(infile)])
     assert result.exit_code == 0
-    assert EXPECTED in result.stdout
+    assert EXPECTED in remove_ansi_escape(result.stdout)
 
 
 def test_reprex_outfile(patch_edit, tmp_path):
@@ -81,7 +96,7 @@ def test_old_results(patch_edit):
     assert "#> [2, 3, 4, 5, 6]" in result.stdout
 
     # with --old-results
-    result = runner.invoke(app, ["--old-results"])
+    result = runner.invoke(app, ["--keep-old-results"])
     print(result.stdout)
     assert result.exit_code == 0
     assert "#> old line" in result.stdout
@@ -91,9 +106,17 @@ def test_old_results(patch_edit):
 def test_ipython_editor():
     """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
     to inject input into the IPython shell."""
-    result = runner.invoke(app, ["--ipython"])
+    result = runner.invoke(app, ["-e", "ipython"])
     assert result.exit_code == 0
     assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
+
+
+def test_ipython_editor_not_installed(no_ipython):
+    """Test for expected error when opening the IPython interactive editor without IPython
+    installed"""
+    result = runner.invoke(app, ["-e", "ipython"])
+    assert result.exit_code == 1
+    assert "ipython is required" in result.stdout
 
 
 def test_help():

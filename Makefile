@@ -23,28 +23,27 @@ docs:
 	sed 's|https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif|images/demo.gif|g' README.md \
 		| sed 's|https://jayqi.github.io/reprexlite/stable/||g' \
 		> docs/docs/index.md
-	sed 's|https://jayqi.github.io/reprexlite/stable/||g' HISTORY.md \
+	sed 's|https://jayqi.github.io/reprexlite/stable/||g' CHANGELOG.md \
 		> docs/docs/changelog.md
 	cd docs && mkdocs build
 
 
 dist: clean-dist
-	python setup.py sdist bdist_wheel
+	python -m build
 
 format:
-	isort reprexlite tests
+	ruff reprexlite tests --fix
 	black reprexlite tests
 
 generate-test-assets:
 	python tests/expected_reprexes.py
 
 lint:
-	isort --check-only reprexlite tests
 	black --check reprexlite tests
-	flake8 reprexlite tests
+	ruff reprexlite tests
 
 test:
 	pytest -vv
 
 typecheck:
-	mypy reprexlite
+	mypy reprexlite --show-error-codes --install-types --non-interactive

@@ -1,4 +1,8 @@
-"""This script generates expected reprex test assets."""
+"""This module holds metadata about formatted test cases. It also can be run as a script to
+generate expected formatted test assets.
+
+    python -m tests.expected_formatted
+"""
 
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -90,7 +94,6 @@ class MockDateTime:
 
 @contextmanager
 def patch_datetime():
-
     datetime = sys.modules["reprexlite.formatting"].datetime
     sys.modules["reprexlite.formatting"].datetime = MockDateTime
     yield

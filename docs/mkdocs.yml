@@ -2,57 +2,94 @@ site_name: reprexlite
 site_url: https://jayqi.github.io/reprexlite
 site_description: Render reproducible examples of Python code for sharing.
 repo_url: https://github.com/jayqi/reprexlite
-theme:
-  name: material
-  logo: images/reprexlite.svg
-  favicon: images/reprexlite_white_blue.svg
-  features:
-    - navigation.top
 
 nav:
   - Home: "index.md"
   - Design Philosophy: "design-philosophy.md"
   - Reprex Do's and Don'ts: "dos-and-donts.md"
-  - CLI Help: "cli.md"
-  - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
-  - API Reference:
-      - reprexlite: "api-reference/reprex.md"
-      - reprexlite.code: "api-reference/code.md"
-      - reprexlite.formatting: "api-reference/formatting.md"
-      - reprexlite.session_info: "api-reference/session_info.md"
+  - Usage:
+      - Basic Usage: "./#basic-usage"
+      - CLI Help: "cli.md"
+      - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
+      - Venues Formatting: "formatting.md"
+      - Configuration: "configuration.md"
+  - Library:
+      - API Reference:
+          - reprexlite.config: "api-reference/config.md"
+          - reprexlite.exceptions: "api-reference/exceptions.md"
+          - reprexlite.formatting: "api-reference/formatting.md"
+          - reprexlite.parsing: "api-reference/parsing.md"
+          - reprexlite.reprexes: "api-reference/reprexes.md"
+          - reprexlite.session_info: "api-reference/session_info.md"
   - Changelog: "changelog.md"
+  - Alternatives: "alternatives.md"
+
+theme:
+  name: material
+  features:
+    - navigation.sections # top-level groups are section headers
+    - navigation.top # adds back-to-top button
+  logo: images/reprexlite.svg
+  favicon: images/reprexlite_white_blue.svg
+  palette:
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  custom_dir: overrides/
 
 extra_css:
-  - css/custom_mkdocstrings.css
+  - css/extra.css
 
 markdown_extensions:
+  - attr_list:
+  - mdx_truly_sane_lists:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.highlight:
   - pymdownx.superfences:
+  - tables:
   - toc:
       permalink: true
       toc_depth: 3
-  - mdx_truly_sane_lists:
 
 plugins:
   - search:
+  - macros:
   - mkdocs-jupyter:
   - mkdocstrings:
       default_handler: python
       handlers:
         python:
-          selection:
-            filters: ["!^_(?!_init__)"]
-            inherited_members: true
-          rendering:
-            show_root_heading: false
+          paths: [../reprexlite]
+          options:
+            # Headings options
+            heading_level: 2
             show_root_toc_entry: false
             show_root_full_path: false
-            show_if_no_docstring: true
-            show_signature_annotations: false
-            show_source: true
-            heading_level: 2
-            group_by_category: true
+            show_root_heading: false
             show_category_heading: true
+            # Members options
+            filters: ["!^_(?!_init__)"]
+            group_by_category: true
+            inherited_members: true
+            # Docstrings options
+            show_if_no_docstring: false
+            # Signatures/annotation options
+            show_signature_annotations: true
+            # Additional options
+            show_source: true
 
 extra:
   version:
