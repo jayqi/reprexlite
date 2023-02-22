@@ -104,6 +104,6 @@ def test_rtf_pygments_bad_dependency(patch_datetime, patch_version, pygments_bad
 def test_not_a_formatter_error():
     with pytest.raises(NotAFormatterError):
 
-        @register_formatter("l33t")
+        @register_formatter("l33t", label="l33t")
         class F0rm4tt3r:
             pass
