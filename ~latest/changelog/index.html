@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/~latest/changelog/">
       
       <link rel="icon" href="../images/reprexlite_white_blue.svg">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -21,13 +21,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
         
       
       
+
     
     
     
@@ -42,12 +43,13 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../css/custom_mkdocstrings.css">
+      <link rel="stylesheet" href="../css/extra.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -55,12 +57,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -68,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#reprexlite-changelog" class="md-skip">
+        <a href="#changelog" class="md-skip">
           Skip to content
         </a>
       
@@ -78,9 +84,19 @@
     </div>
     
       <div data-md-component="outdated" hidden>
-        <aside class="md-banner md-banner--warning">
-          
-        </aside>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+You're not viewing the most recent stable version.
+<a href="../..">
+    <strong>Click here to go to stable.</strong>
+</a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
       </div>
     
     
@@ -113,6 +129,30 @@
       </div>
     </div>
     
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
     
     
       <label class="md-header__button md-icon" for="__search">
@@ -129,7 +169,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -153,7 +193,7 @@
         <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -197,7 +237,7 @@
       <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -259,6 +299,48 @@
   
   
   
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../#basic-usage" class="md-nav__link">
+        Basic Usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../cli/" class="md-nav__link">
         CLI Help
@@ -266,11 +348,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -281,6 +362,41 @@
     </li>
   
 
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatting/" class="md-nav__link">
+        Venues Formatting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
     
       
       
@@ -290,21 +406,49 @@
   
   
     
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Library
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Library" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Library
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_6">
+        <label class="md-nav__link" for="__nav_5_1">
           API Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
           <span class="md-nav__icon md-icon"></span>
           API Reference
         </label>
@@ -316,8 +460,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/reprex/" class="md-nav__link">
-        reprexlite
+      <a href="../api-reference/config/" class="md-nav__link">
+        reprexlite.config
       </a>
     </li>
   
@@ -330,8 +474,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/code/" class="md-nav__link">
-        reprexlite.code
+      <a href="../api-reference/exceptions/" class="md-nav__link">
+        reprexlite.exceptions
       </a>
     </li>
   
@@ -358,9 +502,44 @@
   
   
     <li class="md-nav__item">
+      <a href="../api-reference/parsing/" class="md-nav__link">
+        reprexlite.parsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/reprexes/" class="md-nav__link">
+        reprexlite.reprexes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api-reference/session_info/" class="md-nav__link">
         reprexlite.session_info
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -414,6 +593,40 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v100-unreleased" class="md-nav__link">
+    v1.0.0 (Unreleased)
+  </a>
+  
+    <nav class="md-nav" aria-label="v1.0.0 (Unreleased)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-and-ipython-user-interfaces" class="md-nav__link">
+    CLI and IPython User Interfaces
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#library" class="md-nav__link">
+    Library
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v050-2020-02-20" class="md-nav__link">
     v0.5.0 (2020-02-20)
   </a>
@@ -484,6 +697,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alternatives/" class="md-nav__link">
+        Alternatives
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -509,6 +737,40 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v100-unreleased" class="md-nav__link">
+    v1.0.0 (Unreleased)
+  </a>
+  
+    <nav class="md-nav" aria-label="v1.0.0 (Unreleased)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-and-ipython-user-interfaces" class="md-nav__link">
+    CLI and IPython User Interfaces
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#library" class="md-nav__link">
+    Library
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#v050-2020-02-20" class="md-nav__link">
@@ -581,17 +843,89 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
+
   <a href="https://github.com/jayqi/reprexlite/edit/master/docs/changelog.md" title="Edit this page" class="md-content__button md-icon">
+    
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-
-<h1 id="reprexlite-changelog">reprexlite Changelog<a class="headerlink" href="#reprexlite-changelog" title="Permanent link">&para;</a></h1>
+<h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="v100-unreleased">v1.0.0 (Unreleased)<a class="headerlink" href="#v100-unreleased" title="Permanent link">&para;</a></h2>
+<p>This release involves major changes to reprexlite. There is a significant refactoring of the library internals and also many changes to the API. This enabled new feature and more customizability.</p>
+<h3 id="cli-and-ipython-user-interfaces">CLI and IPython User Interfaces<a class="headerlink" href="#cli-and-ipython-user-interfaces" title="Permanent link">&para;</a></h3>
+<h4 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added a new <code>--editor</code>/<code>-e</code> option to specify what editor to use. If not used, this has same behavior as before. This option is also the new way to launch the IPython interactive shell editor (by passing <code>ipython</code>).</li>
+<li>Added new options to control parsing and output style.<ul>
+<li><code>--prompt</code> and <code>--continuation</code> options let you set the primary and secondary prompt prefixes in rendered output. These default to empty srings <code>""</code> for "reprex-style" output.</li>
+<li>A new <code>--parsing-method</code> option controls input-parsing behavior.<ul>
+<li>The default value <code>auto</code> can automatically handle "reprex-style" input as well as "doctest-style`/Python REPL input.</li>
+<li>A value <code>declared</code> will use the values of <code>--prompt</code>, <code>--continuation</code>, and <code>--comment</code> for parsing input in addition to styling output. To handle input and output with different styes, you can override input-side values with the <code>--input-prompt</code>, <code>--input-continuation</code>, and <code>--input-comment</code> options.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Changed the way to access the IPython interactive shell editor. This is now launched by using the new <code>--editor</code>/<code>-e</code> option by passing <code>ipython</code>. The IPython shell editor also now respects other command line configuration options. It is now considered a stable feature and is no longer experimental.</li>
+<li>Renamed the <code>--old-results</code> option to <code>--keep-old-results</code>.</li>
+</ul>
+<h4 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Fixed bug that silenced output when using the IPython cell magic or the IPython shell editor and encountering an error where reprexlite couldn't render your code (such as a syntax error). This should now display an informative error message.</li>
+</ul>
+<h3 id="library">Library<a class="headerlink" href="#library" title="Permanent link">&para;</a></h3>
+<h4 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added new <code>reprexlite.parsing</code> module which contains functions for parsing input. These functions yield tuples representing lines of the input with an enum indicating whether the line is code or a result.</li>
+<li>Added new <code>reprexlite.reprexes</code> module which contains code for evaluating a reprex.<ul>
+<li>The new <code>Reprex</code> dataclass serves as the main container for reprex data. It holds parallel lists of <code>Statement</code>, <code>ParsedResult</code>, and <code>RawResult</code> data.<ul>
+<li>The <code>Reprex.from_input_lines</code> factory method creates a <code>Reprex</code> from the output of the <code>reprexlite.parsing</code> parsing functions.</li>
+<li>The <code>Reprex.from_input</code> factory method wraps parsing and takes a string input.</li>
+</ul>
+</li>
+<li>The <code>Statement</code> dataclass holds code data and parsed concrete syntax tree. This serves a similar purpose to the old <code>Statement</code> class.</li>
+<li>The <code>ParsedResult</code> dataclass holds old evaluation results parsed from the input, if any.</li>
+<li>The <code>RawResult</code> dataclass holds the returned values from evaluating code. This serves a similar purpose to the old <code>Result</code> class.</li>
+</ul>
+</li>
+<li>Added new <code>reprexlite.config</code> module and <code>ReprexConfig</code> dataclass for holding configuration values.</li>
+<li>Added new <code>reprexlite.exceptions</code> module with exception classes that subclass a base exception class <code>ReprexliteException</code>.</li>
+</ul>
+<h4 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Changed formatting abstractions in <code>reprexlite.formatting</code> module.<ul>
+<li>Rather than <code>*Reprex</code> classes that encapsulate reprex data, we now have <code>*Formatter</code> classes and take a rendered reprex output string as input to a <code>format</code> class method that appropriately prepares the reprex output for a venue, such as adding venue-specific markup.</li>
+<li>The <code>venues_dispatcher</code> dictionary in <code>reprexlite.formatting</code> is now a <code>formatter_registry</code> dictionary.</li>
+<li>Formatters are added to the registry using a <code>register_formatter</code> decorator instead of being hard-coded.</li>
+</ul>
+</li>
+</ul>
+<h4 id="removed">Removed<a class="headerlink" href="#removed" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Removed <code>reprexlite.code</code> module. The functionality in this module was reimplemented in the new <code>reprexlite.reprexes</code> and <code>reprexlite.parsing</code> modules.</li>
+<li>Removed <code>reprexlite.reprex</code> module. The <code>reprex</code> function has been moved to <code>reprexlite.reprexes</code>.</li>
+</ul>
+<h3 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h3>
+<h4 id="added_2">Added<a class="headerlink" href="#added_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added an "Alternatives" page to the documentation that documents alternative tools.</li>
+<li>Added a "Venues Formatting" page to the documentation that documents the different formatting options with examples.</li>
+</ul>
+<h4 id="changed_2">Changed<a class="headerlink" href="#changed_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Changed reprexlite to use a pyproject.toml-based build process and metadata declaration.</li>
+<li>Renamed <code>HISTORY.md</code> to <code>CHANGELOG.md</code>.</li>
+</ul>
 <h2 id="v050-2020-02-20">v0.5.0 (2020-02-20)<a class="headerlink" href="#v050-2020-02-20" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Added experimental IPython interactive editor which can be launched via command line with <code>reprex --ipython</code>. This modified IPython editor will run every cell automatically as a reprex.</li>
@@ -637,10 +971,15 @@
 <h2 id="v010-2021-02-15">v0.1.0 (2021-02-15)<a class="headerlink" href="#v010-2021-02-15" title="Permanent link">&para;</a></h2>
 <p>Initial release! 🎉</p>
 
-              
-            </article>
-            
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
           <a href="#" class="md-top md-icon" data-md-component="top" hidden>
@@ -671,6 +1010,21 @@
         </a>
       
       
+        
+        <a href="../alternatives/" class="md-footer__link md-footer__link--next" aria-label="Next: Alternatives" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Alternatives
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
     </nav>
   
   <div class="md-footer-meta md-typeset">
@@ -693,11 +1047,13 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
+    
     
   </body>
 </html>

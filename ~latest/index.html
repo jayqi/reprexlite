@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/~latest/">
       
       <link rel="icon" href="images/reprexlite_white_blue.svg">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -21,13 +21,14 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.2505c338.min.css">
         
       
       
+
     
     
     
@@ -42,12 +43,13 @@
     
       <link rel="stylesheet" href="assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="css/custom_mkdocstrings.css">
+      <link rel="stylesheet" href="css/extra.css">
     
-    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -55,12 +57,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -78,9 +84,19 @@
     </div>
     
       <div data-md-component="outdated" hidden>
-        <aside class="md-banner md-banner--warning">
-          
-        </aside>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+You're not viewing the most recent stable version.
+<a href="../.">
+    <strong>Click here to go to stable.</strong>
+</a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
       </div>
     
     
@@ -113,6 +129,30 @@
       </div>
     </div>
     
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
     
     
       <label class="md-header__button md-icon" for="__search">
@@ -129,7 +169,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -153,7 +193,7 @@
         <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -197,7 +237,7 @@
       <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -276,11 +316,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#quick-usage" class="md-nav__link">
-    Quick usage
+  <a href="#basic-usage" class="md-nav__link">
+    Basic usage
   </a>
   
-    <nav class="md-nav" aria-label="Quick usage">
+    <nav class="md-nav" aria-label="Basic usage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -291,8 +331,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#python-library" class="md-nav__link">
-    Python library
+  <a href="#ipython-interactive-shell-editor" class="md-nav__link">
+    IPython interactive shell editor
   </a>
   
 </li>
@@ -300,6 +340,13 @@
           <li class="md-nav__item">
   <a href="#ipythonjupyter-cell-magic" class="md-nav__link">
     IPython/Jupyter Cell Magic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-library" class="md-nav__link">
+    Python library
   </a>
   
 </li>
@@ -354,6 +401,48 @@
   
   
   
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="#basic-usage" class="md-nav__link">
+        Basic Usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="cli/" class="md-nav__link">
         CLI Help
@@ -361,11 +450,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -376,6 +464,41 @@
     </li>
   
 
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="formatting/" class="md-nav__link">
+        Venues Formatting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
     
       
       
@@ -385,21 +508,49 @@
   
   
     
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Library
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Library" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Library
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_6">
+        <label class="md-nav__link" for="__nav_5_1">
           API Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
           <span class="md-nav__icon md-icon"></span>
           API Reference
         </label>
@@ -411,8 +562,8 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/reprex/" class="md-nav__link">
-        reprexlite
+      <a href="api-reference/config/" class="md-nav__link">
+        reprexlite.config
       </a>
     </li>
   
@@ -425,8 +576,8 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/code/" class="md-nav__link">
-        reprexlite.code
+      <a href="api-reference/exceptions/" class="md-nav__link">
+        reprexlite.exceptions
       </a>
     </li>
   
@@ -453,9 +604,44 @@
   
   
     <li class="md-nav__item">
+      <a href="api-reference/parsing/" class="md-nav__link">
+        reprexlite.parsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api-reference/reprexes/" class="md-nav__link">
+        reprexlite.reprexes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="api-reference/session_info/" class="md-nav__link">
         reprexlite.session_info
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -477,6 +663,21 @@
     <li class="md-nav__item">
       <a href="changelog/" class="md-nav__link">
         Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="alternatives/" class="md-nav__link">
+        Alternatives
       </a>
     </li>
   
@@ -536,11 +737,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#quick-usage" class="md-nav__link">
-    Quick usage
+  <a href="#basic-usage" class="md-nav__link">
+    Basic usage
   </a>
   
-    <nav class="md-nav" aria-label="Quick usage">
+    <nav class="md-nav" aria-label="Basic usage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -551,8 +752,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#python-library" class="md-nav__link">
-    Python library
+  <a href="#ipython-interactive-shell-editor" class="md-nav__link">
+    IPython interactive shell editor
   </a>
   
 </li>
@@ -560,6 +761,13 @@
           <li class="md-nav__item">
   <a href="#ipythonjupyter-cell-magic" class="md-nav__link">
     IPython/Jupyter Cell Magic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-library" class="md-nav__link">
+    Python library
   </a>
   
 </li>
@@ -577,14 +785,16 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
+
   <a href="https://github.com/jayqi/reprexlite/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+    
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
-
 
 
 <h1 id="reprexlite-python-reproducible-examples-for-sharing">reprexlite: Python reproducible examples for sharing<a class="headerlink" href="#reprexlite-python-reproducible-examples-for-sharing" title="Permanent link">&para;</a></h1>
@@ -592,7 +802,7 @@
 <a href="https://pypi.org/project/reprexlite/"><img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/reprexlite" /></a>
 <a href="https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain"><img alt="tests" src="https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main" /></a>
 <a href="https://codecov.io/gh/jayqi/reprexlite"><img alt="codecov" src="https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg" /></a></p>
-<p><strong>reprexlite</strong> is a tool for rendering <strong>repr</strong>oducible <strong>ex</strong>amples of Python code for sharing. With a <a href="#command-line-interface">convenient CLI</a> and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional <a href="#ipythonjupyter-cell-magic">IPython extension with cell magic</a> for easy use in Jupyter or VS Code. This project is inspired by R's <a href="https://reprex.tidyverse.org/">reprex</a>.</p>
+<p><strong>reprexlite</strong> is a tool for rendering <strong>repr</strong>oducible <strong>ex</strong>amples of Python code for sharing. With a <a href="#command-line-interface">convenient CLI</a> and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional <a href="#ipythonjupyter-cell-magic">IPython extension with cell magic</a> for easy use in Jupyter or VS Code. This project is inspired by R's <a href="https://reprex.tidyverse.org/">reprex</a> package.</p>
 <p><img src="images/demo.gif" width="640px" /></p>
 <ul>
 <li>Paste or type some Python code that you're interested in sharing.</li>
@@ -614,26 +824,48 @@
 <p>If you're asking for help or reporting a bug, you are more likely to succeed in getting others to help you if you include a good reprex. If you're writing documentation, your readers will appreciate examples that they can easily run. See <a href="design-philosophy/">"Design Philosophy"</a> for more on both "Why reproducible examples?" and "Why reprexlite?"</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>reprexlite is available on PyPI:</p>
-<div class="highlight"><pre><span></span><code>pip install reprexlite
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>reprexlite
 </code></pre></div>
-<p>Optional dependencies can be specified using the <a href="https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras">"extras" mechanism</a>, e.g., <code>reprexlite[black]</code>. Available extras are:</p>
+<p>Optional dependencies can be specified using the <a href="https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras">"extras" mechanism</a>, e.g., <code>reprexlite[ipython]</code>. Available extras are:</p>
 <ul>
 <li><code>black</code> : for optionally autoformatting your code</li>
-<li><code>ipython</code> : to use the <code>%%reprex</code> cell magic in IPython/Jupyter</li>
+<li><code>ipython</code> : to use the IPython interactive shell editor or <code>%%reprex</code> IPython cell magic</li>
 <li><code>pygments</code> : for syntax highlighting and the RTF venue</li>
 </ul>
 <h3 id="development-version">Development version<a class="headerlink" href="#development-version" title="Permanent link">&para;</a></h3>
 <p>The development version of reprexlite is available on GitHub:</p>
-<div class="highlight"><pre><span></span><code>pip install https://github.com/jayqi/reprexlite.git#egg<span class="o">=</span>reprexlite
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>https://github.com/jayqi/reprexlite.git#egg<span class="o">=</span>reprexlite
 </code></pre></div>
-<h2 id="quick-usage">Quick usage<a class="headerlink" href="#quick-usage" title="Permanent link">&para;</a></h2>
+<h2 id="basic-usage">Basic usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
 <h3 id="command-line-interface">Command-line interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h3>
-<p>The primary way to use reprexlite is through the CLI. It allows you to create a reprex without entering a Python session. Simply invoke the command:</p>
+<p>The easiest way to use reprexlite is through the CLI. It allows you to create a reprex without entering a Python session. Simply invoke the command:</p>
 <div class="highlight"><pre><span></span><code>reprex
 </code></pre></div>
-<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vim</code>. You can set your default editor using the <a href="https://askubuntu.com/a/432530"><code>$EDITOR</code> environment variable</a>—I'm personally a fan of <code>nano</code>.</p>
+<p>This will take you into your system's default command-line text editor where you can type or paste your Python code. On macOS, for example, this will be <code>vim</code>. You can set your default editor using the <a href="https://unix.stackexchange.com/a/73486"><code>$VISUAL</code> or <code>$EDITOR</code> environment variables</a>—I'm personally a fan of <code>nano</code>/<code>pico</code>.</p>
 <p>Once you're done, reprexlite will print out your reprex to console.</p>
 <p>To see available options, use the <code>--help</code> flag.</p>
+<h3 id="ipython-interactive-shell-editor">IPython interactive shell editor<a class="headerlink" href="#ipython-interactive-shell-editor" title="Permanent link">&para;</a></h3>
+<p><em>Requires IPython.</em> <code>[ipython]</code></p>
+<p>reprexlite optionally supports an IPython interactive shell editor. This is basically like a normal IPython interactive shell except that all cell contents are piped through reprexlite for rendering instead of the normal cell execution. It has the typical advantages of using IPython like auto-suggestions, history scrolling, and syntax highlighting.  You can start the IPython editor by using the <code>--editor</code>/<code>-e</code> option:</p>
+<div class="highlight"><pre><span></span><code>reprex<span class="w"> </span>-e<span class="w"> </span>ipython
+</code></pre></div>
+<p>If you need to configure anything, use the other CLI options alongside the editor option when launching the shell.</p>
+<p>Compared to using the IPython cell magic (next section), you don't need to load the reprexlite extension or write out the <code>%%reprex</code> cell magic every use.</p>
+<h3 id="ipythonjupyter-cell-magic">IPython/Jupyter Cell Magic<a class="headerlink" href="#ipythonjupyter-cell-magic" title="Permanent link">&para;</a></h3>
+<p><em>Requires IPython.</em> <code>[ipython]</code></p>
+<p>reprexlite also has an optional IPython extension with a <code>%%reprex</code> cell magic. That means you can easily create a reprex in an <a href="https://ipython.readthedocs.io/en/stable/">IPython shell</a> (requires IPython), in <a href="https://jupyter.org/">Jupyter</a> (requires Jupyter), or in <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VS Code's Interactive Python window</a> (requires ipykernel). This can be handy if you're already working in a Jupyter notebook and want to share some code and output, which otherwise doesn't neatly copy and paste in a nice format.</p>
+<p>To use, simply load the extension with</p>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">reprexlite</span>
+</code></pre></div>
+<p>and then put <code>%%reprex</code> at the top of a cell you want to create a reprex for:</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">reprex</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]))</span>
+<span class="n">grid</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">grid</span><span class="p">))</span>
+</code></pre></div>
+<p>The magic accepts the same inline option flags as the CLI. Use the line magic <code>%reprex</code> (note single <code>%</code>) to print out help. See the <a href="ipython-jupyter-magic/">documentation</a> for more details.</p>
 <h3 id="python-library">Python library<a class="headerlink" href="#python-library" title="Permanent link">&para;</a></h3>
 <p>The same functionality as the CLI is also available from the <code>reprex</code> function with an equivalent API. Simply pass a string with your code, and it will print out the reprex, as well as return a <code>Reprex</code> object that contains all the data and formatting machinery. See the <a href="api-reference/reprex/">API documentation</a> for more details.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">reprexlite</span> <span class="kn">import</span> <span class="n">reprex</span>
@@ -660,25 +892,16 @@
 <span class="c1">#&gt; &lt;sup&gt;Created at 2021-02-26 00:32:00 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.0&lt;/sup&gt;</span>
 <span class="c1">#&gt; &lt;reprexlite.formatting.GitHubReprex object at 0x109059f10&gt;</span>
 </code></pre></div>
-<h3 id="ipythonjupyter-cell-magic">IPython/Jupyter Cell Magic<a class="headerlink" href="#ipythonjupyter-cell-magic" title="Permanent link">&para;</a></h3>
-<p>reprexlite has an optional IPython extension with a <code>%%reprex</code> cell magic. That means you can easily create a reprex in an <a href="https://ipython.readthedocs.io/en/stable/">IPython shell</a> (requires IPython), in <a href="https://jupyter.org/">Jupyter</a> (requires Jupyter), or in <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VS Code's Interactive Python window</a> (requires <code>ipykernel</code>). This can be handy if you're already working in a Jupyter notebook and want to share some code and output, which otherwise doesn't neatly copy and paste in a nice format.</p>
-<p>To use, simply load the extension with</p>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">load_ext</span> <span class="n">reprexlite</span>
-</code></pre></div>
-<p>and then put <code>%%reprex</code> at the top of a cell you want to create a reprex for:</p>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">reprex</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
 
-<span class="n">grid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]))</span>
-<span class="n">grid</span>
-<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">grid</span><span class="p">))</span>
-</code></pre></div>
-<p>The magic accepts the same inline option flags as the CLI. Use the line magic <code>%reprex</code> (note single <code>%</code>) to print out help. See the <a href="ipython-jupyter-magic/">documentation</a> for more details.</p>
 
-              
-            </article>
-            
-          </div>
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
           <a href="#" class="md-top md-icon" data-md-component="top" hidden>
@@ -731,11 +954,13 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.top"], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
+    
     
   </body>
 </html>

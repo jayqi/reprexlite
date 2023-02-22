@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/~latest/api-reference/formatting/">
       
       <link rel="icon" href="../../images/reprexlite_white_blue.svg">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -21,13 +21,14 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
         
       
       
+
     
     
     
@@ -42,12 +43,13 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../css/custom_mkdocstrings.css">
+      <link rel="stylesheet" href="../../css/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -55,12 +57,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -78,9 +84,19 @@
     </div>
     
       <div data-md-component="outdated" hidden>
-        <aside class="md-banner md-banner--warning">
-          
-        </aside>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+You're not viewing the most recent stable version.
+<a href="../../..">
+    <strong>Click here to go to stable.</strong>
+</a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
       </div>
     
     
@@ -113,6 +129,30 @@
       </div>
     </div>
     
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
     
     
       <label class="md-header__button md-icon" for="__search">
@@ -129,7 +169,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -153,7 +193,7 @@
         <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -197,7 +237,7 @@
       <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -259,6 +299,48 @@
   
   
   
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../#basic-usage" class="md-nav__link">
+        Basic Usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
         CLI Help
@@ -266,11 +348,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -281,6 +362,41 @@
     </li>
   
 
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../formatting/" class="md-nav__link">
+        Venues Formatting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
     
       
       
@@ -292,21 +408,51 @@
   
   
     
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Library
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Library" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Library
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_6">
+        <label class="md-nav__link" for="__nav_5_1">
           API Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
           <span class="md-nav__icon md-icon"></span>
           API Reference
         </label>
@@ -318,8 +464,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../reprex/" class="md-nav__link">
-        reprexlite
+      <a href="../config/" class="md-nav__link">
+        reprexlite.config
       </a>
     </li>
   
@@ -332,8 +478,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../code/" class="md-nav__link">
-        reprexlite.code
+      <a href="../exceptions/" class="md-nav__link">
+        reprexlite.exceptions
       </a>
     </li>
   
@@ -388,8 +534,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.venues_dispatcher" class="md-nav__link">
-    venues_dispatcher
+  <a href="#reprexlite.formatting.formatter_registry" class="md-nav__link">
+    formatter_registry
   </a>
   
 </li>
@@ -415,50 +561,70 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.GitHubReprex" class="md-nav__link">
-    GitHubReprex
+  <a href="#reprexlite.formatting.Formatter" class="md-nav__link">
+    Formatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.HtmlReprex" class="md-nav__link">
-    HtmlReprex
+  <a href="#reprexlite.formatting.FormatterMetadata" class="md-nav__link">
+    FormatterMetadata
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.PyScriptReprex" class="md-nav__link">
-    PyScriptReprex
+  <a href="#reprexlite.formatting.GitHubFormatter" class="md-nav__link">
+    GitHubFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.Reprex" class="md-nav__link">
-    Reprex
+  <a href="#reprexlite.formatting.HtmlFormatter" class="md-nav__link">
+    HtmlFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.RtfReprex" class="md-nav__link">
-    RtfReprex
+  <a href="#reprexlite.formatting.PyScriptFormatter" class="md-nav__link">
+    PyScriptFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.SlackReprex" class="md-nav__link">
-    SlackReprex
+  <a href="#reprexlite.formatting.RtfFormatter" class="md-nav__link">
+    RtfFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.Venue" class="md-nav__link">
-    Venue
+  <a href="#reprexlite.formatting.SlackFormatter" class="md-nav__link">
+    SlackFormatter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reprexlite.formatting-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reprexlite.formatting.register_formatter" class="md-nav__link">
+    register_formatter()
   </a>
   
 </li>
@@ -483,9 +649,44 @@
   
   
     <li class="md-nav__item">
+      <a href="../parsing/" class="md-nav__link">
+        reprexlite.parsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reprexes/" class="md-nav__link">
+        reprexlite.reprexes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../session_info/" class="md-nav__link">
         reprexlite.session_info
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -507,6 +708,21 @@
     <li class="md-nav__item">
       <a href="../../changelog/" class="md-nav__link">
         Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alternatives/" class="md-nav__link">
+        Alternatives
       </a>
     </li>
   
@@ -547,8 +763,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.venues_dispatcher" class="md-nav__link">
-    venues_dispatcher
+  <a href="#reprexlite.formatting.formatter_registry" class="md-nav__link">
+    formatter_registry
   </a>
   
 </li>
@@ -574,50 +790,70 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.GitHubReprex" class="md-nav__link">
-    GitHubReprex
+  <a href="#reprexlite.formatting.Formatter" class="md-nav__link">
+    Formatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.HtmlReprex" class="md-nav__link">
-    HtmlReprex
+  <a href="#reprexlite.formatting.FormatterMetadata" class="md-nav__link">
+    FormatterMetadata
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.PyScriptReprex" class="md-nav__link">
-    PyScriptReprex
+  <a href="#reprexlite.formatting.GitHubFormatter" class="md-nav__link">
+    GitHubFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.Reprex" class="md-nav__link">
-    Reprex
+  <a href="#reprexlite.formatting.HtmlFormatter" class="md-nav__link">
+    HtmlFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.RtfReprex" class="md-nav__link">
-    RtfReprex
+  <a href="#reprexlite.formatting.PyScriptFormatter" class="md-nav__link">
+    PyScriptFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.SlackReprex" class="md-nav__link">
-    SlackReprex
+  <a href="#reprexlite.formatting.RtfFormatter" class="md-nav__link">
+    RtfFormatter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reprexlite.formatting.Venue" class="md-nav__link">
-    Venue
+  <a href="#reprexlite.formatting.SlackFormatter" class="md-nav__link">
+    SlackFormatter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reprexlite.formatting-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reprexlite.formatting.register_formatter" class="md-nav__link">
+    register_formatter()
   </a>
   
 </li>
@@ -635,14 +871,16 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
+
   <a href="https://github.com/jayqi/reprexlite/edit/master/docs/api-reference/formatting.md" title="Edit this page" class="md-content__button md-icon">
+    
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
-
 
 
 <h1 id="reprexliteformatting">reprexlite.formatting<a class="headerlink" href="#reprexliteformatting" title="Permanent link">&para;</a></h1>
@@ -667,15 +905,15 @@
 
 
 
-<h3 id="reprexlite.formatting.venues_dispatcher" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">venues_dispatcher</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">reprexlite</span><span class="o">.</span><span class="n">formatting</span><span class="o">.</span><span class="n">Reprex</span><span class="p">]]</span></code>
+<h3 id="reprexlite.formatting.formatter_registry" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">formatter_registry</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">reprexlite</span><span class="o">.</span><span class="n">formatting</span><span class="o">.</span><span class="n">Formatter</span><span class="p">]]</span></code>
 
 
-<a href="#reprexlite.formatting.venues_dispatcher" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#reprexlite.formatting.formatter_registry" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Mapping from venue keywords to their Reprex implementation.</p>
+      <p>Registry of formatters keyed by venue keywords.</p>
     </div>
 
   </div>
@@ -724,7 +962,7 @@ Advertisement        </code>
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Advertisement</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Class for generating the advertisement note for reprexlite.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for generating the advertisement note for reprexlite.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        timestamp (str): Timestamp of instance instantiation</span>
@@ -739,22 +977,22 @@ Advertisement        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&lt;/sup&gt;&quot;</span>
 
     <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in HTML.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in HTML.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by &quot;</span>
             <span class="sa">f</span><span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s1">&lt;/a&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&lt;/sup&gt;&lt;/p&gt;&#39;</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement as a comment in Python code.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement as a comment in Python code.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in plain text.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in plain text.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
 </code></pre></div>
         </details>
@@ -768,72 +1006,10 @@ Advertisement        </code>
 
 
 
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="reprexlite.formatting.Advertisement.pkg" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">pkg</span></code>
-
-
-<a href="#reprexlite.formatting.Advertisement.pkg" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="reprexlite.formatting.Advertisement.url" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">url</span></code>
-
-
-<a href="#reprexlite.formatting.Advertisement.url" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-  </div>
-
 
 
 
 <h4 id="reprexlite.formatting.Advertisement-methods">Methods<a href="#reprexlite.formatting.Advertisement-methods" class="headerlink" title="Permanent link">&para;</a></h4>
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="reprexlite.formatting.Advertisement.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
-<a href="#reprexlite.formatting.Advertisement.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S %Z&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
 
 
   <div class="doc doc-object doc-method">
@@ -841,7 +1017,7 @@ Advertisement        </code>
 
 
 <h5 id="reprexlite.formatting.Advertisement.code_comment" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
 <a href="#reprexlite.formatting.Advertisement.code_comment" class="headerlink" title="Permanent link">&para;</a></h5>
@@ -853,7 +1029,7 @@ Advertisement        </code>
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement as a comment in Python code.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement as a comment in Python code.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
         </details>
@@ -868,7 +1044,7 @@ Advertisement        </code>
 
 
 <h5 id="reprexlite.formatting.Advertisement.html" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
 <a href="#reprexlite.formatting.Advertisement.html" class="headerlink" title="Permanent link">&para;</a></h5>
@@ -880,7 +1056,7 @@ Advertisement        </code>
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in HTML.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in HTML.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by &quot;</span>
         <span class="sa">f</span><span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s1">&lt;/a&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&lt;/sup&gt;&lt;/p&gt;&#39;</span>
@@ -898,7 +1074,7 @@ Advertisement        </code>
 
 
 <h5 id="reprexlite.formatting.Advertisement.markdown" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
 <a href="#reprexlite.formatting.Advertisement.markdown" class="headerlink" title="Permanent link">&para;</a></h5>
@@ -910,7 +1086,7 @@ Advertisement        </code>
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&lt;/sup&gt;&quot;</span>
 </code></pre></div>
         </details>
@@ -925,7 +1101,7 @@ Advertisement        </code>
 
 
 <h5 id="reprexlite.formatting.Advertisement.text" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
 <a href="#reprexlite.formatting.Advertisement.text" class="headerlink" title="Permanent link">&para;</a></h5>
@@ -937,7 +1113,7 @@ Advertisement        </code>
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in plain text.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in plain text.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
 </code></pre></div>
         </details>
@@ -961,269 +1137,18 @@ Advertisement        </code>
 
 
 
-<h3 id="reprexlite.formatting.GitHubReprex" class="doc doc-heading">
+<h3 id="reprexlite.formatting.Formatter" class="doc doc-heading">
         <code>
-GitHubReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
+Formatter            (<span title="abc.ABC">ABC</span>)
         </code>
 
 
 
-<a href="#reprexlite.formatting.GitHubReprex" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#reprexlite.formatting.Formatter" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Concrete implementation for rendering reprexes in GitHub Flavored Markdown.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">GitHubReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
-
-    <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```python&quot;</span><span class="p">)</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">))</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">markdown</span><span class="p">())</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;details&gt;&lt;summary&gt;Session Info&lt;/summary&gt;&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```text&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">()))</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-<h4 id="reprexlite.formatting.GitHubReprex-attributes">Attributes<a href="#reprexlite.formatting.GitHubReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="reprexlite.formatting.GitHubReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-
-<a href="#reprexlite.formatting.GitHubReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
-    </div>
-
-  </div>
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="reprexlite.formatting.HtmlReprex" class="doc doc-heading">
-        <code>
-HtmlReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
-        </code>
-
-
-
-<a href="#reprexlite.formatting.HtmlReprex" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents ">
-
-      <p>Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is
-available, the rendered HTML will have syntax highlighting for the Python code.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HtmlReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is</span>
-<span class="sd">    available, the rendered HTML will have syntax highlighting for the Python code.&quot;&quot;&quot;</span>
-
-    <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pygments</span> <span class="kn">import</span> <span class="n">highlight</span>
-            <span class="kn">from</span> <span class="nn">pygments.formatters</span> <span class="kn">import</span> <span class="n">HtmlFormatter</span>
-            <span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">PythonLexer</span>
-
-            <span class="n">formatter</span> <span class="o">=</span> <span class="n">HtmlFormatter</span><span class="p">(</span>
-                <span class="n">style</span><span class="o">=</span><span class="s2">&quot;friendly&quot;</span><span class="p">,</span> <span class="n">lineanchors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linenos</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrapcode</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;style&gt;</span><span class="si">{</span><span class="n">formatter</span><span class="o">.</span><span class="n">get_style_defs</span><span class="p">(</span><span class="s1">&#39;.highlight&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/style&gt;&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">highlight</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">),</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">formatter</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">html</span><span class="p">())</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;details&gt;&lt;summary&gt;Session Info&lt;/summary&gt;&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="n">SessionInfo</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-<h4 id="reprexlite.formatting.HtmlReprex-attributes">Attributes<a href="#reprexlite.formatting.HtmlReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="reprexlite.formatting.HtmlReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-
-<a href="#reprexlite.formatting.HtmlReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
-    </div>
-
-  </div>
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="reprexlite.formatting.PyScriptReprex" class="doc doc-heading">
-        <code>
-PyScriptReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
-        </code>
-
-
-
-<a href="#reprexlite.formatting.PyScriptReprex" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents ">
-
-      <p>Concrete implementation for rendering reprexes as a Python script.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PyScriptReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes as a Python script.&quot;&quot;&quot;</span>
-
-    <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">code_comment</span><span class="p">())</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">sess_lines</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="s2">&quot;# &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sess_lines</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-<h4 id="reprexlite.formatting.PyScriptReprex-attributes">Attributes<a href="#reprexlite.formatting.PyScriptReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="reprexlite.formatting.PyScriptReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-
-<a href="#reprexlite.formatting.PyScriptReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
-    </div>
-
-  </div>
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="reprexlite.formatting.Reprex" class="doc doc-heading">
-        <code>
-Reprex            (<span title="abc.ABC">ABC</span>)
-        </code>
-
-
-
-<a href="#reprexlite.formatting.Reprex" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents ">
-
-      <p>Abstract base class for a reprex instance. Concrete subclasses should implement the
+      <p>Abstract base class for a reprex formatter. Concrete subclasses should implement the
 formatting logic appropriate to a specific venue for sharing. Call <code>str(...)</code> on an instance
 to return the formatted reprex.</p>
 
@@ -1238,48 +1163,51 @@ to return the formatted reprex.</p>
   </thead>
   <tbody>
       <tr>
-        <td><code>code_block</code></td>
-        <td><code>CodeBlock</code></td>
-        <td><p>instance of <a class="autorefs autorefs-internal" href="../code/#reprexlite.code.CodeBlock"><code>CodeBlock</code></a></p></td>
+        <td><code>default_advertise</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to render reprexlite advertisement by default</p></td>
       </tr>
       <tr>
-        <td><code>advertise</code></td>
-        <td><code>bool</code></td>
-        <td><p>whether to render reprexlite advertisement</p></td>
-      </tr>
-      <tr>
-        <td><code>session_info</code></td>
-        <td><code>bool</code></td>
-        <td><p>whether to render session info</p></td>
+        <td><code>meta</code></td>
+        <td><code>FormatterMeta</code></td>
+        <td><p>Contains metadata for the formatter, such as label text and an
+example</p></td>
       </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Reprex</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Abstract base class for a reprex instance. Concrete subclasses should implement the</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Formatter</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for a reprex formatter. Concrete subclasses should implement the</span>
 <span class="sd">    formatting logic appropriate to a specific venue for sharing. Call `str(...)` on an instance</span>
 <span class="sd">    to return the formatted reprex.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        code_block (CodeBlock): instance of [`CodeBlock`][reprexlite.code.CodeBlock]</span>
-<span class="sd">        advertise (bool): whether to render reprexlite advertisement</span>
-<span class="sd">        session_info (bool): whether to render session info</span>
+<span class="sd">        default_advertise (bool): Whether to render reprexlite advertisement by default</span>
+<span class="sd">        meta (FormatterMeta): Contains metadata for the formatter, such as label text and an</span>
+<span class="sd">            example</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span>
-    <span class="sd">&quot;&quot;&quot;Default for whether to include reprexlite advertisement for this venue format.&quot;&quot;&quot;</span>
+    <span class="n">default_advertise</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">meta</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">FormatterMetadata</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-
+    <span class="nd">@classmethod</span>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-        <span class="k">pass</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Format a reprex string for a specific sharing venue.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            reprex_str (str): String containing rendered reprex output.</span>
+<span class="sd">            advertise (Optional[bool], optional): Whether to include the advertisement for</span>
+<span class="sd">                reprexlite. Defaults to None, which uses a per-formatter default.</span>
+<span class="sd">            session_info (bool, optional): Whether to include detailed session information.</span>
+<span class="sd">                Defaults to False.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: String containing formatted reprex code. Ends with newline.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
 
@@ -1294,31 +1222,92 @@ to return the formatted reprex.</p>
 
 
 
+<h4 id="reprexlite.formatting.Formatter-methods">Methods<a href="#reprexlite.formatting.Formatter-methods" class="headerlink" title="Permanent link">&para;</a></h4>
 
   <div class="doc doc-object doc-method">
 
 
 
-<h5 id="reprexlite.formatting.Reprex.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h5 id="reprexlite.formatting.Formatter.format" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">format</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
   </span>
 
-<a href="#reprexlite.formatting.Reprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#reprexlite.formatting.Formatter.format" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
+      <p>Format a reprex string for a specific sharing venue.</p>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>reprex_str</code></td>
+        <td><code>str</code></td>
+        <td><p>String containing rendered reprex output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>Whether to include the advertisement for
+reprexlite. Defaults to None, which uses a per-formatter default.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include detailed session information.
+Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>String containing formatted reprex code. Ends with newline.</p></td>
+    </tr>
+  </tbody>
+</table>
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="nd">@abstractmethod</span>
+<span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Format a reprex string for a specific sharing venue.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reprex_str (str): String containing rendered reprex output.</span>
+<span class="sd">        advertise (Optional[bool], optional): Whether to include the advertisement for</span>
+<span class="sd">            reprexlite. Defaults to None, which uses a per-formatter default.</span>
+<span class="sd">        session_info (bool, optional): Whether to include detailed session information.</span>
+<span class="sd">            Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: String containing formatted reprex code. Ends with newline.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
     </div>
@@ -1341,40 +1330,629 @@ to return the formatted reprex.</p>
 
 
 
-<h3 id="reprexlite.formatting.RtfReprex" class="doc doc-heading">
+<h3 id="reprexlite.formatting.FormatterMetadata" class="doc doc-heading">
         <code>
-RtfReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
+FormatterMetadata        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.FormatterMetadata" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>FormatterMetadata(example: Union[str, NoneType], venues: Dict[str, str] = <factory>)</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">FormatterMetadata</span><span class="p">:</span>
+    <span class="n">example</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">venues</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">dict</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.GitHubFormatter" class="doc doc-heading">
+        <code>
+GitHubFormatter            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Formatter" href="#reprexlite.formatting.Formatter">Formatter</a>)
         </code>
 
 
 
-<a href="#reprexlite.formatting.RtfReprex" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#reprexlite.formatting.GitHubFormatter" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Concrete implementation for rendering reprexes in Rich Text Format.</p>
+      <p>Formatter for rendering reprexes in GitHub Flavored Markdown.</p>
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RtfReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes in Rich Text Format.&quot;&quot;&quot;</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">GitHubFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
 
-    <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">FormatterMetadata</span><span class="p">(</span>
+        <span class="n">example</span><span class="o">=</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">            ```python</span>
+<span class="sd">            2+2</span>
+<span class="sd">            #&gt; 4</span>
+<span class="sd">            ```</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```python&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">markdown</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;details&gt;&lt;summary&gt;Session Info&lt;/summary&gt;&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```text&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">()))</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<h4 id="reprexlite.formatting.GitHubFormatter-methods">Methods<a href="#reprexlite.formatting.GitHubFormatter-methods" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.GitHubFormatter.format" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">format</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.GitHubFormatter.format" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Format a reprex string for a specific sharing venue.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>reprex_str</code></td>
+        <td><code>str</code></td>
+        <td><p>String containing rendered reprex output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>Whether to include the advertisement for
+reprexlite. Defaults to None, which uses a per-formatter default.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include detailed session information.
+Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>String containing formatted reprex code. Ends with newline.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```python&quot;</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">markdown</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;details&gt;&lt;summary&gt;Session Info&lt;/summary&gt;&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```text&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">()))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.HtmlFormatter" class="doc doc-heading">
+        <code>
+HtmlFormatter            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Formatter" href="#reprexlite.formatting.Formatter">Formatter</a>)
+        </code>
+
+
+
+<a href="#reprexlite.formatting.HtmlFormatter" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Formatter for rendering reprexes in HTML. If optional dependency Pygments is
+available, the rendered HTML will have syntax highlighting for the Python code.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HtmlFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes in HTML. If optional dependency Pygments is</span>
+<span class="sd">    available, the rendered HTML will have syntax highlighting for the Python code.&quot;&quot;&quot;</span>
+
+    <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">FormatterMetadata</span><span class="p">(</span>
+        <span class="n">example</span><span class="o">=</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">            &lt;pre&gt;&lt;code&gt;2+2</span>
+<span class="sd">            #&gt; 4&lt;/code&gt;&lt;/pre&gt;</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pygments</span> <span class="kn">import</span> <span class="n">highlight</span>
+            <span class="kn">from</span> <span class="nn">pygments.formatters</span> <span class="kn">import</span> <span class="n">HtmlFormatter</span>
+            <span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">PythonLexer</span>
+
+            <span class="n">formatter</span> <span class="o">=</span> <span class="n">HtmlFormatter</span><span class="p">(</span>
+                <span class="n">style</span><span class="o">=</span><span class="s2">&quot;friendly&quot;</span><span class="p">,</span> <span class="n">lineanchors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linenos</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrapcode</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;style&gt;</span><span class="si">{</span><span class="n">formatter</span><span class="o">.</span><span class="n">get_style_defs</span><span class="p">(</span><span class="s1">&#39;.highlight&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/style&gt;&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">highlight</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">),</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">formatter</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="n">reprex_str</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">html</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;details&gt;&lt;summary&gt;Session Info&lt;/summary&gt;&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="n">SessionInfo</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<h4 id="reprexlite.formatting.HtmlFormatter-methods">Methods<a href="#reprexlite.formatting.HtmlFormatter-methods" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.HtmlFormatter.format" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">format</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.HtmlFormatter.format" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Format a reprex string for a specific sharing venue.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>reprex_str</code></td>
+        <td><code>str</code></td>
+        <td><p>String containing rendered reprex output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>Whether to include the advertisement for
+reprexlite. Defaults to None, which uses a per-formatter default.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include detailed session information.
+Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>String containing formatted reprex code. Ends with newline.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pygments</span> <span class="kn">import</span> <span class="n">highlight</span>
+        <span class="kn">from</span> <span class="nn">pygments.formatters</span> <span class="kn">import</span> <span class="n">HtmlFormatter</span>
+        <span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">PythonLexer</span>
+
+        <span class="n">formatter</span> <span class="o">=</span> <span class="n">HtmlFormatter</span><span class="p">(</span>
+            <span class="n">style</span><span class="o">=</span><span class="s2">&quot;friendly&quot;</span><span class="p">,</span> <span class="n">lineanchors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linenos</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrapcode</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;style&gt;</span><span class="si">{</span><span class="n">formatter</span><span class="o">.</span><span class="n">get_style_defs</span><span class="p">(</span><span class="s1">&#39;.highlight&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/style&gt;&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">highlight</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">),</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">formatter</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="n">reprex_str</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">html</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;details&gt;&lt;summary&gt;Session Info&lt;/summary&gt;&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="n">SessionInfo</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.PyScriptFormatter" class="doc doc-heading">
+        <code>
+PyScriptFormatter            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Formatter" href="#reprexlite.formatting.Formatter">Formatter</a>)
+        </code>
+
+
+
+<a href="#reprexlite.formatting.PyScriptFormatter" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Formatter for rendering reprexes as a Python script.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PyScriptFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes as a Python script.&quot;&quot;&quot;</span>
+
+    <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">FormatterMetadata</span><span class="p">(</span>
+        <span class="n">example</span><span class="o">=</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">            2+2</span>
+<span class="sd">            #&gt; 4</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">code_comment</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">sess_lines</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="s2">&quot;# &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sess_lines</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<h4 id="reprexlite.formatting.PyScriptFormatter-methods">Methods<a href="#reprexlite.formatting.PyScriptFormatter-methods" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.PyScriptFormatter.format" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">format</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.PyScriptFormatter.format" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Format a reprex string for a specific sharing venue.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>reprex_str</code></td>
+        <td><code>str</code></td>
+        <td><p>String containing rendered reprex output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>Whether to include the advertisement for
+reprexlite. Defaults to None, which uses a per-formatter default.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include detailed session information.
+Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>String containing formatted reprex code. Ends with newline.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">code_comment</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">sess_lines</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="s2">&quot;# &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sess_lines</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.formatting.RtfFormatter" class="doc doc-heading">
+        <code>
+RtfFormatter            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Formatter" href="#reprexlite.formatting.Formatter">Formatter</a>)
+        </code>
+
+
+
+<a href="#reprexlite.formatting.RtfFormatter" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Formatter for rendering reprexes in Rich Text Format.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RtfFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes in Rich Text Format.&quot;&quot;&quot;</span>
+
+    <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">FormatterMetadata</span><span class="p">(</span><span class="n">example</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pygments</span> <span class="kn">import</span> <span class="n">highlight</span>
             <span class="kn">from</span> <span class="nn">pygments.formatters</span> <span class="kn">import</span> <span class="n">RtfFormatter</span>
             <span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">PythonLexer</span>
-        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Pygments is required for RTF output.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;pygments&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PygmentsNotFoundError</span><span class="p">(</span>
+                    <span class="s2">&quot;Pygments is required for RTF output.&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pygments&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span>
 
-        <span class="n">out</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">highlight</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">RtfFormatter</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">highlight</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">RtfFormatter</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 </code></pre></div>
         </details>
 
@@ -1385,27 +1963,109 @@ RtfReprex            (<a class="autorefs autorefs-internal" title="reprexlite.fo
 
 
 
-<h4 id="reprexlite.formatting.RtfReprex-attributes">Attributes<a href="#reprexlite.formatting.RtfReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
-
-  <div class="doc doc-object doc-attribute">
 
 
 
-<h5 id="reprexlite.formatting.RtfReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
 
 
-<a href="#reprexlite.formatting.RtfReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+<h4 id="reprexlite.formatting.RtfFormatter-methods">Methods<a href="#reprexlite.formatting.RtfFormatter-methods" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="reprexlite.formatting.RtfFormatter.format" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">format</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.RtfFormatter.format" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+      <p>Format a reprex string for a specific sharing venue.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>reprex_str</code></td>
+        <td><code>str</code></td>
+        <td><p>String containing rendered reprex output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>Whether to include the advertisement for
+reprexlite. Defaults to None, which uses a per-formatter default.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include detailed session information.
+Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>String containing formatted reprex code. Ends with newline.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pygments</span> <span class="kn">import</span> <span class="n">highlight</span>
+        <span class="kn">from</span> <span class="nn">pygments.formatters</span> <span class="kn">import</span> <span class="n">RtfFormatter</span>
+        <span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">PythonLexer</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;pygments&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PygmentsNotFoundError</span><span class="p">(</span>
+                <span class="s2">&quot;Pygments is required for RTF output.&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pygments&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">highlight</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">RtfFormatter</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
     </div>
 
   </div>
-
-
-
 
 
 
@@ -1423,38 +2083,53 @@ RtfReprex            (<a class="autorefs autorefs-internal" title="reprexlite.fo
 
 
 
-<h3 id="reprexlite.formatting.SlackReprex" class="doc doc-heading">
+<h3 id="reprexlite.formatting.SlackFormatter" class="doc doc-heading">
         <code>
-SlackReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
+SlackFormatter            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Formatter" href="#reprexlite.formatting.Formatter">Formatter</a>)
         </code>
 
 
 
-<a href="#reprexlite.formatting.SlackReprex" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#reprexlite.formatting.SlackFormatter" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Concrete implementation for rendering reprexes as Slack markup.</p>
+      <p>Formatter for rendering reprexes as Slack markup.</p>
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SlackReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes as Slack markup.&quot;&quot;&quot;</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SlackFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes as Slack markup.&quot;&quot;&quot;</span>
 
-    <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">FormatterMetadata</span><span class="p">(</span>
+        <span class="n">example</span><span class="o">=</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">            ```</span>
+<span class="sd">            2+2</span>
+<span class="sd">            #&gt; 4</span>
+<span class="sd">            ```</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">))</span>
         <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">```&quot;</span><span class="p">)</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">()))</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 </code></pre></div>
         </details>
 
@@ -1465,59 +2140,176 @@ SlackReprex            (<a class="autorefs autorefs-internal" title="reprexlite.
 
 
 
-<h4 id="reprexlite.formatting.SlackReprex-attributes">Attributes<a href="#reprexlite.formatting.SlackReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="reprexlite.formatting.SlackReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-
-<a href="#reprexlite.formatting.SlackReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
-    </div>
-
-  </div>
 
 
 
 
 
+<h4 id="reprexlite.formatting.SlackFormatter-methods">Methods<a href="#reprexlite.formatting.SlackFormatter-methods" class="headerlink" title="Permanent link">&para;</a></h4>
+
+  <div class="doc doc-object doc-method">
 
 
 
-  </div>
+<h5 id="reprexlite.formatting.SlackFormatter.format" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">format</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
-    </div>
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
 
-  </div>
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="reprexlite.formatting.Venue" class="doc doc-heading">
-        <code>
-Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
-        </code>
-
-
-
-<a href="#reprexlite.formatting.Venue" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#reprexlite.formatting.SlackFormatter.format" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
-      <p>Enum for valid venue options.</p>
+      <p>Format a reprex string for a specific sharing venue.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>reprex_str</code></td>
+        <td><code>str</code></td>
+        <td><p>String containing rendered reprex output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>advertise</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>Whether to include the advertisement for
+reprexlite. Defaults to None, which uses a per-formatter default.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>session_info</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include detailed session information.
+Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>String containing formatted reprex code. Ends with newline.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">format</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">reprex_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">advertise</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default_advertise</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">reprex_str</span><span class="p">))</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">advertise</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">session_info</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">```&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">()))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+<h2 id="reprexlite.formatting-functions">Functions<a href="#reprexlite.formatting-functions" class="headerlink" title="Permanent link">&para;</a></h2>
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="reprexlite.formatting.register_formatter" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
+
+
+<a href="#reprexlite.formatting.register_formatter" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Decorator that registers a formatter implementation.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>venue</code></td>
+        <td><code>str</code></td>
+        <td><p>Venue keyword that formatter will be registered to.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>label</code></td>
+        <td><code>str</code></td>
+        <td><p>Short human-readable label explaining the venue.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator that registers a formatter implementation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        venue (str): Venue keyword that formatter will be registered to.</span>
+<span class="sd">        label (str): Short human-readable label explaining the venue.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">registrar</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">formatter_registry</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Formatter</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">NotAFormatterError</span><span class="p">(</span><span class="s2">&quot;Only subclasses of Formatter can be registered.&quot;</span><span class="p">)</span>
+        <span class="n">formatter_registry</span><span class="p">[</span><span class="n">venue</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">venues</span><span class="p">[</span><span class="n">venue</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">registrar</span>
+</code></pre></div>
+        </details>
     </div>
 
   </div>
@@ -1527,17 +2319,21 @@ Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</sp
 
 
 
-
   </div>
 
     </div>
 
   </div>
 
-              
-            </article>
-            
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
           <a href="#" class="md-top md-icon" data-md-component="top" hidden>
@@ -1553,7 +2349,7 @@ Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</sp
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../code/" class="md-footer__link md-footer__link--prev" aria-label="Previous: reprexlite.code" rel="prev">
+        <a href="../exceptions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: reprexlite.exceptions" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -1562,20 +2358,20 @@ Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</sp
               <span class="md-footer__direction">
                 Previous
               </span>
-              reprexlite.code
+              reprexlite.exceptions
             </div>
           </div>
         </a>
       
       
         
-        <a href="../session_info/" class="md-footer__link md-footer__link--next" aria-label="Next: reprexlite.session_info" rel="next">
+        <a href="../parsing/" class="md-footer__link md-footer__link--next" aria-label="Next: reprexlite.parsing" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              reprexlite.session_info
+              reprexlite.parsing
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -1605,11 +2401,13 @@ Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</sp
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
+    
     
   </body>
 </html>

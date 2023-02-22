@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/~latest/cli/">
       
       <link rel="icon" href="../images/reprexlite_white_blue.svg">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -21,13 +21,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
         
       
       
+
     
     
     
@@ -42,12 +43,13 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../css/custom_mkdocstrings.css">
+      <link rel="stylesheet" href="../css/extra.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -55,12 +57,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -78,9 +84,19 @@
     </div>
     
       <div data-md-component="outdated" hidden>
-        <aside class="md-banner md-banner--warning">
-          
-        </aside>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+You're not viewing the most recent stable version.
+<a href="../..">
+    <strong>Click here to go to stable.</strong>
+</a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
       </div>
     
     
@@ -113,6 +129,30 @@
       </div>
     </div>
     
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
     
     
       <label class="md-header__button md-icon" for="__search">
@@ -129,7 +169,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -153,7 +193,7 @@
         <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -197,7 +237,7 @@
       <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -261,6 +301,50 @@
     
   
   
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../#basic-usage" class="md-nav__link">
+        Basic Usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -276,11 +360,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -288,6 +371,41 @@
       <a href="../ipython-jupyter-magic/" class="md-nav__link">
         IPython/Jupyter Magic
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatting/" class="md-nav__link">
+        Venues Formatting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -300,21 +418,49 @@
   
   
     
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Library
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Library" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Library
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_6">
+        <label class="md-nav__link" for="__nav_5_1">
           API Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
           <span class="md-nav__icon md-icon"></span>
           API Reference
         </label>
@@ -326,8 +472,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/reprex/" class="md-nav__link">
-        reprexlite
+      <a href="../api-reference/config/" class="md-nav__link">
+        reprexlite.config
       </a>
     </li>
   
@@ -340,8 +486,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/code/" class="md-nav__link">
-        reprexlite.code
+      <a href="../api-reference/exceptions/" class="md-nav__link">
+        reprexlite.exceptions
       </a>
     </li>
   
@@ -368,9 +514,44 @@
   
   
     <li class="md-nav__item">
+      <a href="../api-reference/parsing/" class="md-nav__link">
+        reprexlite.parsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/reprexes/" class="md-nav__link">
+        reprexlite.reprexes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api-reference/session_info/" class="md-nav__link">
         reprexlite.session_info
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -392,6 +573,21 @@
     <li class="md-nav__item">
       <a href="../changelog/" class="md-nav__link">
         Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alternatives/" class="md-nav__link">
+        Alternatives
       </a>
     </li>
   
@@ -423,33 +619,37 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
+
   <a href="https://github.com/jayqi/reprexlite/edit/master/docs/cli.md" title="Edit this page" class="md-content__button md-icon">
+    
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-
 <h1 id="cli-help-documentation">CLI Help Documentation<a class="headerlink" href="#cli-help-documentation" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>reprex --help
+<div class="highlight"><pre><span></span><code>reprex<span class="w"> </span>--help
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Usage: reprex [OPTIONS]
 
   Render reproducible examples of Python code for sharing. Your code will be
-  executed and the results will be embedded as comments below their associated
-  lines.
+  executed and, in the default output style, the results will be embedded as
+  comments below their associated lines.
 
   By default, your system&#39;s default command-line text editor will open for you
   to type or paste in your code. This editor can be changed by setting the
-  EDITOR environment variable. You can instead specify an input file with the
-  --infile / -i option
+  VISUAL or EDITOR environment variable, or by explicitly passing in the
+  --editor program. You can instead specify an input file with the --infile /
+  -i option. If IPython is installed, an interactive IPython editor can also
+  be launched using the --ipython flag.
 
   Additional markup will be added that is appropriate to the choice of venue
-  option. For example, for the default `gh` venue for GitHub Flavored
-  Markdown, the final reprex will look like:
+  formatting. For example, for the default `gh` venue for GitHub Flavored
+  Markdown, the final reprex output will look like:
 
   ----------------------------------------
   ```python
@@ -460,7 +660,7 @@
   #&gt; 4
   ```
   
-  &lt;sup&gt;Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v0.3.1&lt;/sup&gt;
+  &lt;sup&gt;Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v1.0.0&lt;/sup&gt;
   ----------------------------------------
 
   The supported venue formats are:
@@ -474,31 +674,74 @@
   - slack : Slack
 
 Options:
-  -i, --infile PATH               Read code from an input file instead via
-                                  editor.
+  -e, --editor TEXT               Specify editor to open in. Can be full path
+                                  to executable or name to be searched on
+                                  system search path. If None, will use
+                                  Click&#39;s automatic editor detection. This
+                                  will typically use the editor set to
+                                  environment variable VISUAL or EDITOR. If
+                                  value is &#39;ipython&#39; and IPython is installed,
+                                  this will launch the interactive IPython
+                                  editor where all cells are automatically run
+                                  through reprexlite.
+  -i, --infile PATH               Read code from an input file instead of
+                                  entering in an editor.
   -o, --outfile PATH              Write output to file instead of printing to
                                   console.
   -v, --venue [gh|so|ds|html|py|rtf|slack]
-                                  Output format appropriate to the venue where
-                                  you plan to share this code.  [default: gh]
-  --advertise / --no-advertise    Whether to include footer that credits
+                                  Key to identify the output venue that the
+                                  reprex will be shared in. Used to select an
+                                  appropriate formatter. See &quot;Venues
+                                  Formatting&quot; documentation for formats
+                                  included with reprexlite.  [default: gh]
+  --advertise / --no-advertise    Whether to include a footer that credits
                                   reprexlite. If unspecified, will depend on
-                                  specified venue&#39;s default.
-  --session-info                  Whether to include details about session and
-                                  installed packages.
-  --style                         Autoformat code with black. Requires black
-                                  to be installed.
-  --comment TEXT                  Comment prefix to use for results returned
-                                  by expressions.  [default: #&gt;]
-  --old-results                   Keep old results, i.e., lines that match the
-                                  prefix specified by the --comment option. If
-                                  not using this option, then such lines are
-                                  removed, meaning that an input that is a
-                                  reprex will be effectively regenerated.
-  --ipython                       [experimental] Launch interactive IPython
-                                  editor where all cells are automatically run
-                                  as reprexes. Currently only supports default
-                                  options. Requires IPython.
+                                  specified venue formatter&#39;s default.
+  --session-info / --no-session-info
+                                  Include details about session and
+                                  environment that the reprex was generated
+                                  with.  [default: no-session-info]
+  --style / --no-style            Whether to autoformat code with black.
+                                  Requires black to be installed.  [default:
+                                  no-style]
+  --prompt TEXT                   Prefix to use as primary prompt for code
+                                  lines.
+  --continuation TEXT             Prefix to use as secondary prompt for
+                                  continued code lines.
+  --comment TEXT                  Prefix to use for results returned by
+                                  expressions.  [default: #&gt;]
+  --keep-old-results / --no-keep-old-results
+                                  Whether to additionally include results of
+                                  expressions detected in the original input
+                                  when formatting the reprex output.
+                                  [default: no-keep-old-results]
+  --parsing-method [auto|declared]
+                                  Method for parsing input. &#39;auto&#39; will
+                                  automatically detect either default reprex-
+                                  style input or standard doctest-style input.
+                                  &#39;declared&#39; will allow you to specify custom
+                                  line prefixes. Values for &#39;prompt&#39;,
+                                  &#39;continuation&#39;, and &#39;comment&#39; will be used
+                                  for both output formatting and input
+                                  parsing, unless the associated &#39;input-*&#39;
+                                  override settings are supplied.  [default:
+                                  auto]
+  --input-prompt TEXT             Prefix to use as primary prompt for code
+                                  lines when parsing input. Only used if
+                                  &#39;parsing-method&#39; is &#39;declared&#39;. If not set,
+                                  &#39;prompt&#39; is used for both input parsing and
+                                  output formatting.
+  --input-continuation TEXT       Prefix to use as secondary prompt for
+                                  continued code lines when parsing input.
+                                  Only used if &#39;parsing-method&#39; is &#39;declared&#39;.
+                                  If not set, &#39;prompt&#39; is used for both input
+                                  parsing and output formatting.
+  --input-comment TEXT            Prefix to use for results returned by
+                                  expressions when parsing input. Only used if
+                                  &#39;parsing-method&#39; is &#39;declared&#39;. If not set,
+                                  &#39;prompt&#39; is used for both input parsing and
+                                  output formatting.
+  --verbose
   --version                       Show reprexlite version and exit.
   --install-completion [bash|zsh|fish|powershell|pwsh]
                                   Install completion for the specified shell.
@@ -508,10 +751,15 @@ Options:
   --help                          Show this message and exit.
 </code></pre></div>
 
-              
-            </article>
-            
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
           <a href="#" class="md-top md-icon" data-md-component="top" hidden>
@@ -579,11 +827,13 @@ Options:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
+    
     
   </body>
 </html>
