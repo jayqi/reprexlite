@@ -16,7 +16,7 @@ except ImportError:
 import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig
-from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
+from reprexlite.exceptions import BlackNotFoundError, InputSyntaxError, UnexpectedError
 from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
 
@@ -313,70 +313,73 @@ class Reprex:
         old_results: List[ParsedResult] = []
         current_code_block: List[str] = []
         current_result_block: List[str] = []
-        for line_content, line_type in lines:
-            if line_type is LineType.CODE:
-                # Flush results
-                if current_result_block:
-                    old_results += [ParsedResult(config=config, lines=current_result_block)]
-                    current_result_block = []
-                # Append line to current code
-                current_code_block.append(line_content)
-            elif line_type is LineType.RESULT:
-                # Flush code
-                if current_code_block:
+        try:
+            for line_content, line_type in lines:
+                if line_type is LineType.CODE:
+                    # Flush results
+                    if current_result_block:
+                        old_results += [ParsedResult(config=config, lines=current_result_block)]
+                        current_result_block = []
+                    # Append line to current code
+                    current_code_block.append(line_content)
+                elif line_type is LineType.RESULT:
+                    # Flush code
+                    if current_code_block:
+                        # Parse code and create Statements
+                        tree: cst.Module = cst.parse_module("\n".join(current_code_block))
+                        new_statements = (
+                            [Statement(config=config, stmt=stmt) for stmt in tree.header]
+                            + [Statement(config=config, stmt=stmt) for stmt in tree.body]
+                            + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
+                        )
+                        statements += new_statements
+                        # Pad results with empty results, 1 fewer because of current_result_block
+                        old_results += [ParsedResult(config=config, lines=[])] * (
+                            len(new_statements) - 1
+                        )
+                        # Reset current code block
+                        current_code_block = []
+                    # Append line to current results
+                    current_result_block.append(line_content)
+            # Flush code
+            if current_code_block:
+                if all(not line for line in current_code_block):
+                    # Case where all lines are whitespace: strip and don't add
+                    new_statements = []
+                else:
                     # Parse code and create Statements
-                    tree: cst.Module = cst.parse_module("\n".join(current_code_block))
+                    tree: cst.Module = cst.parse_module(  # type: ignore[no-redef]
+                        "\n".join(current_code_block)
+                    )
                     new_statements = (
                         [Statement(config=config, stmt=stmt) for stmt in tree.header]
                         + [Statement(config=config, stmt=stmt) for stmt in tree.body]
                         + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
                     )
-                    statements += new_statements
-                    # Pad results with empty results, 1 fewer because of current_result_block
-                    old_results += [ParsedResult(config=config, lines=[])] * (
-                        len(new_statements) - 1
-                    )
-                    # Reset current code block
-                    current_code_block = []
-                # Append line to current results
-                current_result_block.append(line_content)
-        # Flush code
-        if current_code_block:
-            if all(not line for line in current_code_block):
-                # Case where all lines are whitespace: strip and don't add
-                new_statements = []
-            else:
-                # Parse code and create Statements
-                tree: cst.Module = cst.parse_module(  # type: ignore[no-redef]
-                    "\n".join(current_code_block)
-                )
-                new_statements = (
-                    [Statement(config=config, stmt=stmt) for stmt in tree.header]
-                    + [Statement(config=config, stmt=stmt) for stmt in tree.body]
-                    + [Statement(config=config, stmt=stmt) for stmt in tree.footer]
-                )
-            # Pad results with empty results, 1 fewer because of current_result_block
-            statements += new_statements
-            old_results += [ParsedResult(config=config, lines=[])] * (len(new_statements) - 1)
-        # Flush results
-        if current_result_block:
-            old_results += [ParsedResult(config=config, lines=current_result_block)]
-        # Pad results to equal length
-        old_results += [ParsedResult(config=config, lines=[])] * (
-            len(statements) - len(old_results)
-        )
+                # Pad results with empty results, 1 fewer because of current_result_block
+                statements += new_statements
+                old_results += [ParsedResult(config=config, lines=[])] * (len(new_statements) - 1)
+            # Flush results
+            if current_result_block:
+                old_results += [ParsedResult(config=config, lines=current_result_block)]
+            # Pad results to equal length
+            old_results += [ParsedResult(config=config, lines=[])] * (
+                len(statements) - len(old_results)
+            )
 
-        # Evaluate for new results
-        if scope is None:
-            scope = {}
-        results = [statement.evaluate(scope=scope) for statement in statements]
-        return cls(
-            config=config,
-            statements=statements,
-            results=results,
-            old_results=old_results,
-            scope=scope,
-        )
+            # Evaluate for new results
+            if scope is None:
+                scope = {}
+            results = [statement.evaluate(scope=scope) for statement in statements]
+            return cls(
+                config=config,
+                statements=statements,
+                results=results,
+                old_results=old_results,
+                scope=scope,
+            )
+        except cst.ParserSyntaxError as e:
+            raise InputSyntaxError(str(e)) from e
 
     def __eq__(self, other: Any) -> bool:
         if isinstance(other, Reprex):
