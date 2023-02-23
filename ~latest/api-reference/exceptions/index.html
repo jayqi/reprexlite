@@ -534,6 +534,13 @@ You're not viewing the most recent stable version.
 </li>
         
           <li class="md-nav__item">
+  <a href="#reprexlite.exceptions.InputSyntaxError" class="md-nav__link">
+    InputSyntaxError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reprexlite.exceptions.NotAFormatterError" class="md-nav__link">
     NotAFormatterError
   </a>
@@ -723,6 +730,13 @@ You're not viewing the most recent stable version.
 </li>
         
           <li class="md-nav__item">
+  <a href="#reprexlite.exceptions.InputSyntaxError" class="md-nav__link">
+    InputSyntaxError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reprexlite.exceptions.NotAFormatterError" class="md-nav__link">
     NotAFormatterError
   </a>
@@ -846,6 +860,37 @@ IPythonNotFoundError            (<span title="ModuleNotFoundError">ModuleNotFoun
           <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">IPythonNotFoundError</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when ipython cannot be found when using an IPython-dependent feature.&quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.exceptions.InputSyntaxError" class="doc doc-heading">
+        <code>
+InputSyntaxError            (<span title="SyntaxError">SyntaxError</span>, <a class="autorefs autorefs-internal" title="reprexlite.exceptions.ReprexliteException" href="#reprexlite.exceptions.ReprexliteException">ReprexliteException</a>)
+        </code>
+
+
+
+<a href="#reprexlite.exceptions.InputSyntaxError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Raised when encountering a syntax error when parsing input.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">InputSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when encountering a syntax error when parsing input.&quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
 

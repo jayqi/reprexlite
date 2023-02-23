@@ -1188,70 +1188,73 @@ Reprex        </code>
         <span class="n">old_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ParsedResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">current_code_block</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">current_result_block</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">line_content</span><span class="p">,</span> <span class="n">line_type</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">CODE</span><span class="p">:</span>
-                <span class="c1"># Flush results</span>
-                <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
-                    <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
-                    <span class="n">current_result_block</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="c1"># Append line to current code</span>
-                <span class="n">current_code_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">RESULT</span><span class="p">:</span>
-                <span class="c1"># Flush code</span>
-                <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">line_content</span><span class="p">,</span> <span class="n">line_type</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">CODE</span><span class="p">:</span>
+                    <span class="c1"># Flush results</span>
+                    <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
+                        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
+                        <span class="n">current_result_block</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="c1"># Append line to current code</span>
+                    <span class="n">current_code_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">RESULT</span><span class="p">:</span>
+                    <span class="c1"># Flush code</span>
+                    <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
+                        <span class="c1"># Parse code and create Statements</span>
+                        <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">))</span>
+                        <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
+                        <span class="p">)</span>
+                        <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
+                        <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
+                        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+                        <span class="p">)</span>
+                        <span class="c1"># Reset current code block</span>
+                        <span class="n">current_code_block</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="c1"># Append line to current results</span>
+                    <span class="n">current_result_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
+            <span class="c1"># Flush code</span>
+            <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">current_code_block</span><span class="p">):</span>
+                    <span class="c1"># Case where all lines are whitespace: strip and don&#39;t add</span>
+                    <span class="n">new_statements</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># Parse code and create Statements</span>
-                    <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">))</span>
+                    <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span>  <span class="c1"># type: ignore[no-redef]</span>
+                        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">)</span>
+                    <span class="p">)</span>
                     <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
                         <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
                         <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
                         <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
                     <span class="p">)</span>
-                    <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
-                    <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
-                    <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
-                        <span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-                    <span class="p">)</span>
-                    <span class="c1"># Reset current code block</span>
-                    <span class="n">current_code_block</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="c1"># Append line to current results</span>
-                <span class="n">current_result_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
-        <span class="c1"># Flush code</span>
-        <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">current_code_block</span><span class="p">):</span>
-                <span class="c1"># Case where all lines are whitespace: strip and don&#39;t add</span>
-                <span class="n">new_statements</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># Parse code and create Statements</span>
-                <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span>  <span class="c1"># type: ignore[no-redef]</span>
-                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">)</span>
-                <span class="p">)</span>
-                <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
-                    <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
-                    <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
-                <span class="p">)</span>
-            <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
-            <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
-            <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="c1"># Flush results</span>
-        <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
-            <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
-        <span class="c1"># Pad results to equal length</span>
-        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
-            <span class="nb">len</span><span class="p">(</span><span class="n">statements</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_results</span><span class="p">)</span>
-        <span class="p">)</span>
+                <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
+                <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
+                <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># Flush results</span>
+            <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
+                <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
+            <span class="c1"># Pad results to equal length</span>
+            <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">statements</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_results</span><span class="p">)</span>
+            <span class="p">)</span>
 
-        <span class="c1"># Evaluate for new results</span>
-        <span class="k">if</span> <span class="n">scope</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">scope</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">statement</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span> <span class="k">for</span> <span class="n">statement</span> <span class="ow">in</span> <span class="n">statements</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-            <span class="n">statements</span><span class="o">=</span><span class="n">statements</span><span class="p">,</span>
-            <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span>
-            <span class="n">old_results</span><span class="o">=</span><span class="n">old_results</span><span class="p">,</span>
-            <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
-        <span class="p">)</span>
+            <span class="c1"># Evaluate for new results</span>
+            <span class="k">if</span> <span class="n">scope</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">scope</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">statement</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span> <span class="k">for</span> <span class="n">statement</span> <span class="ow">in</span> <span class="n">statements</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+                <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+                <span class="n">statements</span><span class="o">=</span><span class="n">statements</span><span class="p">,</span>
+                <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span>
+                <span class="n">old_results</span><span class="o">=</span><span class="n">old_results</span><span class="p">,</span>
+                <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">cst</span><span class="o">.</span><span class="n">ParserSyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InputSyntaxError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">e</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Reprex</span><span class="p">):</span>
@@ -1567,70 +1570,73 @@ dictionary.</p></td>
     <span class="n">old_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ParsedResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">current_code_block</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">current_result_block</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">line_content</span><span class="p">,</span> <span class="n">line_type</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">CODE</span><span class="p">:</span>
-            <span class="c1"># Flush results</span>
-            <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
-                <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
-                <span class="n">current_result_block</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="c1"># Append line to current code</span>
-            <span class="n">current_code_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">RESULT</span><span class="p">:</span>
-            <span class="c1"># Flush code</span>
-            <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line_content</span><span class="p">,</span> <span class="n">line_type</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">CODE</span><span class="p">:</span>
+                <span class="c1"># Flush results</span>
+                <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
+                    <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
+                    <span class="n">current_result_block</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="c1"># Append line to current code</span>
+                <span class="n">current_code_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">RESULT</span><span class="p">:</span>
+                <span class="c1"># Flush code</span>
+                <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
+                    <span class="c1"># Parse code and create Statements</span>
+                    <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">))</span>
+                    <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
+                        <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
+                        <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
+                    <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
+                    <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
+                        <span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+                    <span class="p">)</span>
+                    <span class="c1"># Reset current code block</span>
+                    <span class="n">current_code_block</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="c1"># Append line to current results</span>
+                <span class="n">current_result_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
+        <span class="c1"># Flush code</span>
+        <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">current_code_block</span><span class="p">):</span>
+                <span class="c1"># Case where all lines are whitespace: strip and don&#39;t add</span>
+                <span class="n">new_statements</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># Parse code and create Statements</span>
-                <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">))</span>
+                <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span>  <span class="c1"># type: ignore[no-redef]</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">)</span>
+                <span class="p">)</span>
                 <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
                     <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
                     <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
                 <span class="p">)</span>
-                <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
-                <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
-                <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-                <span class="p">)</span>
-                <span class="c1"># Reset current code block</span>
-                <span class="n">current_code_block</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="c1"># Append line to current results</span>
-            <span class="n">current_result_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
-    <span class="c1"># Flush code</span>
-    <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">current_code_block</span><span class="p">):</span>
-            <span class="c1"># Case where all lines are whitespace: strip and don&#39;t add</span>
-            <span class="n">new_statements</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Parse code and create Statements</span>
-            <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span>  <span class="c1"># type: ignore[no-redef]</span>
-                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
-                <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
-                <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
-            <span class="p">)</span>
-        <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
-        <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
-        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># Flush results</span>
-    <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
-        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
-    <span class="c1"># Pad results to equal length</span>
-    <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
-        <span class="nb">len</span><span class="p">(</span><span class="n">statements</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_results</span><span class="p">)</span>
-    <span class="p">)</span>
+            <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
+            <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
+            <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Flush results</span>
+        <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
+            <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
+        <span class="c1"># Pad results to equal length</span>
+        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">statements</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_results</span><span class="p">)</span>
+        <span class="p">)</span>
 
-    <span class="c1"># Evaluate for new results</span>
-    <span class="k">if</span> <span class="n">scope</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">scope</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">statement</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span> <span class="k">for</span> <span class="n">statement</span> <span class="ow">in</span> <span class="n">statements</span><span class="p">]</span>
-    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-        <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-        <span class="n">statements</span><span class="o">=</span><span class="n">statements</span><span class="p">,</span>
-        <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span>
-        <span class="n">old_results</span><span class="o">=</span><span class="n">old_results</span><span class="p">,</span>
-        <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
-    <span class="p">)</span>
+        <span class="c1"># Evaluate for new results</span>
+        <span class="k">if</span> <span class="n">scope</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">scope</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">statement</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span> <span class="k">for</span> <span class="n">statement</span> <span class="ow">in</span> <span class="n">statements</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+            <span class="n">statements</span><span class="o">=</span><span class="n">statements</span><span class="p">,</span>
+            <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span>
+            <span class="n">old_results</span><span class="o">=</span><span class="n">old_results</span><span class="p">,</span>
+            <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="n">cst</span><span class="o">.</span><span class="n">ParserSyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InputSyntaxError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">e</span>
 </code></pre></div>
         </details>
     </div>
