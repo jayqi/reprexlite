@@ -403,20 +403,21 @@ class Reprex:
             result == old_result for result, old_result in zip(self.results, self.old_results)
         )
 
-    def format(self, terminal: bool = False) -> str:
-        out = str(self)
-        if terminal:
-            try:
-                from pygments import highlight
-                from pygments.formatters import Terminal256Formatter
-                from pygments.lexers import PythonLexer
-
-                out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
-            except ModuleNotFoundError:
-                pass
+    def format(self) -> str:
         formatter = formatter_registry[self.config.venue]
         return formatter.format(
-            out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
+            str(self).strip(),
+            advertise=self.config.advertise,
+            session_info=self.config.session_info,
+        )
+
+    def print_formatted(self, **kwargs) -> None:
+        formatter = formatter_registry[self.config.venue]
+        formatter.print(
+            str(self).strip(),
+            advertise=self.config.advertise,
+            session_info=self.config.session_info,
+            **kwargs,
         )
 
     def __repr__(self) -> str:
@@ -449,7 +450,6 @@ def reprex(
     input: str,
     outfile: Optional[Union[str, os.PathLike]] = None,
     print_: bool = True,
-    terminal: bool = False,
     config: Optional[ReprexConfig] = None,
     **kwargs,
 ) -> Reprex:
@@ -478,8 +478,6 @@ def reprex(
         outfile (Optional[str | os.PathLike]): If provided, path to write formatted reprex
             output to. Defaults to None, which does not write to any file.
         print_ (bool): Whether to print formatted reprex output to console.
-        terminal (bool): Whether currently in a terminal. If true, will automatically apply code
-            highlighting if pygments is installed.
         config (Optional[ReprexConfig]): Instance of the configuration dataclass. Default of none
             will instantiate one with default values.
         **kwargs: Configuration options from [ReprexConfig][reprexlite.config.ReprexConfig]. Any
@@ -495,14 +493,10 @@ def reprex(
         config = dataclasses.replace(config, **kwargs)
 
     config = ReprexConfig(**kwargs)
-    if config.venue in ["html", "rtf"]:
-        # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
-        terminal = False
     r = Reprex.from_input(input, config=config)
-    output = r.format(terminal=terminal)
     if outfile is not None:
         with Path(outfile).open("w") as fp:
-            fp.write(r.format(terminal=False))
+            fp.write(r.format())
     if print_:
-        print(output)
+        r.print_formatted()
     return r

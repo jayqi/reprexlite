@@ -26,8 +26,9 @@ dependencies = [
 
 [project.optional-dependencies]
 black = ["black"]
-pygments = ["Pygments"]
 ipython = ["ipython"]
+pygments = ["Pygments"]
+rich = ["rich"]
 
 [project.scripts]
 reprex = "reprexlite.cli:app"

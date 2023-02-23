@@ -2,11 +2,22 @@ from abc import ABC, abstractmethod
 import dataclasses
 from datetime import datetime
 from textwrap import dedent
-from typing import ClassVar, Dict, Optional, Type
+from typing import Any, ClassVar, Dict, Optional, Type
+
+try:
+    from rich.console import Console
+    from rich.syntax import Syntax
+
+    RICH_IS_AVAILABLE = True
+except ModuleNotFoundError:
+    RICH_IS_AVAILABLE = False
 
 from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
+
+if RICH_IS_AVAILABLE:
+    console = Console(soft_wrap=True)
 
 
 @dataclasses.dataclass
@@ -46,6 +57,29 @@ class Formatter(ABC):
         Returns:
             str: String containing formatted reprex code. Ends with newline.
         """
+
+    @classmethod
+    def print(
+        cls,
+        reprex_str: str,
+        advertise: Optional[bool] = None,
+        session_info: bool = False,
+        **kwargs: Any,
+    ) -> None:
+        """Format a reprex string for a specific sharing venue and print to console.
+
+        Args:
+            reprex_str (str): String containing rendered reprex output.
+            advertise (Optional[bool], optional): Whether to include the advertisement for
+                reprexlite. Defaults to None, which uses a per-formatter default.
+            session_info (bool, optional): Whether to include detailed session information.
+                Defaults to False.
+            **kwargs (Any): Keyword arguments to print or rich's Console.print
+        """
+        formatted = cls.format(
+            reprex_str=reprex_str, advertise=advertise, session_info=session_info
+        )
+        print(formatted, **kwargs)
 
 
 formatter_registry: Dict[str, Type[Formatter]] = {}
@@ -109,6 +143,22 @@ class GitHubFormatter(Formatter):
             out.append("</details>")
         return "\n".join(out) + "\n"
 
+    @classmethod
+    def print(
+        cls,
+        reprex_str: str,
+        advertise: Optional[bool] = None,
+        session_info: bool = False,
+        **kwargs,
+    ) -> None:
+        formatted = cls.format(
+            reprex_str=reprex_str, advertise=advertise, session_info=session_info
+        )
+        if RICH_IS_AVAILABLE:
+            console.print(Syntax(formatted, "markdown", theme="ansi_dark"), **kwargs)
+        else:
+            print(formatted, **kwargs)
+
 
 @register_formatter(venue="html", label="HTML")
 class HtmlFormatter(Formatter):
@@ -153,6 +203,22 @@ class HtmlFormatter(Formatter):
             out.append("</details>")
         return "\n".join(out) + "\n"
 
+    @classmethod
+    def print(
+        cls,
+        reprex_str: str,
+        advertise: Optional[bool] = None,
+        session_info: bool = False,
+        **kwargs,
+    ) -> None:
+        formatted = cls.format(
+            reprex_str=reprex_str, advertise=advertise, session_info=session_info
+        )
+        if RICH_IS_AVAILABLE:
+            console.print(Syntax(formatted, "html", theme="ansi_dark"), **kwargs)
+        else:
+            print(formatted, **kwargs)
+
 
 @register_formatter(venue="py", label="Python script")
 class PyScriptFormatter(Formatter):
@@ -182,6 +248,22 @@ class PyScriptFormatter(Formatter):
             sess_lines = str(SessionInfo()).split("\n")
             out.extend("# " + line for line in sess_lines)
         return "\n".join(out) + "\n"
+
+    @classmethod
+    def print(
+        cls,
+        reprex_str: str,
+        advertise: Optional[bool] = None,
+        session_info: bool = False,
+        **kwargs,
+    ) -> None:
+        formatted = cls.format(
+            reprex_str=reprex_str, advertise=advertise, session_info=session_info
+        )
+        if RICH_IS_AVAILABLE:
+            console.print(Syntax(formatted, "python", theme="ansi_dark"), **kwargs)
+        else:
+            print(formatted, **kwargs)
 
 
 @register_formatter(venue="rtf", label="Rich Text Format")

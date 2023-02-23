@@ -4,6 +4,11 @@ from typing import Optional
 
 import typer
 
+try:
+    from rich import print
+except ModuleNotFoundError:
+    pass
+
 from reprexlite.config import ParsingMethod, ReprexConfig
 from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.formatting import formatter_registry
@@ -161,7 +166,7 @@ def main(
         input = typer.edit(editor=editor) or ""
 
     if verbose:
-        typer.echo(config)
+        print(config)
 
     r = Reprex.from_input(input=input, config=config)
 
@@ -170,7 +175,7 @@ def main(
             fp.write(r.format(terminal=False))
         print(f"Wrote rendered reprex to {outfile}")
     else:
-        print(r.format(terminal=True), end="")
+        r.print_formatted(end="")
 
     return r
 
