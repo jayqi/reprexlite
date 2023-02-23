@@ -421,6 +421,43 @@ def test_reprex_custom_prompts_different_input_and_output():
     assert_str_equals(expected, str(r))
 
 
+def test_reprex_doctest_output():
+    input = dedent(
+        """\
+        2+2
+        #> 4
+
+        # I'm a comment
+        for i in range(2):
+            print(i)
+        #> 0
+        #> 1
+        """
+    )
+    expected = dedent(
+        """\
+        >>> 2+2
+        4
+        >>>
+        >>> # I'm a comment
+        >>> for i in range(2):
+        ...     print(i)
+        0
+        1
+        """
+    )
+    r = Reprex.from_input(
+        input,
+        config=ReprexConfig(
+            prompt=">>>",
+            continuation="...",
+            comment="",
+        ),
+    )
+    assert r.results_match
+    assert_str_equals(expected, str(r))
+
+
 def test_trailing_results_no_newline():
     """Test case with trailing results and no newline"""
     input = "2+2\n#> 4"

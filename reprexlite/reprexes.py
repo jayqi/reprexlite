@@ -44,7 +44,10 @@ class RawResult:
             lines.extend(self.stdout.split("\n"))
         if self.raw is not None:
             lines.extend(pformat(self.raw, indent=2, width=77).split("\n"))
-        return "\n".join(f"{self.config.comment} " + line for line in lines)
+        if self.config.comment:
+            return "\n".join(self.config.comment + " " + line for line in lines)
+        else:
+            return "\n".join(lines)
 
     def __bool__(self) -> bool:
         """Tests whether instance contains anything to print."""
