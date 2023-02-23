@@ -57,11 +57,7 @@ class ReprexMagics(Magics):
         # Cell magic, render reprex
         with patch_edit(cell):
             result = runner.invoke(reprexlite.cli.app, line.split())
-            if result.exit_code == 0:
-                print(result.stdout, end="")
-            else:
-                print("ERROR: reprexlite has encountered an error while evaluating your input.")
-                print(result.exception, end="")
+            print(result.stdout, end="")
 
 
 def load_ipython_extension(ipython: InteractiveShell):

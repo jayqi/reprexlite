@@ -5,7 +5,7 @@ from typing import Optional
 import typer
 
 from reprexlite.config import ParsingMethod, ReprexConfig
-from reprexlite.exceptions import IPythonNotFoundError
+from reprexlite.exceptions import InputSyntaxError, IPythonNotFoundError
 from reprexlite.formatting import formatter_registry
 from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
@@ -163,7 +163,12 @@ def main(
     if verbose:
         typer.echo(config)
 
-    r = Reprex.from_input(input=input, config=config)
+    try:
+        r = Reprex.from_input(input=input, config=config)
+    except InputSyntaxError as e:
+        print("ERROR: reprexlite has encountered an error while evaluating your input.")
+        print(e)
+        raise typer.Exit(1) from e
 
     if outfile:
         with outfile.open("w") as fp:
