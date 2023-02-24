@@ -1343,11 +1343,12 @@ FormatterMetadata        </code>
 
     <div class="doc doc-contents ">
 
-      <p>FormatterMetadata(example: Union[str, NoneType], venues: Dict[str, str] = <factory>)</p>
+      <p>FormatterMetadata(example: Optional[str], venues: Dict[str, str] = <factory>)</p>
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">FormatterMetadata</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">FormatterMetadata</span><span class="p">:</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">venues</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">dict</span><span class="p">())</span>
 </code></pre></div>
@@ -1397,7 +1398,10 @@ GitHubFormatter            (<a class="autorefs autorefs-internal" title="reprexl
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">GitHubFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="o">=</span><span class="s2">&quot;ds&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Discourse (alias for &#39;gh&#39;)&quot;</span><span class="p">)</span>
+<span class="nd">@register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="o">=</span><span class="s2">&quot;so&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;StackOverflow (alias for &#39;gh&#39;)&quot;</span><span class="p">)</span>
+<span class="nd">@register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="o">=</span><span class="s2">&quot;gh&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Github Flavored Markdown&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">GitHubFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1572,7 +1576,8 @@ available, the rendered HTML will have syntax highlighting for the Python code.<
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HtmlFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;HTML&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">HtmlFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes in HTML. If optional dependency Pygments is</span>
 <span class="sd">    available, the rendered HTML will have syntax highlighting for the Python code.&quot;&quot;&quot;</span>
 
@@ -1761,7 +1766,8 @@ PyScriptFormatter            (<a class="autorefs autorefs-internal" title="repre
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PyScriptFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="o">=</span><span class="s2">&quot;py&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Python script&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">PyScriptFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes as a Python script.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1923,7 +1929,8 @@ RtfFormatter            (<a class="autorefs autorefs-internal" title="reprexlite
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RtfFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="o">=</span><span class="s2">&quot;rtf&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Rich Text Format&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">RtfFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes in Rich Text Format.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span>
@@ -2098,7 +2105,8 @@ SlackFormatter            (<a class="autorefs autorefs-internal" title="reprexli
 
         <details class="quote">
           <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SlackFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@register_formatter</span><span class="p">(</span><span class="n">venue</span><span class="o">=</span><span class="s2">&quot;slack&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Slack&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SlackFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Formatter for rendering reprexes as Slack markup.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span>

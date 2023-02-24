@@ -849,7 +849,8 @@ ParsedResult        </code>
 </table>
         <details class="quote">
           <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ParsedResult</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">ParsedResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class that holds parsed result from reading a reprex.</span>
 
 <span class="sd">    Attributes:</span>
@@ -971,7 +972,8 @@ pretty-formatted comment block representation of the result.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RawResult</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">RawResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class that holds the result of evaluated code. Use `str(...)` on an instance to produce a</span>
 <span class="sd">    pretty-formatted comment block representation of the result.</span>
 
@@ -1099,7 +1101,8 @@ Reprex        </code>
 </table>
         <details class="quote">
           <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Reprex</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Reprex</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass for a reprex, which holds Python code and results from evaluation.</span>
 
 <span class="sd">    Attributes:</span>
@@ -1699,7 +1702,8 @@ statement.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Statement</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Statement</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass that holds a LibCST parsed statement. of code.</span>
 
 <span class="sd">    Attributes:</span>
