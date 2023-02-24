@@ -1,7 +1,10 @@
 # reprexlite: Python reproducible examples for sharing
 
-[![PyPI](https://img.shields.io/pypi/v/reprexlite.svg)](https://pypi.org/project/reprexlite/)
+[![Docs Status](https://img.shields.io/badge/docs-stable-informational)](https://jayqi.github.io/reprexlite/stable/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/reprexlite)](https://pypi.org/project/reprexlite/)
+[![PyPI Version](https://img.shields.io/pypi/v/reprexlite.svg)](https://pypi.org/project/reprexlite/)
+[![conda-forge Version](https://img.shields.io/conda/vn/conda-forge/reprexlite.svg)](https://anaconda.org/conda-forge/reprexlite)
+[![conda-forge feedstock](https://img.shields.io/badge/conda--forge-feedstock-yellowgreen)](https://github.com/conda-forge/reprexlite-feedstock)
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
