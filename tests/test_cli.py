@@ -9,7 +9,7 @@ from typer.testing import CliRunner
 from reprexlite.cli import app
 from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.version import __version__
-from tests.utils import remove_ansi_escape
+from tests.utils import remove_ansi_escape, requires_ipython, requires_no_ipython
 
 runner = CliRunner()
 
@@ -40,18 +40,6 @@ def patch_edit(monkeypatch):
     patch = EditPatch()
     monkeypatch.setattr(typer, "edit", patch.mock_edit)
     return patch
-
-
-@pytest.fixture
-def no_ipython(monkeypatch):
-    import_orig = builtins.__import__
-
-    def mocked_import(name, *args):
-        if name.startswith("reprexlite.ipython"):
-            raise IPythonNotFoundError
-        return import_orig(name, *args)
-
-    monkeypatch.setattr(builtins, "__import__", mocked_import)
 
 
 def test_reprex(patch_edit):
@@ -103,6 +91,7 @@ def test_old_results(patch_edit):
     assert "#> [2, 3, 4, 5, 6]" in result.stdout
 
 
+@requires_ipython
 def test_ipython_editor():
     """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
     to inject input into the IPython shell."""
@@ -111,7 +100,8 @@ def test_ipython_editor():
     assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
 
 
-def test_ipython_editor_not_installed(no_ipython):
+@requires_no_ipython
+def test_ipython_editor_not_installed():
     """Test for expected error when opening the IPython interactive editor without IPython
     installed"""
     result = runner.invoke(app, ["-e", "ipython"])

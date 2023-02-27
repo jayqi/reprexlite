@@ -137,7 +137,7 @@ class Statement:
             return RawResult(config=self.config, raw=None, stdout=None)
 
         if "__name__" not in scope:
-            scope["__name__"] = "__reprex__"
+            scope["__name__"] = "__main__"
         stdout_io = StringIO()
         try:
             with redirect_stdout(stdout_io):

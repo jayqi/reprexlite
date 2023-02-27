@@ -33,6 +33,7 @@ dependencies = [
 black = ["black"]
 pygments = ["Pygments"]
 ipython = ["ipython"]
+tests = ["pytest"]
 
 [project.scripts]
 reprex = "reprexlite.cli:app"
@@ -43,6 +44,75 @@ reprex = "reprexlite.cli:app"
 "Bug Tracker" = "https://github.com/jayqi/reprexlite/issues"
 "Changelog" = "https://jayqi.github.io/reprexlite/stable/changelog/"
 
+[tool.hatch.build]
+exclude = ["docs/"]
+
+## DEFAULT ENVIRONMENT ##
+
+[tool.hatch.envs.default]
+dependencies = ["black", "ipython", "mypy", "ruff"]
+python = "3.10"
+path = ".venv"
+
+[tool.hatch.envs.default.scripts]
+lint = ["black --check reprexlite tests", "ruff check reprexlite tests"]
+typecheck = ["mypy reprexlite --install-types --non-interactive"]
+
+## TESTS ENVIRONMENT ##
+
+[tool.hatch.envs.tests]
+features = ["tests"]
+dependencies = ["coverage", "pytest-cov"]
+template = "tests"
+
+[[tool.hatch.envs.tests.matrix]]
+python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+[[tool.hatch.envs.tests.matrix]]
+python = ["3.10"]
+extras = ["black", "ipython", "pygments"]
+
+[tool.hatch.envs.tests.overrides]
+matrix.extras.features = [
+  { value = "black", if = [
+    "black",
+  ] },
+  { value = "ipython", if = [
+    "ipython",
+  ] },
+  { value = "pygments", if = [
+    "pygments",
+  ] },
+]
+
+[tool.hatch.envs.tests.scripts]
+run = "pytest tests"
+run-cov = "run --cov=reprexlite --cov-report=term --cov-report=html --cov-report=xml"
+run-debug = "run --pdb"
+
+
+## DOCS ENVIRONMENT ##
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs",
+  "mkdocs-material",
+  "mike",
+  "mkdocstrings[python]",
+  "mdx-truly-sane-lists",
+]
+template = "docs"
+
+[tool.hatch.envs.docs.scripts]
+build = [
+  "rm -rf site/",
+  "cp README.md docs/index.md",
+  "cp CHANGELOG.md docs/changelog.md",
+  "mkdocs build",
+]
+
+
+## TOOLS ##
 
 [tool.black]
 line-length = 99
@@ -81,7 +151,6 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--cov=reprexlite --cov-report=term --cov-report=html --cov-report=xml"
 testpaths = ["tests"]
 
 [tool.coverage.run]

@@ -4,6 +4,7 @@ generate expected formatted test assets.
     python -m tests.expected_formatted
 """
 
+import builtins
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
@@ -131,6 +132,20 @@ def patch_session_info():
     sys.modules["reprexlite.formatting"].SessionInfo = MockSessionInfo
     yield
     sys.modules["reprexlite.formatting"].SessionInfo = SessionInfo
+
+
+@contextmanager
+def no_pygments():
+    import_orig = builtins.__import__
+
+    def mocked_import(name, *args):
+        if name.startswith("pygments"):
+            raise ModuleNotFoundError(name="pygments")
+        return import_orig(name, *args)
+
+    builtins.__import__ = mocked_import
+    yield
+    builtins.__import__ = import_orig
 
 
 if __name__ == "__main__":

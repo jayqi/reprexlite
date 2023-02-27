@@ -16,7 +16,7 @@ from tests.expected_formatted import (
     MockSessionInfo,
     expected_reprexes,
 )
-from tests.utils import assert_str_equals
+from tests.utils import assert_str_equals, requires_no_pygments, requires_pygments
 
 
 @pytest.fixture
@@ -43,19 +43,8 @@ def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
         assert str(actual).endswith("\n")
 
 
-@pytest.fixture
-def no_pygments(monkeypatch):
-    import_orig = builtins.__import__
-
-    def mocked_import(name, *args):
-        if name.startswith("pygments"):
-            raise ModuleNotFoundError(name="pygments")
-        return import_orig(name, *args)
-
-    monkeypatch.setattr(builtins, "__import__", mocked_import)
-
-
-def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
+@requires_no_pygments
+def test_html_no_pygments(patch_datetime, patch_version):
     r = Reprex.from_input(INPUT, ReprexConfig(venue="html"))
     actual = r.format()
     expected = dedent(
@@ -70,7 +59,8 @@ def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
     assert str(actual).endswith("\n")
 
 
-def test_rtf_no_pygments(patch_datetime, patch_version, no_pygments):
+@requires_no_pygments
+def test_rtf_no_pygments(patch_datetime, patch_version):
     with pytest.raises(PygmentsNotFoundError):
         r = Reprex.from_input(INPUT, ReprexConfig(venue="rtf"))
         r.format()
