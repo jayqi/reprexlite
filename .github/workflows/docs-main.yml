@@ -19,16 +19,14 @@ jobs:
           cache: "pip"
           cache-dependency-path: |
             pyproject.toml
-            requirements-dev.txt
 
-      - name: Install dependencies
+      - name: Install hatch
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
+          pip install hatch
 
       - name: Test building documentation
         run: |
-          make docs
+          hatch run docs:build
 
       - name: Deploy docs to gh-pages
         working-directory: docs
@@ -36,4 +34,4 @@ jobs:
           git fetch origin gh-pages --depth=1
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          mike deploy --push ~latest --title=latest
+          hatch run docs:mike deploy --push ~latest --title=latest

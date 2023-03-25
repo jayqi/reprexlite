@@ -30,7 +30,7 @@ jobs:
 
       - name: Lint package
         run: |
-          hatch run lint
+          hatch run lint:lint
 
   tests:
     name: "Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})"
