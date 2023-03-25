@@ -1,4 +1,5 @@
 import subprocess
+import sys
 from textwrap import dedent
 
 import pytest
@@ -124,7 +125,7 @@ def test_version():
 def test_python_m_version():
     """Test the CLI with python -m and --version flag."""
     result = subprocess.run(
-        ["python", "-m", "reprexlite", "--version"],
+        [sys.executable, "-m", "reprexlite", "--version"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True,
