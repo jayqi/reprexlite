@@ -28,6 +28,10 @@ class ReprexConfig:
     formatting.
     """
 
+    # Editor
+    editor: Optional[str] = field(default=None, metadata={"help": "..."})
+    no_color: Optional[str] = 0
+
     # Formatting
     venue: str = field(
         default="gh",

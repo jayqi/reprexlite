@@ -50,7 +50,7 @@ exclude = ["docs/"]
 ## DEFAULT ENVIRONMENT ##
 
 [tool.hatch.envs.default]
-dependencies = ["black", "ipython", "mypy", "ruff"]
+dependencies = ["black", "ipython", "mypy", "ruff", "tqdm"]
 python = "3.10"
 path = ".venv"
 
