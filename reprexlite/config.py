@@ -30,7 +30,7 @@ class ReprexConfig:
 
     # Editor
     editor: Optional[str] = field(default=None, metadata={"help": "..."})
-    no_color: Optional[str] = 0
+    no_color: Optional[bool] = None
 
     # Formatting
     venue: str = field(

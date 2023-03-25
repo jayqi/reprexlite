@@ -1,11 +1,11 @@
 import dataclasses
 from datetime import datetime
-from typing import Dict, Optional
+from typing import Dict, NamedTuple, Optional
 
 try:
     from typing import Protocol
 except ImportError:
-    from typing_extensions import Protocol
+    from typing_extensions import Protocol  # type: ignore[assignment]
 
 try:
     from pygments import highlight
@@ -48,12 +48,20 @@ class Formatter(Protocol):
         """
 
 
-formatter_registry: Dict[str, Formatter] = {}
-"""Registry of formatters keyed by venue keywords."""
+class FormatterRegistration(NamedTuple):
+    """Named tuple that contains a reference to a venue formatter callable and a human-readable
+    label."""
+
+    formatter: Formatter
+    label: str
+
+
+formatter_registry: Dict[str, FormatterRegistration] = {}
+"""Registry of venue formatters keyed by venue keywords."""
 
 
 def register_formatter(venue: str, label: str):
-    """Decorator that registers a formatter implementation.
+    """Decorator that registers a venue formatter implementation to a venue keyword.
 
     Args:
         venue (str): Venue keyword that formatter will be registered to.
@@ -62,7 +70,7 @@ def register_formatter(venue: str, label: str):
 
     def registrar(fn: Formatter):
         global formatter_registry
-        formatter_registry[venue] = {"formatter": fn, "label": label}
+        formatter_registry[venue] = FormatterRegistration(formatter=fn, label=label)
         return fn
 
     return registrar

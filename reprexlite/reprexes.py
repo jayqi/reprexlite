@@ -420,7 +420,7 @@ class Reprex:
                 out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
             except ModuleNotFoundError:
                 pass
-        formatter = formatter_registry[self.config.venue]["formatter"]
+        formatter = formatter_registry[self.config.venue].formatter
         return formatter(
             out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
         )
