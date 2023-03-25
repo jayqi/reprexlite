@@ -68,7 +68,7 @@ jobs:
 
       - name: Run tests
         run: |
-          hatch run tests.py${{ matrix.python-version }}${{ matrix.extra }}:run
+          hatch run tests.py${{ matrix.python-version }}${{ matrix.extra }}:run-cov
 
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v3
