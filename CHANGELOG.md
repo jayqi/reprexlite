@@ -45,7 +45,7 @@ This release involves major changes to reprexlite. There is a significant refact
 #### Changed
 
 - Changed formatting abstractions in `reprexlite.formatting` module.
-  - Rather than `*Reprex` classes that encapsulate reprex data, we now have `*Formatter` classes and take a rendered reprex output string as input to a `format` class method that appropriately prepares the reprex output for a venue, such as adding venue-specific markup.
+  - Rather than `*Reprex` classes that encapsulate reprex data, we now have simple formatter callables that take a rendered reprex output string as input and appropriately prepares the reprex output for a venue, such as adding venue-specific markup.
   - The `venues_dispatcher` dictionary in `reprexlite.formatting` is now a `formatter_registry` dictionary.
   - Formatters are added to the registry using a `register_formatter` decorator instead of being hard-coded.
 
