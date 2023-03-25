@@ -11,6 +11,7 @@ from tests.utils import (
     assert_equals,
     assert_not_equals,
     assert_str_equals,
+    requires_black,
     requires_no_black,
     requires_no_pygments,
 )
@@ -205,11 +206,11 @@ cases = [
         """,
         expected="""\
         __name__
-        #> '__reprex__'
+        #> '__main__'
 
         class MyClass: ...
         MyClass.__module__
-        #> '__reprex__'
+        #> '__main__'
         """,
     ),
 ]
@@ -690,7 +691,7 @@ def test_style_with_black():
 
 
 @requires_no_black
-def test_no_black(no_black):
+def test_no_black():
     with pytest.raises(BlackNotFoundError):
         reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
         reprex.format()
@@ -734,7 +735,7 @@ def test_repr_html():
 
 
 @requires_no_pygments
-def test_repr_html_no_pygments(no_pygments):
+def test_repr_html_no_pygments():
     """Test that rich HTML display for Jupyter Notebooks runs without error even if pygments is not
     installed."""
     r = Reprex.from_input("2+2")

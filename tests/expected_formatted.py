@@ -4,16 +4,14 @@ generate expected formatted test assets.
     python -m tests.expected_formatted
 """
 
-import builtins
 from contextlib import contextmanager
 from dataclasses import dataclass
+from itertools import chain
 from pathlib import Path
 import shutil
 import sys
 from textwrap import dedent
 from typing import Any, Dict
-
-from tqdm import tqdm
 
 from reprexlite import reprex
 from reprexlite.session_info import Package, SessionInfo
@@ -40,35 +38,49 @@ expected_reprexes = [
     ExpectedReprex("gh.md", {"venue": "gh"}),
     ExpectedReprex("so.md", {"venue": "so"}),
     ExpectedReprex("ds.md", {"venue": "ds"}),
-    ExpectedReprex("html.html", {"venue": "html"}),
+    ExpectedReprex("htmlnocolor.html", {"venue": "htmlnocolor"}),
     ExpectedReprex("py.py", {"venue": "py"}),
-    ExpectedReprex("rtf.rtf", {"venue": "rtf"}),
     ExpectedReprex("slack.txt", {"venue": "slack"}),
     # With ad
     ExpectedReprex("ad/gh.md", {"venue": "gh", "advertise": True}),
     ExpectedReprex("ad/so.md", {"venue": "so", "advertise": True}),
     ExpectedReprex("ad/ds.md", {"venue": "ds", "advertise": True}),
-    ExpectedReprex("ad/html.html", {"venue": "html", "advertise": True}),
+    ExpectedReprex("ad/htmlnocolor.html", {"venue": "htmlnocolor", "advertise": True}),
     ExpectedReprex("ad/py.py", {"venue": "py", "advertise": True}),
-    ExpectedReprex("ad/rtf.rtf", {"venue": "rtf", "advertise": True}),
     ExpectedReprex("ad/slack.txt", {"venue": "slack", "advertise": True}),
     # No ad
     ExpectedReprex("no_ad/gh.md", {"venue": "gh", "advertise": False}),
     ExpectedReprex("no_ad/so.md", {"venue": "so", "advertise": False}),
     ExpectedReprex("no_ad/ds.md", {"venue": "ds", "advertise": False}),
-    ExpectedReprex("no_ad/html.html", {"venue": "html", "advertise": False}),
+    ExpectedReprex("no_ad/htmlnocolor.html", {"venue": "htmlnocolor", "advertise": False}),
     ExpectedReprex("no_ad/py.py", {"venue": "py", "advertise": False}),
-    ExpectedReprex("no_ad/rtf.rtf", {"venue": "rtf", "advertise": False}),
     ExpectedReprex("no_ad/slack.txt", {"venue": "slack", "advertise": False}),
     # With session info
     ExpectedReprex("session_info/gh.md", {"venue": "gh", "session_info": True}),
     ExpectedReprex("session_info/so.md", {"venue": "so", "session_info": True}),
     ExpectedReprex("session_info/ds.md", {"venue": "ds", "session_info": True}),
-    ExpectedReprex("session_info/html.html", {"venue": "html", "session_info": True}),
+    ExpectedReprex(
+        "session_info/htmlnocolor.html",
+        {"venue": "htmlnocolor", "session_info": True},
+    ),
     ExpectedReprex("session_info/py.py", {"venue": "py", "session_info": True}),
-    ExpectedReprex("session_info/rtf.rtf", {"venue": "rtf", "session_info": True}),
     ExpectedReprex("session_info/slack.txt", {"venue": "slack", "session_info": True}),
 ]
+
+expected_reprexes_requires_pygments = [
+    ExpectedReprex("html.html", {"venue": "html"}),
+    ExpectedReprex("rtf.rtf", {"venue": "rtf"}),
+    # With ad
+    ExpectedReprex("ad/html.html", {"venue": "html", "advertise": True}),
+    ExpectedReprex("ad/rtf.rtf", {"venue": "rtf", "advertise": True}),
+    # No ad
+    ExpectedReprex("no_ad/html.html", {"venue": "html", "advertise": False}),
+    ExpectedReprex("no_ad/rtf.rtf", {"venue": "rtf", "advertise": False}),
+    # With session info
+    ExpectedReprex("session_info/html.html", {"venue": "html", "session_info": True}),
+    ExpectedReprex("session_info/rtf.rtf", {"venue": "rtf", "session_info": True}),
+]
+
 
 MOCK_VERSION = "VERSION"
 
@@ -134,24 +146,26 @@ def patch_session_info():
     sys.modules["reprexlite.formatting"].SessionInfo = SessionInfo
 
 
-@contextmanager
-def no_pygments():
-    import_orig = builtins.__import__
+# @contextmanager
+# def no_pygments():
+#     import_orig = builtins.__import__
 
-    def mocked_import(name, *args):
-        if name.startswith("pygments"):
-            raise ModuleNotFoundError(name="pygments")
-        return import_orig(name, *args)
+#     def mocked_import(name, *args):
+#         if name.startswith("pygments"):
+#             raise ModuleNotFoundError(name="pygments")
+#         return import_orig(name, *args)
 
-    builtins.__import__ = mocked_import
-    yield
-    builtins.__import__ = import_orig
+#     builtins.__import__ = mocked_import
+#     yield
+#     builtins.__import__ = import_orig
 
 
 if __name__ == "__main__":
+    import tqdm
+
     shutil.rmtree(ASSETS_DIR, ignore_errors=True)
     with patch_datetime(), patch_version(), patch_session_info():
-        for ereprex in tqdm(expected_reprexes):
+        for ereprex in tqdm(chain(expected_reprexes, expected_reprexes_requires_pygments)):
             outfile = ASSETS_DIR / ereprex.filename
             outfile.parent.mkdir(exist_ok=True)
             reprex(INPUT, outfile=outfile, **ereprex.kwargs, print_=False)
