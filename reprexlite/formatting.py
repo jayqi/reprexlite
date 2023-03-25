@@ -19,7 +19,7 @@ except ModuleNotFoundError as e:
     else:
         raise
 
-from reprexlite.exceptions import InvalidFormatterError, PygmentsNotFoundError
+from reprexlite.exceptions import PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
@@ -61,8 +61,6 @@ def register_formatter(venue: str, label: str):
     """
 
     def registrar(fn):
-        if not callable(fn):
-            raise InvalidFormatterError("Formatter must be a callable.")
         global formatter_registry
         formatter_registry[venue] = {"formatter": fn, "label": label}
         return fn

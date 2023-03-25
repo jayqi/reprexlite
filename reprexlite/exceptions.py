@@ -10,10 +10,6 @@ class InputSyntaxError(SyntaxError, ReprexliteException):
     """Raised when encountering a syntax error when parsing input."""
 
 
-class InvalidFormatterError(TypeError, ReprexliteException):
-    """Raised when registering a formatter that is not a callable."""
-
-
 class InvalidInputPrefixesError(ValueError, ReprexliteException):
     pass
 

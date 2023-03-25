@@ -76,21 +76,3 @@ def test_rtf_no_pygments(patch_datetime, patch_version):
     with pytest.raises(PygmentsNotFoundError):
         r = Reprex.from_input(INPUT, ReprexConfig(venue="rtf"))
         r.format()
-
-
-# def test_rtf_pygments_bad_dependency(patch_datetime, patch_version, pygments_bad_dependency):
-#     """Test that a bad import inside pygments does not trigger PygmentsNotFoundError"""
-#     with pytest.raises(ModuleNotFoundError) as exc_info:
-#         r = Reprex.from_input(INPUT, ReprexConfig(venue="rtf"))
-#         r.format()
-#     assert not isinstance(exc_info.type, PygmentsNotFoundError)
-#     assert exc_info.value.name != "pygments"
-#     assert exc_info.value.name == pygments_bad_dependency
-
-
-# def test_not_a_formatter_error():
-#     with pytest.raises(NotAFormatterError):
-
-#         @register_formatter("l33t", label="l33t")
-#         class F0rm4tt3r:
-#             pass
