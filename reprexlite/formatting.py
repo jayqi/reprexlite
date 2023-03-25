@@ -3,9 +3,9 @@ from datetime import datetime
 from typing import Dict, Optional
 
 try:
-    from typing import Protocol, runtime_checkable
+    from typing import Protocol
 except ImportError:
-    from typing_extensions import Protocol, runtime_checkable
+    from typing_extensions import Protocol
 
 try:
     from pygments import highlight
@@ -19,7 +19,7 @@ except ModuleNotFoundError as e:
     else:
         raise
 
-from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
+from reprexlite.exceptions import InvalidFormatterError, PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
@@ -30,7 +30,6 @@ class FormatterMetadata:
     venues: Dict[str, str] = dataclasses.field(default_factory=lambda: dict())
 
 
-@runtime_checkable
 class Formatter(Protocol):
     def __call__(
         self, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
@@ -62,9 +61,9 @@ def register_formatter(venue: str, label: str):
     """
 
     def registrar(fn):
+        if not callable(fn):
+            raise InvalidFormatterError("Formatter must be a callable.")
         global formatter_registry
-        if not isinstance(fn, Formatter):
-            raise NotAFormatterError("Only subclasses of Formatter can be registered.")
         formatter_registry[venue] = {"formatter": fn, "label": label}
         return fn
 
