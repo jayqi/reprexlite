@@ -9,13 +9,9 @@
 
 Please file an issue in the [issue tracker](https://github.com/jayqi/reprexlite/issues).
 
-## Developers guide
+## Standalone tests
 
-This project uses [Hatch](https://github.com/pypa/hatch) as its project management tool.
-
-### Tests
-
-To run tests in your current environment, you should install from source with the `tests` extra to additionally install test dependencies (pytest). Then, use pytest to run the tests.
+To run tests in your current environment, you should install from source with the `tests` extra to additionally install test dependencies. Then, use pytest to run the tests.
 
 ```bash
 # Install with test dependencies
@@ -24,20 +20,23 @@ pip install .[tests]
 pytest tests.py
 ```
 
-To run tests on the full test matrix, you should use Hatch:
+## Developers guide
+
+This project uses [Hatch](https://github.com/pypa/hatch) as its project management tool. The default environment includes dependencies for linting as well as all extra dependencies.
+
+### Linting
+
+To run linting or typechecking from the default environment:
+
+```bash
+hatch run lint
+hatch run typecheck
+```
+
+### Tests
+
+To run tests on the full test matrix, use the Hatch command:
 
 ```bash
 hatch run tests:run
 ```
-
-### Type annotation inspection notebooks
-
-The directory [`inspect_types/`](./inspect_types/) contains Jupyter notebooks for each supported Python version that inspects attributes and behavior of various type annotations. These are intended as a development aide for understanding behavior of different annotations in different versions of Python.
-
-To regenerate these notebooks, run:
-
-```bash
-hatch run inspect-types:generate-notebook
-```
-
-This command will run `nbconvert` on the configured Python version matrix in isolated environments.

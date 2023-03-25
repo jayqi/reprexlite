@@ -50,15 +50,24 @@ exclude = ["docs/"]
 ## DEFAULT ENVIRONMENT ##
 
 [tool.hatch.envs.default]
-dependencies = ["black", "ipython", "mypy", "ruff", "tqdm"]
-python = "3.10"
+features = ["black", "pygments", "ipython", "tests"]
+dependencies = [
+  "tqdm", # For script to regenerate test assets
+]
 path = ".venv"
+template = "lint"
 
-[tool.hatch.envs.default.scripts]
+## LINTING ENVIRONMENT ##
+[tool.hatch.envs.lint]
+dependencies = ["black", "mypy", "ruff"]
+python = "3.10"
+detached = true
+
+[tool.hatch.envs.lint.scripts]
 lint = ["black --check reprexlite tests", "ruff check reprexlite tests"]
 typecheck = ["mypy reprexlite --install-types --non-interactive"]
 
-## TESTS ENVIRONMENT ##
+## TESTS ENVIRONMENTS ##
 
 [tool.hatch.envs.tests]
 features = ["tests"]
