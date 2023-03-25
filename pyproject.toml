@@ -96,19 +96,23 @@ run-debug = "run --pdb"
 [tool.hatch.envs.docs]
 dependencies = [
   "mkdocs",
+  "mkdocs-jupyter",
+  "mkdocs-macros-plugin",
   "mkdocs-material",
   "mike",
   "mkdocstrings[python]",
   "mdx-truly-sane-lists",
+  "py-markdown-table==0.3.3",
+  "typenames",
 ]
 template = "docs"
 
 [tool.hatch.envs.docs.scripts]
 build = [
-  "rm -rf site/",
-  "cp README.md docs/index.md",
-  "cp CHANGELOG.md docs/changelog.md",
-  "mkdocs build",
+  "rm -rf docs/site/",
+  "cp README.md docs/docs/index.md",
+  "cp CHANGELOG.md docs/docs/changelog.md",
+  "cd docs && mkdocs build",
 ]
 
 
