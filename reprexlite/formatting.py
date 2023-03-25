@@ -60,7 +60,7 @@ def register_formatter(venue: str, label: str):
         label (str): Short human-readable label explaining the venue.
     """
 
-    def registrar(fn):
+    def registrar(fn: Formatter):
         global formatter_registry
         formatter_registry[venue] = {"formatter": fn, "label": label}
         return fn
@@ -109,6 +109,7 @@ class HtmlFormatter:
     available, the rendered HTML will have syntax highlighting for the Python code."""
 
     no_color: bool
+    pygments_style: str = "default"
 
     def __call__(
         self, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
@@ -121,7 +122,7 @@ class HtmlFormatter:
             out.append(f'<pre><code class="language-python">{reprex_str}</code></pre>')
         else:
             formatter = pygments.formatters.HtmlFormatter(
-                lineanchors=True, linenos=True, wrapcode=True
+                lineanchors=True, linenos=True, wrapcode=True, style=self.pygments_style
             )
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
             out.append(highlight(str(reprex_str), PythonLexer(), formatter))
