@@ -1,6 +1,5 @@
 import builtins
 import importlib
-import sys
 from textwrap import dedent
 
 import pytest

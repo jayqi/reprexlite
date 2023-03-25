@@ -1,12 +1,9 @@
-import builtins
 import sys
-from textwrap import dedent
 
 import pytest
 
 from reprexlite.config import ReprexConfig
-from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
-from reprexlite.formatting import register_formatter
+from reprexlite.exceptions import PygmentsNotFoundError
 from reprexlite.reprexes import Reprex
 from tests.expected_formatted import (
     ASSETS_DIR,
