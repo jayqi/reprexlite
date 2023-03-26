@@ -12,22 +12,17 @@ try:
     import pygments.formatters
     from pygments.lexers import PythonLexer
 
-    PYGMENTS_AVAILABLE = True
+    PYGMENTS_IS_AVAILABLE = True
 except ModuleNotFoundError as e:
     if e.name == "pygments":
-        PYGMENTS_AVAILABLE = False
+        PYGMENTS_IS_AVAILABLE = False
     else:
         raise
+
 
 from reprexlite.exceptions import PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
-
-
-@dataclasses.dataclass
-class FormatterMetadata:
-    example: Optional[str]
-    venues: Dict[str, str] = dataclasses.field(default_factory=lambda: dict())
 
 
 class Formatter(Protocol):
@@ -126,7 +121,7 @@ class HtmlFormatter:
             advertise = True
         out = []
 
-        if self.no_color or not PYGMENTS_AVAILABLE:
+        if self.no_color or not PYGMENTS_IS_AVAILABLE:
             out.append(f'<pre><code class="language-python">{reprex_str}</code></pre>')
         else:
             formatter = pygments.formatters.HtmlFormatter(
@@ -168,7 +163,7 @@ def format_python(
 def format_rtf(
     reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
-    if not PYGMENTS_AVAILABLE:
+    if not PYGMENTS_IS_AVAILABLE:
         raise PygmentsNotFoundError("Pygments is required for RTF output.", name="pygments")
 
     if advertise is None:
