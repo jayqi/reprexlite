@@ -185,7 +185,7 @@ def main(
     if outfile:
         with outfile.open("w") as fp:
             fp.write(r.format())
-        print(f"Wrote rendered reprex to {outfile}", no_wrap=True)
+        print(f"Wrote rendered reprex to {outfile}")
     else:
         r.print(end="")
 
