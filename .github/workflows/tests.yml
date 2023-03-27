@@ -40,6 +40,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: [3.7, 3.8, 3.9, "3.10", "3.11"]
+        extra: [""]
         include:
           - os: ubuntu-latest
             python-version: "3.10"
@@ -50,6 +51,9 @@ jobs:
           - os: ubuntu-latest
             python-version: "3.10"
             extra: "-pygments"
+          - os: ubuntu-latest
+            python-version: "3.10"
+            extra: "-rich"
 
     steps:
       - uses: actions/checkout@v3
