@@ -108,6 +108,18 @@ def test_ipython_editor_not_installed():
     assert "ipython is required" in result.stdout
 
 
+def test_syntax_error(patch_edit):
+    patch_edit.input = dedent(
+        """\
+        2+
+        """
+    )
+    result = runner.invoke(app)
+    assert result.exit_code == 1
+    assert "Syntax Error" in result.stdout
+    assert "Incomplete input." in result.stdout
+
+
 def test_help():
     """Test the CLI with --help flag."""
     result = runner.invoke(app, ["--help"])

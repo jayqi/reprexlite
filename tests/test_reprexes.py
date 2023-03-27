@@ -5,7 +5,7 @@ from textwrap import dedent
 import pytest
 
 from reprexlite.config import ReprexConfig
-from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
+from reprexlite.exceptions import BlackNotFoundError, InputSyntaxError, UnexpectedError
 from reprexlite.reprexes import ParsedResult, RawResult, Reprex, reprex
 from tests.utils import (
     assert_equals,
@@ -733,6 +733,11 @@ def test_repr_html_no_pygments():
     installed."""
     r = Reprex.from_input("2+2")
     r._repr_html_()
+
+
+def test_syntax_error():
+    with pytest.raises(InputSyntaxError):
+        Reprex.from_input("2+")
 
 
 def test_reprex_init_bad_lengths_error():

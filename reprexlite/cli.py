@@ -5,9 +5,16 @@ from typing import Optional
 import typer
 
 try:
-    from rich import print
-except ModuleNotFoundError:
-    pass
+    from rich.console import Console
+
+    console = Console(soft_wrap=True)
+    print = console.print
+except ModuleNotFoundError as e:
+    if e.name == "rich":
+        pass
+    else:
+        raise
+
 
 from reprexlite.config import ParsingMethod, ReprexConfig
 from reprexlite.exceptions import InputSyntaxError, IPythonNotFoundError
@@ -178,7 +185,7 @@ def main(
     if outfile:
         with outfile.open("w") as fp:
             fp.write(r.format())
-        print(f"Wrote rendered reprex to {outfile}")
+        print(f"Wrote rendered reprex to {outfile}", no_wrap=True)
     else:
         r.print(end="")
 

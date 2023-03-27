@@ -24,11 +24,16 @@ from reprexlite.exceptions import RichNotFoundError
 
 class Printer(Protocol):
     def __call__(self, formatted_reprex: str, **kwargs):
-        pass
+        """Print a formatted reprex, possibly with colors.
+
+        Args:
+            formatted_reprex (str): Formatted reprex.
+            **kwargs: Arguments passed to print().
+        """
 
 
 printer_registry: Dict[str, Printer] = {}
-"""Registry of venue formatters keyed by venue keywords."""
+"""Registry of venue printers keyed by venue keywords."""
 
 
 def register_printer(venue: str):

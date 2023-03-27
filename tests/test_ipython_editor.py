@@ -71,6 +71,23 @@ def test_ipython_editor(reprexlite_ipython, capsys):
     assert remove_ansi_escape(captured.out) == expected
 
 
+@requires_ipython
+def test_ipython_syntax_error(reprexlite_ipython, capsys):
+    input = dedent(
+        """\
+        2+
+        """
+    )
+    reprexlite_ipython.run_cell(input)
+    captured = capsys.readouterr()
+
+    print("\n---ACTUAL-----\n")
+    print(captured.out)
+    print("\n--------------\n")
+    assert "Syntax Error" in remove_ansi_escape(captured.out)
+    assert "Incomplete input." in remove_ansi_escape(captured.out)
+
+
 @requires_no_ipython
 def test_no_ipython_error(monkeypatch):
     with pytest.raises(IPythonNotFoundError):
