@@ -6,7 +6,7 @@ import pytest
 
 from reprexlite.config import ReprexConfig
 from reprexlite.reprexes import Reprex
-from tests.utils import requires_ipython, requires_no_ipython
+from tests.pytest_utils import requires_ipython, requires_no_ipython
 
 
 @pytest.fixture()

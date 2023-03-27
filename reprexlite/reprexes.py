@@ -423,10 +423,13 @@ class Reprex:
         )
 
     def print(self, **kwargs) -> None:
-        try:
-            printer_registry[self.config.venue](self.format(), **kwargs)
-        except (KeyError, RichNotFoundError):
+        if self.config.no_color:
             print(self.format(), **kwargs)
+        else:
+            try:
+                printer_registry[self.config.venue](self.format(), **kwargs)
+            except (KeyError, RichNotFoundError):
+                print(self.format(), **kwargs)
 
     def __repr__(self) -> str:
         return f"<Reprex ({len(self.statements)}) '{to_snippet(str(self), 10)}'>"

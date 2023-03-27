@@ -4,19 +4,17 @@ generate expected formatted test assets.
     python -m tests.expected_formatted
 """
 
-from contextlib import contextmanager
 from dataclasses import dataclass
 from itertools import chain
 from pathlib import Path
 import shutil
-import sys
 from textwrap import dedent
 from typing import Any, Dict
 
 from reprexlite import reprex
-from reprexlite.session_info import Package, SessionInfo
+from tests.utils import patch_datetime, patch_session_info, patch_version
 
-ASSETS_DIR = (Path(__file__).parent / "assets").resolve()
+ASSETS_DIR = (Path(__file__).parent / "assets" / "formatted").resolve()
 
 
 INPUT = dedent(
@@ -82,86 +80,8 @@ expected_reprexes_requires_pygments = [
 ]
 
 
-MOCK_VERSION = "VERSION"
-
-
-@contextmanager
-def patch_version():
-    version = sys.modules["reprexlite.formatting"].__version__
-    sys.modules["reprexlite.formatting"].__version__ = MOCK_VERSION
-    yield
-    sys.modules["reprexlite.formatting"].__version__ = version
-
-
-class MockDateTime:
-    @classmethod
-    def now(cls):
-        return cls()
-
-    def astimezone(self):
-        return self
-
-    def strftime(self, format):
-        return "DATETIME"
-
-
-@contextmanager
-def patch_datetime():
-    datetime = sys.modules["reprexlite.formatting"].datetime
-    sys.modules["reprexlite.formatting"].datetime = MockDateTime
-    yield
-    sys.modules["reprexlite.formatting"].datetime = datetime
-
-
-class MockPackage(Package):
-    def __init__(self, name: str, version: str):
-        self._name = name
-        self._version = version
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def version(self):
-        return self._version
-
-
-class MockSessionInfo(SessionInfo):
-    def __init__(self, *args, **kwargs):
-        self.python_version = "3.x.y"
-        self.python_build_date = "Jan 01 2020 03:33:33"
-        self.os = "GLaDOS"
-        self.packages = [
-            MockPackage("datatable", "1.0"),
-            MockPackage("ggplot2", "2.0"),
-            MockPackage("pkgnet", "3.0"),
-        ]
-
-
-@contextmanager
-def patch_session_info():
-    sys.modules["reprexlite.formatting"].SessionInfo = MockSessionInfo
-    yield
-    sys.modules["reprexlite.formatting"].SessionInfo = SessionInfo
-
-
-# @contextmanager
-# def no_pygments():
-#     import_orig = builtins.__import__
-
-#     def mocked_import(name, *args):
-#         if name.startswith("pygments"):
-#             raise ModuleNotFoundError(name="pygments")
-#         return import_orig(name, *args)
-
-#     builtins.__import__ = mocked_import
-#     yield
-#     builtins.__import__ = import_orig
-
-
 if __name__ == "__main__":
-    import tqdm
+    from tqdm import tqdm
 
     shutil.rmtree(ASSETS_DIR, ignore_errors=True)
     with patch_datetime(), patch_version(), patch_session_info():

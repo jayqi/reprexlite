@@ -7,7 +7,8 @@ import pytest
 
 from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.reprexes import Reprex
-from tests.utils import remove_ansi_escape, requires_ipython, requires_no_ipython
+from tests.pytest_utils import requires_ipython, requires_no_ipython
+from tests.utils import remove_ansi_escape
 
 
 @pytest.fixture()

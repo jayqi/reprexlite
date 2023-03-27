@@ -7,14 +7,8 @@ import pytest
 from reprexlite.config import ReprexConfig
 from reprexlite.exceptions import BlackNotFoundError, InputSyntaxError, UnexpectedError
 from reprexlite.reprexes import ParsedResult, RawResult, Reprex, reprex
-from tests.utils import (
-    assert_equals,
-    assert_not_equals,
-    assert_str_equals,
-    requires_black,
-    requires_no_black,
-    requires_no_pygments,
-)
+from tests.pytest_utils import requires_black, requires_no_black, requires_no_pygments
+from tests.utils import assert_equals, assert_not_equals, assert_str_equals
 
 Case = namedtuple("Case", ["id", "input", "expected"])
 

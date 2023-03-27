@@ -8,13 +8,16 @@ from reprexlite.reprexes import Reprex
 from tests.expected_formatted import (
     ASSETS_DIR,
     INPUT,
-    MOCK_VERSION,
-    MockDateTime,
-    MockSessionInfo,
     expected_reprexes,
     expected_reprexes_requires_pygments,
 )
-from tests.utils import assert_str_equals, requires_no_pygments, requires_pygments
+from tests.pytest_utils import requires_no_pygments, requires_pygments
+from tests.utils import (
+    MOCK_VERSION,
+    MockDateTime,
+    MockSessionInfo,
+    assert_str_equals,
+)
 
 
 @pytest.fixture

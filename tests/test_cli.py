@@ -8,7 +8,8 @@ from typer.testing import CliRunner
 
 from reprexlite.cli import app
 from reprexlite.version import __version__
-from tests.utils import remove_ansi_escape, requires_ipython, requires_no_ipython
+from tests.pytest_utils import requires_ipython, requires_no_ipython
+from tests.utils import remove_ansi_escape
 
 runner = CliRunner()
 

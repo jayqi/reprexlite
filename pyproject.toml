@@ -93,6 +93,9 @@ matrix.extras.features = [
   { value = "pygments", if = [
     "pygments",
   ] },
+  { value = "rich", if = [
+    "rich",
+  ] },
 ]
 
 [tool.hatch.envs.tests.scripts]

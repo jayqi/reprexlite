@@ -34,3 +34,13 @@ def pytest_configure(config):
             pytest.PYGMENTS_IS_AVAILABLE = False
         else:
             raise
+
+    try:
+        import rich
+
+        pytest.RICH_IS_AVAILABLE = True
+    except ModuleNotFoundError as e:
+        if e.name == "rich":
+            pytest.RICH_IS_AVAILABLE = False
+        else:
+            raise
