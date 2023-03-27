@@ -721,13 +721,6 @@ def test_black_bad_dependency(black_bad_dependency, monkeypatch):
     assert exc_info.value.name == black_bad_dependency
 
 
-@requires_no_pygments
-def test_no_pygments_terminal():
-    """Test that format for terminal works even if pygments is not installed."""
-    r = Reprex.from_input("2+2")
-    assert_str_equals(r.format(terminal=False), r.format(terminal=True))
-
-
 def test_repr_html():
     """Test rich HTML display for Jupyter Notebooks runs without error."""
     r = Reprex.from_input("2+2")

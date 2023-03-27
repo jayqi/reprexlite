@@ -86,7 +86,7 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
         if raw_cell != "exit":
             try:
                 r = Reprex.from_input(raw_cell, config=self.reprex_config)
-                print(r.format(terminal=True), end="")
+                r.print(end="")
             except Exception as e:
                 print("ERROR: reprexlite has encountered an error while evaluating your input.")
                 print(e, end="")

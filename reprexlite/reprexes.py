@@ -16,9 +16,15 @@ except ImportError:
 import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig
-from reprexlite.exceptions import BlackNotFoundError, InputSyntaxError, UnexpectedError
+from reprexlite.exceptions import (
+    BlackNotFoundError,
+    InputSyntaxError,
+    RichNotFoundError,
+    UnexpectedError,
+)
 from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
+from reprexlite.printing import printer_registry
 
 
 @dataclasses.dataclass
@@ -409,21 +415,18 @@ class Reprex:
             result == old_result for result, old_result in zip(self.results, self.old_results)
         )
 
-    def format(self, terminal: bool = False) -> str:
+    def format(self) -> str:
         out = str(self)
-        if terminal:
-            try:
-                from pygments import highlight
-                from pygments.formatters import Terminal256Formatter
-                from pygments.lexers import PythonLexer
-
-                out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
-            except ModuleNotFoundError:
-                pass
         formatter = formatter_registry[self.config.venue].formatter
         return formatter(
             out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
         )
+
+    def print(self, **kwargs) -> None:
+        try:
+            printer_registry[self.config.venue](self.format(), **kwargs)
+        except (KeyError, RichNotFoundError):
+            print(self.format(), **kwargs)
 
     def __repr__(self) -> str:
         return f"<Reprex ({len(self.statements)}) '{to_snippet(str(self), 10)}'>"
@@ -455,7 +458,6 @@ def reprex(
     input: str,
     outfile: Optional[Union[str, os.PathLike]] = None,
     print_: bool = True,
-    terminal: bool = False,
     config: Optional[ReprexConfig] = None,
     **kwargs,
 ) -> Reprex:
@@ -484,8 +486,6 @@ def reprex(
         outfile (Optional[str | os.PathLike]): If provided, path to write formatted reprex
             output to. Defaults to None, which does not write to any file.
         print_ (bool): Whether to print formatted reprex output to console.
-        terminal (bool): Whether currently in a terminal. If true, will automatically apply code
-            highlighting if pygments is installed.
         config (Optional[ReprexConfig]): Instance of the configuration dataclass. Default of none
             will instantiate one with default values.
         **kwargs: Configuration options from [ReprexConfig][reprexlite.config.ReprexConfig]. Any
@@ -501,14 +501,10 @@ def reprex(
         config = dataclasses.replace(config, **kwargs)
 
     config = ReprexConfig(**kwargs)
-    if config.venue in ["html", "rtf"]:
-        # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
-        terminal = False
     r = Reprex.from_input(input, config=config)
-    output = r.format(terminal=terminal)
     if outfile is not None:
         with Path(outfile).open("w") as fp:
-            fp.write(r.format(terminal=False))
+            fp.write(r.format())
     if print_:
-        print(output)
+        r.print()
     return r

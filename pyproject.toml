@@ -31,8 +31,9 @@ dependencies = [
 
 [project.optional-dependencies]
 black = ["black"]
-pygments = ["Pygments"]
 ipython = ["ipython"]
+pygments = ["Pygments"]
+rich = ["rich"]
 tests = ["pytest"]
 
 [project.scripts]
@@ -50,7 +51,7 @@ exclude = ["docs/"]
 ## DEFAULT ENVIRONMENT ##
 
 [tool.hatch.envs.default]
-features = ["black", "pygments", "ipython", "tests"]
+features = ["black", "pygments", "ipython", "rich", "tests"]
 dependencies = [
   "tqdm", # For script to regenerate test assets
 ]
@@ -79,7 +80,7 @@ python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
 [[tool.hatch.envs.tests.matrix]]
 python = ["3.10"]
-extras = ["black", "ipython", "pygments"]
+extras = ["black", "ipython", "pygments", "rich"]
 
 [tool.hatch.envs.tests.overrides]
 matrix.extras.features = [
