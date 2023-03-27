@@ -33,7 +33,7 @@ jobs:
           hatch run lint:lint
 
   tests:
-    name: "Tests (${{ matrix.os }}, Python ${{ matrix.python-version }}, Extra ${{ extra }})"
+    name: "Tests (${{ matrix.os }}, Python ${{ matrix.python-version }}, Extra ${{ matrix.extra }})"
     needs: code-quality
     runs-on: ${{ matrix.os }}
     strategy:
