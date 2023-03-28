@@ -54,7 +54,7 @@ expected_reprexes_no_color = [
 ]
 
 if __name__ == "__main__":
-    import rich
+    import rich  # noqa: F401
     from tqdm import tqdm
 
     shutil.rmtree(ASSETS_DIR, ignore_errors=True)

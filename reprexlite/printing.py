@@ -23,8 +23,11 @@ from reprexlite.exceptions import RichNotFoundError
 
 
 class Printer(Protocol):
+    """Callback protocol for a printer callable type. A printer callable should print a given
+    venue-formatted reprex to stdout, potentially with terminal coloring."""
+
     def __call__(self, formatted_reprex: str, **kwargs):
-        """Print a formatted reprex, possibly with colors.
+        """Print given venue-formatted reprex to stdout.
 
         Args:
             formatted_reprex (str): Formatted reprex.
@@ -49,6 +52,12 @@ def register_printer(venue: str):
 @register_printer("so")
 @register_printer("gh")
 def print_markdown(formatted_reprex: str, **kwargs):
+    """Print a formatted markdown reprex using rich.
+
+    Args:
+        formatted_reprex (str): Formatted reprex.
+        **kwargs: Arguments passed to rich's Console.print.
+    """
     if RICH_IS_AVAILABLE:
         console.print(Syntax(formatted_reprex, "markdown", theme="ansi_dark"), **kwargs)
     else:
@@ -58,6 +67,12 @@ def print_markdown(formatted_reprex: str, **kwargs):
 @register_printer("htmlnocolor")
 @register_printer("html")
 def print_html(formatted_reprex: str, **kwargs):
+    """Print a formatted HTML reprex using rich.
+
+    Args:
+        formatted_reprex (str): Formatted reprex.
+        **kwargs: Arguments passed to rich's Console.print.
+    """
     if RICH_IS_AVAILABLE:
         console.print(Syntax(formatted_reprex, "html", theme="ansi_dark"), **kwargs)
     else:
@@ -66,6 +81,12 @@ def print_html(formatted_reprex: str, **kwargs):
 
 @register_printer("py")
 def print_python_code(formatted_reprex: str, **kwargs):
+    """Print a formatted Python code reprex using rich.
+
+    Args:
+        formatted_reprex (str): Formatted reprex.
+        **kwargs: Arguments passed to rich's Console.print.
+    """
     if RICH_IS_AVAILABLE:
         console.print(Syntax(formatted_reprex, "python", theme="ansi_dark"), **kwargs)
     else:

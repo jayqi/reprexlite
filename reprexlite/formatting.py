@@ -26,10 +26,14 @@ from reprexlite.version import __version__
 
 
 class Formatter(Protocol):
+    """Callback protocol that defines the venue formatter callable type. A formatter callable
+    should take a reprex string (code with results as comments) and format it for rendering
+    in a particular venue."""
+
     def __call__(
         self, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
     ) -> str:
-        """Format a reprex string for a specific sharing venue.
+        """Format a stringified reprex for rendering in some venue.
 
         Args:
             reprex_str (str): String containing rendered reprex output.
@@ -77,7 +81,7 @@ def register_formatter(venue: str, label: str):
 def format_github_flavored_markdown(
     reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
-    """Formatter for rendering reprexes in GitHub Flavored Markdown.
+    """Format a reprex in GitHub Flavored Markdown.
 
     Args:
         reprex_str (str): String containing rendered reprex output.
@@ -108,8 +112,14 @@ def format_github_flavored_markdown(
 
 @dataclasses.dataclass
 class HtmlFormatter:
-    """Formatter for rendering reprexes in HTML. If optional dependency Pygments is
-    available, the rendered HTML will have syntax highlighting for the Python code."""
+    """Format a reprex in HTML. Can use Pygments to add syntax highlighting to the rendered Python
+    code block.
+
+    Attributes:
+        no_color (bool): Whether to disable syntax highlighting, regardless of whether Pygments is
+            available.
+        pygments_style (str): A valid Pygments style name.
+    """
 
     no_color: bool
     pygments_style: str = "default"
@@ -117,6 +127,18 @@ class HtmlFormatter:
     def __call__(
         self, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
     ) -> str:
+        """Format a reprex in HTML.
+
+        Args:
+            reprex_str (str): String containing rendered reprex output.
+            advertise (Optional[bool], optional): Whether to include the advertisement for
+                reprexlite. Defaults to None, which uses a per-formatter default.
+            session_info (bool, optional): Whether to include detailed session information.
+                Defaults to False.
+
+        Returns:
+            str: String containing formatted reprex code. Ends with newline.
+        """
         if advertise is None:
             advertise = True
         out = []

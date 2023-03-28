@@ -416,6 +416,7 @@ class Reprex:
         )
 
     def format(self) -> str:
+        """Returns the reprex formatted for the configured venue."""
         out = str(self)
         formatter = formatter_registry[self.config.venue].formatter
         return formatter(
@@ -423,6 +424,7 @@ class Reprex:
         )
 
     def print(self, **kwargs) -> None:
+        """Prints to stdout the reprex formatted for the configured venue."""
         if self.config.no_color:
             print(self.format(), **kwargs)
         else:
@@ -451,6 +453,7 @@ class Reprex:
 
 
 def to_snippet(s: str, n: int) -> str:
+    """Utility function that truncates a string to n characters."""
     if len(s) <= n:
         return rf"{s}"
     else:

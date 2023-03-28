@@ -1,3 +1,10 @@
+import sys
+
+if sys.version_info[:2] >= (3, 8):
+    import importlib.metadata as importlib_metadata
+else:
+    import importlib_metadata
+
 import pytest
 
 
@@ -38,6 +45,7 @@ def pytest_configure(config):
     try:
         import rich
 
+        print(importlib_metadata.version(rich.__name__))
         pytest.RICH_IS_AVAILABLE = True
     except ModuleNotFoundError as e:
         if e.name == "rich":
