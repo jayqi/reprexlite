@@ -12,7 +12,7 @@ def pytest_configure(config):
     try:
         import IPython
 
-        print(IPython.__version__)
+        print("ipython", IPython.__version__)
         pytest.IPYTHON_IS_AVAILABLE = True
     except ModuleNotFoundError as e:
         if e.name == "IPython":
@@ -23,7 +23,7 @@ def pytest_configure(config):
     try:
         import black
 
-        print(black.__version__)
+        print("black", black.__version__)
         pytest.BLACK_IS_AVAILABLE = True
     except ModuleNotFoundError as e:
         if e.name == "black":
@@ -34,7 +34,7 @@ def pytest_configure(config):
     try:
         import pygments
 
-        print(pygments.__version__)
+        print("pygments", pygments.__version__)
         pytest.PYGMENTS_IS_AVAILABLE = True
     except ModuleNotFoundError as e:
         if e.name == "pygments":
@@ -45,7 +45,7 @@ def pytest_configure(config):
     try:
         import rich
 
-        print(importlib_metadata.version(rich.__name__))
+        print("rich", importlib_metadata.version(rich.__name__))
         pytest.RICH_IS_AVAILABLE = True
     except ModuleNotFoundError as e:
         if e.name == "rich":
