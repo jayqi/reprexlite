@@ -54,7 +54,7 @@ def test_cell_magic(ipython, capsys):
     captured = capsys.readouterr()
 
     r = Reprex.from_input(input, config=ReprexConfig(advertise=False, session_info=True))
-    expected = r.format()
+    expected = r.render()
 
     print("\n---EXPECTED---\n")
     print(expected)

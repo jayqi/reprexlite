@@ -62,7 +62,7 @@ def test_ipython_editor(reprexlite_ipython, capsys):
     reprexlite_ipython.run_cell(input)
     captured = capsys.readouterr()
     r = Reprex.from_input(input)
-    expected = r.format()
+    expected = r.render()
 
     print("\n---EXPECTED---\n")
     print(expected)

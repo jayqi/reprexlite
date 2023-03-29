@@ -415,8 +415,8 @@ class Reprex:
             result == old_result for result, old_result in zip(self.results, self.old_results)
         )
 
-    def format(self) -> str:
-        """Returns the reprex formatted for the configured venue."""
+    def render(self) -> str:
+        """Render to a string with the configured venue format."""
         out = str(self)
         formatter = formatter_registry[self.config.venue].formatter
         return formatter(
@@ -424,14 +424,14 @@ class Reprex:
         )
 
     def print(self, **kwargs) -> None:
-        """Prints to stdout the reprex formatted for the configured venue."""
+        """Prints rendered reprex to stdout."""
         if self.config.no_color:
-            print(self.format(), **kwargs)
+            print(self.render(), **kwargs)
         else:
             try:
-                printer_registry[self.config.venue](self.format(), **kwargs)
+                printer_registry[self.config.venue](self.render(), **kwargs)
             except (KeyError, RichNotFoundError):
-                print(self.format(), **kwargs)
+                print(self.render(), **kwargs)
 
     def __repr__(self) -> str:
         return f"<Reprex ({len(self.statements)}) '{to_snippet(str(self), 10)}'>"
@@ -446,9 +446,9 @@ class Reprex:
 
             formatter = HtmlFormatter(style="friendly", wrapcode=True)
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
-            out.append(highlight(self.format(), PythonLexer(), formatter))
+            out.append(highlight(self.render(), PythonLexer(), formatter))
         except ModuleNotFoundError:
-            out.append(f"<pre><code>{self.format()}</code></pre>")
+            out.append(f"<pre><code>{self.render()}</code></pre>")
         return "\n".join(out)
 
 
@@ -510,7 +510,7 @@ def reprex(
     r = Reprex.from_input(input, config=config)
     if outfile is not None:
         with Path(outfile).open("w") as fp:
-            fp.write(r.format())
+            fp.write(r.render())
     if print_:
         r.print()
     return r

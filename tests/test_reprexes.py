@@ -688,7 +688,7 @@ def test_style_with_black():
 def test_no_black():
     with pytest.raises(BlackNotFoundError):
         reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
-        reprex.format()
+        reprex.render()
 
 
 @pytest.fixture
@@ -709,7 +709,7 @@ def black_bad_dependency(monkeypatch):
 def test_black_bad_dependency(black_bad_dependency, monkeypatch):
     with pytest.raises(ModuleNotFoundError) as exc_info:
         reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
-        reprex.format()
+        reprex.render()
     assert not isinstance(exc_info.type, BlackNotFoundError)
     assert exc_info.value.name != "black"
     assert exc_info.value.name == black_bad_dependency
@@ -761,4 +761,4 @@ def test_reprex_function(tmp_path):
 
     # Test writing to file
     with (tmp_path / "rendered.txt").open("r") as fp:
-        assert expected.format() == fp.read()
+        assert expected.render() == fp.read()
