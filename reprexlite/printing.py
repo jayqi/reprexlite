@@ -16,7 +16,7 @@ except ModuleNotFoundError as e:
     if e.name == "rich":
         RICH_IS_AVAILABLE = False
     else:
-        raise
+        raise  # pragma: no cover
 
 
 from reprexlite.exceptions import RichNotFoundError

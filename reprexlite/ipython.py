@@ -21,7 +21,7 @@ except ModuleNotFoundError as e:
     if e.name == "IPython":
         raise IPythonNotFoundError(*e.args, name="IPython")
     else:
-        raise
+        raise  # pragma: no cover
 
 
 runner = CliRunner()

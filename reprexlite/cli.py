@@ -13,7 +13,7 @@ except ModuleNotFoundError as e:
     if e.name == "rich":
         pass
     else:
-        raise
+        raise  # pragma: no cover
 
 
 from reprexlite.config import ParsingMethod, ReprexConfig

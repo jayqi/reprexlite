@@ -121,6 +121,13 @@ def test_syntax_error(patch_edit):
     assert "Incomplete input." in result.stdout
 
 
+def test_verbose(patch_edit):
+    result = runner.invoke(app, ["--verbose"])
+    print(result.stdout)
+    assert result.exit_code == 0
+    assert "ReprexConfig" in remove_ansi_escape(result.stdout)
+
+
 def test_help():
     """Test the CLI with --help flag."""
     result = runner.invoke(app, ["--help"])

@@ -715,6 +715,12 @@ def test_black_bad_dependency(black_bad_dependency, monkeypatch):
     assert exc_info.value.name == black_bad_dependency
 
 
+def test_repr():
+    """Test rich HTML display for Jupyter Notebooks runs without error."""
+    r = Reprex.from_input("2+2")
+    assert repr(r).startswith("<Reprex ")
+
+
 def test_repr_html():
     """Test rich HTML display for Jupyter Notebooks runs without error."""
     r = Reprex.from_input("2+2")
