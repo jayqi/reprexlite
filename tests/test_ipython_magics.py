@@ -1,18 +1,19 @@
 import builtins
 import importlib
-import sys
 from textwrap import dedent
 
-from IPython.terminal.interactiveshell import TerminalInteractiveShell
-from IPython.testing import globalipapp
 import pytest
 
 from reprexlite.config import ReprexConfig
 from reprexlite.reprexes import Reprex
+from tests.pytest_utils import requires_ipython, requires_no_ipython
 
 
 @pytest.fixture()
 def ipython(monkeypatch):
+    from IPython.terminal.interactiveshell import TerminalInteractiveShell
+    from IPython.testing import globalipapp
+
     monkeypatch.setattr(TerminalInteractiveShell, "_instance", None)
     ipython = globalipapp.start_ipython()
     ipython.run_line_magic("load_ext", "reprexlite")
@@ -33,6 +34,7 @@ def no_ipython(monkeypatch):
     monkeypatch.setattr(builtins, "__import__", mocked_import)
 
 
+@requires_ipython
 def test_line_magic(ipython, capsys):
     ipython.run_line_magic("reprex", line="")
     captured = capsys.readouterr()
@@ -40,6 +42,7 @@ def test_line_magic(ipython, capsys):
     assert r"Cell Magic Usage: %%reprex" in captured.out
 
 
+@requires_ipython
 def test_cell_magic(ipython, capsys):
     input = dedent(
         """\
@@ -51,7 +54,7 @@ def test_cell_magic(ipython, capsys):
     captured = capsys.readouterr()
 
     r = Reprex.from_input(input, config=ReprexConfig(advertise=False, session_info=True))
-    expected = r.format(terminal=True)
+    expected = r.format()
 
     print("\n---EXPECTED---\n")
     print(expected)
@@ -62,8 +65,7 @@ def test_cell_magic(ipython, capsys):
     assert captured.out == expected
 
 
-def test_no_ipython(no_ipython, monkeypatch):
+@requires_no_ipython
+def test_no_ipython(monkeypatch):
     """Tests that not having ipython installed should not cause any import errors."""
-    monkeypatch.delitem(sys.modules, "reprexlite")
-    monkeypatch.delitem(sys.modules, "reprexlite.ipython")
     importlib.import_module("reprexlite")

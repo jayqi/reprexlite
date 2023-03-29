@@ -3,17 +3,20 @@ import importlib
 import sys
 from textwrap import dedent
 
-from IPython.testing import globalipapp
 import pytest
 
 from reprexlite.exceptions import IPythonNotFoundError
-from reprexlite.ipython import ReprexTerminalInteractiveShell
 from reprexlite.reprexes import Reprex
+from tests.pytest_utils import requires_ipython, requires_no_ipython
 from tests.utils import remove_ansi_escape
 
 
 @pytest.fixture()
 def reprexlite_ipython(monkeypatch):
+    from IPython.testing import globalipapp
+
+    from reprexlite.ipython import ReprexTerminalInteractiveShell
+
     monkeypatch.setattr(globalipapp, "TerminalInteractiveShell", ReprexTerminalInteractiveShell)
     monkeypatch.setattr(ReprexTerminalInteractiveShell, "_instance", None)
     ipython = globalipapp.start_ipython()
@@ -48,6 +51,7 @@ def ipython_bad_dependency(monkeypatch):
     yield module_name
 
 
+@requires_ipython
 def test_ipython_editor(reprexlite_ipython, capsys):
     input = dedent(
         """\
@@ -68,12 +72,30 @@ def test_ipython_editor(reprexlite_ipython, capsys):
     assert remove_ansi_escape(captured.out) == expected
 
 
-def test_no_ipython_error(no_ipython, monkeypatch):
-    monkeypatch.delitem(sys.modules, "reprexlite.ipython")
+@requires_ipython
+def test_ipython_syntax_error(reprexlite_ipython, capsys):
+    input = dedent(
+        """\
+        2+
+        """
+    )
+    reprexlite_ipython.run_cell(input)
+    captured = capsys.readouterr()
+
+    print("\n---ACTUAL-----\n")
+    print(captured.out)
+    print("\n--------------\n")
+    assert "Syntax Error" in remove_ansi_escape(captured.out)
+    assert "Incomplete input." in remove_ansi_escape(captured.out)
+
+
+@requires_no_ipython
+def test_no_ipython_error(monkeypatch):
     with pytest.raises(IPythonNotFoundError):
         importlib.import_module("reprexlite.ipython")
 
 
+@requires_ipython
 def test_bad_ipython_dependency(ipython_bad_dependency, monkeypatch):
     """Test that a bad import inside IPython does not trigger IPythonNotFoundError"""
     monkeypatch.delitem(sys.modules, "reprexlite.ipython")

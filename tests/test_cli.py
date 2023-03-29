@@ -1,5 +1,5 @@
-import builtins
 import subprocess
+import sys
 from textwrap import dedent
 
 import pytest
@@ -7,8 +7,8 @@ import typer
 from typer.testing import CliRunner
 
 from reprexlite.cli import app
-from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.version import __version__
+from tests.pytest_utils import requires_ipython, requires_no_ipython
 from tests.utils import remove_ansi_escape
 
 runner = CliRunner()
@@ -40,18 +40,6 @@ def patch_edit(monkeypatch):
     patch = EditPatch()
     monkeypatch.setattr(typer, "edit", patch.mock_edit)
     return patch
-
-
-@pytest.fixture
-def no_ipython(monkeypatch):
-    import_orig = builtins.__import__
-
-    def mocked_import(name, *args):
-        if name.startswith("reprexlite.ipython"):
-            raise IPythonNotFoundError
-        return import_orig(name, *args)
-
-    monkeypatch.setattr(builtins, "__import__", mocked_import)
 
 
 def test_reprex(patch_edit):
@@ -103,6 +91,7 @@ def test_old_results(patch_edit):
     assert "#> [2, 3, 4, 5, 6]" in result.stdout
 
 
+@requires_ipython
 def test_ipython_editor():
     """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
     to inject input into the IPython shell."""
@@ -111,12 +100,32 @@ def test_ipython_editor():
     assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
 
 
-def test_ipython_editor_not_installed(no_ipython):
+@requires_no_ipython
+def test_ipython_editor_not_installed():
     """Test for expected error when opening the IPython interactive editor without IPython
     installed"""
     result = runner.invoke(app, ["-e", "ipython"])
     assert result.exit_code == 1
     assert "ipython is required" in result.stdout
+
+
+def test_syntax_error(patch_edit):
+    patch_edit.input = dedent(
+        """\
+        2+
+        """
+    )
+    result = runner.invoke(app)
+    assert result.exit_code == 1
+    assert "Syntax Error" in result.stdout
+    assert "Incomplete input." in result.stdout
+
+
+def test_verbose(patch_edit):
+    result = runner.invoke(app, ["--verbose"])
+    print(result.stdout)
+    assert result.exit_code == 0
+    assert "ReprexConfig" in remove_ansi_escape(result.stdout)
 
 
 def test_help():
@@ -136,7 +145,7 @@ def test_version():
 def test_python_m_version():
     """Test the CLI with python -m and --version flag."""
     result = subprocess.run(
-        ["python", "-m", "reprexlite", "--version"],
+        [sys.executable, "-m", "reprexlite", "--version"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True,

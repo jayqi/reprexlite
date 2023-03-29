@@ -4,20 +4,17 @@ generate expected formatted test assets.
     python -m tests.expected_formatted
 """
 
-from contextlib import contextmanager
 from dataclasses import dataclass
+from itertools import chain
 from pathlib import Path
 import shutil
-import sys
 from textwrap import dedent
 from typing import Any, Dict
 
-from tqdm import tqdm
-
 from reprexlite import reprex
-from reprexlite.session_info import Package, SessionInfo
+from tests.utils import patch_datetime, patch_session_info, patch_version
 
-ASSETS_DIR = (Path(__file__).parent / "assets").resolve()
+ASSETS_DIR = (Path(__file__).parent / "assets" / "formatted").resolve()
 
 
 INPUT = dedent(
@@ -39,104 +36,56 @@ expected_reprexes = [
     ExpectedReprex("gh.md", {"venue": "gh"}),
     ExpectedReprex("so.md", {"venue": "so"}),
     ExpectedReprex("ds.md", {"venue": "ds"}),
-    ExpectedReprex("html.html", {"venue": "html"}),
+    ExpectedReprex("htmlnocolor.html", {"venue": "htmlnocolor"}),
     ExpectedReprex("py.py", {"venue": "py"}),
-    ExpectedReprex("rtf.rtf", {"venue": "rtf"}),
     ExpectedReprex("slack.txt", {"venue": "slack"}),
     # With ad
     ExpectedReprex("ad/gh.md", {"venue": "gh", "advertise": True}),
     ExpectedReprex("ad/so.md", {"venue": "so", "advertise": True}),
     ExpectedReprex("ad/ds.md", {"venue": "ds", "advertise": True}),
-    ExpectedReprex("ad/html.html", {"venue": "html", "advertise": True}),
+    ExpectedReprex("ad/htmlnocolor.html", {"venue": "htmlnocolor", "advertise": True}),
     ExpectedReprex("ad/py.py", {"venue": "py", "advertise": True}),
-    ExpectedReprex("ad/rtf.rtf", {"venue": "rtf", "advertise": True}),
     ExpectedReprex("ad/slack.txt", {"venue": "slack", "advertise": True}),
     # No ad
     ExpectedReprex("no_ad/gh.md", {"venue": "gh", "advertise": False}),
     ExpectedReprex("no_ad/so.md", {"venue": "so", "advertise": False}),
     ExpectedReprex("no_ad/ds.md", {"venue": "ds", "advertise": False}),
-    ExpectedReprex("no_ad/html.html", {"venue": "html", "advertise": False}),
+    ExpectedReprex("no_ad/htmlnocolor.html", {"venue": "htmlnocolor", "advertise": False}),
     ExpectedReprex("no_ad/py.py", {"venue": "py", "advertise": False}),
-    ExpectedReprex("no_ad/rtf.rtf", {"venue": "rtf", "advertise": False}),
     ExpectedReprex("no_ad/slack.txt", {"venue": "slack", "advertise": False}),
     # With session info
     ExpectedReprex("session_info/gh.md", {"venue": "gh", "session_info": True}),
     ExpectedReprex("session_info/so.md", {"venue": "so", "session_info": True}),
     ExpectedReprex("session_info/ds.md", {"venue": "ds", "session_info": True}),
-    ExpectedReprex("session_info/html.html", {"venue": "html", "session_info": True}),
+    ExpectedReprex(
+        "session_info/htmlnocolor.html",
+        {"venue": "htmlnocolor", "session_info": True},
+    ),
     ExpectedReprex("session_info/py.py", {"venue": "py", "session_info": True}),
-    ExpectedReprex("session_info/rtf.rtf", {"venue": "rtf", "session_info": True}),
     ExpectedReprex("session_info/slack.txt", {"venue": "slack", "session_info": True}),
 ]
 
-MOCK_VERSION = "VERSION"
-
-
-@contextmanager
-def patch_version():
-    version = sys.modules["reprexlite.formatting"].__version__
-    sys.modules["reprexlite.formatting"].__version__ = MOCK_VERSION
-    yield
-    sys.modules["reprexlite.formatting"].__version__ = version
-
-
-class MockDateTime:
-    @classmethod
-    def now(cls):
-        return cls()
-
-    def astimezone(self):
-        return self
-
-    def strftime(self, format):
-        return "DATETIME"
-
-
-@contextmanager
-def patch_datetime():
-    datetime = sys.modules["reprexlite.formatting"].datetime
-    sys.modules["reprexlite.formatting"].datetime = MockDateTime
-    yield
-    sys.modules["reprexlite.formatting"].datetime = datetime
-
-
-class MockPackage(Package):
-    def __init__(self, name: str, version: str):
-        self._name = name
-        self._version = version
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def version(self):
-        return self._version
-
-
-class MockSessionInfo(SessionInfo):
-    def __init__(self, *args, **kwargs):
-        self.python_version = "3.x.y"
-        self.python_build_date = "Jan 01 2020 03:33:33"
-        self.os = "GLaDOS"
-        self.packages = [
-            MockPackage("datatable", "1.0"),
-            MockPackage("ggplot2", "2.0"),
-            MockPackage("pkgnet", "3.0"),
-        ]
-
-
-@contextmanager
-def patch_session_info():
-    sys.modules["reprexlite.formatting"].SessionInfo = MockSessionInfo
-    yield
-    sys.modules["reprexlite.formatting"].SessionInfo = SessionInfo
+expected_reprexes_requires_pygments = [
+    ExpectedReprex("html.html", {"venue": "html"}),
+    ExpectedReprex("rtf.rtf", {"venue": "rtf"}),
+    # With ad
+    ExpectedReprex("ad/html.html", {"venue": "html", "advertise": True}),
+    ExpectedReprex("ad/rtf.rtf", {"venue": "rtf", "advertise": True}),
+    # No ad
+    ExpectedReprex("no_ad/html.html", {"venue": "html", "advertise": False}),
+    ExpectedReprex("no_ad/rtf.rtf", {"venue": "rtf", "advertise": False}),
+    # With session info
+    ExpectedReprex("session_info/html.html", {"venue": "html", "session_info": True}),
+    ExpectedReprex("session_info/rtf.rtf", {"venue": "rtf", "session_info": True}),
+]
 
 
 if __name__ == "__main__":
+    from tqdm import tqdm
+
     shutil.rmtree(ASSETS_DIR, ignore_errors=True)
     with patch_datetime(), patch_version(), patch_session_info():
-        for ereprex in tqdm(expected_reprexes):
+        for ereprex in tqdm(chain(expected_reprexes, expected_reprexes_requires_pygments)):
             outfile = ASSETS_DIR / ereprex.filename
             outfile.parent.mkdir(exist_ok=True)
             reprex(INPUT, outfile=outfile, **ereprex.kwargs, print_=False)

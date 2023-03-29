@@ -28,6 +28,15 @@ class ReprexConfig:
     formatting.
     """
 
+    # Editor
+    editor: Optional[str] = field(default=None, metadata={"help": "..."})
+    no_color: bool = field(
+        default=False,
+        metadata={
+            "help": ("If True, will disable the colored text output when printing to stdout.")
+        },
+    )
+
     # Formatting
     venue: str = field(
         default="gh",

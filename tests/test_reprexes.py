@@ -5,8 +5,9 @@ from textwrap import dedent
 import pytest
 
 from reprexlite.config import ReprexConfig
-from reprexlite.exceptions import BlackNotFoundError, UnexpectedError
+from reprexlite.exceptions import BlackNotFoundError, InputSyntaxError, UnexpectedError
 from reprexlite.reprexes import ParsedResult, RawResult, Reprex, reprex
+from tests.pytest_utils import requires_black, requires_no_black, requires_no_pygments
 from tests.utils import assert_equals, assert_not_equals, assert_str_equals
 
 Case = namedtuple("Case", ["id", "input", "expected"])
@@ -199,11 +200,11 @@ cases = [
         """,
         expected="""\
         __name__
-        #> '__reprex__'
+        #> '__main__'
 
         class MyClass: ...
         MyClass.__module__
-        #> '__reprex__'
+        #> '__main__'
         """,
     ),
 ]
@@ -663,6 +664,7 @@ def test_raw_result_to_parsed_result_comparisons():
     )
 
 
+@requires_black
 def test_style_with_black():
     input = dedent(
         """\
@@ -682,19 +684,8 @@ def test_style_with_black():
     reprex.statements[0].raw_code == expected.strip()
 
 
-@pytest.fixture
-def no_black(monkeypatch):
-    import_orig = builtins.__import__
-
-    def mocked_import(name, *args):
-        if name.startswith("black"):
-            raise ModuleNotFoundError(name="black")
-        return import_orig(name, *args)
-
-    monkeypatch.setattr(builtins, "__import__", mocked_import)
-
-
-def test_no_black(no_black):
+@requires_no_black
+def test_no_black():
     with pytest.raises(BlackNotFoundError):
         reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
         reprex.format()
@@ -724,22 +715,10 @@ def test_black_bad_dependency(black_bad_dependency, monkeypatch):
     assert exc_info.value.name == black_bad_dependency
 
 
-@pytest.fixture
-def no_pygments(monkeypatch):
-    import_orig = builtins.__import__
-
-    def mocked_import(name, *args):
-        if name.startswith("pygments"):
-            raise ModuleNotFoundError(name="pygments")
-        return import_orig(name, *args)
-
-    monkeypatch.setattr(builtins, "__import__", mocked_import)
-
-
-def test_no_pygments_terminal(no_pygments):
-    """Test that format for terminal works even if pygments is not installed."""
+def test_repr():
+    """Test rich HTML display for Jupyter Notebooks runs without error."""
     r = Reprex.from_input("2+2")
-    assert_str_equals(r.format(terminal=False), r.format(terminal=True))
+    assert repr(r).startswith("<Reprex ")
 
 
 def test_repr_html():
@@ -748,11 +727,17 @@ def test_repr_html():
     r._repr_html_()
 
 
-def test_repr_html_no_pygments(no_pygments):
+@requires_no_pygments
+def test_repr_html_no_pygments():
     """Test that rich HTML display for Jupyter Notebooks runs without error even if pygments is not
     installed."""
     r = Reprex.from_input("2+2")
     r._repr_html_()
+
+
+def test_syntax_error():
+    with pytest.raises(InputSyntaxError):
+        Reprex.from_input("2+")
 
 
 def test_reprex_init_bad_lengths_error():
