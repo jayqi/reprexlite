@@ -33,31 +33,32 @@ This release involves major changes to reprexlite. There is a significant refact
 
 - Added new `reprexlite.parsing` module which contains functions for parsing input. These functions yield tuples representing lines of the input with an enum indicating whether the line is code or a result.
 - Added new `reprexlite.reprexes` module which contains code for evaluating a reprex.
-  - The new `Reprex` dataclass serves as the main container for reprex data. It holds parallel lists of `Statement`, `ParsedResult`, and `RawResult` data.
+  - The new `Reprex` dataclass serves as the main container for reprex data. It holds parallel lists of `Statement`, `ParsedResult`, and `RawResult` data. This abstraction replaces the previous `reprexlite.code.CodeBlock` abstraction.
     - The `Reprex.from_input_lines` factory method creates a `Reprex` from the output of the `reprexlite.parsing` parsing functions.
     - The `Reprex.from_input` factory method wraps parsing and takes a string input.
   - The `Statement` dataclass holds code data and parsed concrete syntax tree. This serves a similar purpose to the old `Statement` class.
   - The `ParsedResult` dataclass holds old evaluation results parsed from the input, if any.
   - The `RawResult` dataclass holds the returned values from evaluating code. This serves a similar purpose to the old `Result` class.
+- Added new `reprexlite.rendering` module which contains code for rendering a reprex in different venue formats.
+  - Rendering is done by simple callables (e.g., functions). The type signature is defined by the `Renderer` callback protocol class. This abstraction replaces the previous `reprexlite.formatting.Reprex` abstraction which both encapsulated reprex data and was responsible for rendering to a format.
+  - Renderer callables can be registered under new venue keywords using the `@register_renderer` decorator.
+- Added new `reprexlite.printing` module which contains code for printing a rendered reprex to stdout. This allows for venue-format-specific functionality, such as code highlighting with terminal coloring if Rich is installed.
+  - Printing is done by simple callables (e.g., functions). The type signature is defined by the `Printer` callback protocol class.
+  - Printer callables can be registered under venue keywords using the `@register_printer` decorator.
 - Added new `reprexlite.config` module and `ReprexConfig` dataclass for holding configuration values.
 - Added new `reprexlite.exceptions` module with exception classes that subclass a base exception class `ReprexliteException`.
-
-#### Changed
-
-- Changed formatting abstractions in `reprexlite.formatting` module.
-  - Rather than `*Reprex` classes that encapsulate reprex data, we now have simple formatter callables that take a rendered reprex output string as input and appropriately prepares the reprex output for a venue, such as adding venue-specific markup.
-  - The `venues_dispatcher` dictionary in `reprexlite.formatting` is now a `formatter_registry` dictionary.
-  - Formatters are added to the registry using a `register_formatter` decorator instead of being hard-coded.
 
 #### Removed
 
 - Removed `reprexlite.code` module. The functionality in this module was reimplemented in the new `reprexlite.reprexes` and `reprexlite.parsing` modules.
+- Remmoved `reprexlite.formatting` module. The functionality in this module was reimplemented in the new `reprexlite.rendering` module.
 - Removed `reprexlite.reprex` module. The `reprex` function has been moved to `reprexlite.reprexes`.
 
 ### General
 
 #### Added
 
+- Added new extra dependency keyword `rich`, which will install [Rich](https://rich.readthedocs.io/en/stable/introduction.html) and supports colored terminal printing.
 - Added an "Alternatives" page to the documentation that documents alternative tools.
 - Added a "Venues Formatting" page to the documentation that documents the different formatting options with examples.
 
