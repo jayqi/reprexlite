@@ -22,9 +22,9 @@ from reprexlite.exceptions import (
     RichNotFoundError,
     UnexpectedError,
 )
-from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
 from reprexlite.printing import printer_registry
+from reprexlite.rendering import renderer_registry
 
 
 @dataclasses.dataclass
@@ -417,10 +417,9 @@ class Reprex:
 
     def render(self) -> str:
         """Render to a string with the configured venue format."""
-        out = str(self)
-        formatter = formatter_registry[self.config.venue].formatter
-        return formatter(
-            out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
+        renderer = renderer_registry[self.config.venue].renderer
+        return renderer(
+            self, advertise=self.config.advertise, session_info=self.config.session_info
         )
 
     def print(self, **kwargs) -> None:

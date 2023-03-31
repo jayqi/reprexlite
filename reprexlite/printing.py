@@ -41,7 +41,7 @@ printer_registry: Dict[str, Printer] = {}
 
 def register_printer(venue: str):
     def registrar(fn: Printer):
-        global formatter_registry
+        global printer_registry
         printer_registry[venue] = fn
         return fn
 

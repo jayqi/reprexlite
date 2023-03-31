@@ -17,7 +17,7 @@ nav:
       - API Reference:
           - reprexlite.config: "api-reference/config.md"
           - reprexlite.exceptions: "api-reference/exceptions.md"
-          - reprexlite.formatting: "api-reference/formatting.md"
+          - reprexlite.rendering: "api-reference/rendering.md"
           - reprexlite.parsing: "api-reference/parsing.md"
           - reprexlite.reprexes: "api-reference/reprexes.md"
           - reprexlite.session_info: "api-reference/session_info.md"

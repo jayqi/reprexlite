@@ -1,6 +1,6 @@
 import dataclasses
 from datetime import datetime
-from typing import Dict, NamedTuple, Optional
+from typing import TYPE_CHECKING, Dict, NamedTuple, Optional
 
 try:
     from typing import Protocol
@@ -24,80 +24,82 @@ from reprexlite.exceptions import PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
+if TYPE_CHECKING:
+    from reprexlite.reprexes import Reprex
 
-class Formatter(Protocol):
-    """Callback protocol that defines the venue formatter callable type. A formatter callable
-    should take a reprex string (code with results as comments) and format it for rendering
-    in a particular venue."""
+
+class Renderer(Protocol):
+    """Callback protocol that defines the renderer callable type. A renderer callable
+    should take a reprex and render it in the format for a particular venue."""
 
     def __call__(
-        self, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
+        self, reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
     ) -> str:
-        """Format a stringified reprex for rendering in some venue.
+        """Renders a reprex in the format for a particular venue.
 
         Args:
-            reprex_str (str): String containing rendered reprex output.
+            reprex (Reprex): A reprex instance.
             advertise (Optional[bool], optional): Whether to include the advertisement for
-                reprexlite. Defaults to None, which uses a per-formatter default.
+                reprexlite. Defaults to None, which uses a per-renderer default.
             session_info (bool, optional): Whether to include detailed session information.
                 Defaults to False.
 
         Returns:
-            str: String containing formatted reprex code. Ends with newline.
+            str: Rendered reprex. Always ends with newline.
         """
 
 
-class FormatterRegistration(NamedTuple):
-    """Named tuple that contains a reference to a venue formatter callable and a human-readable
+class RendererRegistration(NamedTuple):
+    """Named tuple that contains a reference to a venue renderer callable and a human-readable
     label."""
 
-    formatter: Formatter
+    renderer: Renderer
     label: str
 
 
-formatter_registry: Dict[str, FormatterRegistration] = {}
-"""Registry of venue formatters keyed by venue keywords."""
+renderer_registry: Dict[str, RendererRegistration] = {}
+"""Registry of reprex renderers keyed by venue keywords."""
 
 
-def register_formatter(venue: str, label: str):
-    """Decorator that registers a venue formatter implementation to a venue keyword.
+def register_renderer(venue: str, label: str):
+    """Decorator that registers a reprex renderer implementation to a venue keyword.
 
     Args:
-        venue (str): Venue keyword that formatter will be registered to.
+        venue (str): Venue keyword that renderer will be registered to.
         label (str): Short human-readable label explaining the venue.
     """
 
-    def registrar(fn: Formatter):
-        global formatter_registry
-        formatter_registry[venue] = FormatterRegistration(formatter=fn, label=label)
+    def registrar(fn: Renderer):
+        global renderer_registry
+        renderer_registry[venue] = RendererRegistration(renderer=fn, label=label)
         return fn
 
     return registrar
 
 
-@register_formatter(venue="ds", label="Discourse (alias for 'gh')")
-@register_formatter(venue="so", label="StackOverflow (alias for 'gh')")
-@register_formatter(venue="gh", label="Github Flavored Markdown")
-def format_github_flavored_markdown(
-    reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
+@register_renderer(venue="ds", label="Discourse (alias for 'gh')")
+@register_renderer(venue="so", label="StackOverflow (alias for 'gh')")
+@register_renderer(venue="gh", label="Github Flavored Markdown")
+def render_github_flavored_markdown(
+    reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
-    """Format a reprex in GitHub Flavored Markdown.
+    """Render a reprex in GitHub Flavored Markdown.
 
     Args:
-        reprex_str (str): String containing rendered reprex output.
+        reprex (Reprex): A reprex instance.
         advertise (Optional[bool], optional): Whether to include the advertisement for
-            reprexlite. Defaults to None, which uses a per-formatter default.
+            reprexlite. Defaults to None, which uses a per-renderer default.
         session_info (bool, optional): Whether to include detailed session information.
             Defaults to False.
 
     Returns:
-        str: String containing formatted reprex code. Ends with newline.
+        str: Rendered reprex. Always ends with newline.
     """
     if advertise is None:
         advertise = True
     out = []
     out.append("```python")
-    out.append(reprex_str)
+    out.append(str(reprex).strip())
     out.append("```")
     if advertise:
         out.append("\n" + Advertisement().markdown())
@@ -111,8 +113,8 @@ def format_github_flavored_markdown(
 
 
 @dataclasses.dataclass
-class HtmlFormatter:
-    """Format a reprex in HTML. Can use Pygments to add syntax highlighting to the rendered Python
+class HtmlRenderer:
+    """Render a reprex in HTML. Can use Pygments to add syntax highlighting to the rendered Python
     code block.
 
     Attributes:
@@ -125,32 +127,32 @@ class HtmlFormatter:
     pygments_style: str = "default"
 
     def __call__(
-        self, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
+        self, reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
     ) -> str:
-        """Format a reprex in HTML.
+        """Render a reprex in HTML.
 
         Args:
-            reprex_str (str): String containing rendered reprex output.
+            reprex (Reprex): A reprex instance.
             advertise (Optional[bool], optional): Whether to include the advertisement for
-                reprexlite. Defaults to None, which uses a per-formatter default.
+                reprexlite. Defaults to None, which uses a per-renderer default.
             session_info (bool, optional): Whether to include detailed session information.
                 Defaults to False.
 
         Returns:
-            str: String containing formatted reprex code. Ends with newline.
+            str: Rendered reprex. Always ends with newline.
         """
         if advertise is None:
             advertise = True
         out = []
 
         if self.no_color or not PYGMENTS_IS_AVAILABLE:
-            out.append(f'<pre><code class="language-python">{reprex_str}</code></pre>')
+            out.append(f'<pre><code class="language-python">{str(reprex).strip()}</code></pre>')
         else:
             formatter = pygments.formatters.HtmlFormatter(
                 lineanchors=True, linenos=True, wrapcode=True, style=self.pygments_style
             )
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
-            out.append(highlight(str(reprex_str), PythonLexer(), formatter))
+            out.append(highlight(str(reprex).strip(), PythonLexer(), formatter))
 
         if advertise:
             out.append(Advertisement().html().strip())
@@ -161,17 +163,29 @@ class HtmlFormatter:
         return "\n".join(out) + "\n"
 
 
-register_formatter(venue="html", label="HTML")(HtmlFormatter(no_color=False))
-register_formatter(venue="htmlnocolor", label="HTML (No Color)")(HtmlFormatter(no_color=True))
+register_renderer(venue="html", label="HTML")(HtmlRenderer(no_color=False))
+register_renderer(venue="htmlnocolor", label="HTML (No Color)")(HtmlRenderer(no_color=True))
 
 
-@register_formatter(venue="py", label="Python script")
-def format_python(
-    reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
+@register_renderer(venue="py", label="Python script")
+def render_python(
+    reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
+    """Renders a reprex as a Python script.
+
+    Args:
+        reprex (Reprex): A reprex instance.
+        advertise (Optional[bool], optional): Whether to include the advertisement for
+            reprexlite. Defaults to None, which uses a per-renderer default.
+        session_info (bool, optional): Whether to include detailed session information.
+            Defaults to False.
+
+    Returns:
+        str: Rendered reprex. Always ends with newline.
+    """
     if advertise is None:
         advertise = False
-    out = [str(reprex_str)]
+    out = [str(reprex).strip()]
     if advertise:
         out.append("\n" + Advertisement().code_comment())
     if session_info:
@@ -181,17 +195,30 @@ def format_python(
     return "\n".join(out) + "\n"
 
 
-@register_formatter(venue="rtf", label="Rich Text Format")
-def format_rtf(
-    reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
+@register_renderer(venue="rtf", label="Rich Text Format")
+def render_rtf(
+    reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
+    """Renders a reprex in Rich Text Format (RTF).
+
+    Args:
+        reprex (Reprex): A reprex instance.
+        advertise (Optional[bool], optional): Whether to include the advertisement for
+            reprexlite. Defaults to None, which uses a per-renderer default.
+        session_info (bool, optional): Whether to include detailed session information.
+            Defaults to False.
+
+    Returns:
+        str: Rendered reprex. Always ends with newline.
+
+    """
     if not PYGMENTS_IS_AVAILABLE:
         raise PygmentsNotFoundError("Pygments is required for RTF output.", name="pygments")
 
     if advertise is None:
         advertise = False
 
-    out = str(reprex_str)
+    out = str(reprex).strip()
     if advertise:
         out += "\n\n" + Advertisement().text()
     if session_info:
@@ -199,15 +226,27 @@ def format_rtf(
     return highlight(out, PythonLexer(), pygments.formatters.RtfFormatter()) + "\n"
 
 
-@register_formatter(venue="slack", label="Slack")
-def format_slack(
-    reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
+@register_renderer(venue="slack", label="Slack")
+def render_slack(
+    reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
+    """Renders a reprex in Slack markup.
+
+    Args:
+        reprex (Reprex): A reprex instance.
+        advertise (Optional[bool], optional): Whether to include the advertisement for
+            reprexlite. Defaults to None, which uses a per-renderer default.
+        session_info (bool, optional): Whether to include detailed session information.
+            Defaults to False.
+
+    Returns:
+        str: Rendered reprex. Always ends with newline.
+    """
     if advertise is None:
         advertise = False
     out = []
     out.append("```")
-    out.append(str(reprex_str))
+    out.append(str(reprex).strip())
     out.append("```")
     if advertise:
         out.append("\n" + Advertisement().text())

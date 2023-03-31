@@ -18,7 +18,7 @@ except ModuleNotFoundError as e:
 
 from reprexlite.config import ParsingMethod, ReprexConfig
 from reprexlite.exceptions import InputSyntaxError, IPythonNotFoundError
-from reprexlite.formatting import formatter_registry
+from reprexlite.rendering import renderer_registry
 from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
 
@@ -33,7 +33,7 @@ def version_callback(version: bool):
 
 
 Venue = Enum(  # type: ignore
-    "Venue", names={v.upper(): v for v in formatter_registry.keys()}, type=str
+    "Venue", names={v.upper(): v for v in renderer_registry.keys()}, type=str
 )
 Venue.__doc__ = """Enum for valid venue options."""
 

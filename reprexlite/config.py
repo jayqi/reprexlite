@@ -7,7 +7,7 @@ from reprexlite.exceptions import (
     InvalidVenueError,
     PromptLengthMismatchError,
 )
-from reprexlite.formatting import formatter_registry
+from reprexlite.rendering import renderer_registry
 
 
 class ParsingMethod(str, Enum):
@@ -43,7 +43,7 @@ class ReprexConfig:
         metadata={
             "help": (
                 "Key to identify the output venue that the reprex will be shared in. Used to "
-                'select an appropriate formatter. See "Venues Formatting" documentation for '
+                'select an appropriate renderer. See "Venues Formatting" documentation for '
                 "formats included with reprexlite."
             )
         },
@@ -53,7 +53,7 @@ class ReprexConfig:
         metadata={
             "help": (
                 "Whether to include a footer that credits reprexlite. If unspecified, will depend "
-                "on specified venue formatter's default."
+                "on specified venue renderer's default."
             )
         },
     )
@@ -138,10 +138,10 @@ class ReprexConfig:
 
     def __post_init__(self):
         # Validate venue
-        if self.venue not in formatter_registry:
+        if self.venue not in renderer_registry:
             raise InvalidVenueError(
-                f"{self.venue} is not a valid value for parsing method."
-                f"Valid values are: {list(formatter_registry.keys())}"
+                f"{self.venue} is not a valid venue keyword for rendering."
+                f"Valid keywords are: {list(renderer_registry.keys())}"
             )
         # Validate prompt and continuation prefixes
         if len(self.prompt) != len(self.continuation):
@@ -179,26 +179,3 @@ class ReprexConfig:
     @classmethod
     def get_help(cls, field_name: str):
         return cls.__dataclass_fields__[field_name].metadata["help"]
-
-
-# def format_args_google_style():
-#     docs = []
-#     for field in dataclasses.fields(ReprexConfig):
-#         field_name = field.name
-#         try:
-#             field_type = field.type.__name__
-#         except AttributeError:
-#             field_type = str(field.type)
-#         docs.extend(
-#             textwrap.wrap(
-#                 f"{field_name} ({field_type}): {CONFIG_DOCS[field_name]}",
-#                 width=99,
-#                 initial_indent=" " * 8,
-#                 subsequent_indent=" " * 12,
-#             )
-#         )
-#     return "\n".join(docs)[4:]
-
-
-# if ReprexConfig.__doc__:
-#     ReprexConfig.__doc__ = ReprexConfig.__doc__.replace("{{args}}", format_args_google_style())

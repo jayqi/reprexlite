@@ -22,17 +22,17 @@ from tests.utils import (
 
 @pytest.fixture
 def patch_datetime(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "datetime", MockDateTime)
+    monkeypatch.setattr(sys.modules["reprexlite.rendering"], "datetime", MockDateTime)
 
 
 @pytest.fixture
 def patch_version(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "__version__", MOCK_VERSION)
+    monkeypatch.setattr(sys.modules["reprexlite.rendering"], "__version__", MOCK_VERSION)
 
 
 @pytest.fixture
 def patch_session_info(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "SessionInfo", MockSessionInfo)
+    monkeypatch.setattr(sys.modules["reprexlite.rendering"], "SessionInfo", MockSessionInfo)
 
 
 @pytest.mark.parametrize("ereprex", expected_reprexes, ids=[e.filename for e in expected_reprexes])
