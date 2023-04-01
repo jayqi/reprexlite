@@ -417,7 +417,7 @@ class Reprex:
 
     def render(self) -> str:
         """Render to a string with the configured venue format."""
-        renderer = renderer_registry[self.config.venue].renderer
+        renderer = renderer_registry[self.config.venue]
         return renderer(
             self, advertise=self.config.advertise, session_info=self.config.session_info
         )

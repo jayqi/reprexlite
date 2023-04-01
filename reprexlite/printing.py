@@ -35,22 +35,22 @@ class Printer(Protocol):
         """
 
 
-printer_registry: Dict[str, Printer] = {}
+class PrinterRegistry(Dict[str, Printer]):
+    def register(self, venue: str):
+        def registrar(fn: Printer):
+            self[venue] = fn
+            return fn
+
+        return registrar
+
+
+printer_registry = PrinterRegistry()
 """Registry of venue printers keyed by venue keywords."""
 
 
-def register_printer(venue: str):
-    def registrar(fn: Printer):
-        global printer_registry
-        printer_registry[venue] = fn
-        return fn
-
-    return registrar
-
-
-@register_printer("ds")
-@register_printer("so")
-@register_printer("gh")
+@printer_registry.register("ds")
+@printer_registry.register("so")
+@printer_registry.register("gh")
 def print_markdown(formatted_reprex: str, **kwargs):
     """Print a formatted markdown reprex using rich.
 
@@ -64,8 +64,8 @@ def print_markdown(formatted_reprex: str, **kwargs):
         raise RichNotFoundError
 
 
-@register_printer("htmlnocolor")
-@register_printer("html")
+@printer_registry.register("htmlnocolor")
+@printer_registry.register("html")
 def print_html(formatted_reprex: str, **kwargs):
     """Print a formatted HTML reprex using rich.
 
@@ -79,7 +79,7 @@ def print_html(formatted_reprex: str, **kwargs):
         raise RichNotFoundError
 
 
-@register_printer("py")
+@printer_registry.register("py")
 def print_python_code(formatted_reprex: str, **kwargs):
     """Print a formatted Python code reprex using rich.
 

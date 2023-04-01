@@ -1,6 +1,6 @@
 import dataclasses
 from datetime import datetime
-from typing import TYPE_CHECKING, Dict, NamedTuple, Optional
+from typing import TYPE_CHECKING, Dict, Optional
 
 try:
     from typing import Protocol
@@ -49,37 +49,34 @@ class Renderer(Protocol):
         """
 
 
-class RendererRegistration(NamedTuple):
-    """Named tuple that contains a reference to a venue renderer callable and a human-readable
-    label."""
+class RendererRegistry(Dict[str, Renderer]):
+    def __init__(self) -> None:
+        self.labels: Dict[str, str] = {}
+        super().__init__(self)
 
-    renderer: Renderer
-    label: str
+    def register(self, venue: str, label: str):
+        """Decorator that registers a reprex renderer implementation to a venue keyword.
+
+        Args:
+            venue (str): Venue keyword that renderer will be registered to.
+            label (str): Short human-readable label explaining the venue.
+        """
+
+        def registrar(fn: Renderer):
+            self[venue] = fn
+            self.labels[venue] = label
+            return fn
+
+        return registrar
 
 
-renderer_registry: Dict[str, RendererRegistration] = {}
+renderer_registry = RendererRegistry()
 """Registry of reprex renderers keyed by venue keywords."""
 
 
-def register_renderer(venue: str, label: str):
-    """Decorator that registers a reprex renderer implementation to a venue keyword.
-
-    Args:
-        venue (str): Venue keyword that renderer will be registered to.
-        label (str): Short human-readable label explaining the venue.
-    """
-
-    def registrar(fn: Renderer):
-        global renderer_registry
-        renderer_registry[venue] = RendererRegistration(renderer=fn, label=label)
-        return fn
-
-    return registrar
-
-
-@register_renderer(venue="ds", label="Discourse (alias for 'gh')")
-@register_renderer(venue="so", label="StackOverflow (alias for 'gh')")
-@register_renderer(venue="gh", label="Github Flavored Markdown")
+@renderer_registry.register(venue="ds", label="Discourse (alias for 'gh')")
+@renderer_registry.register(venue="so", label="StackOverflow (alias for 'gh')")
+@renderer_registry.register(venue="gh", label="Github Flavored Markdown")
 def render_github_flavored_markdown(
     reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
@@ -163,11 +160,13 @@ class HtmlRenderer:
         return "\n".join(out) + "\n"
 
 
-register_renderer(venue="html", label="HTML")(HtmlRenderer(no_color=False))
-register_renderer(venue="htmlnocolor", label="HTML (No Color)")(HtmlRenderer(no_color=True))
+renderer_registry.register(venue="html", label="HTML")(HtmlRenderer(no_color=False))
+renderer_registry.register(venue="htmlnocolor", label="HTML (No Color)")(
+    HtmlRenderer(no_color=True)
+)
 
 
-@register_renderer(venue="py", label="Python script")
+@renderer_registry.register(venue="py", label="Python script")
 def render_python(
     reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
@@ -195,7 +194,7 @@ def render_python(
     return "\n".join(out) + "\n"
 
 
-@register_renderer(venue="rtf", label="Rich Text Format")
+@renderer_registry.register(venue="rtf", label="Rich Text Format")
 def render_rtf(
     reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
@@ -226,7 +225,7 @@ def render_rtf(
     return highlight(out, PythonLexer(), pygments.formatters.RtfFormatter()) + "\n"
 
 
-@register_renderer(venue="slack", label="Slack")
+@renderer_registry.register(venue="slack", label="Slack")
 def render_slack(
     reprex: "Reprex", advertise: Optional[bool] = None, session_info: bool = False
 ) -> str:
