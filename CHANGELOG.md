@@ -41,10 +41,10 @@ This release involves major changes to reprexlite. There is a significant refact
   - The `RawResult` dataclass holds the returned values from evaluating code. This serves a similar purpose to the old `Result` class.
 - Added new `reprexlite.rendering` module which contains code for rendering a reprex in different venue formats.
   - Rendering is done by simple callables (e.g., functions). The type signature is defined by the `Renderer` callback protocol class. This abstraction replaces the previous `reprexlite.formatting.Reprex` abstraction which both encapsulated reprex data and was responsible for rendering to a format.
-  - Renderer callables can be registered under new venue keywords using the `@register_renderer` decorator.
+  - Renderer callables can be registered under new venue keywords using the `@renderer_registry.register` decorator.
 - Added new `reprexlite.printing` module which contains code for printing a rendered reprex to stdout. This allows for venue-format-specific functionality, such as code highlighting with terminal coloring if Rich is installed.
   - Printing is done by simple callables (e.g., functions). The type signature is defined by the `Printer` callback protocol class.
-  - Printer callables can be registered under venue keywords using the `@register_printer` decorator.
+  - Printer callables can be registered under venue keywords using the `@printer_registry.register` decorator.
 - Added new `reprexlite.config` module and `ReprexConfig` dataclass for holding configuration values.
 - Added new `reprexlite.exceptions` module with exception classes that subclass a base exception class `ReprexliteException`.
 

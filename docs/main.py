@@ -6,7 +6,7 @@ from markdownTable import markdownTable
 from typenames import typenames
 
 from reprexlite.config import ReprexConfig
-from reprexlite.formatting import formatter_registry
+from reprexlite.rendering import renderer_registry
 
 
 def define_env(env):
@@ -14,6 +14,7 @@ def define_env(env):
 
     @env.macro
     def create_config_help_table():
+        """Macro to create a table of configuration options and their help text."""
         out = dedent(
             """\
             <table>
@@ -57,33 +58,20 @@ def define_env(env):
 
     @env.macro
     def create_venue_help_table():
+        """Macro to create a table of venue options."""
         data = [
             {
                 "Venue Keyword": venue_key,
-                "Description": formatter.meta.venues[venue_key],
-                "Formatter": f"[`{formatter.__name__}`](#{formatter.__name__.lower()})",
+                "Description": renderer_registry.labels[venue_key],
+                "Formatter": f"`{get_callable_name(renderer)}`",
             }
-            for venue_key, formatter in formatter_registry.items()
+            for venue_key, renderer in renderer_registry.items()
         ]
         table = markdownTable(data)
         return table.setParams(row_sep="markdown", quote=False).getMarkdown()
 
-    @env.macro
-    def create_venue_help_examples():
-        out = []
-        for formatter in dict.fromkeys(formatter_registry.values()):
-            out.append(f"### `{formatter.__name__}`")
-            out.append("")
-            out.append(formatter.__doc__)
-            out.append("")
-            out.append("````")
-            out.append(formatter.meta.example or "Example not shown.")
-            out.append("````")
-            out.append("")
-            out.append(
-                "<sup>"
-                "↳ [API documentation]"
-                f"(api-reference/formatting.md#reprexlite.formatting.{formatter.__qualname__})"
-                "</sup>"
-            )
-        return "\n".join(out)
+
+def get_callable_name(fn):
+    if hasattr(fn, "__name__"):
+        return fn.__name__
+    return type(fn).__name__

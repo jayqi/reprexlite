@@ -14,7 +14,7 @@
 
 - Paste or type some Python code that you're interested in sharing.
 - reprexlite will execute that code in an isolated namespace. Any returned values or standard output will be captured and displayed as comments below their associated code.
-- The rendered reprex will be printed for you to share. Its format can be easily copied, pasted, and run as-is by someone else. Here's an example of an outputted reprex:
+- The rendered reprex will be printed for you to share. It can be easily copied, pasted, and run as-is by someone else. Here's an example of an rendered reprex:
 
 ```python
 from itertools import product
