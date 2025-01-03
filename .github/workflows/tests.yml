@@ -22,11 +22,11 @@ jobs:
 
       - name: Lint package
         run: |
-          just lint
+          uv run --group lint just lint
 
       - name: Typecheck package
         run: |
-          just typecheck
+          uv run --group lint just lint
 
   tests:
     name: "Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})"
