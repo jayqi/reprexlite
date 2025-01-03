@@ -6,7 +6,7 @@ help:
 
 # Sync dev environment dependencies
 sync:
-    uv sync
+    uv sync --all-extras
 
 # Run linting
 lint:
