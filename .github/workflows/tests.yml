@@ -48,7 +48,7 @@ jobs:
 
       - name: Run tests
         run: |
-          just test python=${{ matrix.python-version }}
+          just python=${{ matrix.python-version }} test
 
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v3
