@@ -26,7 +26,7 @@ jobs:
 
       - name: Typecheck package
         run: |
-          uv run --group lint just lint
+          uv run --group lint just typecheck
 
   tests:
     name: "Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})"
