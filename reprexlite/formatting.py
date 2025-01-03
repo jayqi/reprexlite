@@ -264,7 +264,7 @@ class Advertisement:
     url = "https://github.com/jayqi/reprexlite"
 
     def __init__(self):
-        self.timestamp = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
+        self.timestamp = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M %Z")
         self.version = f"v{__version__}"
 
     def markdown(self) -> str:
