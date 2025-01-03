@@ -51,7 +51,7 @@ class ReprexMagics(Magics):
         # Line magic, print help
         if cell is None:
             help_text = runner.invoke(
-                reprexlite.cli.app, ["--help"], env={"NO_COLOR": "1"}
+                reprexlite.cli.app, ["--help"], env={"TERM": "dumb"}
             ).stdout.strip()
             help_text = re.sub(r"^Usage: main", r"Cell Magic Usage: %%reprex", help_text)
             print(f"reprexlite v{__version__} IPython Magic\n\n" + help_text)
