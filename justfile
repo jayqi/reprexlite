@@ -19,7 +19,7 @@ typecheck:
 
 # Run the tests
 test:
-    uv run --python {{python}} --all-extras --group test --isolated pytest
+    uv run --python {{python}} --all-extras --group test --isolated python -I -m pytest
 
 test-all:
     for python in 3.8 3.9 3.10 3.11 3.12 3.13; do \
