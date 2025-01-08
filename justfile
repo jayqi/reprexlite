@@ -19,7 +19,9 @@ typecheck:
 
 # Run the tests
 test:
-    uv run --python {{python}} --all-extras --group test --isolated python -I -m pytest
+    uv run --upgrade --resolution=highest \
+        --python {{python}} --all-extras --group test --isolated \
+        python -I -m pytest
 
 test-all:
     for python in 3.8 3.9 3.10 3.11 3.12 3.13; do \
@@ -28,4 +30,6 @@ test-all:
 
 # Generate test assets
 generate-test-assets:
-    uv run --python {{python}} --all-extras --group test --isolated python tests/expected_formatted.py
+    uv run --upgrade --resolution=highest \
+        --python {{python}} --all-extras --group test  --isolated \
+        python -I tests/expected_formatted.py
