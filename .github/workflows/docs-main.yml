@@ -10,25 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-          cache: "pip"
-          cache-dependency-path: |
-            pyproject.toml
-            requirements-dev.txt
+      - uses: extractions/setup-just@v2
 
-      - name: Install dependencies
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Build docs
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
-
-      - name: Test building documentation
-        run: |
-          make docs
+          just docs
 
       - name: Deploy docs to gh-pages
         working-directory: docs
@@ -36,4 +26,6 @@ jobs:
           git fetch origin gh-pages --depth=1
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          mike deploy --push ~latest --title=latest
+          uv run --no-dev --group docs --isolated \
+            --directory docs/ \
+            mike deploy --push ~latest --title=latest
