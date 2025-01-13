@@ -43,6 +43,36 @@ reprex = "reprexlite.cli:app"
 "Bug Tracker" = "https://github.com/jayqi/reprexlite/issues"
 "Changelog" = "https://jayqi.github.io/reprexlite/stable/changelog/"
 
+[dependency-groups]
+dev = [
+  { include-group = "lint" },
+]
+lint = [
+  "black",
+  "mypy[install-types]",
+  "ruff",
+]
+docs = [
+  "mkdocs",
+  "mkdocs-jupyter",
+  "mkdocs-macros-plugin",
+  "mkdocs-material",
+  "mike",
+  "mkdocstrings[python]",
+  "mdx-truly-sane-lists",
+  "py-markdown-table==0.3.3",
+  "typenames",
+]
+test = [
+  "pytest",
+  "coverage",
+  "pytest-cov",
+  "tqdm",
+]
+
+[tool.uv]
+upgrade = true
+resolution = "highest"
 
 [tool.black]
 line-length = 99
@@ -62,16 +92,18 @@ exclude = '''
 
 [tool.ruff]
 line-length = 99
+src = ["reprexlite", "tests"]
+exclude = ["tests/assets"]
+
+[tool.ruff.lint]
 select = [
   "E", # Pyflakes
   "F", # Pycodestyle
   "I", # isort
 ]
-src = ["reprexlite", "tests"]
-exclude = ["tests/assets"]
 unfixable = ["F"]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["reprexlite"]
 known-third-party = ["IPython"]
 force-sort-within-sections = true
