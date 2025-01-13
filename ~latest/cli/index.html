@@ -787,71 +787,228 @@ You're not viewing the most recent stable version.
 <h1 id="cli-help-documentation">CLI Help Documentation<a class="headerlink" href="#cli-help-documentation" title="Permanent link">&para;</a></h1>
 <div class="highlight"><pre><span></span><code>reprex<span class="w"> </span>--help
 </code></pre></div>
-<div class="highlight"><pre><span></span><code> Usage: reprex [OPTIONS]                                                                                                                                                                                                     
+<div class="highlight"><pre><span></span><code>[1m                                                                                [0m
+[1m [0m[1;33mUsage: [0m[1mreprex [OPTIONS][0m[1m                                                       [0m[1m [0m
+[1m                                                                                [0m
+ Render reproducible examples of Python code for sharing. Your code will be     
+ executed and, in the default output style, the results will be embedded as     
+ comments below their associated lines.                                         
+ [2mBy default, your system&#39;s default command-line text editor will open for you [0m  
+ [2mto type or paste in your code. This editor can be changed by setting the [0m      
+ [2mVISUAL or EDITOR environment variable, or by explicitly passing in the [0m        
+ [1;2;36m-[0m[1;2;36m-editor[0m[2m program. You can instead specify an input file with the [0m[1;2;36m-[0m[1;2;36m-infile[0m[2m / [0m[1;2;32m-i[0m 
+ [2moption. If IPython is installed, an interactive IPython editor can also be [0m    
+ [2mlaunched using the [0m[1;2;36m-[0m[1;2;36m-ipython[0m[2m flag.[0m                                             
+ [2mAdditional markup will be added that is appropriate to the choice of venue [0m    
+ [2mformatting. For example, for the default `gh` venue for GitHub Flavored [0m       
+ [2mMarkdown, the final reprex output will look like:[0m                              
+ [1;2;36m----------------------------------------[0m                                       
+ [2m```python[0m                                                                      
+ [2marr = [1, 2, 3, 4, 5][0m                                                          
+ [2m[x + 1 for x in arr][0m                                                           
+ [2m#&gt; [2, 3, 4, 5, 6][0m                                                             
+ [2mmax(arr) - min(arr)[0m                                                            
+ [2m#&gt; 4[0m                                                                           
+ [2m```[0m                                                                            
 
- Render reproducible examples of Python code for sharing. Your code will be executed and, in the default output style, the results will be embedded as comments below their associated lines.                                
- By default, your system&#39;s default command-line text editor will open for you to type or paste in your code. This editor can be changed by setting the VISUAL or EDITOR environment variable, or by explicitly passing in    
- the --editor program. You can instead specify an input file with the --infile / -i option. If IPython is installed, an interactive IPython editor can also be launched using the --ipython flag.                            
- Additional markup will be added that is appropriate to the choice of venue formatting. For example, for the default `gh` venue for GitHub Flavored Markdown, the final reprex output will look like:                        
- ----------------------------------------                                                                                                                                                                                    
- ```python                                                                                                                                                                                                                   
- arr = [1, 2, 3, 4, 5]                                                                                                                                                                                                       
- [x + 1 for x in arr]                                                                                                                                                                                                        
- #&gt; [2, 3, 4, 5, 6]                                                                                                                                                                                                          
- max(arr) - min(arr)                                                                                                                                                                                                         
- #&gt; 4                                                                                                                                                                                                                        
- ```                                                                                                                                                                                                                         
+ [1;2;33m&lt;sup&gt;[0m[2mCreated at 2021-02-27 00:13:55 PST by [0m                                    
+ [2m[reprexlite](https://github.com/jayqi/reprexlite) v1.0.0[0m[1;2;33m&lt;/sup&gt;[0m                 
+ [1;2;36m----------------------------------------[0m                                       
 
- &lt;sup&gt;Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v1.0.0&lt;/sup&gt;                                                                                                                   
- ----------------------------------------                                                                                                                                                                                    
+ [2mThe supported venue formats are:[0m                                               
 
- The supported venue formats are:                                                                                                                                                                                            
+ [2m- gh : GitHub Flavored Markdown[0m                                                
+ [2m- so : StackOverflow, alias for gh[0m                                             
+ [2m- ds : Discourse, alias for gh[0m                                                 
+ [2m- html : HTML[0m                                                                  
+ [2m- py : Python script[0m                                                           
+ [2m- rtf : Rich Text Format[0m                                                       
+ [2m- slack : Slack[0m                                                                
 
- - gh : GitHub Flavored Markdown                                                                                                                                                                                             
- - so : StackOverflow, alias for gh                                                                                                                                                                                          
- - ds : Discourse, alias for gh                                                                                                                                                                                              
- - html : HTML                                                                                                                                                                                                               
- - py : Python script                                                                                                                                                                                                        
- - rtf : Rich Text Format                                                                                                                                                                                                    
- - slack : Slack                                                                                                                                                                                                             
-
-╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --editor              -e                           TEXT                          Specify editor to open in. Can be full path to executable or name to be searched on system search path. If None, will use Click&#39;s        │
-│                                                                                  automatic editor detection. This will typically use the editor set to environment variable VISUAL or EDITOR. If value is &#39;ipython&#39; and   │
-│                                                                                  IPython is installed, this will launch the interactive IPython editor where all cells are automatically run through reprexlite.          │
-│                                                                                  [default: None]                                                                                                                          │
-│ --infile              -i                           PATH                          Read code from an input file instead of entering in an editor. [default: None]                                                           │
-│ --outfile             -o                           PATH                          Write output to file instead of printing to console. [default: None]                                                                     │
-│ --venue               -v                           [gh|so|ds|html|py|rtf|slack]  Key to identify the output venue that the reprex will be shared in. Used to select an appropriate formatter. See &quot;Venues Formatting&quot;     │
-│                                                                                  documentation for formats included with reprexlite.                                                                                      │
-│                                                                                  [default: gh]                                                                                                                            │
-│ --advertise               --no-advertise                                         Whether to include a footer that credits reprexlite. If unspecified, will depend on specified venue formatter&#39;s default.                 │
-│ --session-info            --no-session-info                                      Include details about session and environment that the reprex was generated with. [default: no-session-info]                             │
-│ --style                   --no-style                                             Whether to autoformat code with black. Requires black to be installed. [default: no-style]                                               │
-│ --prompt                                           TEXT                          Prefix to use as primary prompt for code lines.                                                                                          │
-│ --continuation                                     TEXT                          Prefix to use as secondary prompt for continued code lines.                                                                              │
-│ --comment                                          TEXT                          Prefix to use for results returned by expressions. [default: #&gt;]                                                                         │
-│ --keep-old-results        --no-keep-old-results                                  Whether to additionally include results of expressions detected in the original input when formatting the reprex output.                 │
-│                                                                                  [default: no-keep-old-results]                                                                                                           │
-│ --parsing-method                                   [auto|declared]               Method for parsing input. &#39;auto&#39; will automatically detect either default reprex-style input or standard doctest-style input. &#39;declared&#39; │
-│                                                                                  will allow you to specify custom line prefixes. Values for &#39;prompt&#39;, &#39;continuation&#39;, and &#39;comment&#39; will be used for both output          │
-│                                                                                  formatting and input parsing, unless the associated &#39;input-*&#39; override settings are supplied.                                            │
-│                                                                                  [default: auto]                                                                                                                          │
-│ --input-prompt                                     TEXT                          Prefix to use as primary prompt for code lines when parsing input. Only used if &#39;parsing-method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is  │
-│                                                                                  used for both input parsing and output formatting.                                                                                       │
-│                                                                                  [default: None]                                                                                                                          │
-│ --input-continuation                               TEXT                          Prefix to use as secondary prompt for continued code lines when parsing input. Only used if &#39;parsing-method&#39; is &#39;declared&#39;. If not set,  │
-│                                                                                  &#39;prompt&#39; is used for both input parsing and output formatting.                                                                           │
-│                                                                                  [default: None]                                                                                                                          │
-│ --input-comment                                    TEXT                          Prefix to use for results returned by expressions when parsing input. Only used if &#39;parsing-method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39;  │
-│                                                                                  is used for both input parsing and output formatting.                                                                                    │
-│                                                                                  [default: None]                                                                                                                          │
-│ --verbose                                                                                                                                                                                                                 │
-│ --version                                                                        Show reprexlite version and exit.                                                                                                        │
-│ --install-completion                                                             Install completion for the current shell.                                                                                                │
-│ --show-completion                                                                Show completion for the current shell, to copy it or customize the installation.                                                         │
-│ --help                                                                           Show this message and exit.                                                                                                              │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[2m╭─[0m[2m Options [0m[2m───────────────────────────────────────────────────────────────────[0m[2m─╮[0m
+[2m│[0m [1;36m-[0m[1;36m-editor[0m          [1;32m-e[0m                      [1;33mTEXT           [0m  Specify editor to [2m│[0m
+[2m│[0m                                                            open in. Can be   [2m│[0m
+[2m│[0m                                                            full path to      [2m│[0m
+[2m│[0m                                                            executable or     [2m│[0m
+[2m│[0m                                                            name to be        [2m│[0m
+[2m│[0m                                                            searched on       [2m│[0m
+[2m│[0m                                                            system search     [2m│[0m
+[2m│[0m                                                            path. If None,    [2m│[0m
+[2m│[0m                                                            will use Click&#39;s  [2m│[0m
+[2m│[0m                                                            automatic editor  [2m│[0m
+[2m│[0m                                                            detection. This   [2m│[0m
+[2m│[0m                                                            will typically    [2m│[0m
+[2m│[0m                                                            use the editor    [2m│[0m
+[2m│[0m                                                            set to            [2m│[0m
+[2m│[0m                                                            environment       [2m│[0m
+[2m│[0m                                                            variable VISUAL   [2m│[0m
+[2m│[0m                                                            or EDITOR. If     [2m│[0m
+[2m│[0m                                                            value is          [2m│[0m
+[2m│[0m                                                            &#39;ipython&#39; and     [2m│[0m
+[2m│[0m                                                            IPython is        [2m│[0m
+[2m│[0m                                                            installed, this   [2m│[0m
+[2m│[0m                                                            will launch the   [2m│[0m
+[2m│[0m                                                            interactive       [2m│[0m
+[2m│[0m                                                            IPython editor    [2m│[0m
+[2m│[0m                                                            where all cells   [2m│[0m
+[2m│[0m                                                            are automatically [2m│[0m
+[2m│[0m                                                            run through       [2m│[0m
+[2m│[0m                                                            reprexlite.       [2m│[0m
+[2m│[0m                                                            [2m[default: None]  [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-infile[0m          [1;32m-i[0m                      [1;33mPATH           [0m  Read code from an [2m│[0m
+[2m│[0m                                                            input file        [2m│[0m
+[2m│[0m                                                            instead of        [2m│[0m
+[2m│[0m                                                            entering in an    [2m│[0m
+[2m│[0m                                                            editor.           [2m│[0m
+[2m│[0m                                                            [2m[default: None]  [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-outfile[0m         [1;32m-o[0m                      [1;33mPATH           [0m  Write output to   [2m│[0m
+[2m│[0m                                                            file instead of   [2m│[0m
+[2m│[0m                                                            printing to       [2m│[0m
+[2m│[0m                                                            console.          [2m│[0m
+[2m│[0m                                                            [2m[default: None]  [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-venue[0m           [1;32m-v[0m                      [1;2;33m[[0m[1;33mgh[0m[1;2;33m|[0m[1;33mso[0m[1;2;33m|[0m[1;33mds[0m[1;2;33m|[0m[1;33mhtml[0m[1;2;33m|[0m  Key to identify   [2m│[0m
+[2m│[0m                                           [1;33mpy[0m[1;2;33m|[0m[1;33mrtf[0m[1;2;33m|[0m[1;33mslack[0m[1;2;33m][0m[1;33m  [0m  the output venue  [2m│[0m
+[2m│[0m                                                            that the reprex   [2m│[0m
+[2m│[0m                                                            will be shared    [2m│[0m
+[2m│[0m                                                            in. Used to       [2m│[0m
+[2m│[0m                                                            select an         [2m│[0m
+[2m│[0m                                                            appropriate       [2m│[0m
+[2m│[0m                                                            formatter. See    [2m│[0m
+[2m│[0m                                                            &quot;Venues           [2m│[0m
+[2m│[0m                                                            Formatting&quot;       [2m│[0m
+[2m│[0m                                                            documentation for [2m│[0m
+[2m│[0m                                                            formats included  [2m│[0m
+[2m│[0m                                                            with reprexlite.  [2m│[0m
+[2m│[0m                                                            [2m[default: gh]    [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-advertise[0m           [1;35m-[0m[1;35m-no[0m[1;35m-advertise[0m      [1;33m               [0m  Whether to        [2m│[0m
+[2m│[0m                                                            include a footer  [2m│[0m
+[2m│[0m                                                            that credits      [2m│[0m
+[2m│[0m                                                            reprexlite. If    [2m│[0m
+[2m│[0m                                                            unspecified, will [2m│[0m
+[2m│[0m                                                            depend on         [2m│[0m
+[2m│[0m                                                            specified venue   [2m│[0m
+[2m│[0m                                                            formatter&#39;s       [2m│[0m
+[2m│[0m                                                            default.          [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-session[0m[1;36m-info[0m        [1;35m-[0m[1;35m-no[0m[1;35m-session-in…[0m    [1;33m               [0m  Include details   [2m│[0m
+[2m│[0m                                                            about session and [2m│[0m
+[2m│[0m                                                            environment that  [2m│[0m
+[2m│[0m                                                            the reprex was    [2m│[0m
+[2m│[0m                                                            generated with.   [2m│[0m
+[2m│[0m                                                            [2m[default:        [0m [2m│[0m
+[2m│[0m                                                            [2mno-session-info] [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-style[0m               [1;35m-[0m[1;35m-no[0m[1;35m-style[0m          [1;33m               [0m  Whether to        [2m│[0m
+[2m│[0m                                                            autoformat code   [2m│[0m
+[2m│[0m                                                            with black.       [2m│[0m
+[2m│[0m                                                            Requires black to [2m│[0m
+[2m│[0m                                                            be installed.     [2m│[0m
+[2m│[0m                                                            [2m[default:        [0m [2m│[0m
+[2m│[0m                                                            [2mno-style]        [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-prompt[0m                                  [1;33mTEXT           [0m  Prefix to use as  [2m│[0m
+[2m│[0m                                                            primary prompt    [2m│[0m
+[2m│[0m                                                            for code lines.   [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-continuation[0m                            [1;33mTEXT           [0m  Prefix to use as  [2m│[0m
+[2m│[0m                                                            secondary prompt  [2m│[0m
+[2m│[0m                                                            for continued     [2m│[0m
+[2m│[0m                                                            code lines.       [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-comment[0m                                 [1;33mTEXT           [0m  Prefix to use for [2m│[0m
+[2m│[0m                                                            results returned  [2m│[0m
+[2m│[0m                                                            by expressions.   [2m│[0m
+[2m│[0m                                                            [2m[default: #&gt;]    [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-keep[0m[1;36m-old-resu…[0m      [1;35m-[0m[1;35m-no[0m[1;35m-keep-old-r…[0m    [1;33m               [0m  Whether to        [2m│[0m
+[2m│[0m                                                            additionally      [2m│[0m
+[2m│[0m                                                            include results   [2m│[0m
+[2m│[0m                                                            of expressions    [2m│[0m
+[2m│[0m                                                            detected in the   [2m│[0m
+[2m│[0m                                                            original input    [2m│[0m
+[2m│[0m                                                            when formatting   [2m│[0m
+[2m│[0m                                                            the reprex        [2m│[0m
+[2m│[0m                                                            output.           [2m│[0m
+[2m│[0m                                                            [2m[default:        [0m [2m│[0m
+[2m│[0m                                                            [2mno-keep-old-resu…[0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-parsing[0m[1;36m-method[0m                          [1;2;33m[[0m[1;33mauto[0m[1;2;33m|[0m[1;33mdeclared[0m[1;2;33m][0m  Method for        [2m│[0m
+[2m│[0m                                                            parsing input.    [2m│[0m
+[2m│[0m                                                            &#39;auto&#39; will       [2m│[0m
+[2m│[0m                                                            automatically     [2m│[0m
+[2m│[0m                                                            detect either     [2m│[0m
+[2m│[0m                                                            default           [2m│[0m
+[2m│[0m                                                            reprex-style      [2m│[0m
+[2m│[0m                                                            input or standard [2m│[0m
+[2m│[0m                                                            doctest-style     [2m│[0m
+[2m│[0m                                                            input. &#39;declared&#39; [2m│[0m
+[2m│[0m                                                            will allow you to [2m│[0m
+[2m│[0m                                                            specify custom    [2m│[0m
+[2m│[0m                                                            line prefixes.    [2m│[0m
+[2m│[0m                                                            Values for        [2m│[0m
+[2m│[0m                                                            &#39;prompt&#39;,         [2m│[0m
+[2m│[0m                                                            &#39;continuation&#39;,   [2m│[0m
+[2m│[0m                                                            and &#39;comment&#39;     [2m│[0m
+[2m│[0m                                                            will be used for  [2m│[0m
+[2m│[0m                                                            both output       [2m│[0m
+[2m│[0m                                                            formatting and    [2m│[0m
+[2m│[0m                                                            input parsing,    [2m│[0m
+[2m│[0m                                                            unless the        [2m│[0m
+[2m│[0m                                                            associated        [2m│[0m
+[2m│[0m                                                            &#39;input-*&#39;         [2m│[0m
+[2m│[0m                                                            override settings [2m│[0m
+[2m│[0m                                                            are supplied.     [2m│[0m
+[2m│[0m                                                            [2m[default: auto]  [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-input[0m[1;36m-prompt[0m                            [1;33mTEXT           [0m  Prefix to use as  [2m│[0m
+[2m│[0m                                                            primary prompt    [2m│[0m
+[2m│[0m                                                            for code lines    [2m│[0m
+[2m│[0m                                                            when parsing      [2m│[0m
+[2m│[0m                                                            input. Only used  [2m│[0m
+[2m│[0m                                                            if                [2m│[0m
+[2m│[0m                                                            &#39;parsing-method&#39;  [2m│[0m
+[2m│[0m                                                            is &#39;declared&#39;. If [2m│[0m
+[2m│[0m                                                            not set, &#39;prompt&#39; [2m│[0m
+[2m│[0m                                                            is used for both  [2m│[0m
+[2m│[0m                                                            input parsing and [2m│[0m
+[2m│[0m                                                            output            [2m│[0m
+[2m│[0m                                                            formatting.       [2m│[0m
+[2m│[0m                                                            [2m[default: None]  [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-input[0m[1;36m-continu…[0m                          [1;33mTEXT           [0m  Prefix to use as  [2m│[0m
+[2m│[0m                                                            secondary prompt  [2m│[0m
+[2m│[0m                                                            for continued     [2m│[0m
+[2m│[0m                                                            code lines when   [2m│[0m
+[2m│[0m                                                            parsing input.    [2m│[0m
+[2m│[0m                                                            Only used if      [2m│[0m
+[2m│[0m                                                            &#39;parsing-method&#39;  [2m│[0m
+[2m│[0m                                                            is &#39;declared&#39;. If [2m│[0m
+[2m│[0m                                                            not set, &#39;prompt&#39; [2m│[0m
+[2m│[0m                                                            is used for both  [2m│[0m
+[2m│[0m                                                            input parsing and [2m│[0m
+[2m│[0m                                                            output            [2m│[0m
+[2m│[0m                                                            formatting.       [2m│[0m
+[2m│[0m                                                            [2m[default: None]  [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-input[0m[1;36m-comment[0m                           [1;33mTEXT           [0m  Prefix to use for [2m│[0m
+[2m│[0m                                                            results returned  [2m│[0m
+[2m│[0m                                                            by expressions    [2m│[0m
+[2m│[0m                                                            when parsing      [2m│[0m
+[2m│[0m                                                            input. Only used  [2m│[0m
+[2m│[0m                                                            if                [2m│[0m
+[2m│[0m                                                            &#39;parsing-method&#39;  [2m│[0m
+[2m│[0m                                                            is &#39;declared&#39;. If [2m│[0m
+[2m│[0m                                                            not set, &#39;prompt&#39; [2m│[0m
+[2m│[0m                                                            is used for both  [2m│[0m
+[2m│[0m                                                            input parsing and [2m│[0m
+[2m│[0m                                                            output            [2m│[0m
+[2m│[0m                                                            formatting.       [2m│[0m
+[2m│[0m                                                            [2m[default: None]  [0m [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-verbose[0m                                 [1;33m               [0m                    [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-version[0m                                 [1;33m               [0m  Show reprexlite   [2m│[0m
+[2m│[0m                                                            version and exit. [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-install[0m[1;36m-compl…[0m                          [1;33m               [0m  Install           [2m│[0m
+[2m│[0m                                                            completion for    [2m│[0m
+[2m│[0m                                                            the current       [2m│[0m
+[2m│[0m                                                            shell.            [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-show[0m[1;36m-completi…[0m                          [1;33m               [0m  Show completion   [2m│[0m
+[2m│[0m                                                            for the current   [2m│[0m
+[2m│[0m                                                            shell, to copy it [2m│[0m
+[2m│[0m                                                            or customize the  [2m│[0m
+[2m│[0m                                                            installation.     [2m│[0m
+[2m│[0m [1;36m-[0m[1;36m-help[0m                                    [1;33m               [0m  Show this message [2m│[0m
+[2m│[0m                                                            and exit.         [2m│[0m
+[2m╰──────────────────────────────────────────────────────────────────────────────╯[0m
 </code></pre></div>
 
 
