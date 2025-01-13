@@ -19,7 +19,7 @@ typecheck:
 
 # Run tests
 test:
-    uv run --python {{python}} --all-extras --no-dev --group test --isolated \
+    uv run --python {{python}} --no-editable --all-extras --no-dev --group test --isolated \
         python -I -m pytest
 
 # Run all tests with Python version matrix
