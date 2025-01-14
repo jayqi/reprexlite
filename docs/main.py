@@ -6,7 +6,7 @@ from markdownTable import markdownTable
 from typenames import typenames
 
 from reprexlite.config import ReprexConfig
-from reprexlite.formatting import formatter_registry
+from reprexlite.rendering import renderer_registry
 
 
 def define_env(env):
@@ -63,7 +63,7 @@ def define_env(env):
                 "Description": formatter.meta.venues[venue_key],
                 "Formatter": f"[`{formatter.__name__}`](#{formatter.__name__.lower()})",
             }
-            for venue_key, formatter in formatter_registry.items()
+            for venue_key, formatter in renderer_registry.items()
         ]
         table = markdownTable(data)
         return table.setParams(row_sep="markdown", quote=False).getMarkdown()
@@ -71,7 +71,7 @@ def define_env(env):
     @env.macro
     def create_venue_help_examples():
         out = []
-        for formatter in dict.fromkeys(formatter_registry.values()):
+        for formatter in dict.fromkeys(renderer_registry.values()):
             out.append(f"### `{formatter.__name__}`")
             out.append("")
             out.append(formatter.__doc__)

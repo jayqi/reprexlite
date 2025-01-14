@@ -2,8 +2,6 @@ from contextlib import contextmanager
 import re
 from typing import Optional
 
-from typer.testing import CliRunner
-
 import reprexlite.cli
 from reprexlite.config import ReprexConfig
 from reprexlite.exceptions import IPythonNotFoundError
@@ -24,9 +22,6 @@ except ModuleNotFoundError as e:
         raise
 
 
-runner = CliRunner()
-
-
 @contextmanager
 def patch_edit(input: str):
     """Patches typer.edit to return the input string instead of opening up the text editor. This
@@ -36,10 +31,10 @@ def patch_edit(input: str):
     def return_input(*args, **kwargs) -> str:
         return input
 
-    original = reprexlite.cli.typer.edit
-    setattr(reprexlite.cli.typer, "edit", return_input)
+    original = reprexlite.cli.edit
+    setattr(reprexlite.cli, "edit", return_input)
     yield
-    setattr(reprexlite.cli.typer, "edit", original)
+    setattr(reprexlite.cli, "edit", original)
 
 
 @magics_class
@@ -50,15 +45,13 @@ class ReprexMagics(Magics):
         render a reprex."""
         # Line magic, print help
         if cell is None:
-            help_text = runner.invoke(
-                reprexlite.cli.app, ["--help"], env={"TERM": "dumb"}
-            ).stdout.strip()
+            help_text = reprexlite.cli.app("--help")
             help_text = re.sub(r"^Usage: main", r"Cell Magic Usage: %%reprex", help_text)
             print(f"reprexlite v{__version__} IPython Magic\n\n" + help_text)
             return
         # Cell magic, render reprex
         with patch_edit(cell):
-            result = runner.invoke(reprexlite.cli.app, line.split())
+            result = reprexlite.cli.app(line.split())
             print(result.stdout, end="")
 
 

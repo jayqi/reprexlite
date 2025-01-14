@@ -21,8 +21,9 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dependencies = [
+  "cyclopts",
   "importlib_metadata ; python_version < '3.8'",
   "libcst",
   "typer",
@@ -35,7 +36,7 @@ pygments = ["Pygments"]
 ipython = ["ipython"]
 
 [project.scripts]
-reprex = "reprexlite.cli:app"
+reprex = "reprexlite.cli:entrypoint"
 
 [project.urls]
 "Repository" = "https://github.com/jayqi/reprexlite"

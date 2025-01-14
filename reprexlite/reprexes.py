@@ -17,8 +17,8 @@ import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig
 from reprexlite.exceptions import BlackNotFoundError, InputSyntaxError, UnexpectedError
-from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
+from reprexlite.rendering import renderer_registry
 
 
 @dataclasses.dataclass
@@ -420,10 +420,8 @@ class Reprex:
                 out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
             except ModuleNotFoundError:
                 pass
-        formatter = formatter_registry[self.config.venue]
-        return formatter.format(
-            out.strip(), advertise=self.config.advertise, session_info=self.config.session_info
-        )
+        renderer = renderer_registry[self.config.venue].renderer
+        return renderer(out.strip(), config=self.config)
 
     def __repr__(self) -> str:
         return f"<Reprex ({len(self.statements)}) '{to_snippet(str(self), 10)}'>"

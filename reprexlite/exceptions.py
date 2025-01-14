@@ -6,6 +6,10 @@ class BlackNotFoundError(ModuleNotFoundError, ReprexliteException):
     """Raised when ipython cannot be found when using a black-dependent feature."""
 
 
+class EditorError(ReprexliteException):
+    """Raised when an error occurs with the editor."""
+
+
 class InputSyntaxError(SyntaxError, ReprexliteException):
     """Raised when encountering a syntax error when parsing input."""
 
