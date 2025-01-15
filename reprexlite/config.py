@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional
+from typing import Annotated, Optional
+
+from cyclopts import Parameter
 
 from reprexlite.exceptions import (
     InvalidParsingMethodError,
@@ -53,24 +55,24 @@ class ReprexConfig:
         keep_old_results (bool): Whether to additionally include results of expressions detected in
             the original input when formatting the reprex output.
         parsing_method (str): Method for parsing input. 'auto' will automatically detect either
-            default reprex-style input or standard doctest-style input. 'declared' will allow you to
-            specify custom line prefixes. Values for 'prompt', 'continuation', and 'comment' will be
-            used for both output formatting and input parsing, unless the associated 'input_*'
-            override settings are supplied.
+            default reprex-style input or standard doctest-style input. 'declared' will allow you
+            to specify custom line prefixes. Values for 'prompt', 'continuation', and 'comment'
+            will be used for both output formatting and input parsing, unless the associated
+            'input_*' override settings are supplied.
         input_prompt (str): Prefix to use as primary prompt for code lines when parsing input. Only
             used if 'parsing_method' is 'declared'. If not set, 'prompt' is used for both input
             parsing and output formatting.
         input_continuation (str): Prefix to use as secondary prompt for continued code lines when
-            parsing input. Only used if 'parsing_method' is 'declared'. If not set, 'prompt' is used
-            for both input parsing and output formatting.
+            parsing input. Only used if 'parsing_method' is 'declared'. If not set, 'prompt' is
+            used for both input parsing and output formatting.
         input_comment (str): Prefix to use for results returned by expressions when parsing input.
-            Only used if 'parsing_method' is 'declared'. If not set, 'prompt' is used for both input
-            parsing and output formatting.
+            Only used if 'parsing_method' is 'declared'. If not set, 'prompt' is used for both
+            input parsing and output formatting.
     """
 
-    editor: Optional[str] = None
+    editor: Annotated[Optional[str], Parameter(name=("--editor", "-e"))] = None
     # Formatting
-    venue: str = "gh"
+    venue: Annotated[Venue, Parameter(name=("--venue", "-v"))] = Venue.GH
     advertise: Optional[bool] = None
     session_info: bool = False
     style: bool = False
@@ -123,30 +125,3 @@ class ReprexConfig:
         if self.input_comment is not None:
             return self.input_comment
         return self.comment
-
-    @classmethod
-    def get_help(cls, field_name: str):
-        return cls.__dataclass_fields__[field_name].metadata["help"]
-
-
-# def format_args_google_style():
-#     docs = []
-#     for field in dataclasses.fields(ReprexConfig):
-#         field_name = field.name
-#         try:
-#             field_type = field.type.__name__
-#         except AttributeError:
-#             field_type = str(field.type)
-#         docs.extend(
-#             textwrap.wrap(
-#                 f"{field_name} ({field_type}): {CONFIG_DOCS[field_name]}",
-#                 width=99,
-#                 initial_indent=" " * 8,
-#                 subsequent_indent=" " * 12,
-#             )
-#         )
-#     return "\n".join(docs)[4:]
-
-
-# if ReprexConfig.__doc__:
-#     ReprexConfig.__doc__ = ReprexConfig.__doc__.replace("{{args}}", format_args_google_style())

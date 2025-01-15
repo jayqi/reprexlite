@@ -1,5 +1,5 @@
-from contextlib import contextmanager
 import os
+from pathlib import Path
 import platform
 import subprocess
 import sys
@@ -9,7 +9,11 @@ from typing import Annotated, Optional
 from cyclopts import App, Parameter
 
 from reprexlite.config import ReprexConfig
-from reprexlite.exceptions import EditorError, InputSyntaxError, IPythonNotFoundError
+from reprexlite.exceptions import (
+    EditorError,
+    InputSyntaxError,
+    IPythonNotFoundError,
+)
 from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
 
@@ -21,14 +25,38 @@ def get_version():
 app = App(name="reprex", version=get_version, help_format="plaintext")
 
 
-@contextmanager
-def temporary_file():
-    fd, path = tempfile.mkstemp(prefix="reprexlite", suffix=".py")
+def launch_ipython(config: ReprexConfig):
     try:
-        os.close(fd)  # Close the file descriptor
-        yield path
+        from reprexlite.ipython import ReprexTerminalIPythonApp
+    except IPythonNotFoundError:
+        print(
+            "IPythonNotFoundError: ipython is required to be installed to use the IPython "
+            "interactive editor."
+        )
+        sys.exit(1)
+    ReprexTerminalIPythonApp.set_reprex_config(config)
+    ReprexTerminalIPythonApp.launch_instance(argv=[])
+    sys.exit(0)
+
+
+def launch_editor(editor) -> str:
+    fw, name = tempfile.mkstemp(prefix="reprexlite-", suffix=".py")
+    try:
+        os.close(fw)  # Close the file descriptor
+        # Open editor and edit the file
+        proc = subprocess.Popen(args=f"{editor} {name}", shell=True)
+        exit_code = proc.wait()
+        if exit_code != 0:
+            raise EditorError(f"{editor}: Editing failed with exit code {exit_code}")
+
+        # Read the file back in
+        with open(name, "rb") as fp:
+            content = fp.read()
+        return content.decode("utf-8-sig").replace("\r\n", "\n")
+    except OSError as e:
+        raise EditorError(f"{editor}: Editing failed: {e}") from e
     finally:
-        os.unlink(path)
+        os.unlink(name)
 
 
 def get_editor() -> str:
@@ -45,27 +73,20 @@ def get_editor() -> str:
     return "vi"
 
 
-def edit(editor: str) -> str:
-    with temporary_file() as name:
-        try:
-            # Open editor and edit the file
-            proc = subprocess.Popen(args=f"{editor} {name}", shell=True)
-            exit_code = proc.wait()
-            if exit_code != 0:
-                raise EditorError(f"{editor}: Editing failed")
-
-            # Read the file back in
-            with open(name, "rb") as fp:
-                content = fp.read()
-            return content.decode("utf-8-sig").replace("\r\n", "\n")
-        except OSError as e:
-            raise EditorError(f"{editor}: Editing failed: {e}") from e
+def handle_editor(config: ReprexConfig) -> str:
+    """Determines what to do based on the editor configuration."""
+    editor = config.editor or get_editor()
+    if editor == "ipython":
+        launch_ipython(config)
+    else:
+        return launch_editor(editor)
 
 
 @app.default
 def main(
-    infile=None,
-    outfile=None,
+    *,
+    infile: Annotated[Optional[Path], Parameter(name=("--infile", "-i"))] = None,
+    outfile: Annotated[Optional[Path], Parameter(name=("--outfile", "-o"))] = None,
     config: Annotated[ReprexConfig, Parameter(name="*")] = ReprexConfig(),
     verbose: bool = False,
 ):
@@ -108,24 +129,14 @@ def main(
     - slack : Slack
     """  # noqa: E501
 
-    editor = config.editor or get_editor()
-    if editor.lower() == "ipython":
-        try:
-            from reprexlite.ipython import ReprexTerminalIPythonApp
-        except IPythonNotFoundError:
-            print(
-                "IPythonNotFoundError: ipython is required to be installed to use the IPython "
-                "interactive editor."
-            )
-            sys.exit(1)
-        ReprexTerminalIPythonApp.set_reprex_config(config)
-        ReprexTerminalIPythonApp.launch_instance(argv=[])
-        sys.exit(0)
-    elif infile:
+    if infile:
         with infile.open("r") as fp:
             input = fp.read()
     else:
-        input = edit(editor=editor) or ""
+        input = handle_editor(config)
+        if input.strip() == "":
+            print("No input provided or saved via the editor. Exiting.")
+            sys.exit(0)
 
     if verbose:
         print(config)
@@ -139,15 +150,17 @@ def main(
 
     if outfile:
         with outfile.open("w") as fp:
-            fp.write(r.format(terminal=False))
+            fp.write(r.render(terminal=False))
         print(f"Wrote rendered reprex to {outfile}")
     else:
-        print(r.format(terminal=True), end="")
+        print(r.render(terminal=True), end="")
 
     return r
 
 
 def entrypoint():
     """Entrypoint for the reprex command-line interface. This function is configured as the reprex
-    entrypoint under project.scripts."""
+    entrypoint under [project.scripts].
+    https://packaging.python.org/en/latest/specifications/entry-points/#use-for-scripts
+    """
     app()

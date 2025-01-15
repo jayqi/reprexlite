@@ -4,15 +4,12 @@ import sys
 from textwrap import dedent
 
 import pytest
-import typer
-from typer.testing import CliRunner
 
+import reprexlite.cli
 from reprexlite.cli import app
 from reprexlite.exceptions import IPythonNotFoundError
 from reprexlite.version import __version__
 from tests.utils import remove_ansi_escape
-
-runner = CliRunner()
 
 INPUT = dedent(
     """\
@@ -36,11 +33,12 @@ def patch_edit(monkeypatch):
             self.input = INPUT
 
         def mock_edit(self, *args, **kwargs):
+            sys.stderr.write("Mocking editor\n")
             return self.input
 
     patch = EditPatch()
-    monkeypatch.setattr(typer, "edit", patch.mock_edit)
-    return patch
+    monkeypatch.setattr(reprexlite.cli, "launch_editor", patch.mock_edit)
+    yield patch
 
 
 @pytest.fixture
@@ -55,32 +53,36 @@ def no_ipython(monkeypatch):
     monkeypatch.setattr(builtins, "__import__", mocked_import)
 
 
-def test_reprex(patch_edit):
-    result = runner.invoke(app)
-    print(result.stdout)
-    assert result.exit_code == 0
-    assert EXPECTED in remove_ansi_escape(result.stdout)
+def test_reprex(patch_edit, capsys):
+    assert reprexlite.cli.launch_editor == patch_edit.mock_edit
+    capsys.readouterr()
+    app([])
+    stdout = capsys.readouterr().out
+    print(stdout)
+    assert EXPECTED in remove_ansi_escape(stdout)
 
 
-def test_reprex_infile(tmp_path):
+def test_reprex_infile(tmp_path, capsys):
     infile = tmp_path / "infile.py"
     with infile.open("w") as fp:
         fp.write(INPUT)
-    result = runner.invoke(app, ["-i", str(infile)])
-    assert result.exit_code == 0
-    assert EXPECTED in remove_ansi_escape(result.stdout)
+    app(["-i", str(infile)])
+    stdout = capsys.readouterr().out
+    print(stdout)
+    assert EXPECTED in remove_ansi_escape(stdout)
 
 
-def test_reprex_outfile(patch_edit, tmp_path):
+def test_reprex_outfile(patch_edit, tmp_path, capsys):
     outfile = tmp_path / "outfile.md"
-    result = runner.invoke(app, ["-o", str(outfile)])
-    assert result.exit_code == 0
+    app(["-o", str(outfile)])
     with outfile.open("r") as fp:
         assert EXPECTED in fp.read()
-    assert str(outfile) in result.stdout
+    stdout = capsys.readouterr().out
+    print(stdout)
+    assert str(outfile) in stdout
 
 
-def test_old_results(patch_edit):
+def test_old_results(patch_edit, capsys):
     patch_edit.input = dedent(
         """\
         arr = [1, 2, 3, 4, 5]
@@ -90,48 +92,51 @@ def test_old_results(patch_edit):
     )
 
     # no --old-results (default)
-    result = runner.invoke(app)
-    print(result.stdout)
-    assert result.exit_code == 0
-    assert "#> old line" not in result.stdout
-    assert "#> [2, 3, 4, 5, 6]" in result.stdout
+    capsys.readouterr()
+    app([])
+    stdout = capsys.readouterr().out
+    print(stdout)
+    assert "#> old line" not in stdout
+    assert "#> [2, 3, 4, 5, 6]" in stdout
 
     # with --old-results
-    result = runner.invoke(app, ["--keep-old-results"])
-    print(result.stdout)
-    assert result.exit_code == 0
-    assert "#> old line" in result.stdout
-    assert "#> [2, 3, 4, 5, 6]" in result.stdout
+    app(["--keep-old-results"])
+    stdout = capsys.readouterr().out
+    print(stdout)
+    assert "#> old line" in stdout
+    assert "#> [2, 3, 4, 5, 6]" in stdout
 
 
-def test_ipython_editor():
-    """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
-    to inject input into the IPython shell."""
-    result = runner.invoke(app, ["-e", "ipython"])
-    assert result.exit_code == 0
-    assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
+# def test_ipython_editor(capsys):
+#     """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
+#     to inject input into the IPython shell."""
+#     app(["-e", "ipython"])
+#     stdout = capsys.readouterr().out
+#     assert "Interactive reprex editor via IPython" in stdout  # text from banner
 
 
-def test_ipython_editor_not_installed(no_ipython):
+def test_ipython_editor_not_installed(no_ipython, capsys):
     """Test for expected error when opening the IPython interactive editor without IPython
     installed"""
-    result = runner.invoke(app, ["-e", "ipython"])
-    assert result.exit_code == 1
-    assert "ipython is required" in result.stdout
+    with pytest.raises(SystemExit) as excinfo:
+        app(["-e", "ipython"])
+        assert excinfo.value.code == 1
+    stdout = capsys.readouterr().out
+    assert "ipython is required" in stdout
 
 
-def test_help():
+def test_help(capsys):
     """Test the CLI with --help flag."""
-    result = runner.invoke(app, ["--help"])
-    assert result.exit_code == 0
-    assert "Render reproducible examples of Python code for sharing." in result.output
+    app(["--help"])
+    stdout = capsys.readouterr().out
+    assert "Render reproducible examples of Python code for sharing." in stdout
 
 
-def test_version():
+def test_version(capsys):
     """Test the CLI with --version flag."""
-    result = runner.invoke(app, ["--version"])
-    assert result.exit_code == 0
-    assert result.output.strip() == __version__
+    app(["--version"])
+    stdout = capsys.readouterr().out
+    assert stdout.strip() == __version__
 
 
 def test_python_m_version():

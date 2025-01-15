@@ -409,7 +409,7 @@ class Reprex:
             result == old_result for result, old_result in zip(self.results, self.old_results)
         )
 
-    def format(self, terminal: bool = False) -> str:
+    def render(self, terminal: bool = False) -> str:
         out = str(self)
         if terminal:
             try:
@@ -436,9 +436,9 @@ class Reprex:
 
             formatter = HtmlFormatter(style="friendly", wrapcode=True)
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
-            out.append(highlight(self.format(), PythonLexer(), formatter))
+            out.append(highlight(self.render(), PythonLexer(), formatter))
         except ModuleNotFoundError:
-            out.append(f"<pre><code>{self.format()}</code></pre>")
+            out.append(f"<pre><code>{self.render()}</code></pre>")
         return "\n".join(out)
 
 
@@ -503,10 +503,10 @@ def reprex(
         # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
     r = Reprex.from_input(input, config=config)
-    output = r.format(terminal=terminal)
+    output = r.render(terminal=terminal)
     if outfile is not None:
         with Path(outfile).open("w") as fp:
-            fp.write(r.format(terminal=False))
+            fp.write(r.render(terminal=False))
     if print_:
         print(output)
     return r

@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Dict, Optional, Protocol, Type
 
 from reprexlite.config import ReprexConfig, Venue
-from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
+from reprexlite.exceptions import PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
@@ -24,7 +24,10 @@ class RendererRegistry:
     _registry: Dict[str, RendererRegistration] = {}
 
     def __getitem__(self, key: Venue) -> Type[Renderer]:
-        return self._registry[Venue(key).value]
+        return self._registry[Venue(key)]
+
+    def __contains__(self, key: Venue) -> bool:
+        return Venue(key) in self._registry
 
     def register(self, venue: Venue, label: str):
         """Decorator that registers a formatter implementation.
@@ -34,11 +37,11 @@ class RendererRegistry:
             label (str): Short human-readable label explaining the venue.
         """
 
-        def registrar(fn: Renderer):
-            self._registry[Venue(venue).value] = RendererRegistration(renderer=fn, label=label)
+        def _register(fn: Renderer):
+            self._registry[Venue(venue)] = RendererRegistration(renderer=fn, label=label)
             return fn
 
-        return registrar
+        return _register
 
 
 renderer_registry = RendererRegistry()

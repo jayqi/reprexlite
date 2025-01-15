@@ -4,9 +4,9 @@ from textwrap import dedent
 
 import pytest
 
-from reprexlite.config import ReprexConfig
-from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
-from reprexlite.rendering import register_formatter
+from reprexlite.config import ReprexConfig, Venue
+from reprexlite.exceptions import PygmentsNotFoundError
+from reprexlite.rendering import renderer_registry
 from reprexlite.reprexes import Reprex
 from tests.expected_formatted import (
     ASSETS_DIR,
@@ -21,23 +21,23 @@ from tests.utils import assert_str_equals
 
 @pytest.fixture
 def patch_datetime(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "datetime", MockDateTime)
+    monkeypatch.setattr(sys.modules["reprexlite.rendering"], "datetime", MockDateTime)
 
 
 @pytest.fixture
 def patch_version(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "__version__", MOCK_VERSION)
+    monkeypatch.setattr(sys.modules["reprexlite.rendering"], "__version__", MOCK_VERSION)
 
 
 @pytest.fixture
 def patch_session_info(monkeypatch):
-    monkeypatch.setattr(sys.modules["reprexlite.formatting"], "SessionInfo", MockSessionInfo)
+    monkeypatch.setattr(sys.modules["reprexlite.rendering"], "SessionInfo", MockSessionInfo)
 
 
 @pytest.mark.parametrize("ereprex", expected_reprexes, ids=[e.filename for e in expected_reprexes])
 def test_reprex(ereprex, patch_datetime, patch_session_info, patch_version):
     r = Reprex.from_input(INPUT, ReprexConfig(**ereprex.kwargs))
-    actual = r.format()
+    actual = r.render()
     with (ASSETS_DIR / ereprex.filename).open("r") as fp:
         assert str(actual) == fp.read()
         assert str(actual).endswith("\n")
@@ -55,9 +55,15 @@ def no_pygments(monkeypatch):
     monkeypatch.setattr(builtins, "__import__", mocked_import)
 
 
+def test_all_venues_have_renderers():
+    for venue in Venue:
+        print(venue)
+        assert venue in renderer_registry
+
+
 def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
     r = Reprex.from_input(INPUT, ReprexConfig(venue="html"))
-    actual = r.format()
+    actual = r.render()
     expected = dedent(
         """\
         <pre><code>x = 2
@@ -73,7 +79,7 @@ def test_html_no_pygments(patch_datetime, patch_version, no_pygments):
 def test_rtf_no_pygments(patch_datetime, patch_version, no_pygments):
     with pytest.raises(PygmentsNotFoundError):
         r = Reprex.from_input(INPUT, ReprexConfig(venue="rtf"))
-        r.format()
+        r.render()
 
 
 @pytest.fixture
@@ -95,15 +101,7 @@ def test_rtf_pygments_bad_dependency(patch_datetime, patch_version, pygments_bad
     """Test that a bad import inside pygments does not trigger PygmentsNotFoundError"""
     with pytest.raises(ModuleNotFoundError) as exc_info:
         r = Reprex.from_input(INPUT, ReprexConfig(venue="rtf"))
-        r.format()
+        r.render()
     assert not isinstance(exc_info.type, PygmentsNotFoundError)
     assert exc_info.value.name != "pygments"
     assert exc_info.value.name == pygments_bad_dependency
-
-
-def test_not_a_formatter_error():
-    with pytest.raises(NotAFormatterError):
-
-        @register_formatter("l33t", label="l33t")
-        class F0rm4tt3r:
-            pass

@@ -1,4 +1,5 @@
-from contextlib import contextmanager
+from contextlib import contextmanager, redirect_stdout
+import io
 import re
 from typing import Optional
 
@@ -31,10 +32,10 @@ def patch_edit(input: str):
     def return_input(*args, **kwargs) -> str:
         return input
 
-    original = reprexlite.cli.edit
-    setattr(reprexlite.cli, "edit", return_input)
+    original = reprexlite.cli.launch_editor
+    setattr(reprexlite.cli, "launch_editor", return_input)
     yield
-    setattr(reprexlite.cli, "edit", original)
+    setattr(reprexlite.cli, "launch_editor", original)
 
 
 @magics_class
@@ -45,14 +46,16 @@ class ReprexMagics(Magics):
         render a reprex."""
         # Line magic, print help
         if cell is None:
-            help_text = reprexlite.cli.app("--help")
-            help_text = re.sub(r"^Usage: main", r"Cell Magic Usage: %%reprex", help_text)
+            with io.StringIO() as buffer, redirect_stdout(buffer):
+                reprexlite.cli.app("--help")
+                help_text = buffer.getvalue()
+            help_text = re.sub(r"^Usage: reprex", r"Cell Magic Usage: %%reprex", help_text)
             print(f"reprexlite v{__version__} IPython Magic\n\n" + help_text)
             return
         # Cell magic, render reprex
         with patch_edit(cell):
-            result = reprexlite.cli.app(line.split())
-            print(result.stdout, end="")
+            reprexlite.cli.app(line.split())
+            # print(stdout, end="")
 
 
 def load_ipython_extension(ipython: InteractiveShell):
@@ -81,7 +84,7 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
         if raw_cell != "exit":
             try:
                 r = Reprex.from_input(raw_cell, config=self.reprex_config)
-                print(r.format(terminal=True), end="")
+                print(r.render(terminal=True), end="")
             except Exception as e:
                 print("ERROR: reprexlite has encountered an error while evaluating your input.")
                 print(e, end="")

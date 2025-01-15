@@ -38,10 +38,6 @@ class NoPrefixMatchError(ValueError, ReprexliteException):
     pass
 
 
-class NotAFormatterError(TypeError, ReprexliteException):
-    """Raised when registering a formatter that is not a subclass of the Formatter base class."""
-
-
 class PromptLengthMismatchError(ReprexliteException):
     pass
 
