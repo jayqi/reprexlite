@@ -2,6 +2,7 @@ import dataclasses
 from textwrap import dedent
 from typing import Union
 
+from griffe import Docstring
 from markdownTable import markdownTable
 from typenames import typenames
 
@@ -11,6 +12,10 @@ from reprexlite.rendering import renderer_registry
 
 def define_env(env):
     "Hook function"
+
+    docstring = Docstring(ReprexConfig.__doc__, lineno=1)
+    parsed = docstring.parse("google")
+    descriptions = {param.name: param.description.replace("\n", " ") for param in parsed[1].value}
 
     @env.macro
     def create_config_help_table():
@@ -34,7 +39,7 @@ def define_env(env):
                 <tr>
                     <td class="no-wrap"><b><code>{field.name}</code></b></td>
                     <td class="no-wrap"><code>{typenames(field.type)}</code></td>
-                    <td>{field.metadata['help']}</td>
+                    <td>{descriptions[field.name]}</td>
                 </tr>
                 """
                 for field in dataclasses.fields(ReprexConfig)

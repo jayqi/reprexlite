@@ -41,6 +41,9 @@ class ReprexConfig:
     formatting.
 
     Args:
+        editor (str): Command-line program name of editor to use. If not specified, check $EDITOR
+            and $VISUAL environment variables. If 'ipython', will launch the IPython interactive
+            editor.
         venue (str): Key to identify the output venue that the reprex will be shared in. Used to
             select an appropriate formatter. See "Venues Formatting" documentation for formats
             included with reprexlite.
