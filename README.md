@@ -8,9 +8,11 @@
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
-**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional [IPython extension with cell magic](#ipythonjupyter-cell-magic) for easy use in Jupyter or VS Code. This project is inspired by R's [reprex](https://reprex.tidyverse.org/) package.
+**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional [integration with IPython](#ipython-integration) for easy use with IPython or in Jupyter or VS Code. This project is inspired by R's [reprex](https://reprex.tidyverse.org/) package.
 
 <img src="https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif" width="640px" />
+
+### What it does
 
 - Paste or type some Python code that you're interested in sharing.
 - reprexlite will execute that code in an isolated namespace. Any returned values or standard output will be captured and displayed as comments below their associated code.
@@ -48,7 +50,7 @@ Optional dependencies can be specified using the ["extras" mechanism](https://pa
 
 - `black` : for optionally autoformatting your code
 - `ipython` : to use the IPython interactive shell editor or `%%reprex` IPython cell magic
-- `pygments` : for syntax highlighting and the RTF venue
+- `pygments` : for syntax highlighting and rendering the output as RTF
 
 ### Development version
 
@@ -74,11 +76,18 @@ Once you're done, reprexlite will print out your reprex to console.
 
 To see available options, use the `--help` flag.
 
+### IPython integrations
+
+There are two kinds of IPython integration:
+
+1. [IPython interactive shell editor](#ipython-interactive-shell-editor), which opens up a special IPython session where all cells are run through reprexlite
+2. [Cell magics](#ipythonjupyter-cell-magic), which let you designate individual cells in a normal IPython or Jupyter notebook for being run through reprexlite
+
 ### IPython interactive shell editor
 
 _Requires IPython._ `[ipython]`
 
-reprexlite optionally supports an IPython interactive shell editor. This is basically like a normal IPython interactive shell except that all cell contents are piped through reprexlite for rendering instead of the normal cell execution. It has the typical advantages of using IPython like auto-suggestions, history scrolling, and syntax highlighting.  You can start the IPython editor by using the `--editor`/`-e` option:
+reprexlite optionally supports an IPython interactive shell editor. This is basically like a normal IPython interactive shell except that all cells are piped through reprexlite for rendering instead of the normal cell execution. It has the typical advantages of using IPython like auto-suggestions, history scrolling, and syntax highlighting.  You can start the IPython editor by using the `--editor`/`-e` option:
 
 ```bash
 reprex -e ipython

@@ -29,6 +29,15 @@ class RendererRegistry:
     def __contains__(self, key: Venue) -> bool:
         return Venue(key) in self._registry
 
+    def items(self):
+        return self._registry.items()
+
+    def keys(self):
+        return self._registry.keys()
+
+    def values(self):
+        return self._registry.values()
+
     def register(self, venue: Venue, label: str):
         """Decorator that registers a formatter implementation.
 

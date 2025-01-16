@@ -38,7 +38,7 @@ A widely used approach for Python code examples is copying from an interactive P
 
 This style of code example takes no special tools to generate: simply open a `python` shell from command line, write your code, and copy what you see. Many Python packages use it for their documentation, e.g., [requests](https://requests.readthedocs.io/en/master/). There is also tooling for parsing it. The doctest module can run such examples in the docstrings of your scripts, and test that the output matches what is written. Other tools like [Sphinx](https://www.sphinx-doc.org/en/1.4.9/markup/code.html) are able to parse it when rendering your documentation into other formats.
 
-The drawback of doctest-style examples is that they are _not_ valid Python syntax, so you can't just copy, paste, and run such  examples. The `>>>` prompt is not valid. While IPython's interactive shell and Jupyter notebooks _do_ support executing code with the prompt, it won't work in a regular Python REPL or in Python scripts. Furthermore, since the outputs might be anything, they may not be valid Python syntax either, depending on their `repr`. A barebones class, for example, will look like `<__main__.MyClass object at 0x7f932a001400>` and is not valid.
+The drawback of doctest-style examples is that they are _not_ valid Python syntax, so you can't always just copy, paste, and run such examples. The `>>>` prompt is not valid. While IPython's interactive shell and Jupyter notebooks _do_ support executing code with the prompt, it won't work in a regular Python REPL or in Python scripts. Furthermore, since the outputs might be anything, they may not be valid Python syntax either, depending on their `repr`. A barebones class, for example, will look like `<__main__.MyClass object at 0x7f932a001400>` and is not valid.
 
 So, while no special tools were needed to _generate_ a doctest-style example, either special tools or manual editing are needed to _run_ it. This puts the burden on the person you're sharing with, which is counterproductive. As discussed in the previous section, we want reproducible examples to make it _easier_ for others to run your code.
 
@@ -56,7 +56,7 @@ If this has convinced you, you can take advantage of reprexlite's ability to par
 
 The primary design goal of reprexlite is that it should be **quick and convenient** to use. That objective drove the emphasis on following the design characteristics:
 
-- **Lightweight**. reprexlite needs to be in your virtual environment to be able to run your code. By having minimal and lightweight dependencies itself, reprexlite is quick to install and is unlikely to conflict with your other dependencies.
+- **Lightweight**. reprexlite needs to be in your virtual environment to be able to run your code. By having minimal and lightweight dependencies itself, reprexlite is quick to install and is unlikely to conflict with your other dependencies. Any advanced functionality that require heavier dependencies are optional.
 - **Easy access**. reprexlite comes with a CLI, so you can quickly create a reprex without needing to start a Python shell or to import anything.
   - **And flexible**. The CLI isn't the only option. The [Python library](../api-reference/reprex/) provides programmatic access, and there is an optional [IPython/Jupyter extension](../ipython-jupyter-magic/) for use with a cell magic.
 

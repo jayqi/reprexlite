@@ -1,8 +1,9 @@
+from collections import defaultdict
 import dataclasses
 from textwrap import dedent
 from typing import Union
 
-from griffe import Docstring
+from griffe import Docstring, DocstringSectionAdmonition, DocstringSectionText
 from markdownTable import markdownTable
 from typenames import typenames
 
@@ -64,31 +65,52 @@ def define_env(env):
     def create_venue_help_table():
         data = [
             {
-                "Venue Keyword": venue_key,
-                "Description": formatter.meta.venues[venue_key],
-                "Formatter": f"[`{formatter.__name__}`](#{formatter.__name__.lower()})",
+                "Venue Keyword": f"`{venue_key.value}`",
+                "Description": renderer_entry.label,
+                "Renderer": f"[`{renderer_entry.renderer.__name__}`](#{renderer_entry.renderer.__name__})",
             }
-            for venue_key, formatter in renderer_registry.items()
+            for venue_key, renderer_entry in renderer_registry.items()
         ]
         table = markdownTable(data)
         return table.setParams(row_sep="markdown", quote=False).getMarkdown()
 
     @env.macro
     def create_venue_help_examples():
+        data = defaultdict(list)
+        for key, entry in renderer_registry.items():
+            data[entry.renderer].append(key)
+
         out = []
-        for formatter in dict.fromkeys(renderer_registry.values()):
-            out.append(f"### `{formatter.__name__}`")
-            out.append("")
-            out.append(formatter.__doc__)
-            out.append("")
-            out.append("````")
-            out.append(formatter.meta.example or "Example not shown.")
-            out.append("````")
+        for fn, keys in data.items():
+            pass
+            fn = entry.renderer
+
+            keys_list = ", ".join(f"`{key.value}`" for key in keys)
+            out.append(f"### `{fn.__name__}`")
+
+            # Parse docstring
+            docstring = Docstring(fn.__doc__, lineno=1)
+            parsed = docstring.parse("google")
+
+            for section in parsed:
+                if isinstance(section, DocstringSectionText):
+                    out.append("")
+                    out.append(section.value)
+                elif isinstance(section, DocstringSectionAdmonition):
+                    out.append("")
+                    out.append(f"**Used for venues**: {keys_list}")
+                    out.append("")
+                    out.append(f"**{section.title}**")
+                    out.append("")
+                    out.append("````")
+                    admonition = section.value
+                    out.append(admonition.description)
+                    out.append("````")
             out.append("")
             out.append(
                 "<sup>"
                 "↳ [API documentation]"
-                f"(api-reference/formatting.md#reprexlite.formatting.{formatter.__qualname__})"
+                f"(api-reference/formatting.md#reprexlite.rendering.{fn.__qualname__})"
                 "</sup>"
             )
         return "\n".join(out)
