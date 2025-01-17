@@ -8,22 +8,22 @@ from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
 
-class Renderer(Protocol):
+class Formatter(Protocol):
     def __call__(self, reprex_str: str, config: Optional[ReprexConfig] = None) -> str: ...
 
 
 @dataclass
-class RendererRegistration:
-    renderer: Renderer
+class FormatterRegistration:
+    fn: Formatter
     label: str
 
 
-class RendererRegistry:
+class FormatterRegistry:
     """Registry of formatters keyed by venue keywords."""
 
-    _registry: Dict[str, RendererRegistration] = {}
+    _registry: Dict[str, FormatterRegistration] = {}
 
-    def __getitem__(self, key: Venue) -> Type[Renderer]:
+    def __getitem__(self, key: Venue) -> Type[Formatter]:
         return self._registry[Venue(key)]
 
     def __contains__(self, key: Venue) -> bool:
@@ -46,26 +46,26 @@ class RendererRegistry:
             label (str): Short human-readable label explaining the venue.
         """
 
-        def _register(fn: Renderer):
-            self._registry[Venue(venue)] = RendererRegistration(renderer=fn, label=label)
+        def _register(fn: Formatter):
+            self._registry[Venue(venue)] = FormatterRegistration(fn=fn, label=label)
             return fn
 
         return _register
 
 
-renderer_registry = RendererRegistry()
+formatter_registry = FormatterRegistry()
 
 
-@renderer_registry.register(venue=Venue.DS, label=f"Discourse (alias for '{Venue.GH.value}')")
-@renderer_registry.register(venue=Venue.SO, label=f"StackOverflow (alias for '{Venue.GH.value}')")
-@renderer_registry.register(venue=Venue.GH, label="Github Flavored Markdown")
-def render_to_markdown(
+@formatter_registry.register(venue=Venue.DS, label=f"Discourse (alias for '{Venue.GH.value}')")
+@formatter_registry.register(venue=Venue.SO, label=f"StackOverflow (alias for '{Venue.GH.value}')")
+@formatter_registry.register(venue=Venue.GH, label="Github Flavored Markdown")
+def format_as_markdown(
     reprex_str: str,
     config: Optional[ReprexConfig] = None,
 ) -> str:
     """
-    Render a reprex as a GitHub-Flavored Markdown code block. By default, includes a footer that
-    credits reprexlite.
+    Format a rendered reprex reprex as a GitHub-Flavored Markdown code block. By default, includes
+    a footer that credits reprexlite.
 
     Args:
         reprex_str (str): The reprex string to render.
@@ -98,11 +98,11 @@ def render_to_markdown(
     return "\n".join(out) + "\n"
 
 
-@renderer_registry.register(venue=Venue.HTML, label="HTML")
-def render_to_html(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
-    """Render a reprex as an HTML code block. If optional dependency Pygments is available, the
-    rendered HTML will have syntax highlighting for the Python code. By default, includes a footer
-    that credits reprexlite.
+@formatter_registry.register(venue=Venue.HTML, label="HTML")
+def format_as_html(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex reprex as an HTML code block. If optional dependency Pygments is
+    available, the rendered HTML will have syntax highlighting for the Python code. By default,
+    includes a footer that credits reprexlite.
 
     Args:
         reprex_str (str): The reprex string to render.
@@ -139,9 +139,9 @@ def render_to_html(reprex_str: str, config: Optional[ReprexConfig] = None) -> st
     return "\n".join(out) + "\n"
 
 
-@renderer_registry.register(venue=Venue.PY, label="Python script")
-def render_to_python_script(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
-    """Render a reprex as a Python script.
+@formatter_registry.register(venue=Venue.PY, label="Python script")
+def format_as_python_script(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex reprex as a Python script.
 
     Args:
         reprex_str (str): The reprex string to render.
@@ -167,9 +167,10 @@ def render_to_python_script(reprex_str: str, config: Optional[ReprexConfig] = No
     return "\n".join(out) + "\n"
 
 
-@renderer_registry.register(venue=Venue.RTF, label="Rich Text Format")
-def render_to_rtf(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
-    """Render a reprex as a Rich Text Format (RTF) document. Requires dependency Pygments."""
+@formatter_registry.register(venue=Venue.RTF, label="Rich Text Format")
+def format_as_rtf(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex reprex as a Rich Text Format (RTF) document. Requires dependency
+    Pygments."""
     if config is None:
         config = ReprexConfig()
     advertise = config.advertise if config.advertise is not None else False
@@ -191,9 +192,9 @@ def render_to_rtf(reprex_str: str, config: Optional[ReprexConfig] = None) -> str
     return highlight(out, PythonLexer(), RtfFormatter()) + "\n"
 
 
-@renderer_registry.register(venue=Venue.SLACK, label="Slack")
-def render_for_slack(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
-    """Render a reprex as Slack markup.
+@formatter_registry.register(venue=Venue.SLACK, label="Slack")
+def format_for_slack(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex as Slack markup.
 
     Args:
         reprex_str (str): The reprex string to render.

@@ -8,7 +8,7 @@ from markdownTable import markdownTable
 from typenames import typenames
 
 from reprexlite.config import ReprexConfig
-from reprexlite.rendering import renderer_registry
+from reprexlite.formatting import formatter_registry
 
 
 def define_env(env):
@@ -66,10 +66,10 @@ def define_env(env):
         data = [
             {
                 "Venue Keyword": f"`{venue_key.value}`",
-                "Description": renderer_entry.label,
-                "Renderer": f"[`{renderer_entry.renderer.__name__}`](#{renderer_entry.renderer.__name__})",
+                "Description": formatter_entry.label,
+                "Formatter Function": f"[`{formatter_entry.fn.__name__}`](#{formatter_entry.fn.__name__})",
             }
-            for venue_key, renderer_entry in renderer_registry.items()
+            for venue_key, formatter_entry in formatter_registry.items()
         ]
         table = markdownTable(data)
         return table.setParams(row_sep="markdown", quote=False).getMarkdown()
@@ -77,13 +77,13 @@ def define_env(env):
     @env.macro
     def create_venue_help_examples():
         data = defaultdict(list)
-        for key, entry in renderer_registry.items():
-            data[entry.renderer].append(key)
+        for key, entry in formatter_registry.items():
+            data[entry.fn].append(key)
 
         out = []
         for fn, keys in data.items():
             pass
-            fn = entry.renderer
+            fn = entry.fn
 
             keys_list = ", ".join(f"`{key.value}`" for key in keys)
             out.append(f"### `{fn.__name__}`")

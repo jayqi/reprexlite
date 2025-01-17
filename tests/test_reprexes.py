@@ -697,7 +697,7 @@ def no_black(monkeypatch):
 def test_no_black(no_black):
     with pytest.raises(BlackNotFoundError):
         reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
-        reprex.render()
+        reprex.render_and_format()
 
 
 @pytest.fixture
@@ -718,7 +718,7 @@ def black_bad_dependency(monkeypatch):
 def test_black_bad_dependency(black_bad_dependency, monkeypatch):
     with pytest.raises(ModuleNotFoundError) as exc_info:
         reprex = Reprex.from_input("2+2", config=ReprexConfig(style=True))
-        reprex.render()
+        reprex.render_and_format()
     assert not isinstance(exc_info.type, BlackNotFoundError)
     assert exc_info.value.name != "black"
     assert exc_info.value.name == black_bad_dependency
@@ -739,7 +739,7 @@ def no_pygments(monkeypatch):
 def test_no_pygments_terminal(no_pygments):
     """Test that format for terminal works even if pygments is not installed."""
     r = Reprex.from_input("2+2")
-    assert_str_equals(r.render(terminal=False), r.render(terminal=True))
+    assert_str_equals(r.render_and_format(terminal=False), r.render_and_format(terminal=True))
 
 
 def test_repr_html():
@@ -776,4 +776,4 @@ def test_reprex_function(tmp_path):
 
     # Test writing to file
     with (tmp_path / "rendered.txt").open("r") as fp:
-        assert expected.render() == fp.read()
+        assert expected.render_and_format() == fp.read()

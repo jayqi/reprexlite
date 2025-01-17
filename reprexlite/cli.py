@@ -150,10 +150,10 @@ def main(
 
     if outfile:
         with outfile.open("w") as fp:
-            fp.write(r.render(terminal=False))
+            fp.write(r.render_and_format(terminal=False))
         print(f"Wrote rendered reprex to {outfile}")
     else:
-        print(r.render(terminal=True), end="")
+        print(r.render_and_format(terminal=True), end="")
 
     return r
 

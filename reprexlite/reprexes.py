@@ -17,8 +17,8 @@ import libcst as cst
 
 from reprexlite.config import ParsingMethod, ReprexConfig
 from reprexlite.exceptions import BlackNotFoundError, InputSyntaxError, UnexpectedError
+from reprexlite.formatting import formatter_registry
 from reprexlite.parsing import LineType, auto_parse, parse
-from reprexlite.rendering import renderer_registry
 
 
 @dataclasses.dataclass
@@ -393,14 +393,7 @@ class Reprex:
             return NotImplemented
 
     def __str__(self) -> str:
-        if self.config.keep_old_results:
-            lines = chain.from_iterable(zip(self.statements, self.old_results, self.results))
-        else:
-            lines = chain.from_iterable(zip(self.statements, self.results))
-        out = "\n".join(str(line) for line in lines if line)
-        if not out.endswith("\n"):
-            out += "\n"
-        return out
+        return self.render()
 
     @property
     def results_match(self) -> bool:
@@ -410,7 +403,15 @@ class Reprex:
         )
 
     def render(self, terminal: bool = False) -> str:
-        out = str(self)
+        """Render the reprex as code."""
+        if self.config.keep_old_results:
+            lines = chain.from_iterable(zip(self.statements, self.old_results, self.results))
+        else:
+            lines = chain.from_iterable(zip(self.statements, self.results))
+        out = "\n".join(str(line) for line in lines if line)
+        if not out.endswith("\n"):
+            out += "\n"
+        # if terminal=True and Pygments is available, apply syntax highlighting
         if terminal:
             try:
                 from pygments import highlight
@@ -420,8 +421,13 @@ class Reprex:
                 out = highlight(out, PythonLexer(), Terminal256Formatter(style="friendly"))
             except ModuleNotFoundError:
                 pass
-        renderer = renderer_registry[self.config.venue].renderer
-        return renderer(out.strip(), config=self.config)
+        return out
+
+    def render_and_format(self, terminal: bool = False) -> str:
+        """Render the reprex as code and format it for the configured output venue."""
+        out = self.render(terminal=terminal)
+        formatter_fn = formatter_registry[self.config.venue].fn
+        return formatter_fn(out.strip(), config=self.config)
 
     def __repr__(self) -> str:
         return f"<Reprex ({len(self.statements)}) '{to_snippet(str(self), 10)}'>"
@@ -436,9 +442,9 @@ class Reprex:
 
             formatter = HtmlFormatter(style="friendly", wrapcode=True)
             out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
-            out.append(highlight(self.render(), PythonLexer(), formatter))
+            out.append(highlight(self.render_and_format(), PythonLexer(), formatter))
         except ModuleNotFoundError:
-            out.append(f"<pre><code>{self.render()}</code></pre>")
+            out.append(f"<pre><code>{self.render_and_format()}</code></pre>")
         return "\n".join(out)
 
 
@@ -503,10 +509,10 @@ def reprex(
         # Don't screw up output file or lexing for HTML and RTF with terminal syntax highlighting
         terminal = False
     r = Reprex.from_input(input, config=config)
-    output = r.render(terminal=terminal)
+    output = r.render_and_format(terminal=terminal)
     if outfile is not None:
         with Path(outfile).open("w") as fp:
-            fp.write(r.render(terminal=False))
+            fp.write(r.render_and_format(terminal=False))
     if print_:
         print(output)
     return r
