@@ -23,7 +23,7 @@ class ParsingMethod(str, Enum):
     DECLARED = "declared"
 
 
-class Venue(Enum):
+class Venue(str, Enum):
     """Enum for specifying the output venue for a reprex."""
 
     GH = "gh"

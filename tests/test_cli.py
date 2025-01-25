@@ -1,4 +1,5 @@
 import builtins
+import json
 import subprocess
 import sys
 from textwrap import dedent
@@ -107,12 +108,18 @@ def test_old_results(patch_edit, capsys):
     assert "#> [2, 3, 4, 5, 6]" in stdout
 
 
-# def test_ipython_editor(capsys):
-#     """Test that IPython interactive editor opens as expected. Not testing a reprex. Not sure how
-#     to inject input into the IPython shell."""
-#     app(["-e", "ipython"])
-#     stdout = capsys.readouterr().out
-#     assert "Interactive reprex editor via IPython" in stdout  # text from banner
+def test_ipython_editor():
+    """Test that IPython interactive editor opens as expected. Not testing a reprex."""
+    result = subprocess.run(
+        [sys.executable, "-I", "-m", "reprexlite", "-e", "ipython"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+        text=True,
+        input="exit",
+    )
+    assert result.returncode == 0
+    assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
 
 
 def test_ipython_editor_not_installed(no_ipython, capsys):
@@ -149,3 +156,83 @@ def test_python_m_version():
     )
     assert result.returncode == 0
     assert result.stdout.strip() == __version__
+
+
+def test_pyproject_toml(monkeypatch, tmp_path):
+    pyproject_toml = tmp_path / "pyproject.toml"
+    with pyproject_toml.open("w") as fp:
+        fp.write(
+            dedent(
+                """\
+                [tool.reprexlite]
+                editor = "test_editor"
+                """
+            )
+        )
+
+    monkeypatch.chdir(tmp_path)
+
+    result = subprocess.run(
+        [sys.executable, "-I", "-m", "reprexlite", "--debug"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+    )
+    assert result.returncode == 0
+    params = json.loads(result.stdout)
+    assert params["config"]["editor"] == "test_editor"
+
+
+@pytest.mark.parametrize("filename", [".reprexlite.toml", "reprexlite.toml"])
+def test_reprexlite_toml(monkeypatch, tmp_path, filename):
+    reprexlite_toml = tmp_path / filename
+    with reprexlite_toml.open("w") as fp:
+        fp.write(
+            dedent(
+                """\
+                editor = "test_editor"
+                """
+            )
+        )
+
+    monkeypatch.chdir(tmp_path)
+
+    result = subprocess.run(
+        [sys.executable, "-I", "-m", "reprexlite", "--debug"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+    )
+    assert result.returncode == 0
+    params = json.loads(result.stdout)
+    assert params["config"]["editor"] == "test_editor"
+
+
+def test_user_config_dir(monkeypatch, tmp_path):
+    working_dir = tmp_path / "working_dir"
+    working_dir.mkdir()
+    print(working_dir)
+
+    user_config_dir = tmp_path / "user_config_dir"
+    (user_config_dir / "reprexlite").mkdir(parents=True)
+    with (user_config_dir / "reprexlite" / "reprexlite.toml").open("w") as fp:
+        fp.write(
+            dedent(
+                """\
+                editor = "test_editor"
+                """
+            )
+        )
+    print(user_config_dir)
+
+    monkeypatch.chdir(working_dir)
+    result = subprocess.run(
+        [sys.executable, "-I", "-m", "reprexlite", "--debug"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env={"XDG_CONFIG_HOME": str(user_config_dir)},
+        universal_newlines=True,
+    )
+    assert result.returncode == 0
+    params = json.loads(result.stdout)
+    assert params["config"]["editor"] == "test_editor"

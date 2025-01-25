@@ -26,6 +26,7 @@ dependencies = [
   "cyclopts",
   "importlib_metadata ; python_version < '3.8'",
   "libcst",
+  "platformdirs",
   "typing_extensions>4 ; python_version < '3.11'",
 ]
 
