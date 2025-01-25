@@ -99,14 +99,6 @@ def user_config_file_loader_factory():
     return cyclopts.config.Toml(path, root_keys=("tool", "reprexlite"))
 
 
-def log_decorator(fn):
-    def wrapper(*args, **kwargs):
-        print(f"Function {fn.__name__} called with args: {args} and kwargs: {kwargs}")
-        return fn(*args, **kwargs)
-
-    return wrapper
-
-
 app = App(
     name="reprex",
     version=get_version,
