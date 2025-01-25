@@ -1,3 +1,3 @@
-# reprexlite.rendering
+# reprexlite.formatting
 
-::: reprexlite.rendering
+::: reprexlite.formatting

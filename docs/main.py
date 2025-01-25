@@ -4,7 +4,7 @@ from textwrap import dedent
 from typing import Union
 
 from griffe import Docstring, DocstringSectionAdmonition, DocstringSectionText
-from markdownTable import markdownTable
+from py_markdown_table.markdown_table import markdown_table
 from typenames import typenames
 
 from reprexlite.config import ReprexConfig
@@ -50,16 +50,6 @@ def define_env(env):
             '"Venues Formatting"', '<a href="../formatting/">"Venues Formatting"</a>'
         )
         return out
-        # data = [
-        #     {
-        #         "Name": f"**`{field.name}`**",
-        #         "Type": f"`{typenames(field.type)}`",
-        #         "Description": field.metadata["help"],
-        #     }
-        #     for field in dataclasses.fields(ReprexConfig)
-        # ]
-        # table = markdownTable(data)
-        # return table.setParams(row_sep="markdown", quote=False).getMarkdown()
 
     @env.macro
     def create_venue_help_table():
@@ -71,8 +61,8 @@ def define_env(env):
             }
             for venue_key, formatter_entry in formatter_registry.items()
         ]
-        table = markdownTable(data)
-        return table.setParams(row_sep="markdown", quote=False).getMarkdown()
+        table = markdown_table(data)
+        return table.set_params(row_sep="markdown", quote=False).get_markdown()
 
     @env.macro
     def create_venue_help_examples():
@@ -82,9 +72,6 @@ def define_env(env):
 
         out = []
         for fn, keys in data.items():
-            pass
-            fn = entry.fn
-
             keys_list = ", ".join(f"`{key.value}`" for key in keys)
             out.append(f"### `{fn.__name__}`")
 

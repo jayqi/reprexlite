@@ -10,14 +10,14 @@ nav:
   - Usage:
       - Basic Usage: "./#basic-usage"
       - CLI Help: "cli.md"
-      - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
-      - Output Venues: "output-venues.md"
+      - Rendering and Output Venues: "rendering-and-output-venues.md"
       - Configuration: "configuration.md"
+      - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
   - Library:
       - API Reference:
           - reprexlite.config: "api-reference/config.md"
           - reprexlite.exceptions: "api-reference/exceptions.md"
-          - reprexlite.rendering: "api-reference/rendering.md"
+          - reprexlite.formatting: "api-reference/formatting.md"
           - reprexlite.parsing: "api-reference/parsing.md"
           - reprexlite.reprexes: "api-reference/reprexes.md"
           - reprexlite.session_info: "api-reference/session_info.md"

@@ -8,7 +8,7 @@
 [![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
-**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional [integration with IPython](#ipython-integration) for easy use with IPython or in Jupyter or VS Code. This project is inspired by R's [reprex](https://reprex.tidyverse.org/) package.
+**reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional [integration with IPython](#ipython-integrations) for easy use with IPython or in Jupyter or VS Code. This project is inspired by R's [reprex](https://reprex.tidyverse.org/) package.
 
 <img src="https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif" width="640px" />
 
@@ -28,7 +28,7 @@ list(zip(*grid))
 #> [(1, 1, 2, 2, 3, 3), (8, 16, 8, 16, 8, 16)]
 ```
 
-Writing a good reprex takes thought and effort (see ["Reprex Do's and Don'ts"](https://jayqi.github.io/reprexlite/stable/dos-and-donts) for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.
+Writing a good reprex takes thought and effort (see ["Reprex Do's and Don'ts"](https://jayqi.github.io/reprexlite/stable/dos-and-donts/) for tips). The goal of reprexlite is to be a tool that seamlessly handles the mechanical stuff, so you can devote your full attention to the important, creative work of writing the content.
 
 Reprex-style code formatting—namely, with outputs as comments—is also great for documentation. Users can copy and run with no modification. Consider using reprexlite when writing your documentation instead of copying code with `>>>` prompts from an interactive Python shell. In fact, reprexlite can parse code with `>>>` prompts and convert it into a reprex for you instead.
 

@@ -61,7 +61,7 @@ docs = [
   "mike",
   "mkdocstrings[python]",
   "mdx-truly-sane-lists",
-  "py-markdown-table==0.3.3",
+  "py-markdown-table",
   "typenames",
 ]
 test = [
