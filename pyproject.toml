@@ -21,9 +21,9 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dependencies = [
-  "cyclopts",
+  "cyclopts @ git+https://github.com/BrianPugh/cyclopts/@reduce-caching",
   "importlib_metadata ; python_version < '3.8'",
   "libcst",
   "platformdirs",
@@ -69,7 +69,6 @@ test = [
   "pytest",
   "coverage",
   "pytest-cov",
-  "pytest-xdist",
   "tqdm",
 ]
 
