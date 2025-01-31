@@ -54,6 +54,7 @@ lint = [
   "ruff",
 ]
 docs = [
+  "markdown-callouts",
   "mkdocs",
   "mkdocs-jupyter",
   "mkdocs-macros-plugin",

@@ -97,7 +97,7 @@ def define_env(env):
             out.append(
                 "<sup>"
                 "↳ [API documentation]"
-                f"(api-reference/formatting.md#reprexlite.rendering.{fn.__qualname__})"
+                f"(api-reference/formatting.md#reprexlite.formatting.{fn.__qualname__})"
                 "</sup>"
             )
         return "\n".join(out)

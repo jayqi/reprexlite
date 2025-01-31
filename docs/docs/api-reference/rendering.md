@@ -1,3 +1,0 @@
-# reprexlite.formatting
-
-::: reprexlite.formatting

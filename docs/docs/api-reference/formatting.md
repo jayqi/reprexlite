@@ -1,3 +1,3 @@
-# reprexlite.parsing
+# reprexlite.formatting
 
-::: reprexlite.parsing
+::: reprexlite.formatting

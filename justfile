@@ -58,4 +58,4 @@ docs:
 
 # Serve built docs
 docs-serve:
-    uv tool --verbose run quickhttp docs/site/
+    uv tool run quickhttp docs/site/

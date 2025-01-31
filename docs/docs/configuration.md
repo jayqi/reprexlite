@@ -9,20 +9,21 @@ reprexlite has the following configuration options.
 
 ## Configuration files
 
-reprexlite supports reading default configuration values from configuration files. It will search for files named `pyproject.toml`, `reprexlite.toml`, or `.reprexlite.toml`, and will search for both project-scope configuration and user-scope configuration files.
+reprexlite supports reading default configuration values from configuration files. Both project-level files and user-level files are supported.
 
-### Configuration file formats
+### `pyproject.toml`
 
-#### `pyproject.toml`
-
-reprexlite will read from the `[tool]` table of a `pyproject.toml` file.  For example:
+reprexlite will search the nearest `pyproject.toml` file in the current working directory and any parent directory.
+Configuration for reprexlite should be in the `[tool.reprexlite]` table following standard `pyproject.toml` specifications. For example:
 
 ```toml
 [tool.reprexlite]
 editor = "some_editor"
 ```
 
-#### `reprexlite.toml` or `.reprexlite.toml`
+### `reprexlite.toml` or `.reprexlite.toml`
+
+reprexlite also supports files named `reprexlite.toml` or `.reprexlite.toml` for project-level configuration. It will also search for these in the current working directory or any parent directory.
 
 For reprexlite-specific files, all configuration options should be declared in the root namespace.
 
@@ -30,16 +31,20 @@ For reprexlite-specific files, all configuration options should be declared in t
 editor = "some_editor"
 ```
 
-### Configuration file search locations
+### User-level configuration
 
-#### Project configuration
+reprexlite supports searching standard platform-specific user configuration directories as determined by [platformdirs](https://github.com/tox-dev/platformdirs). Here are typical locations depending on platform:
 
-reprexlite will search for configuration files in the current working directory and all parent directories of the current working directory.
+| Platform | Path                                                       |
+|----------|------------------------------------------------------------|
+| Linux    | `~/.config/reprexlite/config.toml`                         |
+| MacOS    | `~/Library/Application Support/reprexlite/config.toml`     |
+| Windows  | `C:\Users\<username>\AppData\Local\reprexlite\config.toml` |
 
-#### User configuration
+You can check where your user configuration would be with
 
-reprexlite supports searching standard platform-specific user configuration directories as determined by [platformdirs](https://github.com/tox-dev/platformdirs). The file should be within the `reprexlite` subdirectory.
+```bash
+python -m platformdirs
+```
 
-For example, if your user configuration directory is `~/.config/` then you can have a configuration file like `~/.config/reprexlite/reprexlite.toml`.
-
-On Linux and MacOS, the `XDG_CONFIG_DIR` environment variable is supported for explicitly setting the user configuration directory.
+Look for the section `-- app dirs (without optional 'version')` for the value of `user_config_dir`. The value for `MyApp` is `reprexlite`. The configuration file should be named `config.toml` inside that directory.
