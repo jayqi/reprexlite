@@ -18,9 +18,13 @@ typecheck:
     mypy reprexlite --install-types --non-interactive
 
 # Run tests
-test args="":
+test *args:
     uv run --python {{python}} --no-editable --all-extras --no-dev --group test --isolated \
-        python -I -m pytest {{args}}
+        python -I -m pytest -n auto {{args}}
+
+test-no-dist *args:
+    uv run --python {{python}} --no-editable --all-extras --no-dev --group test --isolated \
+        python -I -m pytest -n0 --dist no {{args}}
 
 # Run all tests with Python version matrix
 test-all:

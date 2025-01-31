@@ -73,31 +73,27 @@ pyproject_toml_loader = cyclopts.config.Toml(
     "pyproject.toml",
     root_keys=("tool", "reprexlite"),
     search_parents=True,
+    use_commands_as_keys=False,
 )
 
 reprexlite_toml_loader = cyclopts.config.Toml(
     "reprexlite.toml",
     search_parents=True,
+    use_commands_as_keys=False,
 )
 
 dot_reprexlite_toml_loader = cyclopts.config.Toml(
     ".reprexlite.toml",
     search_parents=True,
+    use_commands_as_keys=False,
 )
 
 
-def user_config_file_loader_factory():
-    if platform.system() == "Darwin" and "XDG_CONFIG_HOME" in os.environ:
-        config_dir = Path(os.getenv("XDG_CONFIG_HOME")) / "reprexlite"
-    else:
-        config_dir = Path(user_config_dir(appname="reprexlite"))
-    for filename in (".reprexlite.toml", "reprexlite.toml"):
-        path = config_dir / filename
-        if path.exists():
-            return cyclopts.config.Toml(path)
-    path = config_dir / "pyproject.toml"
-    return cyclopts.config.Toml(path, root_keys=("tool", "reprexlite"))
-
+user_reprexlite_toml_loader = cyclopts.config.Toml(
+    Path(user_config_dir(appname="reprexlite")) / "config.toml",
+    search_parents=False,
+    use_commands_as_keys=False,
+)
 
 app = App(
     name="reprex",
@@ -108,7 +104,7 @@ app = App(
         pyproject_toml_loader,
         reprexlite_toml_loader,
         dot_reprexlite_toml_loader,
-        user_config_file_loader_factory(),
+        user_reprexlite_toml_loader,
     ),
 )
 

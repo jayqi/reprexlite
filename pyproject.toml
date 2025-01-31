@@ -68,6 +68,7 @@ test = [
   "pytest",
   "coverage",
   "pytest-cov",
+  "pytest-xdist",
   "tqdm",
 ]
 
