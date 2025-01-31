@@ -184,7 +184,12 @@ def main(
         ),
     ] = None,
     config: Annotated[ReprexConfig, Parameter(name="*")] = ReprexConfig(),
-    verbose: Annotated[tuple[bool, ...], Parameter(name=("--verbose", "-V"))] = (),
+    verbose: Annotated[
+        tuple[bool, ...],
+        Parameter(
+            name=("--verbose",), show_default=False, negative=False, help="Increase verbosity."
+        ),
+    ] = (),
     debug: Annotated[bool, Parameter(show=False)] = False,
 ):
     verbosity = sum(verbose)
