@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Dict, Optional, Protocol, Type
+from typing import Dict, Optional, Protocol
 
 from reprexlite.config import ReprexConfig, Venue
 from reprexlite.exceptions import PygmentsNotFoundError
