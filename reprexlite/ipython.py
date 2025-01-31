@@ -76,7 +76,7 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
     """Subclass of IPython's TerminalInteractiveShell that automatically executes all cells using
     reprexlite instead of normally."""
 
-    banner1 = "".join(ipython_banner_parts)
+    banner1 = "".join(ipython_banner_parts)  # type: ignore
     _reprex_config: Optional[ReprexConfig] = None
 
     def run_cell(self, raw_cell: str, *args, **kwargs):
@@ -90,7 +90,7 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
                 print(e, end="")
 
             # Store history
-            self.history_manager.store_inputs(self.execution_count, raw_cell, raw_cell)
+            self.history_manager.store_inputs(self.execution_count, raw_cell, raw_cell)  # type: ignore
             self.execution_count += 1
 
             return None
@@ -107,9 +107,9 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
 class ReprexTerminalIPythonApp(TerminalIPythonApp):
     """Subclass of TerminalIPythonApp that launches ReprexTerminalInteractiveShell."""
 
-    interactive_shell_class = ReprexTerminalInteractiveShell
+    interactive_shell_class = ReprexTerminalInteractiveShell  # type: ignore
 
     @classmethod
     def set_reprex_config(cls, config: ReprexConfig):
         """Set the reprex config bound on the interactive shell."""
-        cls.interactive_shell_class._reprex_config = config
+        cls.interactive_shell_class._reprex_config = config  # type: ignore

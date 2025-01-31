@@ -23,7 +23,7 @@ class FormatterRegistry:
 
     _registry: Dict[str, FormatterRegistration] = {}
 
-    def __getitem__(self, key: Venue) -> Type[Formatter]:
+    def __getitem__(self, key: Venue) -> FormatterRegistration:
         return self._registry[Venue(key)]
 
     def __contains__(self, key: Venue) -> bool:

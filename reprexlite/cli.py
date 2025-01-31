@@ -162,6 +162,7 @@ def handle_editor(config: ReprexConfig) -> str:
     editor = config.editor or get_editor()
     if editor == "ipython":
         launch_ipython(config)
+        sys.exit(0)
     else:
         return launch_editor(editor)
 
