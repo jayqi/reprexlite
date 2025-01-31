@@ -96,7 +96,9 @@ class ReprexConfig:
 
     def __post_init__(self):
         # Validate venue
-        if self.venue not in Venue:
+        try:
+            Venue(self.venue)
+        except ValueError:
             raise InvalidVenueError(
                 f"{self.venue} is not a valid value for parsing method."
                 f"Valid values are: {list(m.value for m in Venue)}"
