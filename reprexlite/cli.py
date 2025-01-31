@@ -6,7 +6,13 @@ import platform
 import subprocess
 import sys
 import tempfile
-from typing import Annotated, Optional
+from typing import Optional
+
+try:
+    from typing import Annotated  # type: ignore  # Python 3.9+
+except ImportError:
+    from typing_extensions import Annotated
+
 
 from cyclopts import App, Parameter
 import cyclopts.config
