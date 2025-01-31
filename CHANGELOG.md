@@ -17,6 +17,7 @@ This release involves major changes to reprexlite. There is a significant refact
   - A new `--parsing-method` option controls input-parsing behavior.
     - The default value `auto` can automatically handle "reprex-style" input as well as "doctest-style`/Python REPL input.
     - A value `declared` will use the values of `--prompt`, `--continuation`, and `--comment` for parsing input in addition to styling output. To handle input and output with different styes, you can override input-side values with the `--input-prompt`, `--input-continuation`, and `--input-comment` options.
+- Added support for configuration files, including support for `[tool.reprexlite]` in `pyproject.toml` files and for user-level configuration. See ["Configuration"](https://jayqi.github.io/reprexlite/stable/configuration/#configuration-files) for more details.
 
 #### Changed
 
@@ -45,9 +46,9 @@ This release involves major changes to reprexlite. There is a significant refact
 #### Changed
 
 - Changed formatting abstractions in `reprexlite.formatting` module.
-  - Rather than `*Reprex` classes that encapsulate reprex data, we now have `*Formatter` classes and take a rendered reprex output string as input to a `format` class method that appropriately prepares the reprex output for a venue, such as adding venue-specific markup.
-  - The `venues_dispatcher` dictionary in `reprexlite.formatting` is now a `formatter_registry` dictionary.
-  - Formatters are added to the registry using a `register_formatter` decorator instead of being hard-coded.
+  - Rather than `*Reprex` classes that encapsulate reprex data, we now have formatter callables and take a rendered reprex output string as input and appropriately prepares the reprex output for a venue, such as adding venue-specific markup.
+  - The `venues_dispatcher` dictionary in `reprexlite.formatting` is now a `formatter_registry` dictionary-like.
+  - Formatters are added to the registry using a `formatter_registry.register` decorator instead of being hard-coded.
 
 #### Removed
 
@@ -58,8 +59,9 @@ This release involves major changes to reprexlite. There is a significant refact
 
 #### Added
 
+- Added a "Rendering and Output Venues" page to the documentation that documents the different formatting options with examples.
+- Added a "Configuration" page to the documentation that provides a reference for configuration options and documents how to use configuration files.
 - Added an "Alternatives" page to the documentation that documents alternative tools.
-- Added a "Venues Formatting" page to the documentation that documents the different formatting options with examples.
 
 #### Changed
 
