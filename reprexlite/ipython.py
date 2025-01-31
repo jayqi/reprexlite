@@ -32,10 +32,10 @@ def patch_edit(input: str):
     def return_input(*args, **kwargs) -> str:
         return input
 
-    original = reprexlite.cli.launch_editor
-    setattr(reprexlite.cli, "launch_editor", return_input)
+    original = reprexlite.cli.handle_editor
+    setattr(reprexlite.cli, "handle_editor", return_input)
     yield
-    setattr(reprexlite.cli, "launch_editor", original)
+    setattr(reprexlite.cli, "handle_editor", original)
 
 
 @magics_class
