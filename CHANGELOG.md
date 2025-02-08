@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This release involves major changes to reprexlite. There is a significant refactoring of the library internals and also many changes to the API. This enabled new feature and more customizability.
 
+_This release also removes support for Python 3.6, 3.7, and 3.8._
+
 ### CLI and IPython User Interfaces
 
 #### Added
