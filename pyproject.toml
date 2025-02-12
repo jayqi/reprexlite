@@ -120,3 +120,9 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 source = ["reprexlite"]
+
+[tool.coverage.paths]
+source = [
+  "reprexlite/",
+  "*/site-packages/reprexlite/",
+]
