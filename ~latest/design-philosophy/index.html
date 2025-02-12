@@ -522,33 +522,11 @@ You're not viewing the most recent stable version.
   
   
     <li class="md-nav__item">
-      <a href="../ipython-jupyter-magic/" class="md-nav__link">
+      <a href="../rendering-and-output-venues/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    IPython/Jupyter Magic
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../formatting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Venues Formatting
+    Rendering and Output Venues
     
   </span>
   
@@ -571,6 +549,28 @@ You're not viewing the most recent stable version.
   
   <span class="md-ellipsis">
     Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipython-jupyter-magic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPython/Jupyter Magic
     
   </span>
   
@@ -988,7 +988,7 @@ You're not viewing the most recent stable version.
 <span class="mf">2.0</span>
 </code></pre></div>
 <p>This style of code example takes no special tools to generate: simply open a <code>python</code> shell from command line, write your code, and copy what you see. Many Python packages use it for their documentation, e.g., <a href="https://requests.readthedocs.io/en/master/">requests</a>. There is also tooling for parsing it. The doctest module can run such examples in the docstrings of your scripts, and test that the output matches what is written. Other tools like <a href="https://www.sphinx-doc.org/en/1.4.9/markup/code.html">Sphinx</a> are able to parse it when rendering your documentation into other formats.</p>
-<p>The drawback of doctest-style examples is that they are <em>not</em> valid Python syntax, so you can't just copy, paste, and run such  examples. The <code>&gt;&gt;&gt;</code> prompt is not valid. While IPython's interactive shell and Jupyter notebooks <em>do</em> support executing code with the prompt, it won't work in a regular Python REPL or in Python scripts. Furthermore, since the outputs might be anything, they may not be valid Python syntax either, depending on their <code>repr</code>. A barebones class, for example, will look like <code>&lt;__main__.MyClass object at 0x7f932a001400&gt;</code> and is not valid.</p>
+<p>The drawback of doctest-style examples is that they are <em>not</em> valid Python syntax, so you can't always just copy, paste, and run such examples. The <code>&gt;&gt;&gt;</code> prompt is not valid. While IPython's interactive shell and Jupyter notebooks <em>do</em> support executing code with the prompt, it won't work in a regular Python REPL or in Python scripts. Furthermore, since the outputs might be anything, they may not be valid Python syntax either, depending on their <code>repr</code>. A barebones class, for example, will look like <code>&lt;__main__.MyClass object at 0x7f932a001400&gt;</code> and is not valid.</p>
 <p>So, while no special tools were needed to <em>generate</em> a doctest-style example, either special tools or manual editing are needed to <em>run</em> it. This puts the burden on the person you're sharing with, which is counterproductive. As discussed in the previous section, we want reproducible examples to make it <em>easier</em> for others to run your code.</p>
 <p>In contrast, reprexes <em>are</em> valid Python code. Anyone can copy, paste, and run a reprex without any special tools or manual editing required.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
@@ -999,7 +999,7 @@ You're not viewing the most recent stable version.
 <h2 id="reprexlites-design">reprexlite's Design<a class="headerlink" href="#reprexlites-design" title="Permanent link">&para;</a></h2>
 <p>The primary design goal of reprexlite is that it should be <strong>quick and convenient</strong> to use. That objective drove the emphasis on following the design characteristics:</p>
 <ul>
-<li><strong>Lightweight</strong>. reprexlite needs to be in your virtual environment to be able to run your code. By having minimal and lightweight dependencies itself, reprexlite is quick to install and is unlikely to conflict with your other dependencies.</li>
+<li><strong>Lightweight</strong>. reprexlite needs to be in your virtual environment to be able to run your code. By having minimal and lightweight dependencies itself, reprexlite is quick to install and is unlikely to conflict with your other dependencies. Any advanced functionality that require heavier dependencies are optional.</li>
 <li><strong>Easy access</strong>. reprexlite comes with a CLI, so you can quickly create a reprex without needing to start a Python shell or to import anything.<ul>
 <li><strong>And flexible</strong>. The CLI isn't the only option. The <a href="../api-reference/reprex/">Python library</a> provides programmatic access, and there is an optional <a href="../ipython-jupyter-magic/">IPython/Jupyter extension</a> for use with a cell magic.</li>
 </ul>

@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/~latest/configuration/">
       
       
-        <link rel="prev" href="../formatting/">
+        <link rel="prev" href="../rendering-and-output-venues/">
       
       
-        <link rel="next" href="../api-reference/config/">
+        <link rel="next" href="../ipython-jupyter-magic/">
       
       
       <link rel="icon" href="../images/reprexlite_white_blue.svg">
@@ -423,33 +423,11 @@ You're not viewing the most recent stable version.
   
   
     <li class="md-nav__item">
-      <a href="../ipython-jupyter-magic/" class="md-nav__link">
+      <a href="../rendering-and-output-venues/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    IPython/Jupyter Magic
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../formatting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Venues Formatting
+    Rendering and Output Venues
     
   </span>
   
@@ -476,6 +454,18 @@ You're not viewing the most recent stable version.
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -487,6 +477,89 @@ You're not viewing the most recent stable version.
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      pyproject.toml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprexlitetoml-or-reprexlitetoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      reprexlite.toml or .reprexlite.toml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-level-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      User-level configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipython-jupyter-magic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPython/Jupyter Magic
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -787,6 +860,56 @@ You're not viewing the most recent stable version.
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      pyproject.toml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprexlitetoml-or-reprexlitetoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      reprexlite.toml or .reprexlite.toml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-level-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      User-level configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -806,6 +929,10 @@ You're not viewing the most recent stable version.
 
 <h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
 <p>reprexlite has the following configuration options.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Command-line option names for these configuration variables use hyphens instead of underscores.</p>
+</div>
 <table>
     <thead>
         <tr>
@@ -815,8 +942,15 @@ You're not viewing the most recent stable version.
         </tr>
 
                 <tr>
+                    <td class="no-wrap"><b><code>editor</code></b></td>
+                    <td class="no-wrap"><code>Optional[str]</code></td>
+                    <td>Command-line program name of editor to use. If not specified, check $EDITOR and $VISUAL environment variables. If 'ipython', will launch the IPython interactive editor.</td>
+                </tr>
+
+
+                <tr>
                     <td class="no-wrap"><b><code>venue</code></b></td>
-                    <td class="no-wrap"><code>str</code></td>
+                    <td class="no-wrap"><code>reprexlite.config.Venue</code></td>
                     <td>Key to identify the output venue that the reprex will be shared in. Used to select an appropriate formatter. See <a href="../formatting/">"Venues Formatting"</a> documentation for formats included with reprexlite.</td>
                 </tr>
 
@@ -872,7 +1006,7 @@ You're not viewing the most recent stable version.
 
                 <tr>
                     <td class="no-wrap"><b><code>parsing_method</code></b></td>
-                    <td class="no-wrap"><code>str</code></td>
+                    <td class="no-wrap"><code>reprexlite.config.ParsingMethod</code></td>
                     <td>Method for parsing input. 'auto' will automatically detect either default reprex-style input or standard doctest-style input. 'declared' will allow you to specify custom line prefixes. Values for 'prompt', 'continuation', and 'comment' will be used for both output formatting and input parsing, unless the associated 'input_*' override settings are supplied.</td>
                 </tr>
 
@@ -899,6 +1033,48 @@ You're not viewing the most recent stable version.
 
     </thead>
 </table>
+
+<h2 id="configuration-files">Configuration files<a class="headerlink" href="#configuration-files" title="Permanent link">&para;</a></h2>
+<p>reprexlite supports reading default configuration values from configuration files. Both project-level files and user-level files are supported.</p>
+<h3 id="pyprojecttoml"><code>pyproject.toml</code><a class="headerlink" href="#pyprojecttoml" title="Permanent link">&para;</a></h3>
+<p>reprexlite will search the nearest <code>pyproject.toml</code> file in the current working directory and any parent directory.
+Configuration for reprexlite should be in the <code>[tool.reprexlite]</code> table following standard <code>pyproject.toml</code> specifications. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.reprexlite]</span>
+<span class="n">editor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;some_editor&quot;</span>
+</code></pre></div>
+<h3 id="reprexlitetoml-or-reprexlitetoml"><code>reprexlite.toml</code> or <code>.reprexlite.toml</code><a class="headerlink" href="#reprexlitetoml-or-reprexlitetoml" title="Permanent link">&para;</a></h3>
+<p>reprexlite also supports files named <code>reprexlite.toml</code> or <code>.reprexlite.toml</code> for project-level configuration. It will also search for these in the current working directory or any parent directory.</p>
+<p>For reprexlite-specific files, all configuration options should be declared in the root namespace.</p>
+<div class="highlight"><pre><span></span><code><span class="n">editor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;some_editor&quot;</span>
+</code></pre></div>
+<h3 id="user-level-configuration">User-level configuration<a class="headerlink" href="#user-level-configuration" title="Permanent link">&para;</a></h3>
+<p>reprexlite supports searching standard platform-specific user configuration directories as determined by <a href="https://github.com/tox-dev/platformdirs">platformdirs</a>. Here are typical locations depending on platform:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td><code>~/.config/reprexlite/config.toml</code></td>
+</tr>
+<tr>
+<td>MacOS</td>
+<td><code>~/Library/Application Support/reprexlite/config.toml</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>C:\Users\&lt;username&gt;\AppData\Local\reprexlite\config.toml</code></td>
+</tr>
+</tbody>
+</table>
+<p>You can check where your user configuration would be with</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>platformdirs
+</code></pre></div>
+<p>Look for the section <code>-- app dirs (without optional 'version')</code> for the value of <code>user_config_dir</code>. The value for <code>MyApp</code> is <code>reprexlite</code>. The configuration file should be named <code>config.toml</code> inside that directory.</p>
 
 
 

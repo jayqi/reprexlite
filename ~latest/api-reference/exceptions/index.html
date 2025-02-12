@@ -421,33 +421,11 @@ You're not viewing the most recent stable version.
   
   
     <li class="md-nav__item">
-      <a href="../../ipython-jupyter-magic/" class="md-nav__link">
+      <a href="../../rendering-and-output-venues/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    IPython/Jupyter Magic
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../formatting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Venues Formatting
+    Rendering and Output Venues
     
   </span>
   
@@ -470,6 +448,28 @@ You're not viewing the most recent stable version.
   
   <span class="md-ellipsis">
     Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipython-jupyter-magic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPython/Jupyter Magic
     
   </span>
   
@@ -666,6 +666,15 @@ You're not viewing the most recent stable version.
 </li>
         
           <li class="md-nav__item">
+  <a href="#reprexlite.exceptions.EditorError" class="md-nav__link">
+    <span class="md-ellipsis">
+      EditorError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reprexlite.exceptions.IPythonNotFoundError" class="md-nav__link">
     <span class="md-ellipsis">
       IPythonNotFoundError
@@ -678,15 +687,6 @@ You're not viewing the most recent stable version.
   <a href="#reprexlite.exceptions.InputSyntaxError" class="md-nav__link">
     <span class="md-ellipsis">
       InputSyntaxError
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reprexlite.exceptions.NotAFormatterError" class="md-nav__link">
-    <span class="md-ellipsis">
-      NotAFormatterError
     </span>
   </a>
   
@@ -924,6 +924,15 @@ You're not viewing the most recent stable version.
 </li>
         
           <li class="md-nav__item">
+  <a href="#reprexlite.exceptions.EditorError" class="md-nav__link">
+    <span class="md-ellipsis">
+      EditorError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reprexlite.exceptions.IPythonNotFoundError" class="md-nav__link">
     <span class="md-ellipsis">
       IPythonNotFoundError
@@ -936,15 +945,6 @@ You're not viewing the most recent stable version.
   <a href="#reprexlite.exceptions.InputSyntaxError" class="md-nav__link">
     <span class="md-ellipsis">
       InputSyntaxError
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reprexlite.exceptions.NotAFormatterError" class="md-nav__link">
-    <span class="md-ellipsis">
-      NotAFormatterError
     </span>
   </a>
   
@@ -1066,6 +1066,41 @@ You're not viewing the most recent stable version.
 
 
 
+<h3 id="reprexlite.exceptions.EditorError" class="doc doc-heading">
+            <code>EditorError</code>
+
+
+<a href="#reprexlite.exceptions.EditorError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="reprexlite.exceptions.ReprexliteException" href="#reprexlite.exceptions.ReprexliteException">ReprexliteException</a></code></p>
+
+
+        <p>Raised when an error occurs with the editor.</p>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">EditorError</span><span class="p">(</span><span class="n">ReprexliteException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when an error occurs with the editor.&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
 <h3 id="reprexlite.exceptions.IPythonNotFoundError" class="doc doc-heading">
             <code>IPythonNotFoundError</code>
 
@@ -1087,8 +1122,8 @@ You're not viewing the most recent stable version.
 
               <details class="quote">
                 <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
-<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">IPythonNotFoundError</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">IPythonNotFoundError</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when ipython cannot be found when using an IPython-dependent feature.&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1122,44 +1157,9 @@ You're not viewing the most recent stable version.
 
               <details class="quote">
                 <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">InputSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">InputSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when encountering a syntax error when parsing input.&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-class">
-
-
-
-<h3 id="reprexlite.exceptions.NotAFormatterError" class="doc doc-heading">
-            <code>NotAFormatterError</code>
-
-
-<a href="#reprexlite.exceptions.NotAFormatterError" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code>TypeError</code>, <code><a class="autorefs autorefs-internal" title="reprexlite.exceptions.ReprexliteException" href="#reprexlite.exceptions.ReprexliteException">ReprexliteException</a></code></p>
-
-
-        <p>Raised when registering a formatter that is not a subclass of the Formatter base class.</p>
-
-
-
-
-
-
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">NotAFormatterError</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when registering a formatter that is not a subclass of the Formatter base class.&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
 

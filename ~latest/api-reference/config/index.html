@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://jayqi.github.io/reprexlite/~latest/api-reference/config/">
       
       
-        <link rel="prev" href="../../configuration/">
+        <link rel="prev" href="../../ipython-jupyter-magic/">
       
       
         <link rel="next" href="../exceptions/">
@@ -421,33 +421,11 @@ You're not viewing the most recent stable version.
   
   
     <li class="md-nav__item">
-      <a href="../../ipython-jupyter-magic/" class="md-nav__link">
+      <a href="../../rendering-and-output-venues/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    IPython/Jupyter Magic
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../formatting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Venues Formatting
+    Rendering and Output Venues
     
   </span>
   
@@ -470,6 +448,28 @@ You're not viewing the most recent stable version.
   
   <span class="md-ellipsis">
     Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipython-jupyter-magic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPython/Jupyter Magic
     
   </span>
   
@@ -625,15 +625,6 @@ You're not viewing the most recent stable version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#reprexlite.config-attributes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Attributes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#reprexlite.config-classes" class="md-nav__link">
     <span class="md-ellipsis">
       Classes
@@ -656,6 +647,15 @@ You're not viewing the most recent stable version.
   <a href="#reprexlite.config.ReprexConfig" class="md-nav__link">
     <span class="md-ellipsis">
       ReprexConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprexlite.config.Venue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Venue
     </span>
   </a>
   
@@ -869,15 +869,6 @@ You're not viewing the most recent stable version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#reprexlite.config-attributes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Attributes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#reprexlite.config-classes" class="md-nav__link">
     <span class="md-ellipsis">
       Classes
@@ -900,6 +891,15 @@ You're not viewing the most recent stable version.
   <a href="#reprexlite.config.ReprexConfig" class="md-nav__link">
     <span class="md-ellipsis">
       ReprexConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprexlite.config.Venue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Venue
     </span>
   </a>
   
@@ -952,7 +952,7 @@ You're not viewing the most recent stable version.
 
 
 
-<h2 id="reprexlite.config-attributes">Attributes<a href="#reprexlite.config-attributes" class="headerlink" title="Permanent link">&para;</a></h2>
+
 <h2 id="reprexlite.config-classes">Classes<a href="#reprexlite.config-classes" class="headerlink" title="Permanent link">&para;</a></h2>
 
 <div class="doc doc-object doc-class">
@@ -1027,16 +1027,16 @@ You're not viewing the most recent stable version.
 
               <details class="quote">
                 <summary>Source code in <code>reprexlite/config.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ParsingMethod</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ParsingMethod</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Methods for parsing input strings.</span>
 
 <span class="sd">    Args:</span>
@@ -1091,31 +1091,253 @@ You're not viewing the most recent stable version.
 formatting.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>editor</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Command-line program name of editor to use. If not specified, check $EDITOR
+and $VISUAL environment variables. If 'ipython', will launch the IPython interactive
+editor.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>venue</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key to identify the output venue that the reprex will be shared in. Used to
+select an appropriate formatter. See "Venues Formatting" documentation for formats
+included with reprexlite.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="reprexlite.config.Venue.GH">GH</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>advertise</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to include a footer that credits reprexlite. If unspecified, will
+depend on specified venue formatter's default.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>session_info</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Include details about session and environment that the reprex was
+generated with.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>style</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to autoformat code with black. Requires black to be installed.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>prompt</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Prefix to use as primary prompt for code lines.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>continuation</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Prefix to use as secondary prompt for continued code lines.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>comment</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Prefix to use for results returned by expressions.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;#&gt;&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>keep_old_results</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to additionally include results of expressions detected in
+the original input when formatting the reprex output.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>parsing_method</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Method for parsing input. 'auto' will automatically detect either
+default reprex-style input or standard doctest-style input. 'declared' will allow you
+to specify custom line prefixes. Values for 'prompt', 'continuation', and 'comment'
+will be used for both output formatting and input parsing, unless the associated
+'input_*' override settings are supplied.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="reprexlite.config.ParsingMethod.AUTO">AUTO</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>input_prompt</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Prefix to use as primary prompt for code lines when parsing input. Only
+used if 'parsing_method' is 'declared'. If not set, 'prompt' is used for both input
+parsing and output formatting.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>input_continuation</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Prefix to use as secondary prompt for continued code lines when
+parsing input. Only used if 'parsing_method' is 'declared'. If not set, 'prompt' is
+used for both input parsing and output formatting.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>input_comment</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Prefix to use for results returned by expressions when parsing input.
+Only used if 'parsing_method' is 'declared'. If not set, 'prompt' is used for both
+input parsing and output formatting.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 
 
 
 
               <details class="quote">
                 <summary>Source code in <code>reprexlite/config.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 43</span>
 <span class="normal"> 44</span>
 <span class="normal"> 45</span>
 <span class="normal"> 46</span>
@@ -1209,152 +1431,68 @@ formatting.</p>
 <span class="normal">134</span>
 <span class="normal">135</span>
 <span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ReprexConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration dataclass for reprexlite. Used to configure input parsing and output</span>
 <span class="sd">    formatting.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        editor (str): Command-line program name of editor to use. If not specified, check $EDITOR</span>
+<span class="sd">            and $VISUAL environment variables. If &#39;ipython&#39;, will launch the IPython interactive</span>
+<span class="sd">            editor.</span>
+<span class="sd">        venue (str): Key to identify the output venue that the reprex will be shared in. Used to</span>
+<span class="sd">            select an appropriate formatter. See &quot;Venues Formatting&quot; documentation for formats</span>
+<span class="sd">            included with reprexlite.</span>
+<span class="sd">        advertise (bool): Whether to include a footer that credits reprexlite. If unspecified, will</span>
+<span class="sd">            depend on specified venue formatter&#39;s default.</span>
+<span class="sd">        session_info (bool): Include details about session and environment that the reprex was</span>
+<span class="sd">            generated with.</span>
+<span class="sd">        style (bool): Whether to autoformat code with black. Requires black to be installed.</span>
+<span class="sd">        prompt (str): Prefix to use as primary prompt for code lines.</span>
+<span class="sd">        continuation (str): Prefix to use as secondary prompt for continued code lines.</span>
+<span class="sd">        comment (str): Prefix to use for results returned by expressions.</span>
+<span class="sd">        keep_old_results (bool): Whether to additionally include results of expressions detected in</span>
+<span class="sd">            the original input when formatting the reprex output.</span>
+<span class="sd">        parsing_method (str): Method for parsing input. &#39;auto&#39; will automatically detect either</span>
+<span class="sd">            default reprex-style input or standard doctest-style input. &#39;declared&#39; will allow you</span>
+<span class="sd">            to specify custom line prefixes. Values for &#39;prompt&#39;, &#39;continuation&#39;, and &#39;comment&#39;</span>
+<span class="sd">            will be used for both output formatting and input parsing, unless the associated</span>
+<span class="sd">            &#39;input_*&#39; override settings are supplied.</span>
+<span class="sd">        input_prompt (str): Prefix to use as primary prompt for code lines when parsing input. Only</span>
+<span class="sd">            used if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used for both input</span>
+<span class="sd">            parsing and output formatting.</span>
+<span class="sd">        input_continuation (str): Prefix to use as secondary prompt for continued code lines when</span>
+<span class="sd">            parsing input. Only used if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is</span>
+<span class="sd">            used for both input parsing and output formatting.</span>
+<span class="sd">        input_comment (str): Prefix to use for results returned by expressions when parsing input.</span>
+<span class="sd">            Only used if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used for both</span>
+<span class="sd">            input parsing and output formatting.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">editor</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;--editor&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">))]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># Formatting</span>
-    <span class="n">venue</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;gh&quot;</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Key to identify the output venue that the reprex will be shared in. Used to &quot;</span>
-                <span class="s1">&#39;select an appropriate formatter. See &quot;Venues Formatting&quot; documentation for &#39;</span>
-                <span class="s2">&quot;formats included with reprexlite.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Whether to include a footer that credits reprexlite. If unspecified, will depend &quot;</span>
-                <span class="s2">&quot;on specified venue formatter&#39;s default.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Include details about session and environment that the reprex was generated with.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;Whether to autoformat code with black. Requires black to be installed.&quot;</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;Prefix to use as primary prompt for code lines.&quot;</span><span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">continuation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;Prefix to use as secondary prompt for continued code lines.&quot;</span><span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;#&gt;&quot;</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="s2">&quot;Prefix to use for results returned by expressions.&quot;</span><span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">keep_old_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Whether to additionally include results of expressions detected in the original &quot;</span>
-                <span class="s2">&quot;input when formatting the reprex output.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
+    <span class="n">venue</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Venue</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;--venue&quot;</span><span class="p">,</span> <span class="s2">&quot;-v&quot;</span><span class="p">))]</span> <span class="o">=</span> <span class="n">Venue</span><span class="o">.</span><span class="n">GH</span>
+    <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">continuation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#&gt;&quot;</span>
+    <span class="n">keep_old_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="c1"># Parsing</span>
-    <span class="n">parsing_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Method for parsing input. &#39;auto&#39; will automatically detect either default &quot;</span>
-                <span class="s2">&quot;reprex-style input or standard doctest-style input. &#39;declared&#39; will allow you to &quot;</span>
-                <span class="s2">&quot;specify custom line prefixes. Values for &#39;prompt&#39;, &#39;continuation&#39;, and &#39;comment&#39; &quot;</span>
-                <span class="s2">&quot;will be used for both output formatting and input parsing, unless the associated &quot;</span>
-                <span class="s2">&quot;&#39;input_*&#39; override settings are supplied.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">input_prompt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Prefix to use as primary prompt for code lines when parsing input. Only used if &quot;</span>
-                <span class="s2">&quot;&#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used for both input &quot;</span>
-                <span class="s2">&quot;parsing and output formatting.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">input_continuation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Prefix to use as secondary prompt for continued code lines when parsing input. &quot;</span>
-                <span class="s2">&quot;Only used if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used for &quot;</span>
-                <span class="s2">&quot;both input parsing and output formatting.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-    <span class="n">input_comment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;help&quot;</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Prefix to use for results returned by expressions when parsing input. Only used &quot;</span>
-                <span class="s2">&quot;if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used for both input &quot;</span>
-                <span class="s2">&quot;parsing and output formatting.&quot;</span>
-            <span class="p">)</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
+    <span class="n">parsing_method</span><span class="p">:</span> <span class="n">ParsingMethod</span> <span class="o">=</span> <span class="n">ParsingMethod</span><span class="o">.</span><span class="n">AUTO</span>
+    <span class="n">input_prompt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">input_continuation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">input_comment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Validate venue</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">venue</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">formatter_registry</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Venue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">venue</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidVenueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">venue</span><span class="si">}</span><span class="s2"> is not a valid value for parsing method.&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Valid values are: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">formatter_registry</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Valid values are: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">value</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">Venue</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
         <span class="c1"># Validate prompt and continuation prefixes</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">continuation</span><span class="p">):</span>
@@ -1388,10 +1526,73 @@ formatting.</p>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_comment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_comment</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comment</span>
+</code></pre></div></td></tr></table></div>
+              </details>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_help</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__dataclass_fields__</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;help&quot;</span><span class="p">]</span>
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="reprexlite.config.Venue" class="doc doc-heading">
+            <code>Venue</code>
+
+
+<a href="#reprexlite.config.Venue" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code>str</code>, <code><span title="enum.Enum">Enum</span></code></p>
+
+
+        <p>Enum for specifying the output venue for a reprex.</p>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/config.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Venue</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enum for specifying the output venue for a reprex.&quot;&quot;&quot;</span>
+
+    <span class="n">GH</span> <span class="o">=</span> <span class="s2">&quot;gh&quot;</span>
+    <span class="n">DS</span> <span class="o">=</span> <span class="s2">&quot;ds&quot;</span>
+    <span class="n">SO</span> <span class="o">=</span> <span class="s2">&quot;so&quot;</span>
+    <span class="n">HTML</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span>
+    <span class="n">PY</span> <span class="o">=</span> <span class="s2">&quot;py&quot;</span>
+    <span class="n">RTF</span> <span class="o">=</span> <span class="s2">&quot;rtf&quot;</span>
+    <span class="n">SLACK</span> <span class="o">=</span> <span class="s2">&quot;slack&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
 

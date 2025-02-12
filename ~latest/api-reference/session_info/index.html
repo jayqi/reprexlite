@@ -421,33 +421,11 @@ You're not viewing the most recent stable version.
   
   
     <li class="md-nav__item">
-      <a href="../../ipython-jupyter-magic/" class="md-nav__link">
+      <a href="../../rendering-and-output-venues/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    IPython/Jupyter Magic
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../formatting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Venues Formatting
+    Rendering and Output Venues
     
   </span>
   
@@ -470,6 +448,28 @@ You're not viewing the most recent stable version.
   
   <span class="md-ellipsis">
     Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipython-jupyter-magic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPython/Jupyter Magic
     
   </span>
   
@@ -1009,7 +1009,12 @@ instances for introspection by <a class="autorefs autorefs-internal" href="#repr
 
               <details class="quote">
                 <summary>Source code in <code>reprexlite/session_info.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
@@ -1023,17 +1028,12 @@ instances for introspection by <a class="autorefs autorefs-internal" href="#repr
 <span class="normal">55</span>
 <span class="normal">56</span>
 <span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Package</span><span class="p">:</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Package</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Interface for adapting [`importlib.metadata.Distribution`](https://docs.python.org/3/library/importlib.metadata.html#distributions)</span>
 <span class="sd">    instances for introspection by [`SessionInfo`][reprexlite.session_info.SessionInfo].</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distribution</span><span class="p">:</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">Distribution</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distribution</span><span class="p">:</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">Distribution</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">distribution</span>
 
     <span class="nd">@property</span>
@@ -1153,7 +1153,12 @@ your operating system, and the Python packages installed in your current environ
 
               <details class="quote">
                 <summary>Source code in <code>reprexlite/session_info.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
@@ -1178,12 +1183,7 @@ your operating system, and the Python packages installed in your current environ
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SessionInfo</span><span class="p">:</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SessionInfo</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for pretty-formatting Python session info. Includes details about your Python version,</span>
 <span class="sd">    your operating system, and the Python packages installed in your current environment.</span>
 
@@ -1200,7 +1200,7 @@ your operating system, and the Python packages installed in your current environ
 
         <span class="bp">self</span><span class="o">.</span><span class="n">os</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">packages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Package</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">Package</span><span class="p">(</span><span class="n">distr</span><span class="p">)</span> <span class="k">for</span> <span class="n">distr</span> <span class="ow">in</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">Distribution</span><span class="o">.</span><span class="n">discover</span><span class="p">()</span>
+            <span class="n">Package</span><span class="p">(</span><span class="n">distr</span><span class="p">)</span> <span class="k">for</span> <span class="n">distr</span> <span class="ow">in</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">Distribution</span><span class="o">.</span><span class="n">discover</span><span class="p">()</span>
         <span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -1307,7 +1307,12 @@ your operating system, and the Python packages installed in your current environ
 
             <details class="quote">
               <summary>Source code in <code>reprexlite/session_info.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">66</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
@@ -1316,12 +1321,7 @@ your operating system, and the Python packages installed in your current environ
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">tabulate</span><span class="p">(</span><span class="n">rows</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">tabulate</span><span class="p">(</span><span class="n">rows</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Utility function for printing a two-column table as text with whitespace padding.</span>
 
 <span class="sd">    Args:</span>
