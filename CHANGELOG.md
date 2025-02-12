@@ -3,9 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.0.0a1 (2025-02-11)
-
-_This is an early version of the 1.0.0 changes that has been available on the main branch of the repository since February 2023. It is being released as a pre-release version in case anyone wants to continue using it. Further significant changes are planned for the final 1.0.0 release._
+## v1.0.0 (Unreleased)
 
 This release involves major changes to reprexlite. There is a significant refactoring of the library internals and also many changes to the API. This enabled new feature and more customizability.
 
@@ -71,6 +69,12 @@ _This release also removes support for Python 3.6, 3.7, and 3.8._
 
 - Changed reprexlite to use a pyproject.toml-based build process and metadata declaration.
 - Renamed `HISTORY.md` to `CHANGELOG.md`.
+
+## v1.0.0a1 (2025-02-11)
+
+This is an early version of the 1.0.0 changes that has been available on the main branch of the repository since February 2023. It is being released as a pre-release version in case anyone wants to continue using it. Further significant changes are planned for the final 1.0.0 release.
+
+For the release notes for this version, see [here](https://github.com/jayqi/reprexlite/blob/v1.0.0a1/CHANGELOG.md#v100a1-2025-02-11).
 
 ## v0.5.0 (2020-02-20)
 
