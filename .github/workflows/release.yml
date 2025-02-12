@@ -13,32 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-          cache: "pip"
-          cache-dependency-path: |
-            pyproject.toml
-            requirements-dev.txt
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
+      - uses: astral-sh/setup-uv@v5
 
       - name: Check that versions match
         id: version
         run: |
           echo "Release tag: [${{ github.event.release.tag_name }}]"
-          PACKAGE_VERSION=$(python -c "import reprexlite; print(reprexlite.__version__)")
+          PACKAGE_VERSION=$(uv run python -c "import reprexlite; print(reprexlite.__version__)")
           echo "Package version: [$PACKAGE_VERSION]"
           [ ${{ github.event.release.tag_name }} == "v$PACKAGE_VERSION" ] || { exit 1; }
           echo "::set-output name=major_minor_version::v${PACKAGE_VERSION%.*}"
 
       - name: Build package
         run: |
-          make dist
+          uv build
 
       - name: Publish to Test PyPI
         uses: pypa/gh-action-pypi-publish@v1.3.0
@@ -55,19 +43,19 @@ jobs:
           password: ${{ secrets.PYPI_PROD_TOKEN }}
           skip_existing: false
 
-      - name: Deploy docs to gh-pages
-        working-directory: docs
-        run: |
-          git fetch origin gh-pages --depth=1
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          # Rename old stable version
-          mike list -j | jq
-          OLD_STABLE=$(mike list -j | jq -r '.[] | select(.aliases | index("stable")) | .title' | awk '{print $1;}')
-          echo $OLD_STABLE
-          mike retitle stable $OLD_STABLE
-          # Deploy new version as stable
-          mike deploy --push --update-aliases --no-redirect \
-            ${{ steps.version.outputs.major_minor_version }} \
-            stable \
-            --title="${{ github.event.release.tag_name }} (stable)"
+      # - name: Deploy docs to gh-pages
+      #   working-directory: docs
+      #   run: |
+      #     git fetch origin gh-pages --depth=1
+      #     git config user.name github-actions[bot]
+      #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      #     # Rename old stable version
+      #     mike list -j | jq
+      #     OLD_STABLE=$(mike list -j | jq -r '.[] | select(.aliases | index("stable")) | .title' | awk '{print $1;}')
+      #     echo $OLD_STABLE
+      #     mike retitle stable $OLD_STABLE
+      #     # Deploy new version as stable
+      #     mike deploy --push --update-aliases --no-redirect \
+      #       ${{ steps.version.outputs.major_minor_version }} \
+      #       stable \
+      #       --title="${{ github.event.release.tag_name }} (stable)"
