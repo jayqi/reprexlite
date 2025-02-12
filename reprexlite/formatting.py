@@ -1,255 +1,228 @@
-from abc import ABC, abstractmethod
-import dataclasses
+from dataclasses import dataclass
 from datetime import datetime
-from textwrap import dedent
-from typing import ClassVar, Dict, Optional, Type
+from typing import Dict, Optional, Protocol
 
-from reprexlite.exceptions import NotAFormatterError, PygmentsNotFoundError
+from reprexlite.config import ReprexConfig, Venue
+from reprexlite.exceptions import PygmentsNotFoundError
 from reprexlite.session_info import SessionInfo
 from reprexlite.version import __version__
 
 
-@dataclasses.dataclass
-class FormatterMetadata:
-    example: Optional[str]
-    venues: Dict[str, str] = dataclasses.field(default_factory=lambda: dict())
+class Formatter(Protocol):
+    def __call__(self, reprex_str: str, config: Optional[ReprexConfig] = None) -> str: ...
 
 
-class Formatter(ABC):
-    """Abstract base class for a reprex formatter. Concrete subclasses should implement the
-    formatting logic appropriate to a specific venue for sharing. Call `str(...)` on an instance
-    to return the formatted reprex.
+@dataclass
+class FormatterRegistration:
+    fn: Formatter
+    label: str
 
-    Attributes:
-        default_advertise (bool): Whether to render reprexlite advertisement by default
-        meta (FormatterMeta): Contains metadata for the formatter, such as label text and an
-            example
-    """
 
-    default_advertise: ClassVar[bool] = True
-    meta: ClassVar[FormatterMetadata]
+class FormatterRegistry:
+    """Registry of formatters keyed by venue keywords."""
 
-    @classmethod
-    @abstractmethod
-    def format(
-        cls, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
-    ) -> str:
-        """Format a reprex string for a specific sharing venue.
+    _registry: Dict[str, FormatterRegistration] = {}
+
+    def __getitem__(self, key: Venue) -> FormatterRegistration:
+        return self._registry[Venue(key)]
+
+    def __contains__(self, key: Venue) -> bool:
+        return Venue(key) in self._registry
+
+    def items(self):
+        return self._registry.items()
+
+    def keys(self):
+        return self._registry.keys()
+
+    def values(self):
+        return self._registry.values()
+
+    def register(self, venue: Venue, label: str):
+        """Decorator that registers a formatter implementation.
 
         Args:
-            reprex_str (str): String containing rendered reprex output.
-            advertise (Optional[bool], optional): Whether to include the advertisement for
-                reprexlite. Defaults to None, which uses a per-formatter default.
-            session_info (bool, optional): Whether to include detailed session information.
-                Defaults to False.
-
-        Returns:
-            str: String containing formatted reprex code. Ends with newline.
+            venue (str): Venue keyword that formatter will be registered to.
+            label (str): Short human-readable label explaining the venue.
         """
 
+        def _register(fn: Formatter):
+            self._registry[Venue(venue)] = FormatterRegistration(fn=fn, label=label)
+            return fn
 
-formatter_registry: Dict[str, Type[Formatter]] = {}
-"""Registry of formatters keyed by venue keywords."""
+        return _register
 
 
-def register_formatter(venue: str, label: str):
-    """Decorator that registers a formatter implementation.
+formatter_registry = FormatterRegistry()
+
+
+@formatter_registry.register(venue=Venue.DS, label=f"Discourse (alias for '{Venue.GH.value}')")
+@formatter_registry.register(venue=Venue.SO, label=f"StackOverflow (alias for '{Venue.GH.value}')")
+@formatter_registry.register(venue=Venue.GH, label="Github Flavored Markdown")
+def format_as_markdown(
+    reprex_str: str,
+    config: Optional[ReprexConfig] = None,
+) -> str:
+    """
+    Format a rendered reprex reprex as a GitHub-Flavored Markdown code block. By default, includes
+    a footer that credits reprexlite.
 
     Args:
-        venue (str): Venue keyword that formatter will be registered to.
-        label (str): Short human-readable label explaining the venue.
+        reprex_str (str): The reprex string to render.
+        config (Optional[ReprexConfig]): Configuration for the reprex. Defaults to None.
+
+    Returns:
+        str: The rendered reprex
+
+    Example:
+        ```python
+        2+2
+        #> 4
+        ```
     """
-
-    def registrar(cls):
-        global formatter_registry
-        if not isinstance(cls, type) or not issubclass(cls, Formatter):
-            raise NotAFormatterError("Only subclasses of Formatter can be registered.")
-        formatter_registry[venue] = cls
-        cls.meta.venues[venue] = label
-        return cls
-
-    return registrar
-
-
-@register_formatter(venue="ds", label="Discourse (alias for 'gh')")
-@register_formatter(venue="so", label="StackOverflow (alias for 'gh')")
-@register_formatter(venue="gh", label="Github Flavored Markdown")
-class GitHubFormatter(Formatter):
-    """Formatter for rendering reprexes in GitHub Flavored Markdown."""
-
-    default_advertise = True
-    meta = FormatterMetadata(
-        example=dedent(
-            """\
-            ```python
-            2+2
-            #> 4
-            ```
-            """
-        )
-    )
-
-    @classmethod
-    def format(
-        cls, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
-    ) -> str:
-        if advertise is None:
-            advertise = cls.default_advertise
-        out = []
-        out.append("```python")
-        out.append(reprex_str)
+    if config is None:
+        config = ReprexConfig()
+    advertise = config.advertise if config.advertise is not None else True
+    out = []
+    out.append("```python")
+    out.append(reprex_str)
+    out.append("```")
+    if advertise:
+        out.append("\n" + Advertisement().markdown())
+    if config.session_info:
+        out.append("\n<details><summary>Session Info</summary>")
+        out.append("```text")
+        out.append(str(SessionInfo()))
         out.append("```")
-        if advertise:
-            out.append("\n" + Advertisement().markdown())
-        if session_info:
-            out.append("\n<details><summary>Session Info</summary>")
-            out.append("```text")
-            out.append(str(SessionInfo()))
-            out.append("```")
-            out.append("</details>")
-        return "\n".join(out) + "\n"
+        out.append("</details>")
+    return "\n".join(out) + "\n"
 
 
-@register_formatter(venue="html", label="HTML")
-class HtmlFormatter(Formatter):
-    """Formatter for rendering reprexes in HTML. If optional dependency Pygments is
-    available, the rendered HTML will have syntax highlighting for the Python code."""
+@formatter_registry.register(venue=Venue.HTML, label="HTML")
+def format_as_html(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex reprex as an HTML code block. If optional dependency Pygments is
+    available, the rendered HTML will have syntax highlighting for the Python code. By default,
+    includes a footer that credits reprexlite.
 
-    default_advertise = True
-    meta = FormatterMetadata(
-        example=dedent(
-            """\
-            <pre><code>2+2
-            #> 4</code></pre>
-            """
-        )
-    )
+    Args:
+        reprex_str (str): The reprex string to render.
+        config (Optional[ReprexConfig]): Configuration for the reprex. Defaults to None.
 
-    @classmethod
-    def format(
-        cls, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
-    ) -> str:
-        if advertise is None:
-            advertise = cls.default_advertise
-        out = []
-        try:
-            from pygments import highlight
-            from pygments.formatters import HtmlFormatter
-            from pygments.lexers import PythonLexer
+    Returns:
+        str: The rendered reprex
 
-            formatter = HtmlFormatter(
-                style="friendly", lineanchors=True, linenos=True, wrapcode=True
-            )
-            out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
-            out.append(highlight(str(reprex_str), PythonLexer(), formatter))
-        except ImportError:
-            out.append(f"<pre><code>{reprex_str}</code></pre>")
+    Example:
+        <pre><code>2+2
+        #> 4</code></pre>
+    """
+    if config is None:
+        config = ReprexConfig()
+    advertise = config.advertise if config.advertise is not None else True
+    out = []
+    try:
+        from pygments import highlight
+        from pygments.formatters import HtmlFormatter
+        from pygments.lexers import PythonLexer
 
-        if advertise:
-            out.append(Advertisement().html().strip())
-        if session_info:
-            out.append("<details><summary>Session Info</summary>")
-            out.append(f"<pre><code>{SessionInfo()}</code></pre>")
-            out.append("</details>")
-        return "\n".join(out) + "\n"
+        formatter = HtmlFormatter(style="friendly", lineanchors=True, linenos=True, wrapcode=True)
+        out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
+        out.append(highlight(str(reprex_str), PythonLexer(), formatter))
+    except ImportError:
+        out.append(f"<pre><code>{reprex_str}</code></pre>")
+
+    if advertise:
+        out.append(Advertisement().html().strip())
+    if config.session_info:
+        out.append("<details><summary>Session Info</summary>")
+        out.append(f"<pre><code>{SessionInfo()}</code></pre>")
+        out.append("</details>")
+    return "\n".join(out) + "\n"
 
 
-@register_formatter(venue="py", label="Python script")
-class PyScriptFormatter(Formatter):
-    """Formatter for rendering reprexes as a Python script."""
+@formatter_registry.register(venue=Venue.PY, label="Python script")
+def format_as_python_script(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex reprex as a Python script.
 
-    default_advertise = False
-    meta = FormatterMetadata(
-        example=dedent(
-            """\
-            2+2
-            #> 4
-            """
-        )
-    )
+    Args:
+        reprex_str (str): The reprex string to render.
+        config (Optional[ReprexConfig]): Configuration for the reprex. Defaults to None.
 
-    @classmethod
-    def format(
-        cls, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
-    ) -> str:
-        if advertise is None:
-            advertise = cls.default_advertise
-        out = [str(reprex_str)]
-        if advertise:
-            out.append("\n" + Advertisement().code_comment())
-        if session_info:
-            out.append("")
-            sess_lines = str(SessionInfo()).split("\n")
-            out.extend("# " + line for line in sess_lines)
-        return "\n".join(out) + "\n"
+    Returns:
+        str: The rendered reprex
+
+    Example:
+        2+2
+        #> 4
+    """
+    if config is None:
+        config = ReprexConfig()
+    advertise = config.advertise if config.advertise is not None else False
+    out = [str(reprex_str)]
+    if advertise:
+        out.append("\n" + Advertisement().code_comment())
+    if config.session_info:
+        out.append("")
+        sess_lines = str(SessionInfo()).split("\n")
+        out.extend("# " + line for line in sess_lines)
+    return "\n".join(out) + "\n"
 
 
-@register_formatter(venue="rtf", label="Rich Text Format")
-class RtfFormatter(Formatter):
-    """Formatter for rendering reprexes in Rich Text Format."""
+@formatter_registry.register(venue=Venue.RTF, label="Rich Text Format")
+def format_as_rtf(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex reprex as a Rich Text Format (RTF) document. Requires dependency
+    Pygments."""
+    if config is None:
+        config = ReprexConfig()
+    advertise = config.advertise if config.advertise is not None else False
+    try:
+        from pygments import highlight
+        from pygments.formatters import RtfFormatter
+        from pygments.lexers import PythonLexer
+    except ModuleNotFoundError as e:
+        if e.name == "pygments":
+            raise PygmentsNotFoundError("Pygments is required for RTF output.", name="pygments")
+        else:
+            raise
 
-    default_advertise = False
-    meta = FormatterMetadata(example=None)
-
-    @classmethod
-    def format(
-        cls, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
-    ) -> str:
-        if advertise is None:
-            advertise = cls.default_advertise
-        try:
-            from pygments import highlight
-            from pygments.formatters import RtfFormatter
-            from pygments.lexers import PythonLexer
-        except ModuleNotFoundError as e:
-            if e.name == "pygments":
-                raise PygmentsNotFoundError(
-                    "Pygments is required for RTF output.", name="pygments"
-                )
-            else:
-                raise
-
-        out = str(reprex_str)
-        if advertise:
-            out += "\n\n" + Advertisement().text()
-        if session_info:
-            out += "\n\n" + str(SessionInfo())
-        return highlight(out, PythonLexer(), RtfFormatter()) + "\n"
+    out = str(reprex_str)
+    if advertise:
+        out += "\n\n" + Advertisement().text()
+    if config.session_info:
+        out += "\n\n" + str(SessionInfo())
+    return highlight(out, PythonLexer(), RtfFormatter()) + "\n"
 
 
-@register_formatter(venue="slack", label="Slack")
-class SlackFormatter(Formatter):
-    """Formatter for rendering reprexes as Slack markup."""
+@formatter_registry.register(venue=Venue.SLACK, label="Slack")
+def format_for_slack(reprex_str: str, config: Optional[ReprexConfig] = None) -> str:
+    """Format a rendered reprex as Slack markup.
 
-    default_advertise = False
-    meta = FormatterMetadata(
-        example=dedent(
-            """\
-            ```
-            2+2
-            #> 4
-            ```
-            """
-        )
-    )
+    Args:
+        reprex_str (str): The reprex string to render.
+        config (Optional[ReprexConfig]): Configuration for the reprex. Defaults to None.
 
-    @classmethod
-    def format(
-        cls, reprex_str: str, advertise: Optional[bool] = None, session_info: bool = False
-    ) -> str:
-        if advertise is None:
-            advertise = cls.default_advertise
-        out = []
+    Returns:
+        str: The rendered reprex
+
+    Example:
+        ```
+        2+2
+        #> 4
+        ```
+    """
+    if config is None:
+        config = ReprexConfig()
+    advertise = config.advertise if config.advertise is not None else False
+    out = []
+    out.append("```")
+    out.append(str(reprex_str))
+    out.append("```")
+    if advertise:
+        out.append("\n" + Advertisement().text())
+    if config.session_info:
+        out.append("\n```")
+        out.append(str(SessionInfo()))
         out.append("```")
-        out.append(str(reprex_str))
-        out.append("```")
-        if advertise:
-            out.append("\n" + Advertisement().text())
-        if session_info:
-            out.append("\n```")
-            out.append(str(SessionInfo()))
-            out.append("```")
-        return "\n".join(out) + "\n"
+    return "\n".join(out) + "\n"
 
 
 class Advertisement:

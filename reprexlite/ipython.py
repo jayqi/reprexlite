@@ -1,8 +1,7 @@
-from contextlib import contextmanager
+from contextlib import contextmanager, redirect_stdout
+import io
 import re
 from typing import Optional
-
-from typer.testing import CliRunner
 
 import reprexlite.cli
 from reprexlite.config import ReprexConfig
@@ -24,9 +23,6 @@ except ModuleNotFoundError as e:
         raise
 
 
-runner = CliRunner()
-
-
 @contextmanager
 def patch_edit(input: str):
     """Patches typer.edit to return the input string instead of opening up the text editor. This
@@ -36,10 +32,10 @@ def patch_edit(input: str):
     def return_input(*args, **kwargs) -> str:
         return input
 
-    original = reprexlite.cli.typer.edit
-    setattr(reprexlite.cli.typer, "edit", return_input)
+    original = reprexlite.cli.handle_editor
+    setattr(reprexlite.cli, "handle_editor", return_input)
     yield
-    setattr(reprexlite.cli.typer, "edit", original)
+    setattr(reprexlite.cli, "handle_editor", original)
 
 
 @magics_class
@@ -50,16 +46,16 @@ class ReprexMagics(Magics):
         render a reprex."""
         # Line magic, print help
         if cell is None:
-            help_text = runner.invoke(
-                reprexlite.cli.app, ["--help"], env={"TERM": "dumb"}
-            ).stdout.strip()
-            help_text = re.sub(r"^Usage: main", r"Cell Magic Usage: %%reprex", help_text)
+            with io.StringIO() as buffer, redirect_stdout(buffer):
+                reprexlite.cli.app("--help")
+                help_text = buffer.getvalue()
+            help_text = re.sub(r"^Usage: reprex", r"Cell Magic Usage: %%reprex", help_text)
             print(f"reprexlite v{__version__} IPython Magic\n\n" + help_text)
             return
         # Cell magic, render reprex
         with patch_edit(cell):
-            result = runner.invoke(reprexlite.cli.app, line.split())
-            print(result.stdout, end="")
+            reprexlite.cli.app(line.split())
+            # print(stdout, end="")
 
 
 def load_ipython_extension(ipython: InteractiveShell):
@@ -80,7 +76,7 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
     """Subclass of IPython's TerminalInteractiveShell that automatically executes all cells using
     reprexlite instead of normally."""
 
-    banner1 = "".join(ipython_banner_parts)
+    banner1 = "".join(ipython_banner_parts)  # type: ignore
     _reprex_config: Optional[ReprexConfig] = None
 
     def run_cell(self, raw_cell: str, *args, **kwargs):
@@ -88,13 +84,13 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
         if raw_cell != "exit":
             try:
                 r = Reprex.from_input(raw_cell, config=self.reprex_config)
-                print(r.format(terminal=True), end="")
+                print(r.render_and_format(terminal=True), end="")
             except Exception as e:
                 print("ERROR: reprexlite has encountered an error while evaluating your input.")
                 print(e, end="")
 
             # Store history
-            self.history_manager.store_inputs(self.execution_count, raw_cell, raw_cell)
+            self.history_manager.store_inputs(self.execution_count, raw_cell, raw_cell)  # type: ignore
             self.execution_count += 1
 
             return None
@@ -111,9 +107,9 @@ class ReprexTerminalInteractiveShell(TerminalInteractiveShell):
 class ReprexTerminalIPythonApp(TerminalIPythonApp):
     """Subclass of TerminalIPythonApp that launches ReprexTerminalInteractiveShell."""
 
-    interactive_shell_class = ReprexTerminalInteractiveShell
+    interactive_shell_class = ReprexTerminalInteractiveShell  # type: ignore
 
     @classmethod
     def set_reprex_config(cls, config: ReprexConfig):
         """Set the reprex config bound on the interactive shell."""
-        cls.interactive_shell_class._reprex_config = config
+        cls.interactive_shell_class._reprex_config = config  # type: ignore

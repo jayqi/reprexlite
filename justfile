@@ -18,13 +18,13 @@ typecheck:
     mypy reprexlite --install-types --non-interactive
 
 # Run tests
-test:
+test *args:
     uv run --python {{python}} --no-editable --all-extras --no-dev --group test --isolated \
-        python -I -m pytest
+        python -I -m pytest {{args}}
 
 # Run all tests with Python version matrix
 test-all:
-    for python in 3.8 3.9 3.10 3.11 3.12 3.13; do \
+    for python in 3.9 3.10 3.11 3.12 3.13; do \
         just python=$python test; \
     done
 
@@ -54,4 +54,4 @@ docs:
 
 # Serve built docs
 docs-serve:
-    uv tool --verbose run quickhttp docs/site/
+    uv tool run quickhttp docs/site/

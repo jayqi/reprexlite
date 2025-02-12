@@ -1,3 +1,5 @@
 from reprexlite.cli import app
 
-app(prog_name="python -m reprexlite")
+if __name__ == "__main__":
+    app._name = ("python -m reprexlite",)
+    app()

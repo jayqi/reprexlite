@@ -1,11 +1,6 @@
+import importlib.metadata
 import platform
-import sys
 from typing import List, Tuple
-
-if sys.version_info[:2] >= (3, 8):
-    import importlib.metadata as importlib_metadata
-else:
-    import importlib_metadata
 
 
 class SessionInfo:
@@ -25,7 +20,7 @@ class SessionInfo:
 
         self.os: str = platform.platform()
         self.packages: List[Package] = [
-            Package(distr) for distr in importlib_metadata.Distribution.discover()
+            Package(distr) for distr in importlib.metadata.Distribution.discover()
         ]
 
     def __str__(self) -> str:
@@ -46,7 +41,7 @@ class Package:
     instances for introspection by [`SessionInfo`][reprexlite.session_info.SessionInfo].
     """  # noqa: E501
 
-    def __init__(self, distribution: importlib_metadata.Distribution):
+    def __init__(self, distribution: importlib.metadata.Distribution):
         self.distribution = distribution
 
     @property

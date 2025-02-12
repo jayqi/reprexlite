@@ -10,9 +10,9 @@ nav:
   - Usage:
       - Basic Usage: "./#basic-usage"
       - CLI Help: "cli.md"
-      - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
-      - Venues Formatting: "formatting.md"
+      - Rendering and Output Venues: "rendering-and-output-venues.md"
       - Configuration: "configuration.md"
+      - IPython/Jupyter Magic: "ipython-jupyter-magic.ipynb"
   - Library:
       - API Reference:
           - reprexlite.config: "api-reference/config.md"
@@ -53,10 +53,11 @@ extra_css:
 
 markdown_extensions:
   - attr_list:
+  - github-callouts:
   - mdx_truly_sane_lists:
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
   - pymdownx.superfences:
   - tables:

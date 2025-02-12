@@ -6,6 +6,10 @@ class BlackNotFoundError(ModuleNotFoundError, ReprexliteException):
     """Raised when ipython cannot be found when using a black-dependent feature."""
 
 
+class EditorError(ReprexliteException):
+    """Raised when an error occurs with the editor."""
+
+
 class InputSyntaxError(SyntaxError, ReprexliteException):
     """Raised when encountering a syntax error when parsing input."""
 
@@ -32,10 +36,6 @@ class MissingDependencyError(ImportError, ReprexliteException):
 
 class NoPrefixMatchError(ValueError, ReprexliteException):
     pass
-
-
-class NotAFormatterError(TypeError, ReprexliteException):
-    """Raised when registering a formatter that is not a subclass of the Formatter base class."""
 
 
 class PromptLengthMismatchError(ReprexliteException):

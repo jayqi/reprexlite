@@ -15,17 +15,17 @@ classifiers = [
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 dependencies = [
-  "importlib_metadata ; python_version < '3.8'",
+  "cyclopts>=3",
   "libcst",
-  "typer",
+  "platformdirs",
   "typing_extensions>4 ; python_version < '3.11'",
 ]
 
@@ -35,7 +35,7 @@ pygments = ["Pygments"]
 ipython = ["ipython"]
 
 [project.scripts]
-reprex = "reprexlite.cli:app"
+reprex = "reprexlite.cli:entrypoint"
 
 [project.urls]
 "Repository" = "https://github.com/jayqi/reprexlite"
@@ -53,6 +53,7 @@ lint = [
   "ruff",
 ]
 docs = [
+  "markdown-callouts",
   "mkdocs",
   "mkdocs-jupyter",
   "mkdocs-macros-plugin",
@@ -60,13 +61,14 @@ docs = [
   "mike",
   "mkdocstrings[python]",
   "mdx-truly-sane-lists",
-  "py-markdown-table==0.3.3",
+  "py-markdown-table",
   "typenames",
 ]
 test = [
   "pytest",
   "coverage",
   "pytest-cov",
+  "pytest-echo>=1.8.1",
   "tqdm",
 ]
 
@@ -113,8 +115,14 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--cov=reprexlite --cov-report=term --cov-report=html --cov-report=xml"
+addopts = "--cov=reprexlite --cov-report=term --cov-report=html --cov-report=xml --echo-version=*"
 testpaths = ["tests"]
 
 [tool.coverage.run]
 source = ["reprexlite"]
+
+[tool.coverage.paths]
+source = [
+  "reprexlite/",
+  "*/site-packages/reprexlite/",
+]

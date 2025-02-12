@@ -3,11 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.0.0a1 (2025-02-11)
-
-_This is an early version of the 1.0.0 changes that has been available on the main branch of the repository since February 2023. It is being released as a pre-release version in case anyone wants to continue using it. Further significant changes are planned for the final 1.0.0 release._
+## v1.0.0 (Unreleased)
 
 This release involves major changes to reprexlite. There is a significant refactoring of the library internals and also many changes to the API. This enabled new feature and more customizability.
+
+_This release also removes support for Python 3.6, 3.7, and 3.8._
 
 ### CLI and IPython User Interfaces
 
@@ -19,6 +19,7 @@ This release involves major changes to reprexlite. There is a significant refact
   - A new `--parsing-method` option controls input-parsing behavior.
     - The default value `auto` can automatically handle "reprex-style" input as well as "doctest-style`/Python REPL input.
     - A value `declared` will use the values of `--prompt`, `--continuation`, and `--comment` for parsing input in addition to styling output. To handle input and output with different styes, you can override input-side values with the `--input-prompt`, `--input-continuation`, and `--input-comment` options.
+- Added support for configuration files, including support for `[tool.reprexlite]` in `pyproject.toml` files and for user-level configuration. See ["Configuration"](https://jayqi.github.io/reprexlite/stable/configuration/#configuration-files) for more details.
 
 #### Changed
 
@@ -47,9 +48,9 @@ This release involves major changes to reprexlite. There is a significant refact
 #### Changed
 
 - Changed formatting abstractions in `reprexlite.formatting` module.
-  - Rather than `*Reprex` classes that encapsulate reprex data, we now have `*Formatter` classes and take a rendered reprex output string as input to a `format` class method that appropriately prepares the reprex output for a venue, such as adding venue-specific markup.
-  - The `venues_dispatcher` dictionary in `reprexlite.formatting` is now a `formatter_registry` dictionary.
-  - Formatters are added to the registry using a `register_formatter` decorator instead of being hard-coded.
+  - Rather than `*Reprex` classes that encapsulate reprex data, we now have formatter callables and take a rendered reprex output string as input and appropriately prepares the reprex output for a venue, such as adding venue-specific markup.
+  - The `venues_dispatcher` dictionary in `reprexlite.formatting` is now a `formatter_registry` dictionary-like.
+  - Formatters are added to the registry using a `formatter_registry.register` decorator instead of being hard-coded.
 
 #### Removed
 
@@ -60,13 +61,20 @@ This release involves major changes to reprexlite. There is a significant refact
 
 #### Added
 
+- Added a "Rendering and Output Venues" page to the documentation that documents the different formatting options with examples.
+- Added a "Configuration" page to the documentation that provides a reference for configuration options and documents how to use configuration files.
 - Added an "Alternatives" page to the documentation that documents alternative tools.
-- Added a "Venues Formatting" page to the documentation that documents the different formatting options with examples.
 
 #### Changed
 
 - Changed reprexlite to use a pyproject.toml-based build process and metadata declaration.
 - Renamed `HISTORY.md` to `CHANGELOG.md`.
+
+## v1.0.0a1 (2025-02-11)
+
+This is an early version of the 1.0.0 changes that has been available on the main branch of the repository since February 2023. It is being released as a pre-release version in case anyone wants to continue using it. Further significant changes are planned for the final 1.0.0 release.
+
+For the release notes for this version, see [here](https://github.com/jayqi/reprexlite/blob/v1.0.0a1/CHANGELOG.md#v100a1-2025-02-11).
 
 ## v0.5.0 (2020-02-20)
 

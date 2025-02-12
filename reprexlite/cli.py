@@ -1,184 +1,246 @@
-from enum import Enum
+import dataclasses
+import json
+import os
 from pathlib import Path
+import platform
+import subprocess
+import sys
+import tempfile
 from typing import Optional
 
-import typer
+try:
+    from typing import Annotated  # type: ignore  # Python 3.9+
+except ImportError:
+    from typing_extensions import Annotated  # type: ignore
 
-from reprexlite.config import ParsingMethod, ReprexConfig
-from reprexlite.exceptions import InputSyntaxError, IPythonNotFoundError
+
+from cyclopts import App, Parameter
+import cyclopts.config
+from platformdirs import user_config_dir
+
+from reprexlite.config import ReprexConfig
+from reprexlite.exceptions import (
+    EditorError,
+    InputSyntaxError,
+    IPythonNotFoundError,
+)
 from reprexlite.formatting import formatter_registry
 from reprexlite.reprexes import Reprex
 from reprexlite.version import __version__
 
-app = typer.Typer()
+
+def get_version():
+    return __version__
 
 
-def version_callback(version: bool):
-    """Print reprexlite version to console."""
-    if version:
-        print(__version__)
-        raise typer.Exit()
+HELP_TEMPLATE = """
+Render reproducible examples of Python code for sharing. Your code will be executed and, in
+the default output style, the results will be embedded as comments below their associated
+lines.
+
+By default, your system's default command-line text editor will open for you to type or paste
+in your code. This editor can be changed by setting either of the `VISUAL` or `EDITOR` environment
+variables, or by explicitly passing in the --editor program. The interactive IPython editor
+requires IPython to be installed. You can also instead specify an input file with the
+--infile / -i option.
+
+Additional markup will be added that is appropriate to the choice of venue formatting. For
+example, for the default 'gh' venue for GitHub Flavored Markdown, the final reprex output will
+look like:
+
+````
+```python
+arr = [1, 2, 3, 4, 5]
+[x + 1 for x in arr]
+#> [2, 3, 4, 5, 6]
+max(arr) - min(arr)
+#> 4
+```
+
+<sup>Created at 2021-02-27 00:13 PST by [reprexlite](https://github.com/jayqi/reprexlite) v{version}</sup>
+````
+
+The supported venue formats are:
+{venue_formats}
+"""  # noqa: E501
 
 
-Venue = Enum(  # type: ignore
-    "Venue", names={v.upper(): v for v in formatter_registry.keys()}, type=str
-)
-Venue.__doc__ = """Enum for valid venue options."""
-
-
-def get_help(key: str):
-    return ReprexConfig.get_help(key).replace("_", "-")
-
-
-@app.command()
-def main(
-    editor: Optional[str] = typer.Option(
-        None,
-        "--editor",
-        "-e",
-        help=(
-            "Specify editor to open in. Can be full path to executable or name to be searched on "
-            "system search path. If None, will use Click's automatic editor detection. This will "
-            "typically use the editor set to environment variable VISUAL or EDITOR. If value is "
-            "'ipython' and IPython is installed, this will launch the interactive IPython editor "
-            "where all cells are automatically run through reprexlite."
+def get_help():
+    help_text = HELP_TEMPLATE.format(
+        version=get_version(),
+        venue_formats="\n".join(
+            f"- {key.value} : {entry.label}" for key, entry in formatter_registry.items()
         ),
-    ),
-    infile: Optional[Path] = typer.Option(
-        None,
-        "--infile",
-        "-i",
-        help="Read code from an input file instead of entering in an editor.",
-    ),
-    outfile: Optional[Path] = typer.Option(
-        None, "--outfile", "-o", help="Write output to file instead of printing to console."
-    ),
-    # Formatting
-    venue: Venue = typer.Option(
-        "gh",
-        "--venue",
-        "-v",
-        help=get_help("venue"),
-    ),
-    advertise: Optional[bool] = typer.Option(
-        None,
-        "--advertise/--no-advertise",
-        help=get_help("advertise"),
-        is_flag=False,
-        show_default=False,
-    ),
-    session_info: bool = typer.Option(False, help=get_help("session_info")),
-    style: bool = typer.Option(False, help=get_help("style")),
-    prompt: str = typer.Option("", help=get_help("prompt")),
-    continuation: str = typer.Option("", help=get_help("continuation")),
-    comment: str = typer.Option("#>", help=get_help("comment")),
-    keep_old_results: bool = typer.Option(False, help=get_help("keep_old_results")),
-    # Parsing
-    parsing_method: ParsingMethod = typer.Option("auto", help=get_help("parsing_method")),
-    input_prompt: Optional[str] = typer.Option(None, help=get_help("input_prompt")),
-    input_continuation: Optional[str] = typer.Option(None, help=get_help("input_continuation")),
-    input_comment: Optional[str] = typer.Option(None, help=get_help("input_comment")),
-    verbose: Optional[bool] = typer.Option(None, "--verbose"),
-    # Callbacks
-    version: Optional[bool] = typer.Option(
-        None,
-        "--version",
-        callback=version_callback,
-        is_eager=True,
-        help="Show reprexlite version and exit.",
-    ),
-):
-    """Render reproducible examples of Python code for sharing. Your code will be executed and, in
-    the default output style, the results will be embedded as comments below their associated
-    lines.
-
-    By default, your system's default command-line text editor will open for you to type or paste
-    in your code. This editor can be changed by setting the VISUAL or EDITOR environment variable,
-    or by explicitly passing in the --editor program. You can instead specify an input file with
-    the --infile / -i option. If IPython is installed, an interactive IPython editor can also be
-    launched using the --ipython flag.
-
-    Additional markup will be added that is appropriate to the choice of venue formatting. For
-    example, for the default `gh` venue for GitHub Flavored Markdown, the final reprex output will
-    look like:
-
-    \b
-    ----------------------------------------
-    ```python
-    arr = [1, 2, 3, 4, 5]
-    [x + 1 for x in arr]
-    #> [2, 3, 4, 5, 6]
-    max(arr) - min(arr)
-    #> 4
-    ```
-    \b
-    <sup>Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v{version}</sup>
-    ----------------------------------------
-
-    \b
-    The supported venue formats are:
-    \b
-    - gh : GitHub Flavored Markdown
-    - so : StackOverflow, alias for gh
-    - ds : Discourse, alias for gh
-    - html : HTML
-    - py : Python script
-    - rtf : Rich Text Format
-    - slack : Slack
-    """  # noqa: E501
-
-    config = ReprexConfig(
-        venue=venue.value,
-        advertise=advertise,
-        session_info=session_info or False,
-        style=style or False,
-        prompt=prompt,
-        continuation=continuation,
-        comment=comment,
-        parsing_method=parsing_method.value,
-        input_prompt=input_prompt,
-        input_continuation=input_continuation,
-        input_comment=input_comment,
-        keep_old_results=keep_old_results or False,
     )
+    return help_text
 
-    if editor and editor.lower() == "ipython":
-        try:
-            from reprexlite.ipython import ReprexTerminalIPythonApp
-        except IPythonNotFoundError:
-            print(
-                "IPythonNotFoundError: ipython is required to be installed to use the IPython "
-                "interactive editor."
-            )
-            raise typer.Exit(code=1)
-        ReprexTerminalIPythonApp.set_reprex_config(config)
-        ReprexTerminalIPythonApp.launch_instance(argv=[])
-        raise typer.Exit()
-    elif infile:
+
+pyproject_toml_loader = cyclopts.config.Toml(
+    "pyproject.toml",
+    root_keys=("tool", "reprexlite"),
+    search_parents=True,
+    use_commands_as_keys=False,
+)
+
+reprexlite_toml_loader = cyclopts.config.Toml(
+    "reprexlite.toml",
+    search_parents=True,
+    use_commands_as_keys=False,
+)
+
+dot_reprexlite_toml_loader = cyclopts.config.Toml(
+    ".reprexlite.toml",
+    search_parents=True,
+    use_commands_as_keys=False,
+)
+
+
+user_reprexlite_toml_loader = cyclopts.config.Toml(
+    Path(user_config_dir(appname="reprexlite")) / "config.toml",
+    search_parents=False,
+    use_commands_as_keys=False,
+)
+
+app = App(
+    name="reprex",
+    version=get_version,
+    help_format="markdown",
+    help=get_help(),
+    config=(
+        pyproject_toml_loader,
+        reprexlite_toml_loader,
+        dot_reprexlite_toml_loader,
+        user_reprexlite_toml_loader,
+    ),
+)
+
+
+def launch_ipython(config: ReprexConfig):
+    try:
+        from reprexlite.ipython import ReprexTerminalIPythonApp
+    except IPythonNotFoundError:
+        print(
+            "IPythonNotFoundError: ipython is required to be installed to use the IPython "
+            "interactive editor."
+        )
+        sys.exit(1)
+    ReprexTerminalIPythonApp.set_reprex_config(config)
+    ReprexTerminalIPythonApp.launch_instance(argv=[])
+    sys.exit(0)
+
+
+def launch_editor(editor) -> str:
+    fw, name = tempfile.mkstemp(prefix="reprexlite-", suffix=".py")
+    try:
+        os.close(fw)  # Close the file descriptor
+        # Open editor and edit the file
+        proc = subprocess.Popen(args=f"{editor} {name}", shell=True)
+        exit_code = proc.wait()
+        if exit_code != 0:
+            raise EditorError(f"{editor}: Editing failed with exit code {exit_code}")
+
+        # Read the file back in
+        with open(name, "rb") as fp:
+            content = fp.read()
+        return content.decode("utf-8-sig").replace("\r\n", "\n")
+    except OSError as e:
+        raise EditorError(f"{editor}: Editing failed: {e}") from e
+    finally:
+        os.unlink(name)
+
+
+def get_editor() -> str:
+    """Determine an editor to use for editing code."""
+    for key in "VISUAL", "EDITOR":
+        env_val = os.environ.get(key)
+        if env_val:
+            return env_val
+    if platform.system() == "Windows":
+        return "notepad"
+    for editor in ("sensible-editor", "vim", "nano"):
+        if os.system(f"which {editor} >/dev/null 2>&1") == 0:
+            return editor
+    return "vi"
+
+
+def handle_editor(config: ReprexConfig) -> str:
+    """Determines what to do based on the editor configuration."""
+    editor = config.editor or get_editor()
+    if editor == "ipython":
+        launch_ipython(config)
+        sys.exit(0)
+    else:
+        return launch_editor(editor)
+
+
+@app.default
+def main(
+    *,
+    infile: Annotated[
+        Optional[Path],
+        Parameter(
+            name=("--infile", "-i"),
+            help="Read code from this file instead of opening an editor.",
+        ),
+    ] = None,
+    outfile: Annotated[
+        Optional[Path],
+        Parameter(
+            name=("--outfile", "-o"),
+            help="Write rendered reprex to this file instead of standard out.",
+        ),
+    ] = None,
+    config: Annotated[ReprexConfig, Parameter(name="*")] = ReprexConfig(),
+    verbose: Annotated[
+        tuple[bool, ...],
+        Parameter(
+            name=("--verbose",), show_default=False, negative=False, help="Increase verbosity."
+        ),
+    ] = (),
+    debug: Annotated[bool, Parameter(show=False)] = False,
+):
+    verbosity = sum(verbose)
+    if verbosity:
+        sys.stderr.write("infile: {}\n".format(infile))
+        sys.stderr.write("outfile: {}\n".format(outfile))
+        sys.stderr.write("config: {}\n".format(config))
+
+    if debug:
+        data = {"infile": infile, "outfile": outfile, "config": dataclasses.asdict(config)}
+        sys.stdout.write(json.dumps(data))
+        return data
+
+    if infile:
+        if verbose:
+            sys.stderr.write(f"Reading from input file: {infile}")
         with infile.open("r") as fp:
             input = fp.read()
     else:
-        input = typer.edit(editor=editor) or ""
-
-    if verbose:
-        typer.echo(config)
+        input = handle_editor(config)
+        if input.strip() == "":
+            print("No input provided or saved via the editor. Exiting.")
+            sys.exit(0)
 
     try:
         r = Reprex.from_input(input=input, config=config)
     except InputSyntaxError as e:
         print("ERROR: reprexlite has encountered an error while evaluating your input.")
         print(e)
-        raise typer.Exit(1) from e
+        raise
 
     if outfile:
         with outfile.open("w") as fp:
-            fp.write(r.format(terminal=False))
+            fp.write(r.render_and_format(terminal=False))
         print(f"Wrote rendered reprex to {outfile}")
     else:
-        print(r.format(terminal=True), end="")
+        print(r.render_and_format(terminal=True), end="")
 
     return r
 
 
-if main.__doc__:
-    main.__doc__ = main.__doc__.format(version=__version__)
+def entrypoint():
+    """Entrypoint for the reprex command-line interface. This function is configured as the reprex
+    entrypoint under [project.scripts].
+    https://packaging.python.org/en/latest/specifications/entry-points/#use-for-scripts
+    """
+    app()
