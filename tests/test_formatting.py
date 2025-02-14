@@ -105,3 +105,13 @@ def test_rtf_pygments_bad_dependency(patch_datetime, patch_version, pygments_bad
     assert not isinstance(exc_info.type, PygmentsNotFoundError)
     assert exc_info.value.name != "pygments"
     assert exc_info.value.name == pygments_bad_dependency
+
+
+def test_registry_methods():
+    keys = list(formatter_registry.keys())
+    assert keys
+    values = list(formatter_registry.values())
+    assert values
+    items = list(formatter_registry.items())
+    assert items
+    assert items == list(zip(keys, values))
