@@ -8,7 +8,7 @@ import pytest
 
 import reprexlite.cli
 from reprexlite.cli import app, user_reprexlite_toml_loader
-from reprexlite.exceptions import IPythonNotFoundError
+from reprexlite.exceptions import InputSyntaxError, IPythonNotFoundError
 from reprexlite.version import __version__
 from tests.utils import remove_ansi_escape
 
@@ -221,3 +221,17 @@ def test_user_config_dir(project_dir, user_config_dir, monkeypatch):
     monkeypatch.setattr(user_reprexlite_toml_loader, "path", user_config_dir / "config.toml")
     params = app(["--debug"])
     assert params["config"]["editor"] == "test_editor"
+
+
+def test_input_syntax_error(project_dir, user_config_dir, patch_edit, capsys):
+    assert reprexlite.cli.handle_editor == patch_edit.mock_edit
+    capsys.readouterr()
+    patch_edit.input = "="
+    with pytest.raises(InputSyntaxError):
+        app([])
+    stdout = capsys.readouterr().out
+    print(stdout)
+    assert (
+        "ERROR: reprexlite has encountered an error while evaluating your input"
+        in remove_ansi_escape(stdout)
+    )

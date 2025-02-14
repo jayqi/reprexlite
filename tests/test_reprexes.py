@@ -777,3 +777,9 @@ def test_reprex_function(tmp_path):
     # Test writing to file
     with (tmp_path / "rendered.txt").open("r") as fp:
         assert expected.render_and_format() == fp.read()
+
+
+def test_reprex_methods():
+    r = reprex("2+2")
+    assert str(r)
+    assert repr(r)
