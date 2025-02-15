@@ -10,10 +10,17 @@
       
       
       
-        <link rel="canonical" href="https://jayqi.github.io/reprexlite/v0.5.0/api-reference/formatting/">
+        <link rel="canonical" href="https://jayqi.github.io/reprexlite/stable/api-reference/formatting/">
+      
+      
+        <link rel="prev" href="../code/">
+      
+      
+        <link rel="next" href="../session_info/">
+      
       
       <link rel="icon" href="../../images/reprexlite_white_blue.svg">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
     
     
       
@@ -21,15 +28,14 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
-        
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
       
       
 
+
     
+    
+      
     
     
       
@@ -45,7 +51,7 @@
     
       <link rel="stylesheet" href="../../css/custom_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -55,14 +61,8 @@
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+    <body dir="ltr">
   
-    
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -79,14 +79,16 @@
       
     </div>
     
-      <div data-md-component="outdated" hidden>
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
         
       </div>
     
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="reprexlite" class="md-header__button md-logo" aria-label="reprexlite" data-md-component="logo">
       
@@ -94,7 +96,8 @@
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -114,9 +117,13 @@
     </div>
     
     
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -124,24 +131,27 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -153,7 +163,7 @@
         <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -183,6 +193,7 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="reprexlite" class="md-nav__button md-logo" aria-label="reprexlite" data-md-component="logo">
@@ -197,7 +208,7 @@
       <a href="https://github.com/jayqi/reprexlite" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -209,14 +220,20 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../.." class="md-nav__link">
-        Home
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -224,14 +241,20 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../design-philosophy/" class="md-nav__link">
-        Design Philosophy
+        
+  
+  <span class="md-ellipsis">
+    Design Philosophy
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -239,14 +262,20 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../dos-and-donts/" class="md-nav__link">
-        Reprex Do's and Don'ts
+        
+  
+  <span class="md-ellipsis">
+    Reprex Do's and Don'ts
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -254,14 +283,20 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
-        CLI Help
+        
+  
+  <span class="md-ellipsis">
+    CLI Help
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -269,14 +304,20 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../ipython-jupyter-magic/" class="md-nav__link">
-        IPython/Jupyter Magic
+        
+  
+  <span class="md-ellipsis">
+    IPython/Jupyter Magic
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -284,84 +325,123 @@
     
       
       
-      
-
   
   
     
   
   
+  
+    
+    
+    
     
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_6">
-          API Reference
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
-          <span class="md-nav__icon md-icon"></span>
-          API Reference
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
           
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../reprex/" class="md-nav__link">
-        reprexlite
+        
+  
+  <span class="md-ellipsis">
+    reprexlite
+    
+  </span>
+  
+
       </a>
     </li>
   
 
-            
-          
+              
             
               
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../code/" class="md-nav__link">
-        reprexlite.code
+        
+  
+  <span class="md-ellipsis">
+    reprexlite.code
+    
+  </span>
+  
+
       </a>
     </li>
   
 
-            
-          
+              
             
               
+                
   
   
     
   
   
+  
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          reprexlite.formatting
+          
+  
+  <span class="md-ellipsis">
+    reprexlite.formatting
+    
+  </span>
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        reprexlite.formatting
+        
+  
+  <span class="md-ellipsis">
+    reprexlite.formatting
+    
+  </span>
+  
+
       </a>
       
         
@@ -381,15 +461,28 @@
       
         <li class="md-nav__item">
   <a href="#reprexlite.formatting-attributes" class="md-nav__link">
-    Attributes
+    <span class="md-ellipsis">
+      Attributes
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#reprexlite.formatting.Venue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Venue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reprexlite.formatting.venues_dispatcher" class="md-nav__link">
-    venues_dispatcher
+    <span class="md-ellipsis">
+      venues_dispatcher
+    </span>
   </a>
   
 </li>
@@ -401,7 +494,9 @@
       
         <li class="md-nav__item">
   <a href="#reprexlite.formatting-classes" class="md-nav__link">
-    Classes
+    <span class="md-ellipsis">
+      Classes
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Classes">
@@ -409,56 +504,63 @@
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.Advertisement" class="md-nav__link">
-    Advertisement
+    <span class="md-ellipsis">
+      Advertisement
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.GitHubReprex" class="md-nav__link">
-    GitHubReprex
+    <span class="md-ellipsis">
+      GitHubReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.HtmlReprex" class="md-nav__link">
-    HtmlReprex
+    <span class="md-ellipsis">
+      HtmlReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.PyScriptReprex" class="md-nav__link">
-    PyScriptReprex
+    <span class="md-ellipsis">
+      PyScriptReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.Reprex" class="md-nav__link">
-    Reprex
+    <span class="md-ellipsis">
+      Reprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.RtfReprex" class="md-nav__link">
-    RtfReprex
+    <span class="md-ellipsis">
+      RtfReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.SlackReprex" class="md-nav__link">
-    SlackReprex
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reprexlite.formatting.Venue" class="md-nav__link">
-    Venue
+    <span class="md-ellipsis">
+      SlackReprex
+    </span>
   </a>
   
 </li>
@@ -475,38 +577,53 @@
     </li>
   
 
-            
-          
+              
             
               
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../session_info/" class="md-nav__link">
-        reprexlite.session_info
+        
+  
+  <span class="md-ellipsis">
+    reprexlite.session_info
+    
+  </span>
+  
+
       </a>
     </li>
   
 
+              
             
-          
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../changelog/" class="md-nav__link">
-        Changelog
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -540,15 +657,28 @@
       
         <li class="md-nav__item">
   <a href="#reprexlite.formatting-attributes" class="md-nav__link">
-    Attributes
+    <span class="md-ellipsis">
+      Attributes
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#reprexlite.formatting.Venue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Venue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reprexlite.formatting.venues_dispatcher" class="md-nav__link">
-    venues_dispatcher
+    <span class="md-ellipsis">
+      venues_dispatcher
+    </span>
   </a>
   
 </li>
@@ -560,7 +690,9 @@
       
         <li class="md-nav__item">
   <a href="#reprexlite.formatting-classes" class="md-nav__link">
-    Classes
+    <span class="md-ellipsis">
+      Classes
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Classes">
@@ -568,56 +700,63 @@
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.Advertisement" class="md-nav__link">
-    Advertisement
+    <span class="md-ellipsis">
+      Advertisement
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.GitHubReprex" class="md-nav__link">
-    GitHubReprex
+    <span class="md-ellipsis">
+      GitHubReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.HtmlReprex" class="md-nav__link">
-    HtmlReprex
+    <span class="md-ellipsis">
+      HtmlReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.PyScriptReprex" class="md-nav__link">
-    PyScriptReprex
+    <span class="md-ellipsis">
+      PyScriptReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.Reprex" class="md-nav__link">
-    Reprex
+    <span class="md-ellipsis">
+      Reprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.RtfReprex" class="md-nav__link">
-    RtfReprex
+    <span class="md-ellipsis">
+      RtfReprex
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#reprexlite.formatting.SlackReprex" class="md-nav__link">
-    SlackReprex
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reprexlite.formatting.Venue" class="md-nav__link">
-    Venue
+    <span class="md-ellipsis">
+      SlackReprex
+    </span>
   </a>
   
 </li>
@@ -641,19 +780,24 @@
                 
                   
 
-  <a href="https://github.com/jayqi/reprexlite/edit/master/docs/api-reference/formatting.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+
+  
+  
 
 
 <h1 id="reprexliteformatting">reprexlite.formatting<a class="headerlink" href="#reprexliteformatting" title="Permanent link">&para;</a></h1>
 
 
-  <div class="doc doc-object doc-module">
+<div class="doc doc-object doc-module">
+
+
 
 
     <div class="doc doc-contents first">
+
+
+
+
 
 
 
@@ -663,69 +807,142 @@
 
 
 
+
 <h2 id="reprexlite.formatting-attributes">Attributes<a href="#reprexlite.formatting-attributes" class="headerlink" title="Permanent link">&para;</a></h2>
 
-  <div class="doc doc-object doc-attribute">
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="reprexlite.formatting.Venue" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">Venue</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span><span class="s1">&#39;Venue&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">{</span><span class="n">v</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span> <span class="n">vfor</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">venues_dispatcher</span><span class="o">.</span><span class="n">keys</span><span class="p">()},</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.Venue" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
 <h3 id="reprexlite.formatting.venues_dispatcher" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">venues_dispatcher</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">reprexlite</span><span class="o">.</span><span class="n">formatting</span><span class="o">.</span><span class="n">Reprex</span><span class="p">]]</span></code>
+            <code class="highlight language-python"><span class="n">venues_dispatcher</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gh&#39;</span><span class="p">:</span> <span class="n">GitHubReprex</span><span class="p">,</span> <span class="s1">&#39;so&#39;</span><span class="p">:</span> <span class="n">GitHubReprex</span><span class="p">,</span> <span class="s1">&#39;ds&#39;</span><span class="p">:</span> <span class="n">GitHubReprex</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">:</span> <span class="n">HtmlReprex</span><span class="p">,</span> <span class="s1">&#39;py&#39;</span><span class="p">:</span> <span class="n">PyScriptReprex</span><span class="p">,</span> <span class="s1">&#39;rtf&#39;</span><span class="p">:</span> <span class="n">RtfReprex</span><span class="p">,</span> <span class="s1">&#39;slack&#39;</span><span class="p">:</span> <span class="n">SlackReprex</span><span class="p">}</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.venues_dispatcher" class="headerlink" title="Permanent link">&para;</a></h3>
 
+
     <div class="doc doc-contents ">
 
-      <p>Mapping from venue keywords to their Reprex implementation.</p>
+        <p>Mapping from venue keywords to their Reprex implementation.</p>
     </div>
 
-  </div>
-
-
+</div>
 <h2 id="reprexlite.formatting-classes">Classes<a href="#reprexlite.formatting-classes" class="headerlink" title="Permanent link">&para;</a></h2>
 
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
 <h3 id="reprexlite.formatting.Advertisement" class="doc doc-heading">
-        <code>
-Advertisement        </code>
-
+            <code>Advertisement</code>
 
 
 <a href="#reprexlite.formatting.Advertisement" class="headerlink" title="Permanent link">&para;</a></h3>
 
+
     <div class="doc doc-contents ">
 
-      <p>Class for generating the advertisement note for reprexlite.</p>
 
-<p><strong>Attributes:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>timestamp</code></td>
-        <td><code>str</code></td>
-        <td><p>Timestamp of instance instantiation</p></td>
-      </tr>
-      <tr>
-        <td><code>version</code></td>
-        <td><code>str</code></td>
-        <td><p>Version of reprexlite</p></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Advertisement</span><span class="p">:</span>
+        <p>Class for generating the advertisement note for reprexlite.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Advertisement.timestamp" href="#reprexlite.formatting.Advertisement.timestamp">timestamp</a></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Timestamp of instance instantiation</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Advertisement.version" href="#reprexlite.formatting.Advertisement.version">version</a></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Version of reprexlite</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Advertisement</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for generating the advertisement note for reprexlite.</span>
 
 <span class="sd">    Attributes:</span>
@@ -736,30 +953,30 @@ Advertisement        </code>
     <span class="n">pkg</span> <span class="o">=</span> <span class="s2">&quot;reprexlite&quot;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/jayqi/reprexlite&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S %Z&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    <span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&lt;/sup&gt;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in HTML.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by &quot;</span>
             <span class="sa">f</span><span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s1">&lt;/a&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&lt;/sup&gt;&lt;/p&gt;&#39;</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement as a comment in Python code.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in plain text.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+              </details>
 
 
 
@@ -769,185 +986,221 @@ Advertisement        </code>
 
 
 
+<h4 id="reprexlite.formatting.Advertisement-attributes">Attributes<a href="#reprexlite.formatting.Advertisement-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
 
-  <div class="doc doc-object doc-attribute">
+<div class="doc doc-object doc-attribute">
 
 
 
 <h5 id="reprexlite.formatting.Advertisement.pkg" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">pkg</span></code>
+            <code class="highlight language-python"><span class="n">pkg</span> <span class="o">=</span> <span class="s1">&#39;reprexlite&#39;</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.Advertisement.pkg" class="headerlink" title="Permanent link">&para;</a></h5>
 
-    <div class="doc doc-contents ">
 
+    <div class="doc doc-contents ">
     </div>
 
-  </div>
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
-  <div class="doc doc-object doc-attribute">
+<h5 id="reprexlite.formatting.Advertisement.timestamp" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S %Z&#39;</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.Advertisement.timestamp" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
 <h5 id="reprexlite.formatting.Advertisement.url" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">url</span></code>
+            <code class="highlight language-python"><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/jayqi/reprexlite&#39;</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.Advertisement.url" class="headerlink" title="Permanent link">&para;</a></h5>
 
-    <div class="doc doc-contents ">
 
+    <div class="doc doc-contents ">
     </div>
 
-  </div>
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
+<h5 id="reprexlite.formatting.Advertisement.version" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">version</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s1">&#39;</span></code>
 
-<h4 id="reprexlite.formatting.Advertisement-methods">Methods<a href="#reprexlite.formatting.Advertisement-methods" class="headerlink" title="Permanent link">&para;</a></h4>
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
-  <div class="doc doc-object doc-method">
+<a href="#reprexlite.formatting.Advertisement.version" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<h4 id="reprexlite.formatting.Advertisement-functions">Functions<a href="#reprexlite.formatting.Advertisement-functions" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-function">
 
 
 <h5 id="reprexlite.formatting.Advertisement.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
 
 <a href="#reprexlite.formatting.Advertisement.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
     <div class="doc doc-contents ">
 
-
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S %Z&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-method">
-
+<div class="doc doc-object doc-function">
 
 
 <h5 id="reprexlite.formatting.Advertisement.code_comment" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+            <code class="highlight language-python"><span class="n">code_comment</span><span class="p">()</span></code>
 
 <a href="#reprexlite.formatting.Advertisement.code_comment" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
     <div class="doc doc-contents ">
 
-      <p>Render reprexlite advertisement as a comment in Python code.</p>
+        <p>Render reprexlite advertisement as a comment in Python code.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">code_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement as a comment in Python code.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-method">
-
+<div class="doc doc-object doc-function">
 
 
 <h5 id="reprexlite.formatting.Advertisement.html" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+            <code class="highlight language-python"><span class="n">html</span><span class="p">()</span></code>
 
 <a href="#reprexlite.formatting.Advertisement.html" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
     <div class="doc doc-contents ">
 
-      <p>Render reprexlite advertisement in HTML.</p>
+        <p>Render reprexlite advertisement in HTML.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in HTML.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by &quot;</span>
         <span class="sa">f</span><span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s1">&lt;/a&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&lt;/sup&gt;&lt;/p&gt;&#39;</span>
     <span class="p">)</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-method">
-
+<div class="doc doc-object doc-function">
 
 
 <h5 id="reprexlite.formatting.Advertisement.markdown" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+            <code class="highlight language-python"><span class="n">markdown</span><span class="p">()</span></code>
 
 <a href="#reprexlite.formatting.Advertisement.markdown" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
     <div class="doc doc-contents ">
 
-      <p>Render reprexlite advertisement in GitHub Flavored Markdown.</p>
+        <p>Render reprexlite advertisement in GitHub Flavored Markdown.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">markdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;sup&gt;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&lt;/sup&gt;&quot;</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-method">
-
+<div class="doc doc-object doc-function">
 
 
 <h5 id="reprexlite.formatting.Advertisement.text" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+            <code class="highlight language-python"><span class="n">text</span><span class="p">()</span></code>
 
 <a href="#reprexlite.formatting.Advertisement.text" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
     <div class="doc doc-contents ">
 
-      <p>Render reprexlite advertisement in plain text.</p>
+        <p>Render reprexlite advertisement in plain text.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Render reprexlite advertisement in plain text.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Created at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkg</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
-
-
+</div>
 
 
 
@@ -955,35 +1208,57 @@ Advertisement        </code>
 
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
 <h3 id="reprexlite.formatting.GitHubReprex" class="doc doc-heading">
-        <code>
-GitHubReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
-        </code>
-
+            <code>GitHubReprex</code>
 
 
 <a href="#reprexlite.formatting.GitHubReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a></code></p>
 
-      <p>Concrete implementation for rendering reprexes in GitHub Flavored Markdown.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">GitHubReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
+        <p>Concrete implementation for rendering reprexes in GitHub Flavored Markdown.</p>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">GitHubReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes in GitHub Flavored Markdown.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```python&quot;</span><span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">))</span>
@@ -997,8 +1272,8 @@ GitHubReprex            (<a class="autorefs autorefs-internal" title="reprexlite
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+              </details>
 
 
 
@@ -1007,29 +1282,117 @@ GitHubReprex            (<a class="autorefs autorefs-internal" title="reprexlite
 
 
 
+
 <h4 id="reprexlite.formatting.GitHubReprex-attributes">Attributes<a href="#reprexlite.formatting.GitHubReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
 
-  <div class="doc doc-object doc-attribute">
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.GitHubReprex.advertise" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">advertise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.GitHubReprex.advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.GitHubReprex.code_block" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">code_block</span> <span class="o">=</span> <span class="n">code_block</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.GitHubReprex.code_block" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
 <h5 id="reprexlite.formatting.GitHubReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
+            <code class="highlight language-python"><span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">True</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.GitHubReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.GitHubReprex.session_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">session_info</span> <span class="o">=</span> <span class="n">session_info</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.GitHubReprex.session_info" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<h4 id="reprexlite.formatting.GitHubReprex-functions">Functions<a href="#reprexlite.formatting.GitHubReprex-functions" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="reprexlite.formatting.GitHubReprex.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#reprexlite.formatting.GitHubReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
     <div class="doc doc-contents ">
 
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
-
-
-
-
-
+</div>
 
 
 
@@ -1037,42 +1400,73 @@ GitHubReprex            (<a class="autorefs autorefs-internal" title="reprexlite
 
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
 <h3 id="reprexlite.formatting.HtmlReprex" class="doc doc-heading">
-        <code>
-HtmlReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
-        </code>
-
+            <code>HtmlReprex</code>
 
 
 <a href="#reprexlite.formatting.HtmlReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
-    <div class="doc doc-contents ">
 
-      <p>Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a></code></p>
+
+
+        <p>Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is
 available, the rendered HTML will have syntax highlighting for the Python code.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HtmlReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HtmlReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes in HTML. If optional dependency Pygments is</span>
 <span class="sd">    available, the rendered HTML will have syntax highlighting for the Python code.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pygments</span> <span class="kn">import</span> <span class="n">highlight</span>
-            <span class="kn">from</span> <span class="nn">pygments.formatters</span> <span class="kn">import</span> <span class="n">HtmlFormatter</span>
-            <span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">PythonLexer</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments</span><span class="w"> </span><span class="kn">import</span> <span class="n">highlight</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.formatters</span><span class="w"> </span><span class="kn">import</span> <span class="n">HtmlFormatter</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.lexers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonLexer</span>
 
             <span class="n">formatter</span> <span class="o">=</span> <span class="n">HtmlFormatter</span><span class="p">(</span>
                 <span class="n">style</span><span class="o">=</span><span class="s2">&quot;friendly&quot;</span><span class="p">,</span> <span class="n">lineanchors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linenos</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrapcode</span><span class="o">=</span><span class="kc">True</span>
@@ -1089,8 +1483,8 @@ available, the rendered HTML will have syntax highlighting for the Python code.<
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="n">SessionInfo</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;/details&gt;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+              </details>
 
 
 
@@ -1099,29 +1493,117 @@ available, the rendered HTML will have syntax highlighting for the Python code.<
 
 
 
+
 <h4 id="reprexlite.formatting.HtmlReprex-attributes">Attributes<a href="#reprexlite.formatting.HtmlReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
 
-  <div class="doc doc-object doc-attribute">
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.HtmlReprex.advertise" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">advertise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.HtmlReprex.advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.HtmlReprex.code_block" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">code_block</span> <span class="o">=</span> <span class="n">code_block</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.HtmlReprex.code_block" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
 <h5 id="reprexlite.formatting.HtmlReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
+            <code class="highlight language-python"><span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">True</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.HtmlReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.HtmlReprex.session_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">session_info</span> <span class="o">=</span> <span class="n">session_info</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.HtmlReprex.session_info" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<h4 id="reprexlite.formatting.HtmlReprex-functions">Functions<a href="#reprexlite.formatting.HtmlReprex-functions" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="reprexlite.formatting.HtmlReprex.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#reprexlite.formatting.HtmlReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
     <div class="doc doc-contents ">
 
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
-
-
-
-
-
+</div>
 
 
 
@@ -1129,35 +1611,52 @@ available, the rendered HTML will have syntax highlighting for the Python code.<
 
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
 <h3 id="reprexlite.formatting.PyScriptReprex" class="doc doc-heading">
-        <code>
-PyScriptReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
-        </code>
-
+            <code>PyScriptReprex</code>
 
 
 <a href="#reprexlite.formatting.PyScriptReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a></code></p>
 
-      <p>Concrete implementation for rendering reprexes as a Python script.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PyScriptReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
+        <p>Concrete implementation for rendering reprexes as a Python script.</p>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PyScriptReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes as a Python script.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">)]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">Advertisement</span><span class="p">()</span><span class="o">.</span><span class="n">code_comment</span><span class="p">())</span>
@@ -1166,8 +1665,8 @@ PyScriptReprex            (<a class="autorefs autorefs-internal" title="reprexli
             <span class="n">sess_lines</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="s2">&quot;# &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sess_lines</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+              </details>
 
 
 
@@ -1176,29 +1675,117 @@ PyScriptReprex            (<a class="autorefs autorefs-internal" title="reprexli
 
 
 
+
 <h4 id="reprexlite.formatting.PyScriptReprex-attributes">Attributes<a href="#reprexlite.formatting.PyScriptReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
 
-  <div class="doc doc-object doc-attribute">
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.PyScriptReprex.advertise" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">advertise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.PyScriptReprex.advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.PyScriptReprex.code_block" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">code_block</span> <span class="o">=</span> <span class="n">code_block</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.PyScriptReprex.code_block" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
 <h5 id="reprexlite.formatting.PyScriptReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
+            <code class="highlight language-python"><span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.PyScriptReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.PyScriptReprex.session_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">session_info</span> <span class="o">=</span> <span class="n">session_info</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.PyScriptReprex.session_info" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<h4 id="reprexlite.formatting.PyScriptReprex-functions">Functions<a href="#reprexlite.formatting.PyScriptReprex-functions" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="reprexlite.formatting.PyScriptReprex.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#reprexlite.formatting.PyScriptReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
     <div class="doc doc-contents ">
 
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
-
-
-
-
-
+</div>
 
 
 
@@ -1206,59 +1793,106 @@ PyScriptReprex            (<a class="autorefs autorefs-internal" title="reprexli
 
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
 <h3 id="reprexlite.formatting.Reprex" class="doc doc-heading">
-        <code>
-Reprex            (<span title="abc.ABC">ABC</span>)
-        </code>
-
+            <code>Reprex</code>
 
 
 <a href="#reprexlite.formatting.Reprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
-    <div class="doc doc-contents ">
 
-      <p>Abstract base class for a reprex instance. Concrete subclasses should implement the
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+
+        <p>Abstract base class for a reprex instance. Concrete subclasses should implement the
 formatting logic appropriate to a specific venue for sharing. Call <code>str(...)</code> on an instance
 to return the formatted reprex.</p>
 
-<p><strong>Attributes:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>code_block</code></td>
-        <td><code>CodeBlock</code></td>
-        <td><p>instance of <a class="autorefs autorefs-internal" href="../code/#reprexlite.code.CodeBlock"><code>CodeBlock</code></a></p></td>
-      </tr>
-      <tr>
-        <td><code>advertise</code></td>
-        <td><code>bool</code></td>
-        <td><p>whether to render reprexlite advertisement</p></td>
-      </tr>
-      <tr>
-        <td><code>session_info</code></td>
-        <td><code>bool</code></td>
-        <td><p>whether to render session info</p></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Reprex</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex.code_block" href="#reprexlite.formatting.Reprex.code_block">code_block</a></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="reprexlite.code.CodeBlock" href="../code/#reprexlite.code.CodeBlock">CodeBlock</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>instance of <a class="autorefs autorefs-internal" href="../code/#reprexlite.code.CodeBlock"><code>CodeBlock</code></a></p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex.advertise" href="#reprexlite.formatting.Reprex.advertise">advertise</a></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>whether to render reprexlite advertisement</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex.session_info" href="#reprexlite.formatting.Reprex.session_info">session_info</a></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>whether to render session info</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Reprex</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for a reprex instance. Concrete subclasses should implement the</span>
 <span class="sd">    formatting logic appropriate to a specific venue for sharing. Call `str(...)` on an instance</span>
 <span class="sd">    to return the formatted reprex.</span>
@@ -1272,7 +1906,7 @@ to return the formatted reprex.</p>
     <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Default for whether to include reprexlite advertisement for this venue format.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
@@ -1280,10 +1914,10 @@ to return the formatted reprex.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
 
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
         <span class="k">pass</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+              </details>
 
 
 
@@ -1293,41 +1927,117 @@ to return the formatted reprex.</p>
 
 
 
+<h4 id="reprexlite.formatting.Reprex-attributes">Attributes<a href="#reprexlite.formatting.Reprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-attribute">
 
 
 
+<h5 id="reprexlite.formatting.Reprex.advertise" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">advertise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span></code>
 
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="reprexlite.formatting.Reprex.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#reprexlite.formatting.Reprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#reprexlite.formatting.Reprex.advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.Reprex.code_block" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">code_block</span> <span class="o">=</span> <span class="n">code_block</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.Reprex.code_block" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.Reprex.default_advertise" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">default_advertise</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.Reprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+
 
     <div class="doc doc-contents ">
 
+        <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+    </div>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.Reprex.session_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">session_info</span> <span class="o">=</span> <span class="n">session_info</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.Reprex.session_info" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<h4 id="reprexlite.formatting.Reprex-functions">Functions<a href="#reprexlite.formatting.Reprex-functions" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="reprexlite.formatting.Reprex.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#reprexlite.formatting.Reprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
-
-
+</div>
 
 
 
@@ -1335,39 +2045,61 @@ to return the formatted reprex.</p>
 
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
 <h3 id="reprexlite.formatting.RtfReprex" class="doc doc-heading">
-        <code>
-RtfReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
-        </code>
-
+            <code>RtfReprex</code>
 
 
 <a href="#reprexlite.formatting.RtfReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a></code></p>
 
-      <p>Concrete implementation for rendering reprexes in Rich Text Format.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RtfReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
+        <p>Concrete implementation for rendering reprexes in Rich Text Format.</p>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RtfReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes in Rich Text Format.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pygments</span> <span class="kn">import</span> <span class="n">highlight</span>
-            <span class="kn">from</span> <span class="nn">pygments.formatters</span> <span class="kn">import</span> <span class="n">RtfFormatter</span>
-            <span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">PythonLexer</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments</span><span class="w"> </span><span class="kn">import</span> <span class="n">highlight</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.formatters</span><span class="w"> </span><span class="kn">import</span> <span class="n">RtfFormatter</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.lexers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonLexer</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Pygments is required for RTF output.&quot;</span><span class="p">)</span>
 
@@ -1377,8 +2109,8 @@ RtfReprex            (<a class="autorefs autorefs-internal" title="reprexlite.fo
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span>
             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">highlight</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">RtfFormatter</span><span class="p">())</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+              </details>
 
 
 
@@ -1387,29 +2119,117 @@ RtfReprex            (<a class="autorefs autorefs-internal" title="reprexlite.fo
 
 
 
+
 <h4 id="reprexlite.formatting.RtfReprex-attributes">Attributes<a href="#reprexlite.formatting.RtfReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
 
-  <div class="doc doc-object doc-attribute">
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.RtfReprex.advertise" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">advertise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.RtfReprex.advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.RtfReprex.code_block" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">code_block</span> <span class="o">=</span> <span class="n">code_block</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.RtfReprex.code_block" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
 <h5 id="reprexlite.formatting.RtfReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
+            <code class="highlight language-python"><span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.RtfReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.RtfReprex.session_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">session_info</span> <span class="o">=</span> <span class="n">session_info</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.RtfReprex.session_info" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<h4 id="reprexlite.formatting.RtfReprex-functions">Functions<a href="#reprexlite.formatting.RtfReprex-functions" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="reprexlite.formatting.RtfReprex.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#reprexlite.formatting.RtfReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
     <div class="doc doc-contents ">
 
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
-  </div>
-
-
-
-
-
+</div>
 
 
 
@@ -1417,35 +2237,55 @@ RtfReprex            (<a class="autorefs autorefs-internal" title="reprexlite.fo
 
     </div>
 
-  </div>
+</div>
 
-
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
 <h3 id="reprexlite.formatting.SlackReprex" class="doc doc-heading">
-        <code>
-SlackReprex            (<a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a>)
-        </code>
-
+            <code>SlackReprex</code>
 
 
 <a href="#reprexlite.formatting.SlackReprex" class="headerlink" title="Permanent link">&para;</a></h3>
 
+
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="reprexlite.formatting.Reprex" href="#reprexlite.formatting.Reprex">Reprex</a></code></p>
 
-      <p>Concrete implementation for rendering reprexes as Slack markup.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>reprexlite/formatting.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SlackReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
+        <p>Concrete implementation for rendering reprexes as Slack markup.</p>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SlackReprex</span><span class="p">(</span><span class="n">Reprex</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concrete implementation for rendering reprexes as Slack markup.&quot;&quot;&quot;</span>
 
     <span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">))</span>
@@ -1457,8 +2297,8 @@ SlackReprex            (<a class="autorefs autorefs-internal" title="reprexlite.
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">SessionInfo</span><span class="p">()))</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div>
-        </details>
+</code></pre></div></td></tr></table></div>
+              </details>
 
 
 
@@ -1467,65 +2307,125 @@ SlackReprex            (<a class="autorefs autorefs-internal" title="reprexlite.
 
 
 
+
 <h4 id="reprexlite.formatting.SlackReprex-attributes">Attributes<a href="#reprexlite.formatting.SlackReprex-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
 
-  <div class="doc doc-object doc-attribute">
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.SlackReprex.advertise" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">advertise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.SlackReprex.advertise" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="reprexlite.formatting.SlackReprex.code_block" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">code_block</span> <span class="o">=</span> <span class="n">code_block</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.SlackReprex.code_block" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
 
 <h5 id="reprexlite.formatting.SlackReprex.default_advertise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">default_advertise</span><span class="p">:</span> <span class="nb">bool</span></code>
+            <code class="highlight language-python"><span class="n">default_advertise</span> <span class="o">=</span> <span class="kc">False</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
 
 <a href="#reprexlite.formatting.SlackReprex.default_advertise" class="headerlink" title="Permanent link">&para;</a></h5>
 
-    <div class="doc doc-contents ">
-
-      <p>Default for whether to include reprexlite advertisement for this venue format.</p>
-    </div>
-
-  </div>
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="reprexlite.formatting.Venue" class="doc doc-heading">
-        <code>
-Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
-        </code>
-
-
-
-<a href="#reprexlite.formatting.Venue" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
+    </div>
 
-      <p>Enum for valid venue options.</p>
+</div>
+
+<div class="doc doc-object doc-attribute">
 
 
+
+<h5 id="reprexlite.formatting.SlackReprex.session_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">session_info</span> <span class="o">=</span> <span class="n">session_info</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#reprexlite.formatting.SlackReprex.session_info" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+    </div>
+
+</div>
+
+<h4 id="reprexlite.formatting.SlackReprex-functions">Functions<a href="#reprexlite.formatting.SlackReprex-functions" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="reprexlite.formatting.SlackReprex.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">code_block</span><span class="p">,</span> <span class="n">advertise</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#reprexlite.formatting.SlackReprex.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
+
+
+    <div class="doc doc-contents ">
+
+            <details class="quote">
+              <summary>Source code in <code>reprexlite/formatting.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span><span class="p">,</span> <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">code_block</span><span class="p">:</span> <span class="n">CodeBlock</span> <span class="o">=</span> <span class="n">code_block</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">advertise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_advertise</span> <span class="k">if</span> <span class="n">advertise</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">advertise</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">session_info</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
 
     </div>
 
-  </div>
-
-
-
+</div>
 
 
 
@@ -1534,7 +2434,14 @@ Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</sp
 
     </div>
 
-  </div>
+</div>
+
+
+
+
+
+
+
 
 
 
@@ -1545,52 +2452,18 @@ Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</sp
             </div>
           
           
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </a>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
         
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../code/" class="md-footer__link md-footer__link--prev" aria-label="Previous: reprexlite.code" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              reprexlite.code
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../session_info/" class="md-footer__link md-footer__link--next" aria-label="Next: reprexlite.session_info" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              reprexlite.session_info
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1613,12 +2486,12 @@ Venue            (<span title="str">str</span>, <span title="enum.Enum">Enum</sp
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "stable", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-    
     
   </body>
 </html>
