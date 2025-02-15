@@ -91,4 +91,4 @@ jobs:
         working-directory: docs/
         run: |
           TAG=${{ steps.get-version-tag.outputs.VERSION_TAG }}
-          uv run mike alias --push $TAG stable
+          uv run mike alias --push --update-aliases $TAG stable
