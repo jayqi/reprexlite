@@ -1789,8 +1789,19 @@ pygments = [
 [package.dev-dependencies]
 dev = [
     { name = "black" },
+    { name = "markdown-callouts" },
+    { name = "mdx-truly-sane-lists" },
+    { name = "mike" },
+    { name = "mkdocs" },
+    { name = "mkdocs-jupyter" },
+    { name = "mkdocs-macros-plugin" },
+    { name = "mkdocs-material" },
+    { name = "mkdocstrings", extra = ["python"] },
     { name = "mypy", extra = ["install-types"] },
+    { name = "py-markdown-table" },
     { name = "ruff" },
+    { name = "typenames" },
+    { name = "vspect" },
 ]
 docs = [
     { name = "markdown-callouts" },
@@ -1832,8 +1843,19 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "black" },
+    { name = "markdown-callouts" },
+    { name = "mdx-truly-sane-lists" },
+    { name = "mike" },
+    { name = "mkdocs" },
+    { name = "mkdocs-jupyter" },
+    { name = "mkdocs-macros-plugin" },
+    { name = "mkdocs-material" },
+    { name = "mkdocstrings", extras = ["python"] },
     { name = "mypy", extras = ["install-types"] },
+    { name = "py-markdown-table" },
     { name = "ruff" },
+    { name = "typenames" },
+    { name = "vspect" },
 ]
 docs = [
     { name = "markdown-callouts" },
