@@ -91,6 +91,13 @@ plugins:
             # Additional options
             show_source: true
 
+  - mike:
+      alias_type: copy
+      canonical_version: stable
+      version_selector: true
+
 extra:
   version:
     provider: mike
+    default: stable
+    alias: true
