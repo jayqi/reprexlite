@@ -1,14 +1,12 @@
-name: docs
+name: docs-preview
 
 on:
-  push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build docs from main
+    name: Build docs and deploy preview
     runs-on: ubuntu-latest
 
     steps:
@@ -22,9 +20,17 @@ jobs:
         run: |
           just docs
 
-      - name: Deploy docs preview to Netlify
-        if: |
-          github.event.pull_request != null
+      - name: Get preview identifier
+        id: get_id
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            PREVIEW_IDENTIFIER=${{ github.event.number }}
+          else
+            PREVIEW_IDENTIFIER=$(git rev-parse --short HEAD)
+          fi
+          echo "PREVIEW_IDENTIFIER=$PREVIEW_IDENTIFIER" | tee -a $GITHUB_OUTPUT
+
+      - name: Deploy preview to Netlify
         uses: nwtgck/actions-netlify@v2.0.0
         with:
           publish-dir: "./docs/site"
@@ -34,19 +40,8 @@ jobs:
           enable-pull-request-comment: true
           enable-commit-comment: false
           overwrites-pull-request-comment: true
-          alias: deploy-preview-${{ github.event.number }}
+          alias: preview-${{ steps.get_id.outputs.PREVIEW_IDENTIFIER }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
-
-      - name: Deploy production docs to gh-pages
-        if: |
-          github.event.pull_request == null
-        run: |
-          git fetch origin gh-pages --depth=1
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          uv run --no-dev --group docs --isolated \
-            --directory docs/ \
-            mike deploy --push ~latest --title=latest

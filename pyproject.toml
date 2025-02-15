@@ -46,6 +46,7 @@ reprex = "reprexlite.cli:entrypoint"
 [dependency-groups]
 dev = [
   { include-group = "lint" },
+  { include-group = "docs" },
 ]
 lint = [
   "black",
@@ -63,6 +64,7 @@ docs = [
   "mdx-truly-sane-lists",
   "py-markdown-table",
   "typenames",
+  "vspect",
 ]
 test = [
   "pytest",
