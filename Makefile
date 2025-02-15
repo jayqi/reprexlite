@@ -18,7 +18,7 @@ docs:
 	@echo '```' >> docs/docs/cli.md
 	@echo "" >> docs/docs/cli.md
 	@echo '```' >> docs/docs/cli.md
-	@reprex --help >> docs/docs/cli.md
+	@COLUMNS=80 reprex --help >> docs/docs/cli.md
 	@echo '```' >> docs/docs/cli.md
 	sed 's|https://raw.githubusercontent.com/jayqi/reprexlite/main/docs/docs/images/demo.gif|images/demo.gif|g' README.md \
 		| sed 's|https://jayqi.github.io/reprexlite/stable/||g' \

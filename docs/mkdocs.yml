@@ -40,10 +40,9 @@ plugins:
       default_handler: python
       handlers:
         python:
-          selection:
+          options:
             filters: ["!^_(?!_init__)"]
             inherited_members: true
-          rendering:
             show_root_heading: false
             show_root_toc_entry: false
             show_root_full_path: false
@@ -54,6 +53,13 @@ plugins:
             group_by_category: true
             show_category_heading: true
 
+  - mike:
+      alias_type: copy
+      canonical_version: stable
+      version_selector: true
+
 extra:
   version:
     provider: mike
+    default: stable
+    alias: true
