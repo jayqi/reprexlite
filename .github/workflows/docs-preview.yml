@@ -23,12 +23,19 @@ jobs:
       - name: Get git commit short hash
         id: commit_hash
         run: |
-          GIT_SHORT_HASH=$(git rev-parse --short HEAD)
+          GIT_SHORT_HASH=
           echo "GIT_SHORT_HASH=$GIT_SHORT_HASH" >> $GITHUB_OUTPUT
 
-      - name: Deploy docs preview to Netlify
-        if: |
-          github.event.pull_request != null
+      - name: Get preview identifier
+        id: get_id
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "PREVIEW_IDENTIFIER=${{ github.event.number }}" >> $GITHUB_ENV
+          else
+            echo "PREVIEW_IDENTIFIER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy preview to Netlify
         uses: nwtgck/actions-netlify@v2.0.0
         with:
           publish-dir: "./docs/site"
@@ -38,7 +45,7 @@ jobs:
           enable-pull-request-comment: true
           enable-commit-comment: false
           overwrites-pull-request-comment: true
-          alias: deploy-preview-${{ steps.commit_hash.outputs.GIT_SHORT_HASH }}
+          alias: preview-${{ steps.get_id.outputs.PREVIEW_IDENTIFIER }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
