@@ -1765,7 +1765,7 @@ wheels = [
 
 [[package]]
 name = "reprexlite"
-version = "1.0.0a1"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "cyclopts" },
@@ -1788,7 +1788,6 @@ pygments = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "black" },
     { name = "markdown-callouts" },
     { name = "mdx-truly-sane-lists" },
     { name = "mike" },
@@ -1817,7 +1816,6 @@ docs = [
     { name = "vspect" },
 ]
 lint = [
-    { name = "black" },
     { name = "mypy", extra = ["install-types"] },
     { name = "ruff" },
 ]
@@ -1842,14 +1840,13 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "black" },
     { name = "markdown-callouts" },
     { name = "mdx-truly-sane-lists" },
     { name = "mike" },
     { name = "mkdocs" },
     { name = "mkdocs-jupyter" },
     { name = "mkdocs-macros-plugin" },
-    { name = "mkdocs-material" },
+    { name = "mkdocs-material", specifier = ">=9.5.23" },
     { name = "mkdocstrings", extras = ["python"] },
     { name = "mypy", extras = ["install-types"] },
     { name = "py-markdown-table" },
@@ -1864,14 +1861,13 @@ docs = [
     { name = "mkdocs" },
     { name = "mkdocs-jupyter" },
     { name = "mkdocs-macros-plugin" },
-    { name = "mkdocs-material" },
+    { name = "mkdocs-material", specifier = ">=9.5.23" },
     { name = "mkdocstrings", extras = ["python"] },
     { name = "py-markdown-table" },
     { name = "typenames" },
     { name = "vspect" },
 ]
 lint = [
-    { name = "black" },
     { name = "mypy", extras = ["install-types"] },
     { name = "ruff" },
 ]
