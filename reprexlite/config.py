@@ -14,7 +14,7 @@ from reprexlite.exceptions import (
 class ParsingMethod(str, Enum):
     """Methods for parsing input strings.
 
-    Args:
+    Attributes:
         AUTO (str): Automatically identify reprex-style or doctest-style input.
         DECLARED (str): Use configured values for parsing.
     """
@@ -24,7 +24,17 @@ class ParsingMethod(str, Enum):
 
 
 class Venue(str, Enum):
-    """Enum for specifying the output venue for a reprex."""
+    """Enum for specifying the output venue for a reprex.
+
+    Attributes:
+        GH (str): GitHub-flavored Markdown
+        DS (str): Discourse
+        SO (str): StackOverflow
+        HTML (str): HTML
+        PY (str): Python script
+        RTF (str): Rich Text Format
+        SLACK (str): Slack markup
+    """
 
     GH = "gh"
     DS = "ds"
@@ -41,9 +51,9 @@ class ReprexConfig:
     formatting.
 
     Args:
-        editor (str): Command-line program name of editor to use. If not specified, check $EDITOR
-            and $VISUAL environment variables. If 'ipython', will launch the IPython interactive
-            editor.
+        editor (Optional[str]): Command-line program name of editor to use. If not specified,
+            check $EDITOR and $VISUAL environment variables. If 'ipython', will launch the IPython
+            interactive editor.
         venue (str): Key to identify the output venue that the reprex will be shared in. Used to
             select an appropriate formatter. See "Venues Formatting" documentation for formats
             included with reprexlite.

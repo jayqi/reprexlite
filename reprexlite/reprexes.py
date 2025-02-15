@@ -26,7 +26,7 @@ class RawResult:
     """Class that holds the result of evaluated code. Use `str(...)` on an instance to produce a
     pretty-formatted comment block representation of the result.
 
-    Attributes:
+    Args:
         config (ReprexConfig): Configuration for formatting and parsing
         raw (Any): Some Python object that is the raw return value of evaluated Python code.
         stdout (str): Standard output from evaluated Python code.
@@ -69,7 +69,7 @@ class RawResult:
 class ParsedResult:
     """Class that holds parsed result from reading a reprex.
 
-    Attributes:
+    Args:
         config (ReprexConfig): Configuration for formatting and parsing
         lines (List[str]): String content of result parsed from a reprex
     """
@@ -115,7 +115,7 @@ class ParsedResult:
 class Statement:
     """Dataclass that holds a LibCST parsed statement. of code.
 
-    Attributes:
+    Args:
         config (ReprexConfig): Configuration for formatting and parsing
         stmt (Union[libcst.SimpleStatementLine, libcst.BaseCompoundStatement]): LibCST parsed
             statement.
@@ -227,7 +227,7 @@ class Statement:
 class Reprex:
     """Dataclass for a reprex, which holds Python code and results from evaluation.
 
-    Attributes:
+    Args:
         config (ReprexConfig): Configuration for formatting and parsing
         statements (List[Statement]): List of parsed Python code statements
         results (List[RawResult]): List of results evaluated from statements

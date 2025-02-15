@@ -32,20 +32,29 @@ theme:
   logo: images/reprexlite.svg
   favicon: images/reprexlite_white_blue.svg
   palette:
-    # Palette toggle for dark mode
-    - scheme: slate
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
       primary: indigo
       accent: blue
       toggle:
-        icon: material/brightness-4
+        icon: material/brightness-auto
         name: Switch to light mode
     # Palette toggle for light mode
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
       primary: indigo
       accent: blue
+      scheme: default
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: indigo
+      accent: blue
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
   custom_dir: overrides/
 
 extra_css:
@@ -75,6 +84,8 @@ plugins:
         python:
           paths: [../reprexlite]
           options:
+            # General
+            docstring_style: google
             # Headings options
             heading_level: 2
             show_root_toc_entry: false
@@ -82,13 +93,15 @@ plugins:
             show_root_heading: false
             show_category_heading: true
             # Members options
-            filters: ["!^_(?!_init__)"]
-            group_by_category: true
-            inherited_members: true
+            filters: ["!^_", "^__init__$"]
             # Docstrings options
             show_if_no_docstring: false
+            merge_init_into_class: true
             # Signatures/annotation options
+            annotations_path: brief
+            separate_signature: true
             show_signature_annotations: true
+            unwrap_annotated: true
             # Additional options
             show_source: true
   - mike:
