@@ -5,7 +5,7 @@
 [![PyPI Version](https://img.shields.io/pypi/v/reprexlite.svg)](https://pypi.org/project/reprexlite/)
 [![conda-forge Version](https://img.shields.io/conda/vn/conda-forge/reprexlite.svg)](https://anaconda.org/conda-forge/reprexlite)
 [![conda-forge feedstock](https://img.shields.io/badge/conda--forge-feedstock-yellowgreen)](https://github.com/conda-forge/reprexlite-feedstock)
-[![tests](https://github.com/jayqi/reprexlite/workflows/tests/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions?query=workflow%3Atests+branch%3Amain)
+[![tests](https://github.com/jayqi/reprexlite/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/jayqi/reprexlite/actions/workflows/tests.yml?query=workflow%3Atests+branch%3Amain)
 [![codecov](https://codecov.io/gh/jayqi/reprexlite/branch/main/graph/badge.svg)](https://codecov.io/gh/jayqi/reprexlite)
 
 **reprexlite** is a tool for rendering **repr**oducible **ex**amples of Python code for sharing. With a [convenient CLI](#command-line-interface) and lightweight dependencies, you can quickly get it up and running in any virtual environment. It has an optional [integration with IPython](#ipython-integrations) for easy use with IPython or in Jupyter or VS Code. This project is inspired by R's [reprex](https://reprex.tidyverse.org/) package.
