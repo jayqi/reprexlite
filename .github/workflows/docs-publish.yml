@@ -73,7 +73,7 @@ jobs:
           VERSION_JSON=$(uv run mike list stable -j | tee /dev/stderr)
           TITLE=$(echo $VERSION_JSON | jq -r '.title' | sed 's/ (stable)//')
           echo "TITLE=${TITLE}"
-          uv run mike retitle stable $TITLE
+          uv run mike retitle stable "${TITLE}"
 
       - name: Deploy as version
         if: github.event.inputs.deploy-as == 'version'
@@ -84,7 +84,7 @@ jobs:
             TITLE="${TITLE} (stable)"
           fi
           TAG=${{ steps.get-version-tag.outputs.VERSION_TAG }}
-          uv run mike deploy --push $TAG --title=$TITLE
+          uv run mike deploy --push $TAG --title="${TITLE}"
 
       - name: Assign stable alias
         if: github.event.inputs.is-stable == 'true'
