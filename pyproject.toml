@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "reprexlite"
-version = "1.0.0a1"
+version = "1.0.0"
 description = "Render reproducible examples of Python code for sharing."
 readme = "README.md"
 authors = [{ name = "Jay Qi", email = "jayqi.opensource@gmail.com" }]
