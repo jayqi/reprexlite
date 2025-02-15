@@ -93,7 +93,7 @@ def parse(
                 yield line, LineType.CODE
             else:
                 raise NoPrefixMatchError(
-                    f"Line {line_no+1} does not match any of prompt, continuation, or comment "
+                    f"Line {line_no + 1} does not match any of prompt, continuation, or comment "
                     f"prefixes: '{line}'"
                 )
 
