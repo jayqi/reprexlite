@@ -10,8 +10,12 @@ sync:
 
 # Run linting
 lint:
-    black --check reprexlite tests
+    ruff format --check reprexlite tests
     ruff check reprexlite tests
+
+# Run formatting
+format:
+    ruff format reprexlite tests
 
 # Run static typechecking
 typecheck:
@@ -56,3 +60,7 @@ docs: _docs-preprocess
 # Serve built docs
 docs-serve: docs
     uv tool run quickhttp docs/site/
+
+# Generate demo gif
+demo-render:
+    terminalizer render docs/demo.yml -o docs/docs/images/demo.gif -q 100
