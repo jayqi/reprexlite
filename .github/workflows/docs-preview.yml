@@ -20,20 +20,15 @@ jobs:
         run: |
           just docs
 
-      - name: Get git commit short hash
-        id: commit_hash
-        run: |
-          GIT_SHORT_HASH=
-          echo "GIT_SHORT_HASH=$GIT_SHORT_HASH" >> $GITHUB_OUTPUT
-
       - name: Get preview identifier
         id: get_id
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "PREVIEW_IDENTIFIER=${{ github.event.number }}" >> $GITHUB_ENV
+            PREVIEW_IDENTIFIER=${{ github.event.number }}
           else
-            echo "PREVIEW_IDENTIFIER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+            PREVIEW_IDENTIFIER=$(git rev-parse --short HEAD)
           fi
+          echo "PREVIEW_IDENTIFIER=$PREVIEW_IDENTIFIER" | tee -a $GITHUB_OUTPUT
 
       - name: Deploy preview to Netlify
         uses: nwtgck/actions-netlify@v2.0.0
