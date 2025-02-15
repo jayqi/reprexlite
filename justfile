@@ -2,7 +2,7 @@ python := shell("cat .python-version")
 
 # Print this help documentation
 help:
-  just --list
+    just --list
 
 # Sync dev environment dependencies
 sync:
@@ -51,9 +51,7 @@ _docs-preprocess:
 
 # Generate docs website
 docs: _docs-preprocess
-    uv run --python {{python}} --no-dev --group docs --isolated \
-        --directory docs/ \
-        python -I -m mkdocs build
+    uv run --directory docs/ python -I -m mkdocs build
 
 # Serve built docs
 docs-serve: docs
