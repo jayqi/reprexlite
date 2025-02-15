@@ -1,0 +1,37 @@
+name: docs-publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build docs and publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: extractions/setup-just@v2
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Build docs
+        run: |
+          just docs
+
+      - name: Set git user to github-actions[bot]
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Fetch gh-pages branch
+        run: |
+          git fetch origin gh-pages --depth=1
+
+      - name: Deploy production docs to gh-pages
+        run: |
+          uv run --no-dev --group docs --isolated \
+            --directory docs/ \
+            mike deploy --push ~latest --title=latest

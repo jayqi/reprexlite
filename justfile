@@ -33,8 +33,8 @@ generate-test-assets:
     uv run --python {{python}} --all-extras --no-dev --group test  --isolated \
         python -I tests/expected_formatted.py
 
-# Generate docs website
-docs:
+# Preprocessing for docs
+_docs-preprocess:
     @echo "# CLI Help Documentation\n" > docs/docs/cli.md
     @echo '```bash' >> docs/docs/cli.md
     @echo "reprex --help" >> docs/docs/cli.md
@@ -48,10 +48,13 @@ docs:
         > docs/docs/index.md
     sed 's|https://jayqi.github.io/reprexlite/stable/||g' CHANGELOG.md \
         > docs/docs/changelog.md
+
+# Generate docs website
+docs: _docs-preprocess
     uv run --python {{python}} --no-dev --group docs --isolated \
         --directory docs/ \
         python -I -m mkdocs build
 
 # Serve built docs
-docs-serve:
+docs-serve: docs
     uv tool run quickhttp docs/site/

@@ -1,14 +1,12 @@
-name: docs
+name: docs-preview
 
 on:
-  push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build docs from main
+    name: Build docs and deploy preview
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +20,12 @@ jobs:
         run: |
           just docs
 
+      - name: Get git commit short hash
+        id: commit_hash
+        run: |
+          GIT_SHORT_HASH=$(git rev-parse --short HEAD)
+          echo "GIT_SHORT_HASH=$GIT_SHORT_HASH" >> $GITHUB_OUTPUT
+
       - name: Deploy docs preview to Netlify
         if: |
           github.event.pull_request != null
@@ -34,19 +38,8 @@ jobs:
           enable-pull-request-comment: true
           enable-commit-comment: false
           overwrites-pull-request-comment: true
-          alias: deploy-preview-${{ github.event.number }}
+          alias: deploy-preview-${{ steps.commit_hash.outputs.GIT_SHORT_HASH }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
-
-      - name: Deploy production docs to gh-pages
-        if: |
-          github.event.pull_request == null
-        run: |
-          git fetch origin gh-pages --depth=1
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          uv run --no-dev --group docs --isolated \
-            --directory docs/ \
-            mike deploy --push ~latest --title=latest
