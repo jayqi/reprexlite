@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://jayqi.github.io/reprexlite/v1.0.0a1/cli/">
+        <link rel="canonical" href="https://jayqi.github.io/reprexlite/stable/cli/">
       
       
         <link rel="prev" href="../dos-and-donts/">
@@ -94,7 +94,7 @@
           <aside class="md-banner md-banner--warning">
             <div class="md-banner__inner md-grid md-typeset">
               
-You're not viewing the most recent stable version.
+You are not viewing the current stable version.
 <a href="../..">
     <strong>Click here to go to stable.</strong>
 </a>
@@ -807,91 +807,227 @@ You're not viewing the most recent stable version.
 <h1 id="cli-help-documentation">CLI Help Documentation<a class="headerlink" href="#cli-help-documentation" title="Permanent link">&para;</a></h1>
 <div class="highlight"><pre><span></span><code>reprex<span class="w"> </span>--help
 </code></pre></div>
-<div class="highlight"><pre><span></span><code> Usage: reprex [OPTIONS]                                                                                                                                    
+<div class="highlight"><pre><span></span><code> Usage: reprex [OPTIONS]                                                        
 
- Render reproducible examples of Python code for sharing. Your code will be executed and, in the default output style, the results will be embedded as      
- comments below their associated lines.                                                                                                                     
- By default, your system&#39;s default command-line text editor will open for you to type or paste in your code. This editor can be changed by setting the      
- VISUAL or EDITOR environment variable, or by explicitly passing in the --editor program. You can instead specify an input file with the --infile / -i      
- option. If IPython is installed, an interactive IPython editor can also be launched using the --ipython flag.                                              
- Additional markup will be added that is appropriate to the choice of venue formatting. For example, for the default `gh` venue for GitHub Flavored         
- Markdown, the final reprex output will look like:                                                                                                          
- ----------------------------------------                                                                                                                   
- ```python                                                                                                                                                  
- arr = [1, 2, 3, 4, 5]                                                                                                                                      
- [x + 1 for x in arr]                                                                                                                                       
- #&gt; [2, 3, 4, 5, 6]                                                                                                                                         
- max(arr) - min(arr)                                                                                                                                        
- #&gt; 4                                                                                                                                                       
- ```                                                                                                                                                        
+ Render reproducible examples of Python code for sharing. Your code will be     
+ executed and, in the default output style, the results will be embedded as     
+ comments below their associated lines.                                         
+ By default, your system&#39;s default command-line text editor will open for you   
+ to type or paste in your code. This editor can be changed by setting the       
+ VISUAL or EDITOR environment variable, or by explicitly passing in the         
+ --editor program. You can instead specify an input file with the --infile / -i 
+ option. If IPython is installed, an interactive IPython editor can also be     
+ launched using the --ipython flag.                                             
+ Additional markup will be added that is appropriate to the choice of venue     
+ formatting. For example, for the default `gh` venue for GitHub Flavored        
+ Markdown, the final reprex output will look like:                              
+ ----------------------------------------                                       
+ ```python                                                                      
+ arr = [1, 2, 3, 4, 5]                                                          
+ [x + 1 for x in arr]                                                           
+ #&gt; [2, 3, 4, 5, 6]                                                             
+ max(arr) - min(arr)                                                            
+ #&gt; 4                                                                           
+ ```                                                                            
 
- &lt;sup&gt;Created at 2021-02-27 00:13:55 PST by [reprexlite](https://github.com/jayqi/reprexlite) v1.0.0a1&lt;/sup&gt;                                                
- ----------------------------------------                                                                                                                   
+ &lt;sup&gt;Created at 2021-02-27 00:13:55 PST by                                     
+ [reprexlite](https://github.com/jayqi/reprexlite) v1.0.0a1&lt;/sup&gt;               
+ ----------------------------------------                                       
 
- The supported venue formats are:                                                                                                                           
+ The supported venue formats are:                                               
 
- - gh : GitHub Flavored Markdown                                                                                                                            
- - so : StackOverflow, alias for gh                                                                                                                         
- - ds : Discourse, alias for gh                                                                                                                             
- - html : HTML                                                                                                                                              
- - py : Python script                                                                                                                                       
- - rtf : Rich Text Format                                                                                                                                   
- - slack : Slack                                                                                                                                            
+ - gh : GitHub Flavored Markdown                                                
+ - so : StackOverflow, alias for gh                                             
+ - ds : Discourse, alias for gh                                                 
+ - html : HTML                                                                  
+ - py : Python script                                                           
+ - rtf : Rich Text Format                                                       
+ - slack : Slack                                                                
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --editor              -e                           TEXT                          Specify editor to open in. Can be full path to executable or name to be │
-│                                                                                  searched on system search path. If None, will use Click&#39;s automatic     │
-│                                                                                  editor detection. This will typically use the editor set to environment │
-│                                                                                  variable VISUAL or EDITOR. If value is &#39;ipython&#39; and IPython is         │
-│                                                                                  installed, this will launch the interactive IPython editor where all    │
-│                                                                                  cells are automatically run through reprexlite.                         │
-│                                                                                  [default: None]                                                         │
-│ --infile              -i                           PATH                          Read code from an input file instead of entering in an editor.          │
-│                                                                                  [default: None]                                                         │
-│ --outfile             -o                           PATH                          Write output to file instead of printing to console. [default: None]    │
-│ --venue               -v                           [gh|so|ds|html|py|rtf|slack]  Key to identify the output venue that the reprex will be shared in.     │
-│                                                                                  Used to select an appropriate formatter. See &quot;Venues Formatting&quot;        │
-│                                                                                  documentation for formats included with reprexlite.                     │
-│                                                                                  [default: gh]                                                           │
-│ --advertise               --no-advertise                                         Whether to include a footer that credits reprexlite. If unspecified,    │
-│                                                                                  will depend on specified venue formatter&#39;s default.                     │
-│ --session-info            --no-session-info                                      Include details about session and environment that the reprex was       │
-│                                                                                  generated with.                                                         │
-│                                                                                  [default: no-session-info]                                              │
-│ --style                   --no-style                                             Whether to autoformat code with black. Requires black to be installed.  │
-│                                                                                  [default: no-style]                                                     │
-│ --prompt                                           TEXT                          Prefix to use as primary prompt for code lines.                         │
-│ --continuation                                     TEXT                          Prefix to use as secondary prompt for continued code lines.             │
-│ --comment                                          TEXT                          Prefix to use for results returned by expressions. [default: #&gt;]        │
-│ --keep-old-results        --no-keep-old-results                                  Whether to additionally include results of expressions detected in the  │
-│                                                                                  original input when formatting the reprex output.                       │
-│                                                                                  [default: no-keep-old-results]                                          │
-│ --parsing-method                                   [auto|declared]               Method for parsing input. &#39;auto&#39; will automatically detect either       │
-│                                                                                  default reprex-style input or standard doctest-style input. &#39;declared&#39;  │
-│                                                                                  will allow you to specify custom line prefixes. Values for &#39;prompt&#39;,    │
-│                                                                                  &#39;continuation&#39;, and &#39;comment&#39; will be used for both output formatting   │
-│                                                                                  and input parsing, unless the associated &#39;input-*&#39; override settings    │
-│                                                                                  are supplied.                                                           │
-│                                                                                  [default: auto]                                                         │
-│ --input-prompt                                     TEXT                          Prefix to use as primary prompt for code lines when parsing input. Only │
-│                                                                                  used if &#39;parsing-method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used    │
-│                                                                                  for both input parsing and output formatting.                           │
-│                                                                                  [default: None]                                                         │
-│ --input-continuation                               TEXT                          Prefix to use as secondary prompt for continued code lines when parsing │
-│                                                                                  input. Only used if &#39;parsing-method&#39; is &#39;declared&#39;. If not set,         │
-│                                                                                  &#39;prompt&#39; is used for both input parsing and output formatting.          │
-│                                                                                  [default: None]                                                         │
-│ --input-comment                                    TEXT                          Prefix to use for results returned by expressions when parsing input.   │
-│                                                                                  Only used if &#39;parsing-method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is    │
-│                                                                                  used for both input parsing and output formatting.                      │
-│                                                                                  [default: None]                                                         │
-│ --verbose                                                                                                                                                │
-│ --version                                                                        Show reprexlite version and exit.                                       │
-│ --install-completion                                                             Install completion for the current shell.                               │
-│ --show-completion                                                                Show completion for the current shell, to copy it or customize the      │
-│                                                                                  installation.                                                           │
-│ --help                                                                           Show this message and exit.                                             │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --editor          -e                      TEXT             Specify editor to │
+│                                                            open in. Can be   │
+│                                                            full path to      │
+│                                                            executable or     │
+│                                                            name to be        │
+│                                                            searched on       │
+│                                                            system search     │
+│                                                            path. If None,    │
+│                                                            will use Click&#39;s  │
+│                                                            automatic editor  │
+│                                                            detection. This   │
+│                                                            will typically    │
+│                                                            use the editor    │
+│                                                            set to            │
+│                                                            environment       │
+│                                                            variable VISUAL   │
+│                                                            or EDITOR. If     │
+│                                                            value is          │
+│                                                            &#39;ipython&#39; and     │
+│                                                            IPython is        │
+│                                                            installed, this   │
+│                                                            will launch the   │
+│                                                            interactive       │
+│                                                            IPython editor    │
+│                                                            where all cells   │
+│                                                            are automatically │
+│                                                            run through       │
+│                                                            reprexlite.       │
+│                                                            [default: None]   │
+│ --infile          -i                      PATH             Read code from an │
+│                                                            input file        │
+│                                                            instead of        │
+│                                                            entering in an    │
+│                                                            editor.           │
+│                                                            [default: None]   │
+│ --outfile         -o                      PATH             Write output to   │
+│                                                            file instead of   │
+│                                                            printing to       │
+│                                                            console.          │
+│                                                            [default: None]   │
+│ --venue           -v                      [gh|so|ds|html|  Key to identify   │
+│                                           py|rtf|slack]    the output venue  │
+│                                                            that the reprex   │
+│                                                            will be shared    │
+│                                                            in. Used to       │
+│                                                            select an         │
+│                                                            appropriate       │
+│                                                            formatter. See    │
+│                                                            &quot;Venues           │
+│                                                            Formatting&quot;       │
+│                                                            documentation for │
+│                                                            formats included  │
+│                                                            with reprexlite.  │
+│                                                            [default: gh]     │
+│ --advertise           --no-advertise                       Whether to        │
+│                                                            include a footer  │
+│                                                            that credits      │
+│                                                            reprexlite. If    │
+│                                                            unspecified, will │
+│                                                            depend on         │
+│                                                            specified venue   │
+│                                                            formatter&#39;s       │
+│                                                            default.          │
+│ --session-info        --no-session-in…                     Include details   │
+│                                                            about session and │
+│                                                            environment that  │
+│                                                            the reprex was    │
+│                                                            generated with.   │
+│                                                            [default:         │
+│                                                            no-session-info]  │
+│ --style               --no-style                           Whether to        │
+│                                                            autoformat code   │
+│                                                            with black.       │
+│                                                            Requires black to │
+│                                                            be installed.     │
+│                                                            [default:         │
+│                                                            no-style]         │
+│ --prompt                                  TEXT             Prefix to use as  │
+│                                                            primary prompt    │
+│                                                            for code lines.   │
+│ --continuation                            TEXT             Prefix to use as  │
+│                                                            secondary prompt  │
+│                                                            for continued     │
+│                                                            code lines.       │
+│ --comment                                 TEXT             Prefix to use for │
+│                                                            results returned  │
+│                                                            by expressions.   │
+│                                                            [default: #&gt;]     │
+│ --keep-old-resu…      --no-keep-old-r…                     Whether to        │
+│                                                            additionally      │
+│                                                            include results   │
+│                                                            of expressions    │
+│                                                            detected in the   │
+│                                                            original input    │
+│                                                            when formatting   │
+│                                                            the reprex        │
+│                                                            output.           │
+│                                                            [default:         │
+│                                                            no-keep-old-resu… │
+│ --parsing-method                          [auto|declared]  Method for        │
+│                                                            parsing input.    │
+│                                                            &#39;auto&#39; will       │
+│                                                            automatically     │
+│                                                            detect either     │
+│                                                            default           │
+│                                                            reprex-style      │
+│                                                            input or standard │
+│                                                            doctest-style     │
+│                                                            input. &#39;declared&#39; │
+│                                                            will allow you to │
+│                                                            specify custom    │
+│                                                            line prefixes.    │
+│                                                            Values for        │
+│                                                            &#39;prompt&#39;,         │
+│                                                            &#39;continuation&#39;,   │
+│                                                            and &#39;comment&#39;     │
+│                                                            will be used for  │
+│                                                            both output       │
+│                                                            formatting and    │
+│                                                            input parsing,    │
+│                                                            unless the        │
+│                                                            associated        │
+│                                                            &#39;input-*&#39;         │
+│                                                            override settings │
+│                                                            are supplied.     │
+│                                                            [default: auto]   │
+│ --input-prompt                            TEXT             Prefix to use as  │
+│                                                            primary prompt    │
+│                                                            for code lines    │
+│                                                            when parsing      │
+│                                                            input. Only used  │
+│                                                            if                │
+│                                                            &#39;parsing-method&#39;  │
+│                                                            is &#39;declared&#39;. If │
+│                                                            not set, &#39;prompt&#39; │
+│                                                            is used for both  │
+│                                                            input parsing and │
+│                                                            output            │
+│                                                            formatting.       │
+│                                                            [default: None]   │
+│ --input-continu…                          TEXT             Prefix to use as  │
+│                                                            secondary prompt  │
+│                                                            for continued     │
+│                                                            code lines when   │
+│                                                            parsing input.    │
+│                                                            Only used if      │
+│                                                            &#39;parsing-method&#39;  │
+│                                                            is &#39;declared&#39;. If │
+│                                                            not set, &#39;prompt&#39; │
+│                                                            is used for both  │
+│                                                            input parsing and │
+│                                                            output            │
+│                                                            formatting.       │
+│                                                            [default: None]   │
+│ --input-comment                           TEXT             Prefix to use for │
+│                                                            results returned  │
+│                                                            by expressions    │
+│                                                            when parsing      │
+│                                                            input. Only used  │
+│                                                            if                │
+│                                                            &#39;parsing-method&#39;  │
+│                                                            is &#39;declared&#39;. If │
+│                                                            not set, &#39;prompt&#39; │
+│                                                            is used for both  │
+│                                                            input parsing and │
+│                                                            output            │
+│                                                            formatting.       │
+│                                                            [default: None]   │
+│ --verbose                                                                    │
+│ --version                                                  Show reprexlite   │
+│                                                            version and exit. │
+│ --install-compl…                                           Install           │
+│                                                            completion for    │
+│                                                            the current       │
+│                                                            shell.            │
+│ --show-completi…                                           Show completion   │
+│                                                            for the current   │
+│                                                            shell, to copy it │
+│                                                            or customize the  │
+│                                                            installation.     │
+│ --help                                                     Show this message │
+│                                                            and exit.         │
+╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
 
 
@@ -945,7 +1081,7 @@ You're not viewing the most recent stable version.
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "stable", "provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.f1b6f286.min.js"></script>
