@@ -57,7 +57,7 @@ docs = [
   "mkdocs",
   "mkdocs-jupyter",
   "mkdocs-macros-plugin",
-  "mkdocs-material",
+  "mkdocs-material>=9.5.23",
   "mike",
   "mkdocstrings[python]",
   "mdx-truly-sane-lists",
