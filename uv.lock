@@ -371,7 +371,7 @@ toml = [
 
 [[package]]
 name = "cyclopts"
-version = "3.8.1"
+version = "3.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -381,9 +381,9 @@ dependencies = [
     { name = "rich-rst" },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7e/e6/4e449d3930e3b9fe6012ad560a46bff5b1d7076a03aed8dae507b2b28570/cyclopts-3.8.1.tar.gz", hash = "sha256:99716e909fb30a4c793e162add90cfeab213c8c4081dc393c938d72794efde59", size = 66454 }
+sdist = { url = "https://files.pythonhosted.org/packages/dc/d6/c94e3f2e25695497b37ec630d7f6fcab3d73332ab6f7ed29b8a9e3570411/cyclopts-3.9.0.tar.gz", hash = "sha256:47f594c171fbab02612764432f4f2e36764e82d685fbfc5763a67490f97da113", size = 66833 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b0/9d/6fde69937fec690c21b47077c5111bdd90c409aa43f2b216eb3425b206e9/cyclopts-3.8.1-py3-none-any.whl", hash = "sha256:0c8b256a2d1f20402edb61b778b6b47c9656a00d6bfa59fb0d575a45521368c0", size = 76129 },
+    { url = "https://files.pythonhosted.org/packages/40/80/edd037956594abeab235e1e12fd695fdd234734c3775c55b0c6ca2748a41/cyclopts-3.9.0-py3-none-any.whl", hash = "sha256:b41b85124bfb85ccfdfc5b9ccc8bc4b08b974c8b725168652a8dbc6e7e194154", size = 76537 },
 ]
 
 [[package]]
@@ -1120,7 +1120,7 @@ python = [
 
 [[package]]
 name = "mkdocstrings-python"
-version = "1.15.0"
+version = "1.16.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "griffe" },
@@ -1128,9 +1128,9 @@ dependencies = [
     { name = "mkdocstrings" },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/28/5e/ea531f1798d6b614f87b7a1191f8bfda864767adecef3c75ec87f30e0a3d/mkdocstrings_python-1.15.0.tar.gz", hash = "sha256:2bfecbbe1252c67281408a6567d59545f4979931110f01ab625aa8c227c06edc", size = 422613 }
+sdist = { url = "https://files.pythonhosted.org/packages/82/a4/3475fd03f3d566ca05872cec76a86d94ead23d99bbf6a89035b924a3e9b6/mkdocstrings_python-1.16.1.tar.gz", hash = "sha256:d7152d17da74d3616a0f17df5d2da771ecf7340518c158650e5a64a0a95973f4", size = 423399 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6f/d7/1d35cce198f76e8ae4010a71ff5acabe8b75aeb35f8c3d920e175a6476ca/mkdocstrings_python-1.15.0-py3-none-any.whl", hash = "sha256:77aced1bb28840d7d3510f77353319eeb450961880d87f9c53fdab331ba0120d", size = 449068 },
+    { url = "https://files.pythonhosted.org/packages/00/f7/433201c48d4b59208dcbae6e1481febdf732ae20ecb2aee84a4ea142f043/mkdocstrings_python-1.16.1-py3-none-any.whl", hash = "sha256:b88ff6fc6a293cee9cb42313f1cba37a2c5cdf37bcc60b241ec7ab66b5d41b58", size = 449139 },
 ]
 
 [[package]]
@@ -1796,6 +1796,7 @@ dev = [
     { name = "mkdocs-macros-plugin" },
     { name = "mkdocs-material" },
     { name = "mkdocstrings", extra = ["python"] },
+    { name = "mkdocstrings-python" },
     { name = "mypy", extra = ["install-types"] },
     { name = "py-markdown-table" },
     { name = "ruff" },
@@ -1811,6 +1812,7 @@ docs = [
     { name = "mkdocs-macros-plugin" },
     { name = "mkdocs-material" },
     { name = "mkdocstrings", extra = ["python"] },
+    { name = "mkdocstrings-python" },
     { name = "py-markdown-table" },
     { name = "typenames" },
     { name = "vspect" },
@@ -1848,6 +1850,7 @@ dev = [
     { name = "mkdocs-macros-plugin" },
     { name = "mkdocs-material", specifier = ">=9.5.23" },
     { name = "mkdocstrings", extras = ["python"] },
+    { name = "mkdocstrings-python", specifier = ">=1.15.1" },
     { name = "mypy", extras = ["install-types"] },
     { name = "py-markdown-table" },
     { name = "ruff" },
@@ -1863,6 +1866,7 @@ docs = [
     { name = "mkdocs-macros-plugin" },
     { name = "mkdocs-material", specifier = ">=9.5.23" },
     { name = "mkdocstrings", extras = ["python"] },
+    { name = "mkdocstrings-python", specifier = ">=1.15.1" },
     { name = "py-markdown-table" },
     { name = "typenames" },
     { name = "vspect" },
