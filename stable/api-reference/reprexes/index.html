@@ -71,7 +71,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -144,20 +144,30 @@ You are not viewing the current stable version.
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
       </label>
     
   
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       </label>
     
   
@@ -1026,7 +1036,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.reprexes.ParsedResult" class="doc doc-heading">
-            <code>ParsedResult</code>
+            <span class="doc doc-object-name doc-class-name">ParsedResult</span>
 
 
   <span class="doc doc-labels">
@@ -1034,7 +1044,8 @@ You are not viewing the current stable version.
   </span>
 
 <a href="#reprexlite.reprexes.ParsedResult" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span><span class="p">,</span> <span class="n">lines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -1042,18 +1053,21 @@ You are not viewing the current stable version.
         <p>Class that holds parsed result from reading a reprex.</p>
 
 
-<p><span class="doc-section-title">Attributes:</span></p>
+<p><span class="doc-section-title">Parameters:</span></p>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Type</th>
           <th>Description</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.ParsedResult.config">config</span></code></td>
+            <td>
+                <code>config</code>
+            </td>
             <td>
                   <code><a class="autorefs autorefs-internal" title="reprexlite.config.ReprexConfig" href="../config/#reprexlite.config.ReprexConfig">ReprexConfig</a></code>
             </td>
@@ -1062,9 +1076,14 @@ You are not viewing the current stable version.
                 <p>Configuration for formatting and parsing</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.ParsedResult.lines">lines</span></code></td>
+            <td>
+                <code>lines</code>
+            </td>
             <td>
                   <code><span title="typing.List">List</span>[str]</code>
             </td>
@@ -1072,6 +1091,9 @@ You are not viewing the current stable version.
               <div class="doc-md-description">
                 <p>String content of result parsed from a reprex</p>
               </div>
+            </td>
+            <td>
+                <em>required</em>
             </td>
           </tr>
       </tbody>
@@ -1082,97 +1104,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ParsedResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class that holds parsed result from reading a reprex.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        config (ReprexConfig): Configuration for formatting and parsing</span>
-<span class="sd">        lines (List[str]): String content of result parsed from a reprex</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span>
-    <span class="n">lines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">UnexpectedError</span><span class="p">(</span><span class="s2">&quot;Should not print a ParsedResult if it tests False.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">as_result_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">comment</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">comment</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tests whether instance contains anything to print.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">joined</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;ParsedResult &#39;</span><span class="si">{</span><span class="n">to_snippet</span><span class="p">(</span><span class="n">joined</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ParsedResult</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">lines</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">RawResult</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
-                <span class="k">return</span> <span class="kc">True</span>
-            <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_result_str</span><span class="p">()</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1199,7 +1130,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.reprexes.RawResult" class="doc doc-heading">
-            <code>RawResult</code>
+            <span class="doc doc-object-name doc-class-name">RawResult</span>
 
 
   <span class="doc doc-labels">
@@ -1207,7 +1138,10 @@ You are not viewing the current stable version.
   </span>
 
 <a href="#reprexlite.reprexes.RawResult" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">RawResult</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span><span class="p">,</span> <span class="n">raw</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">stdout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -1216,18 +1150,21 @@ You are not viewing the current stable version.
 pretty-formatted comment block representation of the result.</p>
 
 
-<p><span class="doc-section-title">Attributes:</span></p>
+<p><span class="doc-section-title">Parameters:</span></p>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Type</th>
           <th>Description</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.RawResult.config">config</span></code></td>
+            <td>
+                <code>config</code>
+            </td>
             <td>
                   <code><a class="autorefs autorefs-internal" title="reprexlite.config.ReprexConfig" href="../config/#reprexlite.config.ReprexConfig">ReprexConfig</a></code>
             </td>
@@ -1236,9 +1173,14 @@ pretty-formatted comment block representation of the result.</p>
                 <p>Configuration for formatting and parsing</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.RawResult.raw">raw</span></code></td>
+            <td>
+                <code>raw</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
@@ -1247,9 +1189,14 @@ pretty-formatted comment block representation of the result.</p>
                 <p>Some Python object that is the raw return value of evaluated Python code.</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.RawResult.stdout">stdout</span></code></td>
+            <td>
+                <code>stdout</code>
+            </td>
             <td>
                   <code>str</code>
             </td>
@@ -1257,6 +1204,9 @@ pretty-formatted comment block representation of the result.</p>
               <div class="doc-md-description">
                 <p>Standard output from evaluated Python code.</p>
               </div>
+            </td>
+            <td>
+                <em>required</em>
             </td>
           </tr>
       </tbody>
@@ -1267,93 +1217,6 @@ pretty-formatted comment block representation of the result.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">RawResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class that holds the result of evaluated code. Use `str(...)` on an instance to produce a</span>
-<span class="sd">    pretty-formatted comment block representation of the result.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        config (ReprexConfig): Configuration for formatting and parsing</span>
-<span class="sd">        raw (Any): Some Python object that is the raw return value of evaluated Python code.</span>
-<span class="sd">        stdout (str): Standard output from evaluated Python code.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span>
-    <span class="n">raw</span><span class="p">:</span> <span class="n">Any</span>
-    <span class="n">stdout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">UnexpectedError</span><span class="p">(</span><span class="s2">&quot;Should not print a RawResult if it tests False.&quot;</span><span class="p">)</span>
-        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">comment</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">comment</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tests whether instance contains anything to print.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;&lt;RawResult &#39;</span><span class="si">{</span><span class="n">to_snippet</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; &#39;</span><span class="si">{</span><span class="n">to_snippet</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;&quot;</span>
-        <span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">RawResult</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">raw</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">stdout</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1380,7 +1243,7 @@ pretty-formatted comment block representation of the result.</p>
 
 
 <h3 id="reprexlite.reprexes.Reprex" class="doc doc-heading">
-            <code>Reprex</code>
+            <span class="doc doc-object-name doc-class-name">Reprex</span>
 
 
   <span class="doc doc-labels">
@@ -1388,7 +1251,14 @@ pretty-formatted comment block representation of the result.</p>
   </span>
 
 <a href="#reprexlite.reprexes.Reprex" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Reprex</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span><span class="p">,</span>
+    <span class="n">statements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Statement</span><span class="p">],</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RawResult</span><span class="p">],</span>
+    <span class="n">old_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ParsedResult</span><span class="p">],</span>
+    <span class="n">scope</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -1396,18 +1266,21 @@ pretty-formatted comment block representation of the result.</p>
         <p>Dataclass for a reprex, which holds Python code and results from evaluation.</p>
 
 
-<p><span class="doc-section-title">Attributes:</span></p>
+<p><span class="doc-section-title">Parameters:</span></p>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Type</th>
           <th>Description</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.Reprex.config">config</span></code></td>
+            <td>
+                <code>config</code>
+            </td>
             <td>
                   <code><a class="autorefs autorefs-internal" title="reprexlite.config.ReprexConfig" href="../config/#reprexlite.config.ReprexConfig">ReprexConfig</a></code>
             </td>
@@ -1416,9 +1289,14 @@ pretty-formatted comment block representation of the result.</p>
                 <p>Configuration for formatting and parsing</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.Reprex.statements">statements</span></code></td>
+            <td>
+                <code>statements</code>
+            </td>
             <td>
                   <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="reprexlite.reprexes.Statement" href="#reprexlite.reprexes.Statement">Statement</a>]</code>
             </td>
@@ -1427,9 +1305,14 @@ pretty-formatted comment block representation of the result.</p>
                 <p>List of parsed Python code statements</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.Reprex.results">results</span></code></td>
+            <td>
+                <code>results</code>
+            </td>
             <td>
                   <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="reprexlite.reprexes.RawResult" href="#reprexlite.reprexes.RawResult">RawResult</a>]</code>
             </td>
@@ -1438,9 +1321,14 @@ pretty-formatted comment block representation of the result.</p>
                 <p>List of results evaluated from statements</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.Reprex.old_results">old_results</span></code></td>
+            <td>
+                <code>old_results</code>
+            </td>
             <td>
                   <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="reprexlite.reprexes.ParsedResult" href="#reprexlite.reprexes.ParsedResult">ParsedResult</a>]</code>
             </td>
@@ -1449,9 +1337,14 @@ pretty-formatted comment block representation of the result.</p>
                 <p>List of any old results parsed from input code</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.Reprex.scope">scope</span></code></td>
+            <td>
+                <code>scope</code>
+            </td>
             <td>
                   <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
             </td>
@@ -1459,6 +1352,9 @@ pretty-formatted comment block representation of the result.</p>
               <div class="doc-md-description">
                 <p>Dictionary holding the scope that the reprex was evaluated in</p>
               </div>
+            </td>
+            <td>
+                <em>required</em>
             </td>
           </tr>
       </tbody>
@@ -1469,455 +1365,6 @@ pretty-formatted comment block representation of the result.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span>
-<span class="normal">344</span>
-<span class="normal">345</span>
-<span class="normal">346</span>
-<span class="normal">347</span>
-<span class="normal">348</span>
-<span class="normal">349</span>
-<span class="normal">350</span>
-<span class="normal">351</span>
-<span class="normal">352</span>
-<span class="normal">353</span>
-<span class="normal">354</span>
-<span class="normal">355</span>
-<span class="normal">356</span>
-<span class="normal">357</span>
-<span class="normal">358</span>
-<span class="normal">359</span>
-<span class="normal">360</span>
-<span class="normal">361</span>
-<span class="normal">362</span>
-<span class="normal">363</span>
-<span class="normal">364</span>
-<span class="normal">365</span>
-<span class="normal">366</span>
-<span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
-<span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span>
-<span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span>
-<span class="normal">442</span>
-<span class="normal">443</span>
-<span class="normal">444</span>
-<span class="normal">445</span>
-<span class="normal">446</span>
-<span class="normal">447</span>
-<span class="normal">448</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Reprex</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass for a reprex, which holds Python code and results from evaluation.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        config (ReprexConfig): Configuration for formatting and parsing</span>
-<span class="sd">        statements (List[Statement]): List of parsed Python code statements</span>
-<span class="sd">        results (List[RawResult]): List of results evaluated from statements</span>
-<span class="sd">        old_results (List[ParsedResult]): List of any old results parsed from input code</span>
-<span class="sd">        scope (Dict[str, Any]): Dictionary holding the scope that the reprex was evaluated in</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span>
-    <span class="n">statements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Statement</span><span class="p">]</span>
-    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RawResult</span><span class="p">]</span>
-    <span class="n">old_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ParsedResult</span><span class="p">]</span>
-    <span class="n">scope</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statements</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">old_results</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="n">UnexpectedError</span><span class="p">(</span>
-                <span class="s2">&quot;statements, results, and old_results should all be the same length. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Got: </span><span class="si">{</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statements</span><span class="p">),</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">),</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">old_results</span><span class="p">))</span><span class="si">}</span><span class="s2">.&quot;</span>
-            <span class="p">)</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_input</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span>
-        <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">scope</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Reprex instance from parsing and evaluating code from a string.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            input (str): Input code</span>
-<span class="sd">            config (Optional[ReprexConfig], optional): Configuration. Defaults to None, which will</span>
-<span class="sd">                use default settings.</span>
-<span class="sd">            scope (Optional[Dict[str, Any]], optional): Dictionary holding scope that the parsed</span>
-<span class="sd">                code will be evaluated with. Defaults to None, which will create an empty</span>
-<span class="sd">                dictionary.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Reprex: New instance of Reprex.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">config</span> <span class="o">=</span> <span class="n">ReprexConfig</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">parsing_method</span> <span class="o">==</span> <span class="n">ParsingMethod</span><span class="o">.</span><span class="n">AUTO</span><span class="p">:</span>
-            <span class="n">lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">auto_parse</span><span class="p">(</span><span class="nb">input</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">parsing_method</span> <span class="o">==</span> <span class="n">ParsingMethod</span><span class="o">.</span><span class="n">DECLARED</span><span class="p">:</span>
-            <span class="n">lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-                <span class="n">parse</span><span class="p">(</span>
-                    <span class="nb">input</span><span class="p">,</span>
-                    <span class="n">prompt</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">resolved_input_prompt</span><span class="p">,</span>
-                    <span class="n">continuation</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">resolved_input_continuation</span><span class="p">,</span>
-                    <span class="n">comment</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">resolved_input_comment</span><span class="p">,</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">UnexpectedError</span><span class="p">(</span>  <span class="c1"># pragma: nocover</span>
-                <span class="sa">f</span><span class="s2">&quot;Parsing method </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">parsing_method</span><span class="si">}</span><span class="s2"> is not implemented.&quot;</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_input_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_input_lines</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">lines</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">LineType</span><span class="p">]],</span>
-        <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">scope</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a Reprex instance from the output of [parse][reprexlite.parsing.parse].</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            lines (Sequence[Tuple[str, LineType]]): Output from parse.</span>
-<span class="sd">            config (Optional[ReprexConfig], optional): Configuration. Defaults to None, which will</span>
-<span class="sd">                use default settings.</span>
-<span class="sd">            scope (Optional[Dict[str, Any]], optional): Dictionary holding scope that the parsed</span>
-<span class="sd">                code will be evaluated with. Defaults to None, which will create an empty</span>
-<span class="sd">                dictionary.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Reprex: New instance of Reprex.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">config</span> <span class="o">=</span> <span class="n">ReprexConfig</span><span class="p">()</span>
-        <span class="n">statements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Statement</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">old_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ParsedResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">current_code_block</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">current_result_block</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">line_content</span><span class="p">,</span> <span class="n">line_type</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">CODE</span><span class="p">:</span>
-                    <span class="c1"># Flush results</span>
-                    <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
-                        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
-                        <span class="n">current_result_block</span> <span class="o">=</span> <span class="p">[]</span>
-                    <span class="c1"># Append line to current code</span>
-                    <span class="n">current_code_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">line_type</span> <span class="ow">is</span> <span class="n">LineType</span><span class="o">.</span><span class="n">RESULT</span><span class="p">:</span>
-                    <span class="c1"># Flush code</span>
-                    <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
-                        <span class="c1"># Parse code and create Statements</span>
-                        <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">))</span>
-                        <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
-                            <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
-                            <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
-                            <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
-                        <span class="p">)</span>
-                        <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
-                        <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
-                        <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
-                            <span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-                        <span class="p">)</span>
-                        <span class="c1"># Reset current code block</span>
-                        <span class="n">current_code_block</span> <span class="o">=</span> <span class="p">[]</span>
-                    <span class="c1"># Append line to current results</span>
-                    <span class="n">current_result_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_content</span><span class="p">)</span>
-            <span class="c1"># Flush code</span>
-            <span class="k">if</span> <span class="n">current_code_block</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">current_code_block</span><span class="p">):</span>
-                    <span class="c1"># Case where all lines are whitespace: strip and don&#39;t add</span>
-                    <span class="n">new_statements</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c1"># Parse code and create Statements</span>
-                    <span class="n">tree</span><span class="p">:</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">parse_module</span><span class="p">(</span>  <span class="c1"># type: ignore[no-redef]</span>
-                        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_code_block</span><span class="p">)</span>
-                    <span class="p">)</span>
-                    <span class="n">new_statements</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">header</span><span class="p">]</span>
-                        <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
-                        <span class="o">+</span> <span class="p">[</span><span class="n">Statement</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span> <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">footer</span><span class="p">]</span>
-                    <span class="p">)</span>
-                <span class="c1"># Pad results with empty results, 1 fewer because of current_result_block</span>
-                <span class="n">statements</span> <span class="o">+=</span> <span class="n">new_statements</span>
-                <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_statements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="c1"># Flush results</span>
-            <span class="k">if</span> <span class="n">current_result_block</span><span class="p">:</span>
-                <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">current_result_block</span><span class="p">)]</span>
-            <span class="c1"># Pad results to equal length</span>
-            <span class="n">old_results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ParsedResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[])]</span> <span class="o">*</span> <span class="p">(</span>
-                <span class="nb">len</span><span class="p">(</span><span class="n">statements</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_results</span><span class="p">)</span>
-            <span class="p">)</span>
-
-            <span class="c1"># Evaluate for new results</span>
-            <span class="k">if</span> <span class="n">scope</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">scope</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">statement</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span> <span class="k">for</span> <span class="n">statement</span> <span class="ow">in</span> <span class="n">statements</span><span class="p">]</span>
-            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-                <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-                <span class="n">statements</span><span class="o">=</span><span class="n">statements</span><span class="p">,</span>
-                <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span>
-                <span class="n">old_results</span><span class="o">=</span><span class="n">old_results</span><span class="p">,</span>
-                <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
-            <span class="p">)</span>
-        <span class="k">except</span> <span class="n">cst</span><span class="o">.</span><span class="n">ParserSyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">InputSyntaxError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Reprex</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">config</span>
-                <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">right</span> <span class="k">for</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statements</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">statements</span><span class="p">))</span>
-                <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">right</span> <span class="k">for</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">results</span><span class="p">))</span>
-                <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">right</span> <span class="k">for</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">old_results</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">old_results</span><span class="p">))</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">results_match</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether results of evaluating code match old results parsed from input.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span>
-            <span class="n">result</span> <span class="o">==</span> <span class="n">old_result</span> <span class="k">for</span> <span class="n">result</span><span class="p">,</span> <span class="n">old_result</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">old_results</span><span class="p">)</span>
-        <span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render the reprex as code.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">keep_old_results</span><span class="p">:</span>
-            <span class="n">lines</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">old_results</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">lines</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">))</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="n">line</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
-            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="c1"># if terminal=True and Pygments is available, apply syntax highlighting</span>
-        <span class="k">if</span> <span class="n">terminal</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">pygments</span><span class="w"> </span><span class="kn">import</span> <span class="n">highlight</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.formatters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Terminal256Formatter</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.lexers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonLexer</span>
-
-                <span class="n">out</span> <span class="o">=</span> <span class="n">highlight</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">Terminal256Formatter</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;friendly&quot;</span><span class="p">))</span>
-            <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-                <span class="k">pass</span>
-        <span class="k">return</span> <span class="n">out</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">render_and_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render the reprex as code and format it for the configured output venue.&quot;&quot;&quot;</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">terminal</span><span class="o">=</span><span class="n">terminal</span><span class="p">)</span>
-        <span class="n">formatter_fn</span> <span class="o">=</span> <span class="n">formatter_registry</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">venue</span><span class="p">]</span><span class="o">.</span><span class="n">fn</span>
-        <span class="k">return</span> <span class="n">formatter_fn</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Reprex (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statements</span><span class="p">)</span><span class="si">}</span><span class="s2">) &#39;</span><span class="si">{</span><span class="n">to_snippet</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;HTML representation. Used for rendering in Jupyter.&quot;&quot;&quot;</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments</span><span class="w"> </span><span class="kn">import</span> <span class="n">highlight</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.formatters</span><span class="w"> </span><span class="kn">import</span> <span class="n">HtmlFormatter</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">pygments.lexers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonLexer</span>
-
-            <span class="n">formatter</span> <span class="o">=</span> <span class="n">HtmlFormatter</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;friendly&quot;</span><span class="p">,</span> <span class="n">wrapcode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;style&gt;</span><span class="si">{</span><span class="n">formatter</span><span class="o">.</span><span class="n">get_style_defs</span><span class="p">(</span><span class="s1">&#39;.highlight&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/style&gt;&quot;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">highlight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">render_and_format</span><span class="p">(),</span> <span class="n">PythonLexer</span><span class="p">(),</span> <span class="n">formatter</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;pre&gt;&lt;code&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">render_and_format</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/pre&gt;&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1934,14 +1381,16 @@ pretty-formatted comment block representation of the result.</p>
 
 
 <h5 id="reprexlite.reprexes.Reprex.results_match" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">results_match</span><span class="p">:</span> <span class="nb">bool</span></code>
+            <span class="doc doc-object-name doc-attribute-name">results_match</span>
+
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
   </span>
 
 <a href="#reprexlite.reprexes.Reprex.results_match" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">results_match</span><span class="p">:</span> <span class="nb">bool</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -1956,14 +1405,20 @@ pretty-formatted comment block representation of the result.</p>
 
 
 <h5 id="reprexlite.reprexes.Reprex.from_input" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">from_input</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span></code>
+            <span class="doc doc-object-name doc-function-name">from_input</span>
+
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
   </span>
 
 <a href="#reprexlite.reprexes.Reprex.from_input" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">from_input</span><span class="p">(</span>
+    <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">scope</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -2145,14 +1600,20 @@ dictionary.</p>
 
 
 <h5 id="reprexlite.reprexes.Reprex.from_input_lines" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">from_input_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">LineType</span><span class="p">]],</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span></code>
+            <span class="doc doc-object-name doc-function-name">from_input_lines</span>
+
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
   </span>
 
 <a href="#reprexlite.reprexes.Reprex.from_input_lines" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">from_input_lines</span><span class="p">(</span>
+    <span class="n">lines</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">LineType</span><span class="p">]],</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">scope</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -2444,10 +1905,12 @@ dictionary.</p>
 
 
 <h5 id="reprexlite.reprexes.Reprex.render" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">render</span><span class="p">(</span><span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+            <span class="doc doc-object-name doc-function-name">render</span>
+
 
 <a href="#reprexlite.reprexes.Reprex.render" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">render</span><span class="p">(</span><span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -2504,10 +1967,12 @@ dictionary.</p>
 
 
 <h5 id="reprexlite.reprexes.Reprex.render_and_format" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">render_and_format</span><span class="p">(</span><span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+            <span class="doc doc-object-name doc-function-name">render_and_format</span>
+
 
 <a href="#reprexlite.reprexes.Reprex.render_and_format" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">render_and_format</span><span class="p">(</span><span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -2543,7 +2008,7 @@ dictionary.</p>
 
 
 <h3 id="reprexlite.reprexes.Statement" class="doc doc-heading">
-            <code>Statement</code>
+            <span class="doc doc-object-name doc-class-name">Statement</span>
 
 
   <span class="doc doc-labels">
@@ -2551,7 +2016,15 @@ dictionary.</p>
   </span>
 
 <a href="#reprexlite.reprexes.Statement" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Statement</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span><span class="p">,</span>
+    <span class="n">stmt</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">SimpleStatementLine</span><span class="p">,</span>
+        <span class="n">BaseCompoundStatement</span><span class="p">,</span>
+        <span class="n">EmptyLine</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -2559,18 +2032,21 @@ dictionary.</p>
         <p>Dataclass that holds a LibCST parsed statement. of code.</p>
 
 
-<p><span class="doc-section-title">Attributes:</span></p>
+<p><span class="doc-section-title">Parameters:</span></p>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Type</th>
           <th>Description</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.Statement.config">config</span></code></td>
+            <td>
+                <code>config</code>
+            </td>
             <td>
                   <code><a class="autorefs autorefs-internal" title="reprexlite.config.ReprexConfig" href="../config/#reprexlite.config.ReprexConfig">ReprexConfig</a></code>
             </td>
@@ -2579,9 +2055,14 @@ dictionary.</p>
                 <p>Configuration for formatting and parsing</p>
               </div>
             </td>
+            <td>
+                <em>required</em>
+            </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="reprexlite.reprexes.Statement.stmt">stmt</span></code></td>
+            <td>
+                <code>stmt</code>
+            </td>
             <td>
                   <code><span title="typing.Union">Union</span>[<span title="libcst.SimpleStatementLine">SimpleStatementLine</span>, <span title="libcst.BaseCompoundStatement">BaseCompoundStatement</span>]</code>
             </td>
@@ -2590,6 +2071,9 @@ dictionary.</p>
                 <p>LibCST parsed
 statement.</p>
               </div>
+            </td>
+            <td>
+                <em>required</em>
             </td>
           </tr>
       </tbody>
@@ -2600,229 +2084,6 @@ statement.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/reprexes.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Statement</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass that holds a LibCST parsed statement. of code.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        config (ReprexConfig): Configuration for formatting and parsing</span>
-<span class="sd">        stmt (Union[libcst.SimpleStatementLine, libcst.BaseCompoundStatement]): LibCST parsed</span>
-<span class="sd">            statement.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">config</span><span class="p">:</span> <span class="n">ReprexConfig</span>
-    <span class="n">stmt</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">cst</span><span class="o">.</span><span class="n">SimpleStatementLine</span><span class="p">,</span> <span class="n">cst</span><span class="o">.</span><span class="n">BaseCompoundStatement</span><span class="p">,</span> <span class="n">cst</span><span class="o">.</span><span class="n">EmptyLine</span><span class="p">]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RawResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate code statement and produce a RawResult dataclass instance.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            scope (dict): scope to use for evaluation</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            RawResult: Dataclass instance holding evaluation results.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stmt</span><span class="p">,</span> <span class="n">cst</span><span class="o">.</span><span class="n">EmptyLine</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">RawResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="s2">&quot;__name__&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">scope</span><span class="p">:</span>
-            <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;__name__&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;__reprex__&quot;</span>
-        <span class="n">stdout_io</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">stdout_io</span><span class="p">):</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="c1"># Treat as a single expression</span>
-                    <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">scope</span><span class="p">)</span>
-                <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
-                    <span class="c1"># Treat as a statement</span>
-                    <span class="n">exec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">scope</span><span class="p">)</span>
-                    <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">stdout</span> <span class="o">=</span> <span class="n">stdout_io</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="c1"># Skip first step of traceback, since that is this evaluate method</span>
-            <span class="k">if</span> <span class="n">exc</span><span class="o">.</span><span class="n">__traceback__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">tb</span> <span class="o">=</span> <span class="n">exc</span><span class="o">.</span><span class="n">__traceback__</span><span class="o">.</span><span class="n">tb_next</span>
-                <span class="n">stdout</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="s2">&quot;Traceback (most recent call last):</span><span class="se">\n</span><span class="s2">&quot;</span>
-                    <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_tb</span><span class="p">(</span><span class="n">tb</span><span class="p">))</span>
-                    <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="p">)</span>
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="n">stdout_io</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">RawResult</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">stdout</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">raw_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raw code of contained statement as a string.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stmt</span><span class="p">,</span> <span class="n">cst</span><span class="o">.</span><span class="n">EmptyLine</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="p">[],</span> <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stmt</span><span class="p">])</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">cst</span><span class="o">.</span><span class="n">Module</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stmt</span><span class="p">])</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Code of contained statement. May be autoformatted depending on configuration.&quot;&quot;&quot;</span>
-        <span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_code</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">style</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">black</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mode</span><span class="p">,</span> <span class="n">format_str</span>
-            <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;black&quot;</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">BlackNotFoundError</span><span class="p">(</span><span class="s2">&quot;Must install black to restyle code.&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">raise</span>
-
-            <span class="n">code</span> <span class="o">=</span> <span class="n">format_str</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">Mode</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">code</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">prompt</span><span class="p">:</span>
-            <span class="c1"># Add prompt and continuation prefixes to lines</span>
-            <span class="n">lines</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">primary_found</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                    <span class="c1"># Whitespace line</span>
-                    <span class="n">out</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">prompt</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
-                    <span class="c1"># Comment line</span>
-                    <span class="n">out</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">prompt</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c1"># Code line</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">primary_found</span><span class="p">:</span>
-                        <span class="n">out</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">prompt</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-                        <span class="n">primary_found</span> <span class="o">=</span> <span class="kc">True</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">out</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">continuation</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tests whether this instance contains anything to print. Always true for Statement.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Statement &#39;</span><span class="si">{</span><span class="n">to_snippet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Statement</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_code</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">raw_code</span>
-        <span class="k">return</span> <span class="bp">NotImplemented</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -2839,14 +2100,16 @@ statement.</p>
 
 
 <h5 id="reprexlite.reprexes.Statement.code" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">code</span><span class="p">:</span> <span class="nb">str</span></code>
+            <span class="doc doc-object-name doc-attribute-name">code</span>
+
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
   </span>
 
 <a href="#reprexlite.reprexes.Statement.code" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">code</span><span class="p">:</span> <span class="nb">str</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -2860,14 +2123,16 @@ statement.</p>
 
 
 <h5 id="reprexlite.reprexes.Statement.raw_code" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">raw_code</span><span class="p">:</span> <span class="nb">str</span></code>
+            <span class="doc doc-object-name doc-attribute-name">raw_code</span>
+
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
   </span>
 
 <a href="#reprexlite.reprexes.Statement.raw_code" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">raw_code</span><span class="p">:</span> <span class="nb">str</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -2882,10 +2147,12 @@ statement.</p>
 
 
 <h5 id="reprexlite.reprexes.Statement.evaluate" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">evaluate</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RawResult</span></code>
+            <span class="doc doc-object-name doc-function-name">evaluate</span>
+
 
 <a href="#reprexlite.reprexes.Statement.evaluate" class="headerlink" title="Permanent link">&para;</a></h5>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">evaluate</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RawResult</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -3043,10 +2310,19 @@ statement.</p>
 
 
 <h3 id="reprexlite.reprexes.reprex" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">reprex</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">print_</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Reprex</span></code>
+            <span class="doc doc-object-name doc-function-name">reprex</span>
+
 
 <a href="#reprexlite.reprexes.reprex" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">reprex</span><span class="p">(</span>
+    <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">print_</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">terminal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReprexConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Reprex</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 

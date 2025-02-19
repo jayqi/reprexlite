@@ -71,7 +71,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -144,20 +144,30 @@ You are not viewing the current stable version.
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
       </label>
     
   
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       </label>
     
   
@@ -960,7 +970,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.config.ParsingMethod" class="doc doc-heading">
-            <code>ParsingMethod</code>
+            <span class="doc doc-object-name doc-class-name">ParsingMethod</span>
 
 
 <a href="#reprexlite.config.ParsingMethod" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -974,21 +984,18 @@ You are not viewing the current stable version.
         <p>Methods for parsing input strings.</p>
 
 
-<p><span class="doc-section-title">Parameters:</span></p>
+<p><span class="doc-section-title">Attributes:</span></p>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Type</th>
           <th>Description</th>
-          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td>
-                <code>AUTO</code>
-            </td>
+            <td><code><span title="reprexlite.config.ParsingMethod.AUTO">AUTO</span></code></td>
             <td>
                   <code>str</code>
             </td>
@@ -997,14 +1004,9 @@ You are not viewing the current stable version.
                 <p>Automatically identify reprex-style or doctest-style input.</p>
               </div>
             </td>
-            <td>
-                <em>required</em>
-            </td>
           </tr>
           <tr class="doc-section-item">
-            <td>
-                <code>DECLARED</code>
-            </td>
+            <td><code><span title="reprexlite.config.ParsingMethod.DECLARED">DECLARED</span></code></td>
             <td>
                   <code>str</code>
             </td>
@@ -1012,9 +1014,6 @@ You are not viewing the current stable version.
               <div class="doc-md-description">
                 <p>Use configured values for parsing.</p>
               </div>
-            </td>
-            <td>
-                <em>required</em>
             </td>
           </tr>
       </tbody>
@@ -1025,29 +1024,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/config.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ParsingMethod</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Methods for parsing input strings.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        AUTO (str): Automatically identify reprex-style or doctest-style input.</span>
-<span class="sd">        DECLARED (str): Use configured values for parsing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">AUTO</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>
-    <span class="n">DECLARED</span> <span class="o">=</span> <span class="s2">&quot;declared&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1074,7 +1050,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.config.ReprexConfig" class="doc doc-heading">
-            <code>ReprexConfig</code>
+            <span class="doc doc-object-name doc-class-name">ReprexConfig</span>
 
 
   <span class="doc doc-labels">
@@ -1082,7 +1058,22 @@ You are not viewing the current stable version.
   </span>
 
 <a href="#reprexlite.config.ReprexConfig" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ReprexConfig</span><span class="p">(</span>
+    <span class="n">editor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">venue</span><span class="p">:</span> <span class="n">Venue</span> <span class="o">=</span> <span class="n">Venue</span><span class="o">.</span><span class="n">GH</span><span class="p">,</span>
+    <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">continuation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#&gt;&quot;</span><span class="p">,</span>
+    <span class="n">keep_old_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">parsing_method</span><span class="p">:</span> <span class="n">ParsingMethod</span> <span class="o">=</span> <span class="n">ParsingMethod</span><span class="o">.</span><span class="n">AUTO</span><span class="p">,</span>
+    <span class="n">input_prompt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">input_continuation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">input_comment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
 
@@ -1107,13 +1098,13 @@ formatting.</p>
                 <code>editor</code>
             </td>
             <td>
-                  <code>str</code>
+                  <code><span title="typing.Optional">Optional</span>[str]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Command-line program name of editor to use. If not specified, check $EDITOR
-and $VISUAL environment variables. If 'ipython', will launch the IPython interactive
-editor.</p>
+                <p>Command-line program name of editor to use. If not specified,
+check $EDITOR and $VISUAL environment variables. If 'ipython', will launch the IPython
+interactive editor.</p>
               </div>
             </td>
             <td>
@@ -1335,199 +1326,6 @@ input parsing and output formatting.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/config.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ReprexConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration dataclass for reprexlite. Used to configure input parsing and output</span>
-<span class="sd">    formatting.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        editor (str): Command-line program name of editor to use. If not specified, check $EDITOR</span>
-<span class="sd">            and $VISUAL environment variables. If &#39;ipython&#39;, will launch the IPython interactive</span>
-<span class="sd">            editor.</span>
-<span class="sd">        venue (str): Key to identify the output venue that the reprex will be shared in. Used to</span>
-<span class="sd">            select an appropriate formatter. See &quot;Venues Formatting&quot; documentation for formats</span>
-<span class="sd">            included with reprexlite.</span>
-<span class="sd">        advertise (bool): Whether to include a footer that credits reprexlite. If unspecified, will</span>
-<span class="sd">            depend on specified venue formatter&#39;s default.</span>
-<span class="sd">        session_info (bool): Include details about session and environment that the reprex was</span>
-<span class="sd">            generated with.</span>
-<span class="sd">        style (bool): Whether to autoformat code with black. Requires black to be installed.</span>
-<span class="sd">        prompt (str): Prefix to use as primary prompt for code lines.</span>
-<span class="sd">        continuation (str): Prefix to use as secondary prompt for continued code lines.</span>
-<span class="sd">        comment (str): Prefix to use for results returned by expressions.</span>
-<span class="sd">        keep_old_results (bool): Whether to additionally include results of expressions detected in</span>
-<span class="sd">            the original input when formatting the reprex output.</span>
-<span class="sd">        parsing_method (str): Method for parsing input. &#39;auto&#39; will automatically detect either</span>
-<span class="sd">            default reprex-style input or standard doctest-style input. &#39;declared&#39; will allow you</span>
-<span class="sd">            to specify custom line prefixes. Values for &#39;prompt&#39;, &#39;continuation&#39;, and &#39;comment&#39;</span>
-<span class="sd">            will be used for both output formatting and input parsing, unless the associated</span>
-<span class="sd">            &#39;input_*&#39; override settings are supplied.</span>
-<span class="sd">        input_prompt (str): Prefix to use as primary prompt for code lines when parsing input. Only</span>
-<span class="sd">            used if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used for both input</span>
-<span class="sd">            parsing and output formatting.</span>
-<span class="sd">        input_continuation (str): Prefix to use as secondary prompt for continued code lines when</span>
-<span class="sd">            parsing input. Only used if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is</span>
-<span class="sd">            used for both input parsing and output formatting.</span>
-<span class="sd">        input_comment (str): Prefix to use for results returned by expressions when parsing input.</span>
-<span class="sd">            Only used if &#39;parsing_method&#39; is &#39;declared&#39;. If not set, &#39;prompt&#39; is used for both</span>
-<span class="sd">            input parsing and output formatting.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">editor</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;--editor&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">))]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="c1"># Formatting</span>
-    <span class="n">venue</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Venue</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;--venue&quot;</span><span class="p">,</span> <span class="s2">&quot;-v&quot;</span><span class="p">))]</span> <span class="o">=</span> <span class="n">Venue</span><span class="o">.</span><span class="n">GH</span>
-    <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">continuation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#&gt;&quot;</span>
-    <span class="n">keep_old_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="c1"># Parsing</span>
-    <span class="n">parsing_method</span><span class="p">:</span> <span class="n">ParsingMethod</span> <span class="o">=</span> <span class="n">ParsingMethod</span><span class="o">.</span><span class="n">AUTO</span>
-    <span class="n">input_prompt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">input_continuation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">input_comment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Validate venue</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">Venue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">venue</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">InvalidVenueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">venue</span><span class="si">}</span><span class="s2"> is not a valid value for parsing method.&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Valid values are: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">value</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">Venue</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-        <span class="c1"># Validate prompt and continuation prefixes</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">continuation</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">PromptLengthMismatchError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Primary prompt (&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="si">}</span><span class="s2">&#39;) and continuation prompt &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">continuation</span><span class="si">}</span><span class="s2">&#39;) must be equal lengths.&quot;</span>
-            <span class="p">)</span>
-        <span class="c1"># Validate parsing method</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">ParsingMethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parsing_method</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">InvalidParsingMethodError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parsing_method</span><span class="si">}</span><span class="s2"> is not a valid value for parsing method.&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Valid values are: </span><span class="si">{</span><span class="p">[</span><span class="n">pm</span><span class="o">.</span><span class="n">value</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">pm</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">ParsingMethod</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">resolved_input_prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_prompt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_prompt</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">resolved_input_continuation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_continuation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_continuation</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuation</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">resolved_input_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_comment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_comment</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comment</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1554,7 +1352,7 @@ input parsing and output formatting.</p>
 
 
 <h3 id="reprexlite.config.Venue" class="doc doc-heading">
-            <code>Venue</code>
+            <span class="doc doc-object-name doc-class-name">Venue</span>
 
 
 <a href="#reprexlite.config.Venue" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1568,33 +1366,101 @@ input parsing and output formatting.</p>
         <p>Enum for specifying the output venue for a reprex.</p>
 
 
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="reprexlite.config.Venue.GH">GH</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>GitHub-flavored Markdown</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="reprexlite.config.Venue.DS">DS</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Discourse</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="reprexlite.config.Venue.SO">SO</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>StackOverflow</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="reprexlite.config.Venue.HTML">HTML</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>HTML</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="reprexlite.config.Venue.PY">PY</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Python script</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="reprexlite.config.Venue.RTF">RTF</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Rich Text Format</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="reprexlite.config.Venue.SLACK">SLACK</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Slack markup</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/config.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Venue</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enum for specifying the output venue for a reprex.&quot;&quot;&quot;</span>
 
-    <span class="n">GH</span> <span class="o">=</span> <span class="s2">&quot;gh&quot;</span>
-    <span class="n">DS</span> <span class="o">=</span> <span class="s2">&quot;ds&quot;</span>
-    <span class="n">SO</span> <span class="o">=</span> <span class="s2">&quot;so&quot;</span>
-    <span class="n">HTML</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span>
-    <span class="n">PY</span> <span class="o">=</span> <span class="s2">&quot;py&quot;</span>
-    <span class="n">RTF</span> <span class="o">=</span> <span class="s2">&quot;rtf&quot;</span>
-    <span class="n">SLACK</span> <span class="o">=</span> <span class="s2">&quot;slack&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
+
 
 
 

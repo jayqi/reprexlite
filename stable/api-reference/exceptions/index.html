@@ -71,7 +71,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -144,20 +144,30 @@ You are not viewing the current stable version.
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
       </label>
     
   
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       </label>
     
   
@@ -1032,7 +1042,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.exceptions.BlackNotFoundError" class="doc doc-heading">
-            <code>BlackNotFoundError</code>
+            <span class="doc doc-object-name doc-class-name">BlackNotFoundError</span>
 
 
 <a href="#reprexlite.exceptions.BlackNotFoundError" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1050,13 +1060,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BlackNotFoundError</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when ipython cannot be found when using a black-dependent feature.&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
     </div>
 
@@ -1067,7 +1070,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.exceptions.EditorError" class="doc doc-heading">
-            <code>EditorError</code>
+            <span class="doc doc-object-name doc-class-name">EditorError</span>
 
 
 <a href="#reprexlite.exceptions.EditorError" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1085,13 +1088,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">EditorError</span><span class="p">(</span><span class="n">ReprexliteException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when an error occurs with the editor.&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
     </div>
 
@@ -1102,7 +1098,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.exceptions.IPythonNotFoundError" class="doc doc-heading">
-            <code>IPythonNotFoundError</code>
+            <span class="doc doc-object-name doc-class-name">IPythonNotFoundError</span>
 
 
 <a href="#reprexlite.exceptions.IPythonNotFoundError" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1120,13 +1116,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">IPythonNotFoundError</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when ipython cannot be found when using an IPython-dependent feature.&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
     </div>
 
@@ -1137,7 +1126,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.exceptions.InputSyntaxError" class="doc doc-heading">
-            <code>InputSyntaxError</code>
+            <span class="doc doc-object-name doc-class-name">InputSyntaxError</span>
 
 
 <a href="#reprexlite.exceptions.InputSyntaxError" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1155,13 +1144,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">InputSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when encountering a syntax error when parsing input.&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
     </div>
 
@@ -1172,7 +1154,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.exceptions.PygmentsNotFoundError" class="doc doc-heading">
-            <code>PygmentsNotFoundError</code>
+            <span class="doc doc-object-name doc-class-name">PygmentsNotFoundError</span>
 
 
 <a href="#reprexlite.exceptions.PygmentsNotFoundError" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1190,13 +1172,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
-<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PygmentsNotFoundError</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="n">ReprexliteException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when pygments cannot be found when using a pygments-dependent feature.&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
     </div>
 
@@ -1207,7 +1182,7 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.exceptions.ReprexliteException" class="doc doc-heading">
-            <code>ReprexliteException</code>
+            <span class="doc doc-object-name doc-class-name">ReprexliteException</span>
 
 
 <a href="#reprexlite.exceptions.ReprexliteException" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1225,13 +1200,6 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ReprexliteException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for reprexlite exceptions.&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
     </div>
 
@@ -1242,11 +1210,12 @@ You are not viewing the current stable version.
 
 
 <h3 id="reprexlite.exceptions.UnexpectedError" class="doc doc-heading">
-            <code>UnexpectedError</code>
+            <span class="doc doc-object-name doc-class-name">UnexpectedError</span>
 
 
 <a href="#reprexlite.exceptions.UnexpectedError" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">UnexpectedError</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
@@ -1260,31 +1229,25 @@ You are not viewing the current stable version.
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
+                  <details class="quote">
+                    <summary>Source code in <code>reprexlite/exceptions.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
-<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">UnexpectedError</span><span class="p">(</span><span class="n">ReprexliteException</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when an unexpected case happens.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">msg</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span>
-        <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span>
-            <span class="s2">&quot;If you see this error from normal usage, please report at &quot;</span>
-            <span class="s2">&quot;https://github.com/jayqi/reprexlite/issues&quot;</span>
-        <span class="p">)</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">msg</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span>
+    <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="s2">&quot;If you see this error from normal usage, please report at &quot;</span>
+        <span class="s2">&quot;https://github.com/jayqi/reprexlite/issues&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-              </details>
+                  </details>
 
 
 
