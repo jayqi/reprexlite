@@ -60,6 +60,7 @@ docs = [
   "mkdocs-material>=9.5.23",
   "mike",
   "mkdocstrings[python]",
+  "mkdocstrings-python>=1.15.1",
   "mdx-truly-sane-lists",
   "py-markdown-table",
   "typenames",
