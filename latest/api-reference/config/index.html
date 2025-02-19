@@ -1059,12 +1059,8 @@ You are not viewing the current stable version.
 
 <a href="#reprexlite.config.ReprexConfig" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">ReprexConfig</span><span class="p">(</span>
-    <span class="n">editor</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">(</span><span class="o">--</span><span class="n">editor</span><span class="p">,</span> <span class="o">-</span><span class="n">e</span><span class="p">))</span>
-    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">venue</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
-        <span class="n">Venue</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">(</span><span class="o">--</span><span class="n">venue</span><span class="p">,</span> <span class="o">-</span><span class="n">v</span><span class="p">))</span>
-    <span class="p">]</span> <span class="o">=</span> <span class="n">Venue</span><span class="o">.</span><span class="n">GH</span><span class="p">,</span>
+    <span class="n">editor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">venue</span><span class="p">:</span> <span class="n">Venue</span> <span class="o">=</span> <span class="n">Venue</span><span class="o">.</span><span class="n">GH</span><span class="p">,</span>
     <span class="n">advertise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">session_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">style</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
