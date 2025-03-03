@@ -1,0 +1,3 @@
+# Exclude test assets from GitHub language stats
+# https://github.com/github-linguist/linguist/blob/main/docs/overrides.md#using-gitattributes
+tests/assets/** linguist-generated
