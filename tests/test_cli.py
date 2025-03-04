@@ -128,19 +128,19 @@ def test_old_results(project_dir, user_config_dir, patch_edit, capsys):
     assert "#> [2, 3, 4, 5, 6]" in stdout
 
 
-# def test_ipython_editor(project_dir, user_config_dir):
-#     """Test that IPython interactive editor opens as expected. Not testing a reprex."""
+def test_ipython_editor_launch(project_dir, user_config_dir):
+    """Test that IPython interactive editor opens as expected. Not testing a reprex."""
 
-#     result = subprocess.run(
-#         [sys.executable, "-I", "-m", "reprexlite", "-e", "ipython"],
-#         stdout=subprocess.PIPE,
-#         stderr=subprocess.PIPE,
-#         universal_newlines=True,
-#         text=True,
-#         input="exit",
-#     )
-#     assert result.returncode == 0
-#     assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
+    result = subprocess.run(
+        [sys.executable, "-I", "-m", "reprexlite", "-e", "ipython"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+        text=True,
+        input="exit",
+    )
+    assert result.returncode == 0
+    assert "Interactive reprex editor via IPython" in result.stdout  # text from banner
 
 
 def test_ipython_editor_not_installed(project_dir, user_config_dir, no_ipython, capsys):
