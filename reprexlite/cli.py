@@ -108,6 +108,12 @@ app = App(
     ),
 )
 
+# cyclopts v4 defaults to sys.exit-ing with the command's return value. We call app()
+# programmatically from the IPython magics, so we need the return value itself. cyclopts v3, which
+# is still resolved on Python 3.9, always does this and has no such attribute.
+if hasattr(app, "result_action"):
+    app.result_action = "return_value"
+
 
 def launch_ipython(config: ReprexConfig):
     try:
