@@ -124,7 +124,9 @@ def format_as_html(reprex_str: str, config: Optional[ReprexConfig] = None) -> st
         from pygments.formatters import HtmlFormatter
         from pygments.lexers import PythonLexer
 
-        formatter = HtmlFormatter(style="friendly", lineanchors=True, linenos=True, wrapcode=True)
+        formatter = HtmlFormatter(
+            style="friendly", lineanchors="line", linenos=True, wrapcode=True
+        )
         out.append(f"<style>{formatter.get_style_defs('.highlight')}</style>")
         out.append(highlight(str(reprex_str), PythonLexer(), formatter))
     except ImportError:
